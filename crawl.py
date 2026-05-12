@@ -15,6 +15,7 @@ SOURCE_URLS = [
     "https://raw.githubusercontent.com/Tsing-Hua/IPTV/main/tv.m3u",
     "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cn.m3u",
     "https://raw.githubusercontent.com/Moexin/IPTV/master/m3u/china.m3u"
+    "https://raw.githubusercontent.com/babylife/China-ShangHai-IPTV-list/master/IPTV_Enhanced_change.m3u"
 ]
 
 # 2. 排序权重配置
