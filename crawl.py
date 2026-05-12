@@ -23,12 +23,16 @@ def get_quality_info(name):
     return 4, "" 
 
 def clean_channel_name(name):
-    """极致净化：只留频道名+分辨率"""
+    """优化后的净化：保留 CCTV-1 综合 这种具体名称"""
     _, res_label = get_quality_info(name)
-    # 彻底删除括号、Not 24/7、画质词、IPv6等
+    
+    # 1. 先去掉常见的干扰标签
     clean = re.sub(r'(\[.*?\]|【.*?】|\(.*?\)|\d+K|蓝光|超清|高清|标清|FHD|HD|SD|IP[vV]6|IPV4|B8|C7|A\d+|NOT 24/7)', '', name, flags=re.I)
-    # 提取核心词（遇到空格、横杠、下划线即停止）
-    clean = re.split(r'[-_ ]', clean.strip())[0].strip()
+    
+    # 2. 针对 CCTV 的特殊处理：保留 CCTV-1 这种格式及后面的中文
+    # 移除末尾多余的空格和连字符
+    clean = clean.strip().rstrip('-').strip()
+    
     return f"{clean} {res_label}".strip() if res_label else clean
 
 def extract_number(name):
@@ -48,7 +52,6 @@ def get_group(name):
 def check_url(channel):
     try:
         headers = {'User-Agent': 'Mozilla/5.0'}
-        # 增加超时容忍度，确保更多央视源能通过验证
         response = requests.get(channel['url'], headers=headers, timeout=4, stream=True)
         if response.status_code == 200:
             channel['response_time'] = response.elapsed.total_seconds()
@@ -62,22 +65,18 @@ def fetch_and_process():
     for url in SOURCE_URLS:
         try:
             r = requests.get(url, timeout=10)
-            # 改进正则，防止漏掉链接
             matches = re.findall(r'#EXTINF:.*?,(.*?)\n(http.*?)(?:\n|$)', r.text)
             
-            if not matches:
-                print(f"⚠️ 跳过源 (无数据): {url[:40]}")
-                continue
+            if not matches: continue
             
-            print(f"✅ 成功抓取: {len(matches)} 条来自 {url[:30]}...")
+            print(f"✅ 源: {url[:30]}... 抓取到 {len(matches)} 条")
             
             for name, link in matches:
                 name, link = name.strip(), link.strip()
                 if "127.0.0.1" in link or not link.startswith("http"): continue
                 
-                name_up = name.upper()
-                # 仅过滤明确标为低画质的源
-                if any(word in name_up for word in ["600P", "576I", "480P", "SD", "标清"]): continue
+                # 过滤明确的低画质
+                if any(word in name.upper() for word in ["600P", "576I", "480P", "SD", "标清"]): continue
 
                 q_weight, _ = get_quality_info(name)
                 final_name = clean_channel_name(name)
@@ -88,10 +87,9 @@ def fetch_and_process():
                     "group": get_group(name),
                     "quality_weight": q_weight
                 })
-        except Exception as e:
-            print(f"❌ 访问失败: {url[:30]}... 错误: {e}")
+        except: continue
 
-    print(f"\n>>> 正在验证信号 (候选总数: {len(all_channels)})...")
+    print(f"\n>>> 正在验证信号 (候选: {len(all_channels)})...")
     valid_channels = []
     with ThreadPoolExecutor(max_workers=60) as executor:
         futures = [executor.submit(check_url, ch) for ch in all_channels]
@@ -99,15 +97,14 @@ def fetch_and_process():
             res = f.result()
             if res: valid_channels.append(res)
 
-    print(f"\n>>> 正在精简去重...")
+    print(f"\n>>> 正在精简去重 (保留多线路)...")
     best_channels = {}
     for ch in valid_channels:
-        # --- 这里的 Key 改为 名字+URL，确保同一频道的多线路全部保留 ---
+        # 使用 名字+URL 作为唯一标识，确保不同线路的 CCTV-1 综合 都能共存
         key = f"{ch['name']}_{ch['url']}"
         best_channels[key] = ch
     
     final_list = list(best_channels.values())
-    # 排序：组别 > 频道号 > 画质
     final_list.sort(key=lambda x: (GROUP_PRIORITY.get(x['group'], 99), extract_number(x['name']), x['quality_weight']))
     return final_list
 
@@ -121,4 +118,4 @@ def save_m3u(channels):
 if __name__ == "__main__":
     result = fetch_and_process()
     save_m3u(result)
-    print(f"\n🎉 处理完成！保留了 {len(result)} 个有效频道，央视频道已补全。")
+    print(f"\n🎉 完成！已恢复 CCTV 详细名称，共保留 {len(result)} 个频道。")
