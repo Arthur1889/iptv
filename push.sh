@@ -1,51 +1,59 @@
 #!/bin/bash
 
+# 1. 自动定位脚本所在目录（核心：解决从不同路径调用脚本的问题）
+cd "$(dirname "$0")"
+
 # --- 颜色定义 ---
 GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 YELLOW='\033[1;33m'
-NC='\033[0m' # 无颜色
+NC='\033[0m'
 
-echo -e "${BLUE}==== 📺 IPTV 自动化同步程序 ====${NC}"
+echo -e "${BLUE}==== 📺 IPTV 自动同步工具 (Mac/Ubuntu 通用) ====${NC}"
 
-# 1. 运行 Python 脚本抓取数据
-echo -e "${YELLOW}[1/3] 正在运行爬虫进行深度分析...${NC}"
-python3 crawl.py
+# 2. 智能选择 Python 解释器
+# 优先使用当前目录下的虚拟环境，如果没有，则退而求其次使用系统 python3
+if [ -f "./.venv/bin/python3" ]; then
+    PYTHON_CMD="./.venv/bin/python3"
+else
+    PYTHON_CMD="python3"
+fi
 
-# 检查上一步是否成功
+echo -e "${YELLOW}[1/3] 正在运行爬虫 (使用: $PYTHON_CMD)...${NC}"
+$PYTHON_CMD crawl.py
+
 if [ $? -ne 0 ]; then
-    echo "❌ 爬虫运行出错，请检查网络或依赖。"
+    echo "❌ 脚本运行失败，请检查依赖。"
     exit 1
 fi
 
-# 2. 检查是否有文件更新
+# 3. 检查文件变动
 echo -e "${YELLOW}[2/3] 检查文件变动...${NC}"
 status=$(git status --porcelain)
 
 if [ -z "$status" ]; then
-    echo -e "${GREEN}✨ 文件没有变动，无需更新 GitHub。${NC}"
+    echo -e "${GREEN}✨ 内容无变化，无需提交。${NC}"
     exit 0
 fi
 
-# 3. 提交并推送
-echo -e "${BLUE}检测到以下变动：${NC}"
-echo "$status"
+# 4. 提交并推送
+echo -e "${BLUE}检测到更新，准备推送至 GitHub...${NC}"
 
-# 提示输入提交备注
-echo -e "${YELLOW}请输入本次更新的备注 (直接回车将使用默认备注):${NC}"
+# 如果是在无人值守环境（如定时任务），可以取消下行注释并删除 read 行
+# msg="Auto Update: $(date +'%Y-%m-%d %H:%M:%S')"
+
+echo -e "${YELLOW}请输入 Commit 备注 (直接回车使用默认值):${NC}"
 read msg
-
 if [ -z "$msg" ]; then
-    msg="自动更新 IPTV 列表: $(date +'%Y-%m-%d %H:%M:%S')"
+    msg="Update IPTV list: $(date +'%Y-%m-%d %H:%M:%S')"
 fi
 
-echo -e "${YELLOW}[3/3] 正在推送到 GitHub...${NC}"
 git add .
 git commit -m "$msg"
 git push origin main
 
 if [ $? -eq 0 ]; then
-    echo -e "${GREEN}✅ 同步成功！你的 APTV 稍后即可刷新。${NC}"
+    echo -e "${GREEN}✅ 所有操作已完成！${NC}"
 else
-    echo "❌ 推送失败，请检查 Token 或网络。"
+    echo -e "❌ 推送失败。如果是首次在 Ubuntu 运行，请确保已配置 Token。"
 fi
