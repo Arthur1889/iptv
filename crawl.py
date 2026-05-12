@@ -2,7 +2,7 @@ import requests
 import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-# 1. 仅保留你指定的 8 个源
+# 1. 按照要求删除了 iptv-org 的央视专用源，保留其余 7 个源
 SOURCE_URLS = [
     "https://live.fanmingming.com/tv/m3u/ipv6.m3u",
     "https://iptv-org.github.io/iptv/countries/cn.m3u",
@@ -21,12 +21,12 @@ def get_quality_info(name):
     if any(w in name_up for w in ["4K", "8K", "UHD"]): return 1, "4K"
     if any(w in name_up for w in ["1080", "FHD", "1080P"]): return 2, "1080P"
     if any(w in name_up for w in ["720", "HD", "720P"]): return 3, "720P"
-    return 4, "" # 没写分辨率的统一给权重4，但不删除
+    return 4, "" 
 
 def clean_channel_name(name):
-    """净化标题：删掉 【Not 24/7】、括号内容等"""
+    """净化标题：剔除杂质，但保留核心名"""
     _, res_label = get_quality_info(name)
-    # 正则：删除中英文方括号、圆括号及其内容
+    # 正则：删除括号内容、画质标识、IPv6等
     clean = re.sub(r'(\[.*?\]|【.*?】|\(.*?\)|\d+K|蓝光|超清|高清|标清|FHD|HD|SD|IP[vV]6|IPV4|B8|C7|A\d+)', '', name, flags=re.I)
     # 仅保留核心频道名
     clean = re.split(r'[-_ ]', clean)[0].strip()
@@ -58,14 +58,13 @@ def check_url(channel):
 
 def fetch_and_process():
     all_channels = []
-    print("\n>>> 步骤 1: 开始抓取与初步筛选")
+    print("\n--- 步骤 1: 开始从 7 个源抓取数据 ---")
     for url in SOURCE_URLS:
         try:
             r = requests.get(url, timeout=8)
             matches = re.findall(r'#EXTINF:.*?,(.*?)\n(http.*?)\n', r.text, re.DOTALL)
             
-            if not matches:
-                continue
+            if not matches: continue
             
             print(f"✅ 抓取源: [{url[:40]}...] (发现 {len(matches)} 条)")
             
@@ -73,14 +72,12 @@ def fetch_and_process():
                 name, link = name.strip(), link.strip()
                 if "127.0.0.1" in link: continue
                 
+                # 过滤明确的低画质
                 name_up = name.upper()
-                
-                # --- 仅执行黑名单过滤 ---
-                low_quality_keywords = ["600P", "576I", "480P", "标清", "SD", "流畅"]
-                if any(word in name_up for word in low_quality_keywords):
-                    continue # 明确写了低画质的才删掉
-                
-                # 识别画质和净化标题
+                low_quality = ["600P", "576I", "480P", "标清", "SD", "流畅"]
+                if any(word in name_up for word in low_quality):
+                    continue
+
                 q_weight, _ = get_quality_info(name)
                 final_name = clean_channel_name(name)
                 
@@ -92,40 +89,23 @@ def fetch_and_process():
                 })
         except: continue
 
-    print(f"\n>>> 步骤 2: 验证信号质量 (待验证: {len(all_channels)})")
+    print(f"\n--- 步骤 2: 验证信号 (候选: {len(all_channels)}) ---")
     valid_channels = []
-    count = 0
     with ThreadPoolExecutor(max_workers=50) as executor:
         futures = [executor.submit(check_url, ch) for ch in all_channels]
         for f in as_completed(futures):
             res = f.result()
-            count += 1
             if res: valid_channels.append(res)
-            if count % 100 == 0: print(f"进度: {count}/{len(all_channels)}...")
 
-    print(f"\n>>> 步骤 3: 同名去重与排序")
+    print(f"\n--- 步骤 3: 优化去重 (保留多线路) ---")
     best_channels = {}
     for ch in valid_channels:
-        key = ch['name']
-        # 相同名字，选画质权重高（数字小）的，如果画质一样则选响应快的
-        if key not in best_channels or ch['quality_weight'] < best_channels[key]['quality_weight']:
+        # 【核心改进】: Key = 名字 + 域名(或URL前部分)
+        # 这样 CCTV1 如果在 A 源和 B 源都有，都会被保留，不会被合并。
+        url_domain = ch['url'].split('/')[2] if "://" in ch['url'] else ch['url'][:10]
+        key = f"{ch['name']}_{url_domain}"
+        
+        if key not in best_channels:
             best_channels[key] = ch
-        elif ch['quality_weight'] == best_channels[key]['quality_weight']:
-            if ch['response_time'] < best_channels[key]['response_time']:
-                best_channels[key] = ch
-    
-    final_list = list(best_channels.values())
-    final_list.sort(key=lambda x: (GROUP_PRIORITY.get(x['group'], 99), extract_number(x['name']), x['quality_weight']))
-    return final_list
-
-def save_m3u(channels):
-    with open("tv.m3u", "w", encoding="utf-8") as f:
-        f.write("#EXTM3U x-tvg-url=\"https://live.fanmingming.com/e.xml\"\n")
-        for ch in channels:
-            f.write(f'#EXTINF:-1 tvg-name="{ch["name"]}" group-title="{ch["group"]}",{ch["name"]}\n')
-            f.write(f'{ch["url"]}\n')
-
-if __name__ == "__main__":
-    result = fetch_and_process()
-    save_m3u(result)
-    print(f"\n🎉 搞定！已保留所有未明确标低画质的频道，总计 {len(result)} 个。")
+        else:
+            # 只有
