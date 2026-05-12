@@ -27,26 +27,21 @@ GROUP_PRIORITY = {
     "其他频道": 5
 }
 
-def check_url(channel):
-    """
-    不仅验证连通性，还记录响应时间（越短代表信号质量越好）
-    """
-    try:
-        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
-        # 使用 timeout=2 严格筛选
-        response = requests.get(channel['url'], headers=headers, timeout=2, stream=True)
-        if response.status_code == 200:
-            # 记录响应时间作为质量依据
-            channel['response_time'] = response.elapsed.total_seconds()
-            return channel
-    except:
-        pass
-    return None
+def get_quality_weight(name):
+    """根据名称关键词评估画质权重，数值越小优先级越高"""
+    name_up = name.upper()
+    if any(word in name_up for word in ["4K", "8K", "蓝光", "BD", "超高清"]):
+        return 1
+    if any(word in name_up for word in ["1080", "超清", "HD", "FHD"]):
+        return 2
+    if any(word in name_up for word in ["720", "高清"]):
+        return 3
+    if any(word in name_up for word in ["标清", "SD", "流畅"]):
+        return 5
+    return 4
 
 def extract_number(name):
-    """
-    从频道名提取数字（如 CCTV-1 -> 1, CCTV-5+ -> 5.1）用于精确排序
-    """
+    """从频道名提取数字（如 CCTV-1 -> 1, CCTV-5+ -> 5.1）用于精确排序"""
     nums = re.findall(r'\d+', name)
     if not nums:
         return 999
@@ -56,7 +51,7 @@ def extract_number(name):
     return val
 
 def get_group(name):
-    """分组逻辑"""
+    """频道分组识别"""
     name_up = name.upper()
     if "CCTV" in name_up or "央视" in name:
         return "央视频道"
@@ -68,27 +63,39 @@ def get_group(name):
         return "地方频道"
     return "其他频道"
 
+def check_url(channel):
+    """验证连通性并记录响应时间"""
+    try:
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
+        response = requests.get(channel['url'], headers=headers, timeout=2, stream=True)
+        if response.status_code == 200:
+            channel['response_time'] = response.elapsed.total_seconds()
+            return channel
+    except:
+        pass
+    return None
+
 def fetch_and_process():
     all_channels = []
     for url in SOURCE_URLS:
         try:
-            print(f"正在抓取: {url}")
+            print(f"抓取源: {url}")
             r = requests.get(url, timeout=10)
             matches = re.findall(r'#EXTINF:.*?,(.*?)\n(http.*?)\n', r.text, re.DOTALL)
             for name, link in matches:
                 name, link = name.strip(), link.strip()
-                if "bj.chinamobile" not in link and "127.0.0.1" not in link:
+                if "127.0.0.1" not in link and "bj.chinamobile" not in link:
                     all_channels.append({
                         "name": name,
                         "url": link,
-                        "group": get_group(name)
+                        "group": get_group(name),
+                        "quality_weight": get_quality_weight(name)
                     })
         except:
             continue
 
-    print(f"抓取完成，开始验证 {len(all_channels)} 个链接的信号质量...")
+    print(f"开始本地筛选与去重，原始链接数: {len(all_channels)}")
 
-    # 多线程验证
     valid_channels = []
     with ThreadPoolExecutor(max_workers=50) as executor:
         futures = [executor.submit(check_url, ch) for ch in all_channels]
@@ -97,23 +104,28 @@ def fetch_and_process():
             if res:
                 valid_channels.append(res)
 
-    # --- 信号质量去重逻辑 ---
-    # 如果频道名相同，只保留响应时间（response_time）最短的那一个
+    # 去重逻辑：同名频道保留 (画质权重最高 > 响应时间最短) 的那一个
     best_channels = {}
     for ch in valid_channels:
         name = ch['name']
-        if name not in best_channels or ch['response_time'] < best_channels[name]['response_time']:
+        if name not in best_channels:
             best_channels[name] = ch
+        else:
+            # 比较画质权重（越小越好）
+            if ch['quality_weight'] < best_channels[name]['quality_weight']:
+                best_channels[name] = ch
+            # 权重相同时，比较响应时间（越快越好）
+            elif ch['quality_weight'] == best_channels[name]['quality_weight']:
+                if ch['response_time'] < best_channels[name]['response_time']:
+                    best_channels[name] = ch
     
     final_list = list(best_channels.values())
 
-    # --- 排序逻辑 ---
-    # 1. 按组权重 (央视 > 卫视...)
-    # 2. 同组内按提取的数字序号 (1, 2, 3...)
-    # 3. 序号相同按名称文本
+    # 排序：组权重 > 序号 > 画质权重
     final_list.sort(key=lambda x: (
         GROUP_PRIORITY.get(x['group'], 99),
         extract_number(x['name']),
+        x['quality_weight'],
         x['name']
     ))
     
@@ -129,4 +141,4 @@ def save_m3u(channels):
 if __name__ == "__main__":
     result = fetch_and_process()
     save_m3u(result)
-    print(f"🎉 筛选完成！已去重并按序号排序，最终保留 {len(result)} 个优质频道。")
+    print(f"🎉 处理完成！保留 {len(result)} 个高画质频道。")
