@@ -26,8 +26,8 @@ def get_env_config():
         "os": sys_type,
         "ffprobe": "ffprobe",
         "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-        "timeout": 3, # 统一超时设置
-        "workers": 50 # 并发数
+        "timeout": 3,
+        "workers": 60  # 增加并发数以应对海量源
     }
     if sys_type == "Windows" and os.path.exists(r"C:\ffmpeg\bin\ffprobe.exe"):
         config["ffprobe"] = r"C:\ffmpeg\bin\ffprobe.exe"
@@ -35,16 +35,21 @@ def get_env_config():
 
 ENV = get_env_config()
 
-# ================= 2. 核心配置 =================
+# ================= 2. 核心配置 (全部 14 个源) =================
 SOURCE_URLS = [
     "https://live.fanmingming.com/tv/m3u/ipv6.m3u",
     "https://iptv-org.github.io/iptv/countries/cn.m3u",
     "https://raw.githubusercontent.com/frankwuzp/iptv-cn/master/tv-ipv4-cn.m3u",
+    "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cn.m3u",
+    "https://raw.githubusercontent.com/plsy1/iptv/main/multicast/multicast-qingdao.m3u",
     "https://raw.githubusercontent.com/xcc360/SHCU-TV/refs/heads/main/IPTV.m3u",
     "https://raw.githubusercontent.com/babylife/China-ShangHai-IPTV-list/master/IPTV_Enhanced_change.m3u",
+    "https://raw.githubusercontent.com/hujingguang/ChinaIPTV/main/cnTV_AutoUpdate.m3u8",
     "https://raw.githubusercontent.com/YueChan/IPTV/main/hongkong.m3u",
     "https://raw.githubusercontent.com/YueChan/IPTV/main/macau.m3u",
     "https://raw.githubusercontent.com/YueChan/IPTV/main/taiwan.m3u",
+    "https://iptv-org.github.io/iptv/languages/eng.m3u",
+    "https://raw.githubusercontent.com/LuenShor/IPTV/master/Global.m3u",
     "https://raw.githubusercontent.com/Guovin/TV/gd/output/result.m3u"
 ]
 
@@ -77,15 +82,15 @@ def get_group(name):
     return "综合/其他"
 
 def deep_analyze_stream(url):
-    """画质优化：精简分析时长，读取码率"""
+    """画质与速度双重优化：限制分析窗口"""
     cmd = [
         ENV["ffprobe"], '-v', 'error', 
-        '-probesize', '256000',       # 减小探测包，极大提升速度
-        '-analyzeduration', '500000',  # 0.5s 分析
+        '-probesize', '256000',      
+        '-analyzeduration', '500000', 
         '-user_agent', ENV["ua"],
         '-show_entries', 'stream=width,height,bit_rate', 
         '-of', 'json', '-select_streams', 'v:0', 
-        '-timeout', '3000000', url     # 3s 超时
+        '-timeout', '3000000', url    
     ]
     try:
         cf = subprocess.CREATE_NO_WINDOW if ENV["os"] == "Windows" else 0
@@ -99,42 +104,40 @@ def deep_analyze_stream(url):
     return 0, 0
 
 def check_channel(ch, session):
-    """速度优化：利用 Session 复用连接"""
+    """预判请求 + 深度分析"""
     try:
+        # 第一步：快速确认链接是否存活
         res = session.head(ch['url'], timeout=ENV["timeout"], allow_redirects=True)
         if res.status_code == 200:
+            # 第二步：获取画质参数
             h, br = deep_analyze_stream(ch['url'])
-            if h >= 360: # 过滤掉极低画质源
+            if h >= 360: 
                 ch['height'], ch['bitrate'] = h, br
                 return ch, True
     except: pass
     return ch, False
 
 def sort_key(ch):
-    """逻辑优化：精准排序（CCTV数字补位 + 画质权重）"""
     group_p = GROUP_PRIORITY.get(ch['group'], 99)
     name = ch['name']
-    
-    # CCTV 数字排序修复：将 CCTV-1 转换为 CCTV-01
     cctv_match = re.search(r'CCTV-(\d+)', name)
     cctv_num = int(cctv_match.group(1)) if cctv_match else 999
-    
-    # 画质权重：分辨率越高清越排前，同分辨率比码率
+    # 画质权重：高度优先，码率其次
     quality_score = ch.get('height', 0) * 10000000 + ch.get('bitrate', 0)
-    
     return (group_p, cctv_num, name, -quality_score)
 
-# ================= 4. 主流程 =================
+# ================= 4. 执行流程 =================
 def run():
     all_channels = []
     seen_urls = set()
     session = requests.Session()
     session.headers.update({"User-Agent": ENV["ua"]})
 
-    print(f"📡 正在获取节目源...")
+    print(f"📡 正在从 14 个源提取链接...")
     for url in SOURCE_URLS:
         try:
-            r = session.get(url, timeout=10)
+            # 加入 verify=False 以兼容某些证书过期的 GitHub 源
+            r = session.get(url, timeout=12, verify=False) 
             matches = re.findall(r'#EXTINF:.*?,(.*?)\n(http.*?)(?:\n|$)', r.text)
             for name, link in matches:
                 link = link.strip()
@@ -142,29 +145,27 @@ def run():
                     clean_n = clean_channel_name(name)
                     all_channels.append({"name": clean_n, "url": link, "group": get_group(clean_n)})
                     seen_urls.add(link)
-        except Exception as e:
-            print(f"⚠️ 无法访问源: {url[:30]}...")
+        except Exception:
+            print(f"❌ 暂时无法连接: {url[:40]}...")
 
-    print(f"🚀 深度筛选开始 (线程数: {ENV['workers']})...")
-    best_channels = {} # 格式: {name: channel_info}
+    print(f"🚀 任务总数: {len(all_channels)} | 正在极速筛选并择优...")
+    best_channels = {}
 
     with ThreadPoolExecutor(max_workers=ENV["workers"]) as executor:
         futures = {executor.submit(check_channel, ch, session): ch for ch in all_channels}
-        for f in tqdm(as_completed(futures), total=len(all_channels), desc="探测进度", bar_format='{l_bar}{bar:20}{r_bar}'):
+        for f in tqdm(as_completed(futures), total=len(all_channels), desc="分析中", bar_format='{l_bar}{bar:20}{r_bar}'):
             res_ch, is_ok = f.result()
             if is_ok:
                 name = res_ch['name']
-                # 画质择优逻辑：
-                # 如果频道不存在，或者当前源的分辨率更高，或者分辨率相同但码率更高，则更新
+                # 核心择优逻辑：同一个频道，保留画质（Height）最高且码率（Bitrate）最大的源
                 if name not in best_channels:
                     best_channels[name] = res_ch
                 else:
-                    curr_best = best_channels[name]
-                    if (res_ch['height'] > curr_best['height']) or \
-                       (res_ch['height'] == curr_best['height'] and res_ch['bitrate'] > curr_best['bitrate']):
+                    curr = best_channels[name]
+                    if (res_ch['height'] > curr['height']) or \
+                       (res_ch['height'] == curr['height'] and res_ch['bitrate'] > curr['bitrate']):
                         best_channels[name] = res_ch
 
-    # 排序与保存
     final_list = sorted(best_channels.values(), key=sort_key)
     
     with open("tv.m3u", "w", encoding="utf-8") as f:
@@ -173,9 +174,9 @@ def run():
             logo = f"https://live.fanmingming.com/tv/{ch['name'].replace('-', '')}.png"
             f.write(f'#EXTINF:-1 tvg-id="{ch["name"]}" tvg-logo="{logo}" group-title="{ch["group"]}",{ch["name"]}\n{ch["url"]}\n')
 
-    print(f"\n✅ 完成！筛选出 {len(final_list)} 个最优频道源。结果已保存至 tv.m3u")
+    print(f"\n✨ 筛选完成！已从海量链接中精选出 {len(final_list)} 个最高画质频道。")
 
 if __name__ == "__main__":
     start_time = time.time()
     run()
-    print(f"⏳ 总耗时: {int(time.time() - start_time)} 秒")
+    print(f"⏱️ 总耗时: {int(time.time() - start_time)} 秒")
