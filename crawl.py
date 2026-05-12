@@ -5,16 +5,10 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 # 1. 14 个源列表（已包含你新增的两个源）
 SOURCE_URLS = [
     "https://live.fanmingming.com/tv/m3u/ipv6.m3u",
-    "https://raw.githubusercontent.com/youshandefeiyang/IPTV/main/main.m3u",
-    "https://raw.githubusercontent.com/Guovin/TV/gd/output/user_result.m3u",
     "https://iptv-org.github.io/iptv/countries/cn.m3u",
     "https://raw.githubusercontent.com/frankwuzp/iptv-cn/master/tv-ipv4-cn.m3u",
-    "https://raw.githubusercontent.com/Gao-S/TVBox/main/v.m3u",
-    "https://raw.githubusercontent.com/hujingguang/ChinaIPTV/main/grouped.m3u8",
     "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cn_cctv.m3u",
-    "https://raw.githubusercontent.com/Tsing-Hua/IPTV/main/tv.m3u",
     "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cn.m3u",
-    "https://raw.githubusercontent.com/Moexin/IPTV/master/m3u/china.m3u",
     "https://raw.githubusercontent.com/plsy1/iptv/main/multicast/multicast-qingdao.m3u",
     "https://raw.githubusercontent.com/xcc360/SHCU-TV/refs/heads/main/IPTV.m3u",
     "https://raw.githubusercontent.com/babylife/China-ShangHai-IPTV-list/master/IPTV_Enhanced_change.m3u"
