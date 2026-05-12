@@ -13,7 +13,7 @@ SOURCE_URLS = [
     "https://raw.githubusercontent.com/hujingguang/ChinaIPTV/main/grouped.m3u8",
     "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cn_cctv.m3u",
     "https://raw.githubusercontent.com/Tsing-Hua/IPTV/main/tv.m3u",
-    "https://github.com/iptv-org/iptv/blob/master/streams/cn.m3u",
+    "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cn.m3u",
     "https://raw.githubusercontent.com/Moexin/IPTV/master/m3u/china.m3u"
 ]
 
