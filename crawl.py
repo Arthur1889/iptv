@@ -35,7 +35,6 @@ def get_group(name):
 
 def deep_analyze_stream(url):
     """使用 ffprobe 探测流信息 (自动适配 Windows/Linux)"""
-    # 路径自适应：优先找你本地 C 盘，找不到则使用系统变量（针对 GitHub Actions）
     win_path = r"C:\ffmpeg\bin\ffprobe.exe"
     ffprobe_path = win_path if os.path.exists(win_path) else "ffprobe"
     
@@ -46,7 +45,6 @@ def deep_analyze_stream(url):
         '-timeout', '5000000', url
     ]
     try:
-        # 如果是 Windows 且路径存在，添加不弹窗标志
         extra_args = {}
         if os.name == 'nt' and os.path.exists(win_path):
             extra_args['creationflags'] = subprocess.CREATE_NO_WINDOW
@@ -65,3 +63,66 @@ def check_channel(ch):
     """综合验证逻辑"""
     try:
         # 第一步：快速 HTTP
+        res = requests.get(ch['url'], timeout=3, stream=True)
+        if res.status_code == 200:
+            w, h = deep_analyze_stream(ch['url'])
+            if h > 0:
+                if h >= 2160: label = "4K"
+                elif h >= 1080: label = "1080P"
+                elif h >= 720: label = "720P"
+                else: label = "SD"
+                ch['name'] = f"{ch['name']} [{label}]"
+                ch['height'] = h
+                return ch, True
+    except:
+        pass
+    return ch, False
+
+def fetch_and_process():
+    all_channels = []
+    print(">>> 正在抓取源数据...")
+    for url in SOURCE_URLS:
+        try:
+            r = requests.get(url, timeout=10)
+            matches = re.findall(r'#EXTINF:.*?,(.*?)\n(http.*?)(?:\n|$)', r.text)
+            for name, link in matches:
+                all_channels.append({"name": clean_channel_name(name), "url": link.strip(), "group": get_group(name)})
+        except: continue
+
+    total = len(all_channels)
+    print(f">>> 开始深度分析 (总数: {total})...")
+    valid_channels = []
+    processed = 0
+    success = 0
+
+    with ThreadPoolExecutor(max_workers=10) as executor:
+        futures = [executor.submit(check_channel, ch) for ch in all_channels]
+        for f in as_completed(futures):
+            processed += 1
+            res_ch, is_ok = f.result()
+            if is_ok:
+                success += 1
+                valid_channels.append(res_ch)
+            sys.stdout.write(f"\r[进度: {processed}/{total}] | 成功: {success} | 正在测: {res_ch['name'][:15]}")
+            sys.stdout.flush()
+
+    # 去重并排序
+    unique_list = {}
+    for ch in valid_channels:
+        key = f"{ch['name']}_{ch['url'].split('/')[2] if '://' in ch['url'] else 'unk'}"
+        if key not in unique_list: unique_list[key] = ch
+    
+    results = list(unique_list.values())
+    results.sort(key=lambda x: (GROUP_PRIORITY.get(x['group'], 99), -x.get('height', 0)))
+    return results
+
+def save_m3u(channels):
+    with open("tv.m3u", "w", encoding="utf-8") as f:
+        f.write("#EXTM3U\n")
+        for ch in channels:
+            f.write(f'#EXTINF:-1 group-title="{ch["group"]}",{ch["name"]}\n{ch["url"]}\n')
+
+if __name__ == "__main__":
+    final_data = fetch_and_process()
+    save_m3u(final_data)
+    print(f"\n🎉 完成！已生成 {len(final_data)} 个频道到 tv.m3u")
