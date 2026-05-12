@@ -20,10 +20,12 @@ SOURCE_URLS = [
 GROUP_PRIORITY = {"央视频道": 1, "地方卫视": 2, "上海频道": 3, "其他频道": 4}
 
 def clean_channel_name(name):
+    """剔除杂质标签"""
     clean = re.sub(r'(\[.*?\]|【.*?】|\(.*?\)|\d+K|蓝光|超清|高清|标清|FHD|HD|SD|IP[vV]6|IPV4|B8|C7|A\d+|NOT 24/7)', '', name, flags=re.I)
     return clean.strip().rstrip('-').strip()
 
 def get_group(name):
+    """频道分组逻辑"""
     name_up = name.upper()
     if "CCTV" in name_up or "央视" in name: return "央视频道"
     if "卫视" in name: return "地方卫视"
@@ -31,10 +33,8 @@ def get_group(name):
     return "其他频道"
 
 def deep_analyze_stream(url):
-    """使用 ffprobe 探测流信息 - 已适配 Windows 路径"""
-    # 这里使用了你测试成功的绝对路径
+    """使用 ffprobe 探测流信息 (Windows 路径已适配)"""
     ffprobe_path = r"C:\ffmpeg\bin\ffprobe.exe" 
-    
     cmd = [
         ffprobe_path, '-v', 'error', '-show_entries', 'stream=width,height', 
         '-of', 'json', '-select_streams', 'v:0',
@@ -42,7 +42,7 @@ def deep_analyze_stream(url):
         '-timeout', '5000000', url
     ]
     try:
-        # Windows 环境增加 creationflags 防止弹出大量黑窗口
+        # Windows creationflags 防止黑窗口闪烁
         result = subprocess.run(cmd, capture_output=True, text=True, timeout=15, creationflags=subprocess.CREATE_NO_WINDOW)
         if result.returncode == 0:
             data = json.loads(result.stdout)
@@ -54,12 +54,12 @@ def deep_analyze_stream(url):
     return 0, 0
 
 def check_channel(ch):
-    """双重验证逻辑"""
+    """综合验证逻辑"""
     try:
-        # 第一步：快速 HTTP 探测，设置较短超时防止卡死
+        # 第一步：快速 HTTP 请求
         res = requests.get(ch['url'], timeout=3, stream=True)
         if res.status_code == 200:
-            # 第二步：深度 FFprobe 探测
+            # 第二步：ffprobe 深度检测
             w, h = deep_analyze_stream(ch['url'])
             if h > 0:
                 if h >= 2160: label = "4K"
@@ -98,18 +98,16 @@ def fetch_and_process():
         for f in as_completed(futures):
             processed_count += 1
             res_ch, is_success = f.result()
-            
             if is_success:
                 success_count += 1
                 valid_channels.append(res_ch)
-            
             # 动态进度条
             sys.stdout.write(f"\r[进度: {processed_count}/{total}] | 成功: {success_count} | 正在测: {res_ch['name'][:15]}")
             sys.stdout.flush()
 
     print(f"\n\n>>> 分析结束！通过检测的频道: {len(valid_channels)}")
 
-    # 去重：同频道不同源均保留
+    # 去重
     unique_list = {}
     for ch in valid_channels:
         domain = ch['url'].split('/')[2] if '://' in ch['url'] else 'unknown'
@@ -118,4 +116,20 @@ def fetch_and_process():
     
     results = list(unique_list.values())
     # 排序：组优先级 -> 分辨率从高到低
-    results.sort(key=lambda
+    results.sort(key=lambda x: (GROUP_PRIORITY.get(x['group'], 99), -x.get('height', 0)))
+    return results
+
+def save_m3u(channels):
+    """保存结果"""
+    with open("tv.m3u", "w", encoding="utf-8") as f:
+        f.write("#EXTM3U\n")
+        for ch in channels:
+            f.write(f'#EXTINF:-1 group-title="{ch["group"]}",{ch["name"]}\n')
+            f.write(f'{ch["url"]}\n')
+
+if __name__ == "__main__":
+    start_time = time.time()
+    final_data = fetch_and_process()
+    save_m3u(final_data)
+    end_time = time.time()
+    print(f"\n🎉 处理完成！耗时: {int(end_time - start_time)}s，文件已更新至 tv.m3u")
