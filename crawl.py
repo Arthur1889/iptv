@@ -1,8 +1,10 @@
 import requests
 import re
+import subprocess
+import json
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-# 1. 确认后的 7 个源
+# 1. 确认后的 7 个高权重源
 SOURCE_URLS = [
     "https://live.fanmingming.com/tv/m3u/ipv6.m3u",
     "https://iptv-org.github.io/iptv/countries/cn.m3u",
@@ -15,32 +17,10 @@ SOURCE_URLS = [
 
 GROUP_PRIORITY = {"央视频道": 1, "地方卫视": 2, "上海频道": 3, "其他频道": 4}
 
-def get_quality_info(name):
-    name_up = name.upper()
-    if any(w in name_up for w in ["4K", "8K", "UHD"]): return 1, "4K"
-    if any(w in name_up for w in ["1080", "FHD", "1080P"]): return 2, "1080P"
-    if any(w in name_up for w in ["720", "HD", "720P"]): return 3, "720P"
-    return 4, "" 
-
 def clean_channel_name(name):
-    """优化后的净化：保留 CCTV-1 综合 这种具体名称"""
-    _, res_label = get_quality_info(name)
-    
-    # 1. 先去掉常见的干扰标签
+    """基础净化：剔除杂质标签"""
     clean = re.sub(r'(\[.*?\]|【.*?】|\(.*?\)|\d+K|蓝光|超清|高清|标清|FHD|HD|SD|IP[vV]6|IPV4|B8|C7|A\d+|NOT 24/7)', '', name, flags=re.I)
-    
-    # 2. 针对 CCTV 的特殊处理：保留 CCTV-1 这种格式及后面的中文
-    # 移除末尾多余的空格和连字符
-    clean = clean.strip().rstrip('-').strip()
-    
-    return f"{clean} {res_label}".strip() if res_label else clean
-
-def extract_number(name):
-    nums = re.findall(r'\d+', name)
-    if not nums: return 999
-    val = float(nums[0])
-    if '+' in name: val += 0.1
-    return val
+    return clean.strip().rstrip('-').strip()
 
 def get_group(name):
     name_up = name.upper()
@@ -49,73 +29,99 @@ def get_group(name):
     if any(s in name for s in ["上海", "东方", "五星体育", "新闻综合"]): return "上海频道"
     return "其他频道"
 
-def check_url(channel):
+def deep_analyze_stream(url):
+    """
+    学习 iptv-org：使用 ffprobe 探测流的真实物理分辨率
+    返回: (宽度, 高度, 编码格式)
+    """
+    cmd = [
+        'ffprobe', '-v', 'quiet', '-print_format', 'json',
+        '-show_streams', '-select_streams', 'v:0',
+        '-timeout', '3000000', # 3秒探测超时
+        url
+    ]
     try:
-        headers = {'User-Agent': 'Mozilla/5.0'}
-        response = requests.get(channel['url'], headers=headers, timeout=4, stream=True)
-        if response.status_code == 200:
-            channel['response_time'] = response.elapsed.total_seconds()
-            return channel
-    except: pass
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=5)
+        if result.returncode == 0:
+            data = json.loads(result.stdout)
+            if data.get('streams'):
+                s = data['streams'][0]
+                return s.get('width', 0), s.get('height', 0), s.get('codec_name', 'N/A')
+    except:
+        pass
+    return 0, 0, None
+
+def check_channel(ch):
+    """综合验证：先测响应，再测流信息"""
+    try:
+        # 第一步：快速 HTTP 验证
+        res = requests.get(ch['url'], timeout=3, stream=True)
+        if res.status_code == 200:
+            # 第二步：深度 FFprobe 验证（只针对连通的源）
+            w, h, codec = deep_analyze_stream(ch['url'])
+            if h > 0:
+                # 根据真实物理高度标注画质
+                if h >= 2160: label = "4K"
+                elif h >= 1080: label = "1080P"
+                elif h >= 720: label = "720P"
+                else: label = "SD"
+                
+                ch['name'] = f"{ch['name']} [{label}]"
+                ch['height'] = h  # 用于后续排序（分辨率高者优先）
+                return ch
+    except:
+        pass
     return None
 
 def fetch_and_process():
     all_channels = []
-    print("\n>>> 正在抓取...")
+    print(">>> 正在抓取源数据...")
     for url in SOURCE_URLS:
         try:
             r = requests.get(url, timeout=10)
             matches = re.findall(r'#EXTINF:.*?,(.*?)\n(http.*?)(?:\n|$)', r.text)
-            
-            if not matches: continue
-            
-            print(f"✅ 源: {url[:30]}... 抓取到 {len(matches)} 条")
-            
             for name, link in matches:
                 name, link = name.strip(), link.strip()
-                if "127.0.0.1" in link or not link.startswith("http"): continue
-                
-                # 过滤明确的低画质
-                if any(word in name.upper() for word in ["600P", "576I", "480P", "SD", "标清"]): continue
-
-                q_weight, _ = get_quality_info(name)
-                final_name = clean_channel_name(name)
-                
+                if "127.0.0.1" in link: continue
                 all_channels.append({
-                    "name": final_name,
+                    "name": clean_channel_name(name),
                     "url": link,
-                    "group": get_group(name),
-                    "quality_weight": q_weight
+                    "group": get_group(name)
                 })
         except: continue
 
-    print(f"\n>>> 正在验证信号 (候选: {len(all_channels)})...")
+    print(f">>> 开始深度分析 (预计耗时较长，候选源: {len(all_channels)})...")
     valid_channels = []
-    with ThreadPoolExecutor(max_workers=60) as executor:
-        futures = [executor.submit(check_url, ch) for ch in all_channels]
+    # 深度分析耗性能，并发数不宜过高，建议 30-50
+    with ThreadPoolExecutor(max_workers=40) as executor:
+        futures = [executor.submit(check_channel, ch) for ch in all_channels]
         for f in as_completed(futures):
             res = f.result()
-            if res: valid_channels.append(res)
+            if res:
+                valid_channels.append(res)
+                if len(valid_channels) % 10 == 0:
+                    print(f"  已找到 {len(valid_channels)} 个真实有效源...")
 
-    print(f"\n>>> 正在精简去重 (保留多线路)...")
-    best_channels = {}
+    # 去重逻辑：同名同分辨率，保留一条
+    unique_list = {}
     for ch in valid_channels:
-        # 使用 名字+URL 作为唯一标识，确保不同线路的 CCTV-1 综合 都能共存
-        key = f"{ch['name']}_{ch['url']}"
-        best_channels[key] = ch
+        key = f"{ch['name']}_{ch['url'].split('/')[2] if '://' in ch['url'] else ''}"
+        if key not in unique_list:
+            unique_list[key] = ch
     
-    final_list = list(best_channels.values())
-    final_list.sort(key=lambda x: (GROUP_PRIORITY.get(x['group'], 99), extract_number(x['name']), x['quality_weight']))
-    return final_list
+    # 最终排序：组别 > 分辨率高低 (height)
+    results = list(unique_list.values())
+    results.sort(key=lambda x: (GROUP_PRIORITY.get(x['group'], 99), -x.get('height', 0)))
+    return results
 
 def save_m3u(channels):
     with open("tv.m3u", "w", encoding="utf-8") as f:
-        f.write("#EXTM3U x-tvg-url=\"https://live.fanmingming.com/e.xml\"\n")
+        f.write("#EXTM3U\n")
         for ch in channels:
-            f.write(f'#EXTINF:-1 tvg-name="{ch["name"]}" group-title="{ch["group"]}",{ch["name"]}\n')
+            f.write(f'#EXTINF:-1 group-title="{ch["group"]}",{ch["name"]}\n')
             f.write(f'{ch["url"]}\n')
 
 if __name__ == "__main__":
-    result = fetch_and_process()
-    save_m3u(result)
-    print(f"\n🎉 完成！已恢复 CCTV 详细名称，共保留 {len(result)} 个频道。")
+    final_data = fetch_and_process()
+    save_m3u(final_data)
+    print(f"\n🎉 深度检测完成！生成了 {len(final_data)} 个真实可播频道。")
