@@ -32,24 +32,20 @@ def get_quality_label(name):
 def clean_channel_name(name):
     """净化名称：只保留 频道名 + 分辨率"""
     res_label = get_quality_label(name)
-    # 移除括号内容、特殊标签、多余空格
+    # 移除括号内容、多余标签、IPv6等杂质
     clean_name = re.sub(r'(\[.*?\]|\(.*?\)|\d+K|蓝光|超清|高清|标清|FHD|HD|SD|IP[vV]6|IPV4|B8|C7|A\d+)', '', name, flags=re.I)
-    # 移除频道名末尾可能残留的连字符或空格
+    # 移除末尾连字符或空格
     clean_name = clean_name.split('-')[0].split('_')[0].strip()
-    
     return f"{clean_name} {res_label}".strip() if res_label else clean_name
 
 def get_quality_weight(name):
-    """判断画质：720P以下直接返回 None 触发过滤"""
+    """仅用于去重和排序时的权重参考，不再作为过滤条件"""
     name_up = name.upper()
     if any(w in name_up for w in ["4K", "8K", "UHD"]): return 1
     if any(w in name_up for w in ["1080", "FHD", "1080P"]): return 2
-    if any(w in name_up for w in ["720", "720P", "高清", "HD"]): return 3
-    # 强制剔除标清
-    if any(w in name_up for w in ["标清", "SD", "流畅", "LD"]): return None
-    # 针对 CCTV/卫视 没写分辨率的默认保留
-    if "CCTV" in name_up or "卫视" in name_up: return 4
-    return None
+    if any(w in name_up for w in ["720", "HD", "720P"]): return 3
+    if any(w in name_up for w in ["标清", "SD", "流畅"]): return 5
+    return 4 # 默认画质
 
 def extract_number(name):
     """序号排序逻辑"""
@@ -86,48 +82,8 @@ def fetch_and_process():
             matches = re.findall(r'#EXTINF:.*?,(.*?)\n(http.*?)\n', r.text, re.DOTALL)
             for name, link in matches:
                 name, link = name.strip(), link.strip()
+                if "127.0.0.1" in link or "bj.chinamobile" in link: continue
+                
+                # 获取权重并净化名称
                 q_weight = get_quality_weight(name)
-                if q_weight is None: continue # 过滤 720P 以下
-                
-                # 净化名称
-                final_name = clean_channel_name(name)
-                
-                all_channels.append({
-                    "name": final_name,
-                    "url": link,
-                    "group": get_group(name),
-                    "quality_weight": q_weight
-                })
-        except: continue
-
-    valid_channels = []
-    with ThreadPoolExecutor(max_workers=50) as executor:
-        futures = [executor.submit(check_url, ch) for ch in all_channels]
-        for future in as_completed(futures):
-            res = future.result()
-            if res: valid_channels.append(res)
-
-    best_channels = {}
-    for ch in valid_channels:
-        key = ch['name']
-        if key not in best_channels or ch['quality_weight'] < best_channels[key]['quality_weight']:
-            best_channels[key] = ch
-        elif ch['quality_weight'] == best_channels[key]['quality_weight']:
-            if ch['response_time'] < best_channels[key]['response_time']:
-                best_channels[key] = ch
-    
-    final_list = list(best_channels.values())
-    final_list.sort(key=lambda x: (GROUP_PRIORITY.get(x['group'], 99), extract_number(x['name']), x['quality_weight']))
-    return final_list
-
-def save_m3u(channels):
-    with open("tv.m3u", "w", encoding="utf-8") as f:
-        f.write("#EXTM3U x-tvg-url=\"https://live.fanmingming.com/e.xml\"\n")
-        for ch in channels:
-            f.write(f'#EXTINF:-1 tvg-name="{ch["name"]}" group-title="{ch["group"]}",{ch["name"]}\n')
-            f.write(f'{ch["url"]}\n')
-
-if __name__ == "__main__":
-    result = fetch_and_process()
-    save_m3u(result)
-    print(f"🎉 处理完成！保留 720P 及以上，名称已净化，共计 {len(result)} 个频道。")
+                final_name = clean
