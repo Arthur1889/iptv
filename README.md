@@ -20,3 +20,12 @@
 确保你的系统安装了 **Python 3.7+**。
 ```powershell
 pip install requests tqdm
+
+2. 配置 FFmpeg 组件
+本工具利用 ffprobe 探测流信息，请务必配置：
+
+下载：前往 FFmpeg 官网 下载。
+
+路径：将 ffprobe.exe 放置于 C:\ffmpeg\bin\ffprobe.exe。
+
+验证：在终端输入 ffprobe -version，看到版本信息即代表成功。
