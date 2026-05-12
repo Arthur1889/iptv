@@ -28,20 +28,31 @@ GROUP_PRIORITY = {
 }
 
 def get_quality_weight(name):
-    """根据名称关键词评估画质权重，数值越小优先级越高"""
+    """
+    根据名称关键词评估画质权重。
+    返回 1-2 代表 1080P 及以上，返回 None 代表需要过滤（720P及以下）。
+    """
     name_up = name.upper()
-    if any(word in name_up for word in ["4K", "8K", "蓝光", "BD", "超高清"]):
+    
+    # 优先保留顶级画质
+    if any(word in name_up for word in ["4K", "8K", "蓝光", "BD", "超高清", "UHD"]):
         return 1
-    if any(word in name_up for word in ["1080", "超清", "HD", "FHD"]):
+    # 保留 1080P 级别
+    if any(word in name_up for word in ["1080", "超清", "FHD", "1080P"]):
         return 2
-    if any(word in name_up for word in ["720", "高清"]):
+    
+    # 明确过滤：出现 720P、高清(通常指720)、标清、SD 等关键词直接拦截
+    if any(word in name_up for word in ["720", "720P", "高清", "HD", "标清", "SD", "流畅"]):
+        return None
+        
+    # 对于没写分辨率的频道，如果是 CCTV 或 卫视，默认保留（权重设为 3），如果是其他小台则过滤
+    if "CCTV" in name_up or "卫视" in name_up:
         return 3
-    if any(word in name_up for word in ["标清", "SD", "流畅"]):
-        return 5
-    return 4
+        
+    return None
 
 def extract_number(name):
-    """从频道名提取数字（如 CCTV-1 -> 1, CCTV-5+ -> 5.1）用于精确排序"""
+    """从频道名提取数字用于排序"""
     nums = re.findall(r'\d+', name)
     if not nums:
         return 999
@@ -84,17 +95,23 @@ def fetch_and_process():
             matches = re.findall(r'#EXTINF:.*?,(.*?)\n(http.*?)\n', r.text, re.DOTALL)
             for name, link in matches:
                 name, link = name.strip(), link.strip()
+                
+                # --- 新增过滤逻辑 ---
+                q_weight = get_quality_weight(name)
+                if q_weight is None:
+                    continue  # 跳过 720P 及以下或未标注的高清
+                
                 if "127.0.0.1" not in link and "bj.chinamobile" not in link:
                     all_channels.append({
                         "name": name,
                         "url": link,
                         "group": get_group(name),
-                        "quality_weight": get_quality_weight(name)
+                        "quality_weight": q_weight
                     })
         except:
             continue
 
-    print(f"开始本地筛选与去重，原始链接数: {len(all_channels)}")
+    print(f"已过滤低画质，开始验证剩余 {len(all_channels)} 个链接的信号质量...")
 
     valid_channels = []
     with ThreadPoolExecutor(max_workers=50) as executor:
@@ -104,17 +121,15 @@ def fetch_and_process():
             if res:
                 valid_channels.append(res)
 
-    # 去重逻辑：同名频道保留 (画质权重最高 > 响应时间最短) 的那一个
+    # 去重逻辑：同名频道保留 (画质权重最高 > 响应时间最短)
     best_channels = {}
     for ch in valid_channels:
         name = ch['name']
         if name not in best_channels:
             best_channels[name] = ch
         else:
-            # 比较画质权重（越小越好）
             if ch['quality_weight'] < best_channels[name]['quality_weight']:
                 best_channels[name] = ch
-            # 权重相同时，比较响应时间（越快越好）
             elif ch['quality_weight'] == best_channels[name]['quality_weight']:
                 if ch['response_time'] < best_channels[name]['response_time']:
                     best_channels[name] = ch
@@ -141,4 +156,4 @@ def save_m3u(channels):
 if __name__ == "__main__":
     result = fetch_and_process()
     save_m3u(result)
-    print(f"🎉 处理完成！保留 {len(result)} 个高画质频道。")
+    print(f"🎉 处理完成！已剔除所有 720P 及以下频道，最终保留 {len(result)} 个优质频道。")
