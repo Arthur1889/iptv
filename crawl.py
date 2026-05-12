@@ -2,6 +2,7 @@ import requests
 import re
 import subprocess
 import json
+import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 # 1. 确认后的 7 个高权重源
@@ -29,45 +30,55 @@ def get_group(name):
     if any(s in name for s in ["上海", "东方", "五星体育", "新闻综合"]): return "上海频道"
     return "其他频道"
 
-def deep_analyze_stream(url):
+def deep_analyze_stream(url, retry=1):
     """
-    学习 iptv-org：使用 ffprobe 探测流的真实物理分辨率
-    返回: (宽度, 高度, 编码格式)
+    学习 iptv-org：使用 ffprobe 探测流的真实物理信息
     """
     cmd = [
-        'ffprobe', '-v', 'quiet', '-print_format', 'json',
-        '-show_streams', '-select_streams', 'v:0',
-        '-timeout', '3000000', # 3秒探测超时
+        'ffprobe', 
+        '-v', 'error', 
+        '-show_entries', 'stream=width,height,codec_name', 
+        '-of', 'json',
+        '-select_streams', 'v:0',
+        '-analyzeduration', '5000000', # 5秒分析时长
+        '-probesize', '5000000',       # 5MB 探测包
+        '-timeout', '5000000',          # 5秒超时
         url
     ]
     try:
-        result = subprocess.run(cmd, capture_output=True, text=True, timeout=5)
+        # 给 ffmpeg 15 秒总执行时间
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=15)
         if result.returncode == 0:
             data = json.loads(result.stdout)
-            if data.get('streams'):
+            if 'streams' in data and len(data['streams']) > 0:
                 s = data['streams'][0]
                 return s.get('width', 0), s.get('height', 0), s.get('codec_name', 'N/A')
+        
+        # 如果第一次失败且还有重试次数
+        if retry > 0:
+            time.sleep(1)
+            return deep_analyze_stream(url, retry - 1)
+            
     except:
         pass
     return 0, 0, None
 
 def check_channel(ch):
-    """综合验证：先测响应，再测流信息"""
+    """综合验证：先测 HTTP 响应，再测流内容"""
     try:
-        # 第一步：快速 HTTP 验证
-        res = requests.get(ch['url'], timeout=3, stream=True)
+        # 使用快速请求确认服务器还活着
+        res = requests.get(ch['url'], timeout=4, stream=True)
         if res.status_code == 200:
-            # 第二步：深度 FFprobe 验证（只针对连通的源）
+            # 只有 HTTP 通的源才进行昂贵的深度探测
             w, h, codec = deep_analyze_stream(ch['url'])
             if h > 0:
-                # 根据真实物理高度标注画质
                 if h >= 2160: label = "4K"
                 elif h >= 1080: label = "1080P"
                 elif h >= 720: label = "720P"
                 else: label = "SD"
                 
                 ch['name'] = f"{ch['name']} [{label}]"
-                ch['height'] = h  # 用于后续排序（分辨率高者优先）
+                ch['height'] = h
                 return ch
     except:
         pass
@@ -90,26 +101,27 @@ def fetch_and_process():
                 })
         except: continue
 
-    print(f">>> 开始深度分析 (预计耗时较长，候选源: {len(all_channels)})...")
+    print(f">>> 开始深度分析 (候选源: {len(all_channels)})...")
     valid_channels = []
-    # 深度分析耗性能，并发数不宜过高，建议 30-50
-    with ThreadPoolExecutor(max_workers=40) as executor:
+    
+    # 核心修正：降低并发数到 15，防止网络拥塞导致 0 结果
+    with ThreadPoolExecutor(max_workers=15) as executor:
         futures = [executor.submit(check_channel, ch) for ch in all_channels]
         for f in as_completed(futures):
             res = f.result()
             if res:
                 valid_channels.append(res)
-                if len(valid_channels) % 10 == 0:
-                    print(f"  已找到 {len(valid_channels)} 个真实有效源...")
+                if len(valid_channels) % 5 == 0:
+                    print(f"  已找到 {len(valid_channels)} 个高清有效源...")
 
-    # 去重逻辑：同名同分辨率，保留一条
+    # 去重
     unique_list = {}
     for ch in valid_channels:
-        key = f"{ch['name']}_{ch['url'].split('/')[2] if '://' in ch['url'] else ''}"
+        domain = ch['url'].split('/')[2] if '://' in ch['url'] else 'default'
+        key = f"{ch['name']}_{domain}"
         if key not in unique_list:
             unique_list[key] = ch
     
-    # 最终排序：组别 > 分辨率高低 (height)
     results = list(unique_list.values())
     results.sort(key=lambda x: (GROUP_PRIORITY.get(x['group'], 99), -x.get('height', 0)))
     return results
