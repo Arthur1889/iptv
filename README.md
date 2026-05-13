@@ -31,6 +31,8 @@ macOS / Linux:
 Bash
 brew install ffmpeg  # macOS
 sudo apt install ffmpeg  # Ubuntu/Debian
+
+
 **🚀 使用指南**
 
 1. 配置直播源

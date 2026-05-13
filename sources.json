@@ -12,7 +12,7 @@
         "https://raw.githubusercontent.com/YueChan/IPTV/main/hongkong.m3u",
         "https://raw.githubusercontent.com/YueChan/IPTV/main/macau.m3u",
         "https://raw.githubusercontent.com/YueChan/IPTV/main/taiwan.m3u",
-#        "https://iptv-org.github.io/iptv/languages/eng.m3u",
+        "stop_https://iptv-org.github.io/iptv/languages/eng.m3u",
         "https://raw.githubusercontent.com/LuenShor/IPTV/master/Global.m3u",
         "https://raw.githubusercontent.com/Guovin/TV/gd/output/result.m3u"
     ]
