@@ -56,11 +56,11 @@ git push origin %branch%
 if %errorlevel% equ 0 (
     echo.
     echo ===========================================
-    echo ✅ SUCCESS: Pushed to %branch% branch.
+    echo  SUCCESS: Pushed to %branch% branch.
     echo ===========================================
 ) else (
     echo.
-    echo ❌ ERROR: Push failed. Check your network or Git config.
+    echo  ERROR: Push failed. Check your network or Git config.
 )
 
 pause
