@@ -39,23 +39,25 @@ def get_env_config():
 
 ENV = get_env_config()
 
-# ================= 2. 核心配置 =================
-SOURCE_URLS = [
-    "https://live.fanmingming.com/tv/m3u/ipv6.m3u",
-    "https://iptv-org.github.io/iptv/countries/cn.m3u",
-    "https://raw.githubusercontent.com/frankwuzp/iptv-cn/master/tv-ipv4-cn.m3u",
-    "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cn.m3u",
-    "https://raw.githubusercontent.com/plsy1/iptv/main/multicast/multicast-qingdao.m3u",
-    "https://raw.githubusercontent.com/xcc360/SHCU-TV/refs/heads/main/IPTV.m3u",
-    "https://raw.githubusercontent.com/babylife/China-ShangHai-IPTV-list/master/IPTV_Enhanced_change.m3u",
-    "https://raw.githubusercontent.com/hujingguang/ChinaIPTV/main/cnTV_AutoUpdate.m3u8",
-    "https://raw.githubusercontent.com/YueChan/IPTV/main/hongkong.m3u",
-    "https://raw.githubusercontent.com/YueChan/IPTV/main/macau.m3u",
-    "https://raw.githubusercontent.com/YueChan/IPTV/main/taiwan.m3u",
-#    "https://iptv-org.github.io/iptv/languages/eng.m3u",
-    "https://raw.githubusercontent.com/LuenShor/IPTV/master/Global.m3u",
-    "https://raw.githubusercontent.com/Guovin/TV/gd/output/result.m3u"
-]
+# ================= 2. 核心配置 (改从文件读取) =================
+CONFIG_FILE = "sources.json"
+
+def load_sources():
+    """从本地 JSON 文件读取源链接"""
+    if not os.path.exists(CONFIG_FILE):
+        print(f"❌ 错误：找不到配置文件 {CONFIG_FILE}！")
+        # 如果文件不存在，返回一个空的或默认的列表防止崩溃
+        return []
+    try:
+        with open(CONFIG_FILE, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+            return data.get("urls", [])
+    except Exception as e:
+        print(f"❌ 读取配置文件出错: {e}")
+        return []
+
+# 动态加载源
+SOURCE_URLS = load_sources()
 
 GROUP_PRIORITY = {
     "央视频道": 1, "地方卫视": 2, "上海频道": 3, "港澳台": 4, 
@@ -127,6 +129,10 @@ def sort_key(ch):
 
 # ================= 4. 主流程 =================
 def run():
+    if not SOURCE_URLS:
+        print("⚠️ 没有可用的源链接，请检查 sources.json！")
+        return
+
     all_channels = []
     seen_urls = set()
     source_stats = {}
