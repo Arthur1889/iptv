@@ -12,38 +12,32 @@
 
 🍏 跨平台适配：完美支持 Windows、macOS 和 Ubuntu，内置 push 脚本实现一键同步至 GitHub。
 
-🛠️ 本地部署准备
-1. 安装环境
-确保你的系统安装了 Python 3.7+。
+**🛠️ 本地部署准备**
 
-Bash
-# 安装必要依赖
-pip install requests tqdm
-2. 配置 FFmpeg 组件
+1. 安装环境
+(1)确保你的系统安装了 Python 3.7+。
+(2)安装必要依赖：pip install requests tqdm
+2. 配置FFmpeg组件
 本工具利用 ffprobe 探测流信息，请务必配置：
 
 Windows:
 
 下载 FFmpeg 官网二进制文件。
 
-将 ffprobe.exe 放置于 C:\ffmpeg\bin\ffprobe.exe (或修改 crawl.py 中的路径)。
+将 ffprobe.exe 放置于 C:\\ffmpeg\\bin\\ffprobe.exe (或修改 crawl.py 中的路径)。
 
 macOS / Linux:
 
 Bash
 brew install ffmpeg  # macOS
 sudo apt install ffmpeg  # Ubuntu/Debian
-🚀 使用指南
+**🚀 使用指南**
+
 1. 配置直播源
 编辑根目录下的 sources.json 文件，在 urls 数组中添加你收集到的 .m3u 或 .txt 原始订阅链接。
-
-JSON
-{
-    "urls": [
-        "https://example.com/live.m3u",
-        "https://raw.githubusercontent.com/.../tv.m3u"
-    ]
-}
+"urls": \[
+"https://example.com/live.m3u",
+"https://raw.githubusercontent.com/.../tv.m3u"
 2. 运行爬虫
 执行脚本开始自动化探测与筛选：
 
@@ -71,3 +65,4 @@ Plaintext
 
 💡 提示
 如果你使用的是 Apple TV (APTV)，可以直接将你仓库中的 tv.m3u 原始链接（Raw Link）填入 App，享受自动关联的台标与节目预告（EPG）。
+
