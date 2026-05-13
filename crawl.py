@@ -7,7 +7,7 @@ import re
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-# ================= 0. 环境与依赖 =================
+# ================= 0. 禁用 SSL 警告 =================
 import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
@@ -38,8 +38,9 @@ def get_env_config():
 
 ENV = get_env_config()
 
-# ================= 1. 配置与工具 =================
+# ================= 1. 加载配置与别名表 =================
 CONFIG_FILE = "sources.json"
+NAME_JSON = "name.json"
 
 def load_sources():
     if not os.path.exists(CONFIG_FILE): return []
@@ -48,38 +49,81 @@ def load_sources():
             return json.load(f).get("urls", [])
     except: return []
 
+def load_alias_map():
+    """
+    加载 name.json 并解析为别名映射字典
+    支持正则匹配
+    """
+    alias_dict = {}
+    if not os.path.exists(NAME_JSON):
+        return alias_dict
+    try:
+        with open(NAME_JSON, 'r', encoding='utf-8') as f:
+            # 过滤掉注释行
+            lines = [line.strip() for line in f if line.strip() and not line.startswith('#')]
+            for line in lines:
+                parts = line.split(',')
+                if len(parts) < 2: continue
+                main_name = parts[0].strip()
+                aliases = parts[1:]
+                alias_dict[main_name] = aliases
+    except Exception as e:
+        print(f"⚠️ 加载 name.json 失败: {e}")
+    return alias_dict
+
 SOURCE_URLS = load_sources()
+ALIAS_MAP = load_alias_map()
 
 GROUP_PRIORITY = {
     "央视频道": 1, "地方卫视": 2, "上海频道": 3, "港澳台": 4, 
     "电影/影院": 5, "体育/竞技": 6, "英文/国际": 7, "纪录/纪实": 8, "少儿/动画": 9 
 }
 
-# ================= 2. 核心功能函数 =================
+# ================= 2. 核心逻辑函数 =================
+
+def get_standard_name(origin_name):
+    """
+    根据别名表将原始名称标准化
+    """
+    name_upper = origin_name.strip().upper()
+    for main_name, aliases in ALIAS_MAP.items():
+        for alias in aliases:
+            alias = alias.strip()
+            # 处理正则表达式
+            if alias.startswith("re:"):
+                pattern = alias[3:]
+                try:
+                    if re.search(pattern, origin_name):
+                        return main_name
+                except: continue
+            # 处理普通字符串匹配
+            elif alias.upper() in name_upper or name_upper in alias.upper():
+                return main_name
+    return origin_name
 
 def clean_channel_name(name, height=0, original_name=""):
     """
-    清洗名称并根据物理参数或文字匹配进行打标
+    综合别名映射与物理像素打标
     """
-    # 1. 物理识别（最高优先级）
-    is_4k = height >= 2160
-    is_8k = height >= 4320
+    # 1. 首先通过别名映射表获取标准名
+    standard_name = get_standard_name(original_name if original_name else name)
+    
+    # 2. 物理与文字识别 (4K/8K)
+    is_4k = height >= 2160 or re.search(r'4K', original_name, re.I)
+    is_8k = height >= 4320 or re.search(r'8K', original_name, re.I)
 
-    # 2. 文字匹配（回退机制：如果物理探测失败，检查原始名称）
-    if height == 0:
-        if re.search(r'8K', original_name, re.I): is_8k = True
-        elif re.search(r'4K', original_name, re.I): is_4k = True
-
-    # 3. 基础清洗
-    clean_n = re.sub(r'(\[.*?\]|【.*?】|\(.*?\)|\d+K|蓝光|超清|高清|标清|FHD|HD|SD|IP[vV]6|IPV4|频道|画质)', '', name, flags=re.I)
-    clean_n = clean_n.replace("CCTV", "CCTV-").replace("CCTV--", "CCTV-")
-    clean_n = clean_n.strip().upper()
+    # 3. 基础清洗（针对未命中别名表的频道）
+    if standard_name == name:
+        standard_name = re.sub(r'(\[.*?\]|【.*?】|\(.*?\)|\d+K|蓝光|超清|高清|标清|FHD|HD|SD|IP[vV]6|IPV4|频道|画质)', '', standard_name, flags=re.I)
+        standard_name = standard_name.replace("CCTV", "CCTV-").replace("CCTV--", "CCTV-")
+    
+    standard_name = standard_name.strip().upper()
     
     # 4. 重新打标
-    if is_8k: clean_n = f"{clean_n}-8K"
-    elif is_4k: clean_n = f"{clean_n}-4K"
+    if is_8k: standard_name = f"{standard_name}-8K"
+    elif is_4k: standard_name = f"{standard_name}-4K"
     
-    return clean_n
+    return standard_name
 
 def deep_analyze_stream(url):
     cmd = [
@@ -100,28 +144,32 @@ def deep_analyze_stream(url):
     return 0, 0
 
 def check_channel(ch):
-    """
-    探测逻辑：即使物理探测失败(h=0)，只要链接能通，也保留以便后续文字匹配
-    """
     try:
         h, br = deep_analyze_stream(ch['url'])
-        # 只要能获取到基本信息（即使高度为0，但ffprobe没报错，或者链接本身有效）
-        # 这里为了严谨，如果 h=0，我们尝试用 requests 验证一下链接存活
+        # 存活判定：有物理分辨率 或 虽物理探测失败但名字带4K/8K且链接通畅
         if h >= 360:
             ch['height'], ch['bitrate'] = h, br
             ch['name'] = clean_channel_name(ch['name'], height=h, original_name=ch['origin_name'])
             return ch, True
         else:
-            # 回退：物理探测失败，但如果名字里带 4K/8K，我们放宽要求，通过 HTTP 状态码验证
-            res = requests.head(ch['url'], timeout=3, headers={"User-Agent": ENV["ua"]})
+            res = requests.head(ch['url'], timeout=3, headers={"User-Agent": ENV["ua"]}, verify=False)
             if res.status_code == 200:
                 ch['height'], ch['bitrate'] = 0, 0
                 ch['name'] = clean_channel_name(ch['name'], height=0, original_name=ch['origin_name'])
-                # 只有文字匹配中含有 4K/8K 的才在 h=0 时保留
                 if "-4K" in ch['name'] or "-8K" in ch['name']:
                     return ch, True
     except: pass
     return ch, False
+
+def get_group(name):
+    n = name.upper()
+    if "CCTV" in n: return "央视频道"
+    if "卫视" in n: return "地方卫视"
+    if any(s in n for s in ["上海", "东方", "新闻综合", "纪实人文"]): return "上海频道"
+    k_map = {"港澳台": ["翡翠", "TVB", "凤凰", "明珠", "J2", "HK", "澳门", "台湾"], "电影/影院": ["电影", "影院", "CHC"]}
+    for group, keys in k_map.items():
+        if any(k in n for k in keys): return group
+    return "综合/其他"
 
 def sort_key(ch):
     group_p = GROUP_PRIORITY.get(get_group(ch['name']), 99)
@@ -131,17 +179,7 @@ def sort_key(ch):
     score = ch.get('height', 0) * 10000000 + ch.get('bitrate', 0)
     return (group_p, cctv_num, name, -score)
 
-def get_group(name):
-    n = name.upper()
-    if "CCTV" in n: return "央视频道"
-    if "卫视" in n: return "地方卫视"
-    if any(s in n for s in ["上海", "东方", "五星体育", "新闻综合", "纪实人文"]): return "上海频道"
-    k_map = {"港澳台": ["翡翠", "TVB", "凤凰", "明珠"], "电影/影院": ["电影", "影院"], "体育/竞技": ["体育", "竞技"]}
-    for group, keys in k_map.items():
-        if any(k in n for k in keys): return group
-    return "综合/其他"
-
-# ================= 3. 主程序逻辑 =================
+# ================= 3. 主程序 =================
 
 def run():
     if not SOURCE_URLS: return
@@ -157,12 +195,11 @@ def run():
             for name, link in matches:
                 link = link.strip()
                 if link not in seen_urls:
-                    # 额外存储一个原始名称用于回退匹配
                     all_channels.append({"name": name, "origin_name": name, "url": link})
                     seen_urls.add(link)
         except: continue
 
-    print(f"🚀 [2/3] 提取链接: {len(all_channels)} 条 | 开始物理探测 + 文字回退校验...")
+    print(f"🚀 [2/3] 提取链接: {len(all_channels)} 条 | 基于别名表与物理探测校验...")
     
     best_channels = {}
     valid_count = 0
@@ -177,30 +214,27 @@ def run():
                     valid_count += 1
                     pbar.set_postfix_str(str(valid_count))
                     
-                    # 保留原则：4K/8K 全留
+                    # 4K/8K 频道以 URL 为 Key 全量保留；普通频道以标准名为 Key 择优留一
                     if "-4K" in res_ch['name'] or "-8K" in res_ch['name']:
-                        unique_key = f"{res_ch['name']}_{res_ch['url']}"
+                        u_key = f"{res_ch['name']}_{res_ch['url']}"
                     else:
-                        unique_key = res_ch['name']
+                        u_key = res_ch['name']
 
-                    if unique_key not in best_channels:
-                        best_channels[unique_key] = res_ch
-                    else:
-                        new_score = res_ch['height'] * 1000 + res_ch['bitrate']
-                        old_score = best_channels[unique_key]['height'] * 1000 + best_channels[unique_key]['bitrate']
-                        if new_score > old_score:
-                            best_channels[unique_key] = res_ch
+                    if u_key not in best_channels or (res_ch['height'] * 1000 + res_ch['bitrate'] > 
+                                                     best_channels[u_key]['height'] * 1000 + best_channels[u_key]['bitrate']):
+                        best_channels[u_key] = res_ch
                 pbar.update(1)
 
     final_list = sorted(best_channels.values(), key=sort_key)
     with open("tv.m3u", "w", encoding="utf-8") as f:
         f.write('#EXTM3U x-tvg-url="https://live.fanmingming.com/e.xml"\n')
         for ch in final_list:
-            logo_id = ch['name'].replace('-4K','').replace('-8K','').replace('-', '')
+            # Logo ID 逻辑：使用映射后的主名，并剔除画质后缀
+            clean_id = ch['name'].split('-4K')[0].split('-8K')[0].replace('-', '')
             group = get_group(ch['name'])
-            f.write(f'#EXTINF:-1 tvg-id="{ch["name"]}" tvg-logo="https://live.fanmingming.com/tv/{logo_id}.png" group-title="{group}",{ch["name"]}\n{ch["url"]}\n')
+            f.write(f'#EXTINF:-1 tvg-id="{ch["name"]}" tvg-logo="https://live.fanmingming.com/tv/{clean_id}.png" group-title="{group}",{ch["name"]}\n{ch["url"]}\n')
 
-    print(f"\n✅ 完成！最终精选频道 {len(final_list)} 个")
+    print(f"\n✅ 完成！最终入选 {len(final_list)} 个频道。")
 
 if __name__ == "__main__":
     start_time = time.time()
