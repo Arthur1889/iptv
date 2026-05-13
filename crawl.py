@@ -29,7 +29,7 @@ def get_env_config():
         "os": sys_type, 
         "ffprobe": "ffprobe", 
         "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36", 
-        "timeout": 12, 
+        "timeout": 15, 
         "workers": 50 
     }
     if sys_type == "Windows" and os.path.exists(r"C:\ffmpeg\bin\ffprobe.exe"):
@@ -74,13 +74,8 @@ GROUP_PRIORITY = {"央视频道": 1, "地方卫视": 2, "山东频道": 3, "上�
 # ================= 2. 核心逻辑函数 =================
 
 def get_standard_name(origin_name):
-    """
-    归一化识别：剥离 ID 后缀并匹配别名
-    """
-    # 1. 自动剥离国际源 ID 后缀，如 CCTV1.cn -> CCTV1
     processed_name = re.sub(r'\.(cn|hk|tw|us|uk|org)$', '', origin_name.strip(), flags=re.I)
     name_upper = processed_name.upper()
-
     for main_name, aliases in ALIAS_MAP.items():
         for alias in aliases:
             alias = alias.strip()
@@ -93,63 +88,74 @@ def get_standard_name(origin_name):
     return processed_name
 
 def clean_channel_name(name, height=0, original_name=""):
-    """
-    核心清洗与打标逻辑
-    """
-    # 1. 彻底清洗：剔除 HD、高清、(720p)、[1080P]、备用等干扰词
     noise_pattern = r'(HD|高清|超高清|蓝光|频道|\(备用\)|\(\d+[Pp]\)|\[\d+[Pp]\]|-\d+[Pp]|\d+[Pp])'
     cleaned_origin = re.sub(noise_pattern, '', original_name if original_name else name, flags=re.I).strip()
-    
-    # 2. 获取标准名
     base_name = get_standard_name(cleaned_origin)
-    
-    # 3. 二次清理 base_name 残留
     base_name = re.sub(r'(-4K|-8K|4K|8K|超高清|HD|高清)$', '', base_name, flags=re.I).strip()
-
-    # 4. 识别 4K/8K
+    
     is_8k = height >= 4320 or re.search(r'8K', original_name, re.I)
     is_4k = height >= 2160 or re.search(r'4K', original_name, re.I)
 
-    # 5. 重新打标：仅 4K/8K 带后缀，普通频道保持干净
     is_ultra = False
     if is_8k: 
-        final_name = f"{base_name}-8K"
-        is_ultra = True
+        final_name = f"{base_name}-8K"; is_ultra = True
     elif is_4k: 
-        final_name = f"{base_name}-4K"
-        is_ultra = True
+        final_name = f"{base_name}-4K"; is_ultra = True
     else:
-        final_name = base_name
-        is_ultra = False
+        final_name = base_name; is_ultra = False
         
     return final_name, base_name, is_ultra
 
 def deep_analyze_stream(url):
-    cmd = [ENV["ffprobe"], '-v', 'error', '-probesize', '4096000', '-analyzeduration', '4000000', '-user_agent', ENV["ua"], '-show_entries', 'stream=width,height,bit_rate', '-of', 'json', '-select_streams', 'v:0', '-timeout', '10000000', url]
+    """
+    深度探测：获取分辨率、码率及 Service Name (元数据)
+    """
+    cmd = [
+        ENV["ffprobe"], '-v', 'error', 
+        '-show_entries', 'format_tags=service_name:stream=width,height,bit_rate', 
+        '-of', 'json', '-select_streams', 'v:0', '-timeout', '10000000', url
+    ]
     try:
         cf = subprocess.CREATE_NO_WINDOW if ENV["os"] == "Windows" else 0
         result = subprocess.run(cmd, capture_output=True, text=True, timeout=ENV["timeout"], creationflags=cf)
         if result.returncode == 0:
             data = json.loads(result.stdout)
-            if 'streams' in data and data['streams']:
-                s = data['streams'][0]
-                return int(s.get('height', 0)), int(s.get('bit_rate', 0)) or 0
+            streams = data.get('streams', [])
+            h = int(streams[0].get('height', 0)) if streams else 0
+            br = int(streams[0].get('bit_rate', 0)) if streams else 0
+            tags = data.get('format', {}).get('tags', {})
+            s_name = tags.get('service_name', '').upper()
+            return h, br, s_name
     except: pass
-    return 0, 0
+    return 0, 0, ""
 
 def check_channel(ch):
+    """
+    筛选逻辑：元数据校验 + 码率底线 + 来源权重惩罚
+    """
+    # 假源常见关键词黑名单
+    BAD_SERVICE_KEYWORDS = ["SHOPPING", "GO購物", "TEST", "DEMO", "AD", "광고", "彩条", "M3U8"]
+    
     try:
-        h, br = deep_analyze_stream(ch['url'])
+        h, br, s_name = deep_analyze_stream(ch['url'])
+        
+        # 1. 元数据黑名单过滤
+        if any(k in s_name for k in BAD_SERVICE_KEYWORDS):
+            return ch, False
+
+        # 2. 码率红线过滤 (720P以上低于800k基本判定为假源或画质极差)
+        if h >= 720 and br > 0 and br < 800000:
+            return ch, False
+
         if h >= 360:
             ch['height'], ch['bitrate'] = h, br
             ch['name'], ch['epg_id'], ch['is_ultra'] = clean_channel_name(ch['name'], height=h, original_name=ch['origin_name'])
+            
+            # 3. 来源一致性惩罚：如果流内名称与匹配名完全不搭，降权 20%
+            if s_name and ch['epg_id'].upper() not in s_name:
+                ch['bitrate'] = int(ch['bitrate'] * 0.8)
+
             return ch, True
-        else:
-            res = requests.head(ch['url'], timeout=3, headers={"User-Agent": ENV["ua"]}, verify=False)
-            if res.status_code == 200:
-                ch['height'], ch['bitrate'] = 0, 0
-                ch['name'], ch['epg_id'], ch['is_ultra'] = clean_channel_name(ch['name'], height=0, original_name=ch['origin_name'])
-                if ch['is_ultra']: return ch, True
     except: pass
     return ch, False
 
@@ -159,7 +165,6 @@ def get_group(name):
     if "卫视" in n: return "地方卫视"
     if any(s in n for s in ["山东", "齐鲁", "济南", "青岛", "潍坊", "烟台", "淄博"]): return "山东频道"
     if any(s in n for s in ["上海", "东方", "新闻综合", "纪实人文"]): return "上海频道"
-    
     k_map = {"港澳台": ["翡翠", "TVB", "凤凰", "明珠", "J2", "HK", "澳门", "台湾"], "电影/影院": ["电影", "影院", "CHC"]}
     for group, keys in k_map.items():
         if any(k in n for k in keys): return group
@@ -170,11 +175,7 @@ def sort_key(ch):
     name = ch['name']
     cctv_match = re.search(r'CCTV-(\d+)', name)
     cctv_num = int(cctv_match.group(1)) if cctv_match else 999
-    
-    quality_rank = 0
-    if "-8K" in name: quality_rank = 20
-    elif "-4K" in name: quality_rank = 10
-    
+    quality_rank = 20 if "-8K" in name else (10 if "-4K" in name else 0)
     phys_score = ch.get('height', 0) * 1000000 + ch.get('bitrate', 0)
     return (group_p, cctv_num, ch['epg_id'], -quality_rank, -phys_score)
 
@@ -189,7 +190,7 @@ def run():
     print(f"\n📡 [1/3] 正在从 {len(SOURCE_URLS)} 个源提取链接...")
     for url in SOURCE_URLS:
         try:
-            r = session.get(url, timeout=ENV["timeout"], verify=False)
+            r = session.get(url, timeout=12, verify=False)
             matches = re.findall(r'#EXTINF:.*?(?:tvg-id="(.*?)")?.*?,(.*?)\n(http.*?)(?:\n|$)', r.text)
             for tid, name, link in matches:
                 link = link.strip()
@@ -198,23 +199,17 @@ def run():
                     seen_urls.add(link)
         except: continue
 
-    print(f"🚀 [2/3] 提取链接: {len(all_channels)} 条 | 开启 一频道双源 择优...")
+    print(f"🚀 [2/3] 提取链接: {len(all_channels)} 条 | 开启深度识别与筛选...")
     
-    best_sources = {} 
-    valid_count = 0
+    best_sources = {}
     with ThreadPoolExecutor(max_workers=ENV["workers"]) as executor:
         futures = {executor.submit(check_channel, ch): ch for ch in all_channels}
-        pbar_fmt = '{l_bar}{bar:20}{r_bar} {n_fmt}/{total_fmt} [{percentage:3.0f}%] 优质源:{postfix}'
-        with tqdm(total=len(all_channels), desc="探测进度", bar_format=pbar_fmt) as pbar:
+        with tqdm(total=len(all_channels), desc="校验进度", bar_format='{l_bar}{bar:20}{r_bar}') as pbar:
             for f in as_completed(futures):
                 res_ch, is_ok = f.result()
                 if is_ok:
-                    valid_count += 1
-                    pbar.set_postfix_str(str(valid_count))
-                    
                     unique_key = (res_ch['epg_id'], res_ch['is_ultra'])
                     phys_score = res_ch['height'] * 1000000 + res_ch['bitrate']
-
                     if unique_key not in best_sources or phys_score > best_sources[unique_key]['phys_score']:
                         res_ch['phys_score'] = phys_score
                         best_sources[unique_key] = res_ch
