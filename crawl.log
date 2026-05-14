@@ -1,0 +1,29 @@
+2026-05-14 14:45:55,967 - WARNING - Using CPU. Note: This module is much faster with a GPU.
+2026-05-14 14:45:57,142 - INFO - 开始执行 IPTV 抓取与探测任务...
+2026-05-14 14:46:08,429 - WARNING - 无法读取源 stop_https://raw.githubusercontent.com/plsy1/iptv/main/multicast/multicast-qingdao.m3u: No connection adapters were found for 'stop_https://raw.githubusercontent.com/plsy1/iptv/main/multicast/multicast-qingdao.m3u'
+2026-05-14 14:46:08,430 - WARNING - 无法读取源 stop_https://raw.githubusercontent.com/YueChan/IPTV/main/hongkong.m3u: No connection adapters were found for 'stop_https://raw.githubusercontent.com/YueChan/IPTV/main/hongkong.m3u'
+2026-05-14 14:46:08,431 - WARNING - 无法读取源 stop_https://raw.githubusercontent.com/YueChan/IPTV/main/macau.m3u: No connection adapters were found for 'stop_https://raw.githubusercontent.com/YueChan/IPTV/main/macau.m3u'
+2026-05-14 14:46:08,439 - WARNING - 无法读取源 stop_https://raw.githubusercontent.com/YueChan/IPTV/main/taiwan.m3u: No connection adapters were found for 'stop_https://raw.githubusercontent.com/YueChan/IPTV/main/taiwan.m3u'
+2026-05-14 14:46:08,440 - WARNING - 无法读取源 stop_https://iptv-org.github.io/iptv/languages/eng.m3u: No connection adapters were found for 'stop_https://iptv-org.github.io/iptv/languages/eng.m3u'
+2026-05-14 14:46:08,440 - WARNING - 无法读取源 stop_https://raw.githubusercontent.com/LuenShor/IPTV/master/Global.m3u: No connection adapters were found for 'stop_https://raw.githubusercontent.com/LuenShor/IPTV/master/Global.m3u'
+2026-05-14 14:46:08,441 - WARNING - 无法读取源 stop_https://live.fanmingming.com/tv/m3u/ipv6.m3u: No connection adapters were found for 'stop_https://live.fanmingming.com/tv/m3u/ipv6.m3u'
+2026-05-14 14:46:08,442 - WARNING - 无法读取源 stop_https://iptv-org.github.io/iptv/countries/cn.m3u: No connection adapters were found for 'stop_https://iptv-org.github.io/iptv/countries/cn.m3u'
+2026-05-14 14:46:08,443 - WARNING - 无法读取源 stop_https://raw.githubusercontent.com/frankwuzp/iptv-cn/master/tv-ipv4-cn.m3u: No connection adapters were found for 'stop_https://raw.githubusercontent.com/frankwuzp/iptv-cn/master/tv-ipv4-cn.m3u'
+2026-05-14 14:51:29,277 - INFO - 
+==================================================
+              IPTV 探测任务摘要报告
+==================================================
+1. 初始源梳理:
+   - 抓取 URL 总数: 2688
+   - 过滤重复/无效后: 2464
+
+2. 探测过滤情况:
+   - 画质连通性通过 (>=360p): 750
+   - OCR/视觉校验后精选: 375
+
+3. 最终统计:
+   - 成功生成频道数: 375
+   - 总计运行耗时: 5分32秒
+   - 日志文件: crawl.log
+==================================================
+
