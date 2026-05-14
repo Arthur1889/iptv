@@ -10672,516 +10672,284 @@
     "last_fail": "2026-05-14 20:28:21"
   },
   "https://live.goodiptv.club/api/yqgd.php?id=fyzq": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:21:07"
-  },
-  "http://38.75.136.137:98/gslb/dsdqpub/gdwshd.m3u8?auth=testpub": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:21:07"
-  },
-  "http://38.75.136.137:98/gslb/dsdqpub/tjwshd.m3u8?auth=testpub": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:21:28"
-  },
-  "https://stream1.freetv.fun/fo-shan-zong-he-7.ctv": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:21:17"
-  },
-  "https://stream1.freetv.fun/shan-tou-zong-he-5.ctv": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:21:18"
-  },
-  "https://stream1.freetv.fun/fo-shan-zong-he-17.ctv": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:21:18"
-  },
-  "https://stream1.freetv.fun/shan-tou-zong-he-9.ctv": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:21:18"
-  },
-  "https://stream1.freetv.fun/shan-tou-jing-ji-6.ctv": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:21:19"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:39:34"
   },
   "https://epg.pw/stream/ac8062ec9484078061d3bef507c15a423ac57ae4144e3fcc4b0a198dd420f911.m3u8": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:21:21"
-  },
-  "https://stream1.freetv.fun/zhe-jiang-shao-er-9.ctv": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:21:24"
-  },
-  "https://stream1.freetv.fun/zhe-jiang-min-sheng-5.m3u8": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:21:29"
-  },
-  "https://stream1.freetv.fun/xiao-shan-xin-wen-zong-he-8.m3u8": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:21:34"
-  },
-  "https://l.cztvcloud.com/channels/lantian/SXxinchang1/720p.m3u8": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:21:41"
-  },
-  "https://stream1.freetv.fun/shang-yu-xin-shang-du-5.m3u8": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:21:45"
-  },
-  "https://www.freetv.top/migu/617290047.m3u8?migutoken=86c02ad0875d5cc49d77bcc8bdb628f2c9d508ffc323b964a03c8f92dde4afafa0345cf5a8fefbdf915c748e3d11c6c18e27ae1e21a609cec31a45e6c437db26a7a243625f9cf35c271171a22c": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:21:51"
-  },
-  "https://stream1.freetv.fun/ha-ha-xuan-dong-8.m3u8": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:21:52"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:39:49"
   },
   "http://stream.thmz.com/wxtv2/sd/live.m3u8": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:22:04"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:40:32"
   },
   "http://stream.thmz.com/wxtv1/sd/live.m3u8": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:21:57"
-  },
-  "http://stream.thmz.com/wxtv3/playlist.m3u8": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:21:58"
-  },
-  "http://stream.thmz.com/wxtv2/sd/live.m3u8?_upt=acffe97a1704940314": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:21:56"
-  },
-  "https://stream1.freetv.fun/wu-yi-2dian-shi-ju-1.m3u8": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:22:14"
-  },
-  "https://stream1.freetv.fun/jin-chuan-xin-wen-zong-he-3.m3u8": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:22:25"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:40:24"
   },
   "https://stream1.freetv.fun/de-yang-xin-wen-zong-he-1.m3u8": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:22:22"
-  },
-  "https://stream1.freetv.fun/fu-jian-xin-wen-2.m3u8": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:22:27"
-  },
-  "https://stream1.freetv.fun/fu-jian-zong-he-5.m3u8": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:22:30"
-  },
-  "http://tvpull.dxhmt.cn:9081/tv/11328-1.m3u8?zhend#http://tvpull.dxhmt.cn:9081/tv/11328-1.m3u8": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:22:34"
-  },
-  "https://stream1.freetv.fun/ipv6-wei-fang-xin-wen-zong-he-1.m3u8": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:22:50"
-  },
-  "https://stream1.freetv.fun/an-hui-jing-ji-sheng-huo-4.ctv": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:22:53"
-  },
-  "https://stream1.freetv.fun/xing-tai-zong-he-2.m3u8": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:22:43"
-  },
-  "http://38.64.72.148:80/hls/modn/list/2013/chunklist1.m3u8": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:23:03"
-  },
-  "http://38.75.136.137:98/gslb/dsdqpub/chcdz.m3u8?auth=testpub": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:23:05"
-  },
-  "https://stream1.freetv.fun/he-bei-shao-er-ke-jiao-15.ctv": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:23:11"
-  },
-  "http://cdn.jdshipin.com:8880/huya.php?id=11352879": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:23:10"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:40:43"
   },
   "http://74.91.26.218:82/live/cctv2hd.m3u8": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:23:17"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:41:40"
   },
   "http://74.91.26.218:82/live/cctv1hd.m3u8": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:23:18"
-  },
-  "https://www.sgmsw.cn/videos/tv/201805/1308/SB05RIYZOU8JR418AUQOF62CAJQ08D0E/hls/live.m3u8": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:23:24"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:41:39"
   },
   "https://live.metshop.top/huya/11601966": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:23:26"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:41:47"
   },
   "https://live.metshop.top/huya/11342413": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:23:27"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:41:47"
   },
   "https://live.metshop.top/huya/11352879": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:23:27"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:41:48"
   },
   "https://yylunbo.ottiptv.cc/yy/1382735568": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:23:28"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:41:49"
   },
   "https://live.metshop.top/huya/11602081": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:23:29"
-  },
-  "http://192.151.150.154/live/fyzq.m3u8": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:23:34"
-  },
-  "http://107.150.60.122/live/cctv7hd.m3u8": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:23:43"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:41:51"
   },
   "http://pplee.vicp.net:4022/udp/233.18.204.220:5140": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:23:46"
-  },
-  "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv7hd": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:23:49"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:42:08"
   },
   "https://shcm-stream-cf1.stream.264788.xyz/cms001/ch00000090990000001348/index.m3u8?streamid=37d60172a2bbb0d41f072d29213e6264&streamkey=06Au6xOXDlDEaapIVa7cpJhfzHs3AaqeIMjrUSQi1ZhQNbtlQYu45U2p26oN78H5M54F7fWWjiWa5JbgizqfzftqDt06P5Nj3CWuFMU3yFOgiX5n&token=1776221467-8fa99b3b879bacd8-0-b09602326b577119089417591328a91d": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:23:59"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:42:21"
   },
   "https://shcm-stream-cf1.stream.264788.xyz/cms001/ch00000090990000001680/index.m3u8?streamid=2c224135515a11c735f7351c17434a62&streamkey=070kmnWlSO6tVzLyh1sXZ20iCOCRLXoHmCsz0IqkkXJJD0eYMb2A5kwULwbki6Baf4Z2bJfsbp07kt5WoqgWvFeVzbkW96tGU7nFRu0brwnn5lybIRJA&token=1776221300-cf453e64c67843de-0-4539fce56dec116202db007052b0029c": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:23:59"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:42:21"
   },
   "http://live.sfrmt.com:85/live/zhpd.m3u8": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:24:18"
-  },
-  "http://iptv.4666888.xyz/iptv2A.php?id=1": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:24:05"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:42:22"
   },
   "http://74.91.26.218:82/live/ctvjd.m3u8": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:24:25"
-  },
-  "https://mumt03.tangotv.in/FOODFOOD/index.m3u8": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:24:27"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:42:30"
   },
   "http://cdns.jp-primehome.com:8000/zhongying/live/playlist.m3u8?cid=cs20": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:24:25"
-  },
-  "http://cdns.jp-primehome.com:8000/zhongying/live/playlist.m3u8?cid=cs14": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:24:36"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:42:39"
   },
   "http://23.237.104.106:8080/USA_CINEMAX/tracks-v1a1/mono.m3u8": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:24:22"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:42:37"
   },
   "https://stream.chmbc.co.kr/TV/myStream/playlist.m3u8": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:24:28"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:42:47"
   },
   "https://5c3639aa99149.streamlock.net/live_TV/tv/playlist.m3u8": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:24:27"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:42:45"
   },
   "https://live.ottiptv.cc/huya/19197407": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:24:41"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:43:02"
   },
   "http://bgdc.live:25461/catrinamcdermott/catrinamcdermott/215737": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:24:45"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:42:57"
   },
   "https://live.ottiptv.cc/huya/30080246": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:24:53"
-  },
-  "https://live.ottiptv.cc/huya/11602058": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:24:49"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:43:10"
   },
   "https://live.ottiptv.cc/huya/30080247": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:24:49"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:43:10"
   },
   "https://live.ottiptv.cc/huya/23728689": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:24:52"
-  },
-  "https://live.ottiptv.cc/huya/23864973": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:24:53"
-  },
-  "https://live.ottiptv.cc/huya/11342427": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:24:52"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:43:06"
   },
   "https://live.ottiptv.cc/huya/880261": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:24:53"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:43:11"
   },
   "https://live.ottiptv.cc/huya/30080238": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:24:54"
-  },
-  "http://live.nctv.top/douyu1.php?id=9412981": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:24:55"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:43:13"
   },
   "https://live.ottiptv.cc/huya/11336725": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:24:58"
-  },
-  "https://live.ottiptv.cc/huya/29465870": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:24:58"
-  },
-  "https://live.ottiptv.cc/huya/11352882": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:24:58"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:43:10"
   },
   "https://live.ottiptv.cc/huya/24720260": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:02"
-  },
-  "http://live.nctv.top/douyu1.php?id=10153463": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:24:59"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:43:17"
   },
   "https://live.ottiptv.cc/huya/29982655": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:24:57"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:43:13"
   },
   "https://live.ottiptv.cc/huya/29465857": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:09"
-  },
-  "https://rvsh.jtw.sh.gov.cn/live/200120a4-3d7c-4a7d-82dc-71fdfef3e045_sub/index.m3u8?t=1902119605&k=2c3e3086e3191872": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:02"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:43:16"
   },
   "https://live.ottiptv.cc/huya/29465858": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:04"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:43:22"
   },
   "https://down-hls.qxiu.com/live/457903/index.m3u8": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:07"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:43:19"
   },
   "https://down-hls.qxiu.com/live/455302/index.m3u8": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:08"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:43:19"
   },
   "https://videodowntx.9xiuzb.com/9xiu/108363409.m3u8": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:03"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:43:18"
   },
   "https://live01.qujigeq.cn/live/30020778.m3u8": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:05"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:43:32"
   },
   "https://live.ottiptv.cc/huya/29465859": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:03"
-  },
-  "http://lvbaiducdnct.inter.ptqy.gitv.tv/tslive/c58_fast_949_1080P_t10/c58_fast_949_1080P_t10.m3u8?d": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:07"
-  },
-  "https://live.ottiptv.cc/huya/29465856": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:03"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:43:19"
   },
   "https://kbpull.kktv8.com/livekktv/156871698/playlist.m3u8": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:08"
-  },
-  "https://xn--vusr00g.v.nxog.top/m/tv/xjj.php?id=2": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:08"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:43:22"
   },
   "https://v.nrzj.vip/video.php": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:13"
-  },
-  "https://cfss.cc/api/kg/158898.mp4": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:16"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:43:27"
   },
   "https://live01.qujigeq.cn/live/50309152.m3u8": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:18"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:43:31"
   },
   "https://live06.zuqiu106.com/live/03646838.m3u8": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:16"
-  },
-  "https://cfss.cc/api/kg/79424.mp4": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:28"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:43:31"
   },
   "http://125.42.150.124:9901/tsfile/live/1000_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:45"
-  },
-  "http://125.42.150.164:9901/tsfile/live/1001_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:46"
-  },
-  "http://125.42.150.164:9901/tsfile/live/1003_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:47"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:44:00"
   },
   "http://221.13.235.139:9901/tsfile/live/0005_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:47"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:43:46"
   },
   "http://125.42.150.164:9901/tsfile/live/1004_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:47"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:44:01"
   },
   "http://221.13.235.139:9901/tsfile/live/0010_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:52"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:44:04"
   },
   "http://125.42.150.164:9901/tsfile/live/1000_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:45"
-  },
-  "http://221.13.235.139:9901/tsfile/live/0001_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:45"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:43:59"
   },
   "http://125.42.150.124:9901/tsfile/live/1002_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:46"
-  },
-  "http://221.13.235.139:9901/tsfile/live/0003_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:46"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:44:00"
   },
   "http://125.42.150.124:9901/tsfile/live/1004_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:47"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:43:46"
   },
   "http://125.42.150.164:9901/tsfile/live/1006_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:49"
-  },
-  "http://125.42.150.124:9901/tsfile/live/1007_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:49"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:44:03"
   },
   "http://125.42.150.124:9901/tsfile/live/1008_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:50"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:44:03"
   },
   "http://221.13.235.173:9901/tsfile/live/0008_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:50"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:44:03"
   },
   "http://125.42.150.124:9901/tsfile/live/1005_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:52"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:44:04"
   },
   "http://221.13.235.139:9901/tsfile/live/0009_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:52"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:44:04"
   },
   "http://221.13.235.173:9901/tsfile/live/0010_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:53"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:44:05"
   },
   "http://125.42.150.124:9901/tsfile/live/1009_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:53"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:44:05"
   },
   "http://125.42.150.124:9901/tsfile/live/1010_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:53"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:44:06"
   },
   "http://221.13.235.173:9901/tsfile/live/0011_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:53"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:44:06"
   },
   "http://125.42.150.164:9901/tsfile/live/1010_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:53"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:44:06"
   },
   "http://221.13.235.139:9901/tsfile/live/0011_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:54"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:44:06"
   },
   "http://221.13.235.139:9901/tsfile/live/0012_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:55"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:44:06"
   },
   "http://221.13.235.173:9901/tsfile/live/0012_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:55"
-  },
-  "http://123.129.70.178:9901/tsfile/live/0012_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:56"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:44:07"
   },
   "http://125.42.150.164:9901/tsfile/live/1012_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:25:59"
-  },
-  "http://125.42.150.164:9901/tsfile/live/1013_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:26:05"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:44:09"
   },
   "http://125.42.150.164:9901/tsfile/live/1014_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:26:06"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:44:15"
   },
   "http://125.42.150.124:9901/tsfile/live/1014_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:26:06"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:44:19"
   },
   "http://125.42.150.124:9901/tsfile/live/0122_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:26:07"
-  },
-  "http://125.42.150.124:9901/tsfile/live/0118_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:26:07"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:44:20"
   },
   "http://125.42.150.124:9901/tsfile/live/0130_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:26:07"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:44:20"
   },
   "http://125.42.150.164:9901/tsfile/live/0127_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:26:09"
-  },
-  "http://125.42.150.164:9901/tsfile/live/0118_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:26:10"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:44:21"
   },
   "http://121.19.134.73:808/tsfile/live/0112_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:26:11"
-  },
-  "http://125.42.150.124:9901/tsfile/live/0127_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:26:12"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:44:24"
   },
   "http://121.19.134.73:808/tsfile/live/0109_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:26:08"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:44:40"
   },
   "http://zwebl02.cztv.com/live/channel01720Pnew.m3u8?auth_key=1778760325-0c7554ed9aadee8f486a62daed9bebf5-0-f0b688778f14db4ccd625de061913188": {
     "fail_count": 1,
@@ -11196,1219 +10964,1155 @@
     "last_fail": "2026-05-14 21:12:11"
   },
   "http://121.19.134.73:808/tsfile/live/1033_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:26:15"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:44:30"
   },
   "http://1.197.249.239:9901/tsfile/live/1012_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:26:32"
-  },
-  "http://1.197.249.239:9901/tsfile/live/1005_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 2,
-    "last_fail": "2026-05-14 21:26:35"
-  },
-  "http://38.75.136.137:98/gslb/dsdqpub/ysjp.m3u8?auth=testpub": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:07"
-  },
-  "https://stream1.freetv.fun/5335c88a9a7d8b74173b491f480d4f94e8d3bd596af54478106aa2399e6c7917.ctv": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:07"
-  },
-  "http://38.75.136.137:98/gslb/dsdqpub/dfwshd.m3u8?auth=testpub": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:11"
-  },
-  "http://38.75.136.137:98/gslb/dsdqpub/dnwshd.m3u8?auth=testpub": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:11"
-  },
-  "http://222.214.208.34:59901/tsfile/live/0120_1.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:11"
+    "fail_count": 3,
+    "last_fail": "2026-05-14 21:44:33"
   },
   "http://38.75.136.137:98/gslb/dsdqpub/gzwshd.m3u8?auth=testpub": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:12"
-  },
-  "https://stream1.freetv.fun/yan-zhou-ying-shi-28.ctv": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:16"
-  },
-  "https://stream1.freetv.fun/yan-zhou-jing-sai-38.ctv": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:16"
-  },
-  "https://stream1.freetv.fun/yan-zhou-jing-sai-32.ctv": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:17"
-  },
-  "https://stream1.freetv.fun/fo-shan-zong-he-22.ctv": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:18"
-  },
-  "https://stream1.freetv.fun/jiang-men-zong-he-2.ctv": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:18"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:39:39"
   },
   "https://stream1.freetv.fun/shan-tou-zong-he-3.ctv": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:19"
-  },
-  "https://stream1.freetv.fun/shan-tou-jing-ji-2.ctv": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:20"
-  },
-  "http://ali-xwl.cztv.com/live/channel02720Plxw.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:21"
-  },
-  "https://t.freetv.fun/live/zhe-jiang-qian-jiang-du-shi-1.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:21"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:39:45"
   },
   "https://stream1.freetv.fun/zhe-jiang-shao-er-4.ctv": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:23"
-  },
-  "https://stream1.freetv.fun/hang-zhou-zong-he-2.ctv": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:24"
-  },
-  "https://stream1.freetv.fun/zhe-jiang-shao-er-4.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:25"
-  },
-  "https://stream1.freetv.fun/zhe-jiang-xin-wen-11.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:26"
-  },
-  "http://107.150.60.122/live/gxwshd.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:26"
-  },
-  "http://ali-xwl.cztv.com/live/channel061080Plxw.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:29"
-  },
-  "http://ali-xwl.cztv.com/live/channel06720Plxw.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:29"
-  },
-  "https://stream1.freetv.fun/qu-jiang-xin-wen-zong-he-3.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:32"
-  },
-  "https://stream1.freetv.fun/xiao-shan-xin-wen-zong-he-2.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:33"
-  },
-  "http://l.cztvcloud.com/channels/lantian/SXsongyang1/720p.m3u8?zzhed?": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:39"
-  },
-  "https://stream1.freetv.fun/xin-chang-xin-wen-zong-he-5.ctv": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:41"
-  },
-  "https://t.freetv.fun/live/xin-chang-xin-wen-zong-he.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:41"
-  },
-  "http://l.cztvcloud.com/channels/lantian/SXkaihua2/720p.m3u8?zzhed#http://l.cztvcloud.com/channels/lantian/SXkaihua2/720p.m3u8zzhed#http://l.cztvcloud.com/channels/lantian/SXkaihua2/720p.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:42"
-  },
-  "https://l.cztvcloud.com/channels/lantian/SXyuyao1/720p.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:46"
-  },
-  "https://stream1.freetv.fun/shang-yu-xin-shang-du-3.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:48"
-  },
-  "https://stream1.freetv.fun/shang-yu-wen-hua-ying-yuan-3.ctv": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:50"
-  },
-  "https://stream1.freetv.fun/dong-fang-ying-shi-12.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:50"
-  },
-  "https://stream1.freetv.fun/dong-man-xiu-chang-11.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:51"
-  },
-  "https://stream1.freetv.fun/xin-wen-zong-he-5.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:54"
-  },
-  "http://stream.thmz.com/wxtv2/playlist.m3u8?_upt=5ff4061f1706166872": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:56"
-  },
-  "http://stream.thmz.com/wxtv1/playlist.m3u8?_upt=156143371706166361": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:56"
-  },
-  "http://stream.thmz.com/wxtv4/sd/live.m3u8?_upt=978cd8731706199708": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:57"
-  },
-  "https://stream.thmz.com/wxtv5/playlist.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:57"
-  },
-  "http://stream.thmz.com/wxtv5/sd/live.m3u8?zjiangsd": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:57"
-  },
-  "http://stream.thmz.com/wxtv3/sd/live.m3u8?zjiangsd#http://stream.thmz.com/wxtv3/sd/live.m3u8?_upt=978cd8731706199708#http://stream.thmz.com/wxtv3/playlist.m3u8#http://stream.thmz.com/wxtv3/playlist.m3u8?_upt=1758133b1706166861": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:59"
-  },
-  "https://t.freetv.fun/live/ping-hu-xin-wen-zong-he-1.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:59"
-  },
-  "https://stream.thmz.com/wxtv4/playlist.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:59"
-  },
-  "https://shuyang-tv-hls.cm.jstv.com:443/shuyang-tv/shuyangzh.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:21:59"
-  },
-  "http://zjtv-wshls.homecdn.com/live/2aa16.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:03"
-  },
-  "https://stream1.freetv.fun/jing-jiang-xin-wen-zong-he-7.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:03"
-  },
-  "https://stream1.freetv.fun/liao-zhu-jing-ji-2.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:04"
-  },
-  "https://stream1.freetv.fun/liao-zhu-ying-shi-ju-3.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:05"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:39:50"
   },
   "https://stream1.freetv.fun/hu-nan-jing-shi-5.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:06"
-  },
-  "https://stream1.freetv.fun/liao-zhu-jiao-yu-qing-shao-1.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:06"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:40:27"
   },
   "https://stream1.freetv.fun/hu-nan-dian-shi-ju-14.ctv": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:06"
-  },
-  "https://stream1.freetv.fun/hu-nan-yu-le-3.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:08"
-  },
-  "https://stream1.freetv.fun/hu-nan-gong-gong-7.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:09"
-  },
-  "https://stream1.freetv.fun/hu-bei-zong-he-6.ctv": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:10"
-  },
-  "https://t.freetv.fun/live/hu-bei-jing-shi-1.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:10"
-  },
-  "https://t.freetv.fun/live/hu-bei-jiao-yu.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:11"
-  },
-  "https://stream1.freetv.fun/hu-bei-ying-shi-1.ctv": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:12"
-  },
-  "https://stream1.freetv.fun/shi-yan-xin-wen-2.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:14"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:40:27"
   },
   "https://stream1.freetv.fun/wu-yi-jiao-yu-1.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:14"
-  },
-  "https://stream1.freetv.fun/nan-zhu-gong-gong-6.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:16"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:40:34"
   },
   "https://stream1.freetv.fun/wu-yi-jiao-yu-4.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:16"
-  },
-  "https://stream1.freetv.fun/su-zhou-xin-wen-zong-he-13.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:16"
-  },
-  "https://stream1.freetv.fun/wu-yi-jiao-yu-8.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:18"
-  },
-  "https://t.freetv.fun/live/yan-xi-xin-wen-2.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:18"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:40:34"
   },
   "https://stream1.freetv.fun/nan-zhu-xin-wen-zong-he-4.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:18"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:40:37"
   },
   "https://stream1.freetv.fun/le-shan-xin-wen-zong-he-1.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:19"
-  },
-  "http://175.155.106.72:89/live1/live1.m3u8?zsicd;http://rmlive.lzxrmtzx.com/live1/live1.m3u8?zsicd": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:19"
-  },
-  "https://stream1.freetv.fun/xu-zhou-xin-wen-zong-he-7.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:20"
-  },
-  "https://stream1.freetv.fun/si-chuan-ke-jiao-4.ctv": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:21"
-  },
-  "http://live.iwcmt.cn:90/live/zhxw.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:23"
-  },
-  "http://lxfile.lxxcb.cn/nmip-media/channellive/channel103799/playlist.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:23"
-  },
-  "http://file.ysxtv.cn/cms/videos/nmip-media/channellive/channel4/playlist.m3u8?zsicd#http://file.ysxtv.cn/cms/videos/nmip-media/channellive/channel4/playlist.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:24"
-  },
-  "https://t.freetv.fun/live/jin-chuan-xin-wen-zong-he-1.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:25"
-  },
-  "https://stream1.freetv.fun/fu-jian-dian-shi-ju-2.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:28"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:40:41"
   },
   "https://stream1.freetv.fun/fu-jian-zong-he-3.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:30"
-  },
-  "https://t.freetv.fun/live/fu-jian-gong-gong-1.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:30"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:40:52"
   },
   "https://stream1.freetv.fun/fu-jian-jing-ji-1.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:30"
-  },
-  "https://t.freetv.fun/live/fu-jian-gong-gong.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:30"
-  },
-  "https://stream1.freetv.fun/fu-jian-lu-you-6.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:31"
-  },
-  "http://tvpull.dxhmt.cn:9081/tv/11621-1.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:34"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:40:50"
   },
   "https://stream1.freetv.fun/fu-jian-shao-er-2.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:36"
-  },
-  "http://tvpull.dxhmt.cn:9081/tv/11622-1.m3u8?%E5%85%B3%E6%B3%A8%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7[%E6%99%B4%E5%9B%AD]": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:36"
-  },
-  "https://stream1.freetv.fun/mi-yang-xin-wen-zong-he-2.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:36"
-  },
-  "http://tvpull.dxhmt.cn:9081/tv/11625-1.m3u8?wsSecret=df15530a0abec41b14bca00fc96270d1&wsTime=1654956569": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:37"
-  },
-  "https://stream1.freetv.fun/shi-jia-zhuang-du-shi-4.ctv": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:38"
-  },
-  "http://tvpull.dxhmt.cn:9081/tv/11681-1.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:38"
-  },
-  "http://tvpull.dxhmt.cn:9081/tv/10182-1.m3u8?wsSecret=df15530a0abec41b14bca00fc96270d1&wsTime=1654956569": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:39"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:40:54"
   },
   "http://tvpull.dxhmt.cn:9081/tv/10182-1.m3u8?zhend": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:39"
-  },
-  "https://dxtx.hntv.tv/live/lypd.m3u8?txSecret=10c771842a0be59e8b575d765173ec96&txTime=7B923E0A&wsSecret=41543190cdf375f1c73207222bb96542&wsTime=1769313549": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:39"
-  },
-  "https://stream1.freetv.fun/kai-feng-xin-wen-zong-he-2.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:40"
-  },
-  "http://tvpull.dxhmt.cn:9081/tv/11325-1.m3u8?%E5%85%B3%E6%B3%A8%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7[%E6%99%B4%E5%9B%AD]": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:41"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:41:00"
   },
   "https://stream1.freetv.fun/qin-yang-xin-wen-zong-he-1.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:41"
-  },
-  "https://stream1.freetv.fun/shi-jia-zhuang-xin-wen-zong-he-7.ctv": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:43"
-  },
-  "https://stream1.freetv.fun/shi-jia-zhuang-yu-le-7.ctv": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:44"
-  },
-  "https://stream1.freetv.fun/shi-jia-zhuang-sheng-huo-1.ctv": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:44"
-  },
-  "https://t.freetv.fun/live/he-bei-nong-min-1.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:45"
-  },
-  "https://t.freetv.fun/live/he-bei-nong-min.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:45"
-  },
-  "http://play.kankanlive.com/live/1720583434627241.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:46"
-  },
-  "http://play.kankanlive.com/live/1720408280309109.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:46"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:41:03"
   },
   "https://stream1.freetv.fun/shan-dong-shao-er-5.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:48"
-  },
-  "https://stream1.freetv.fun/shi-jia-zhuang-sheng-huo-2.ctv": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:48"
-  },
-  "https://stream1.freetv.fun/shi-jia-zhuang-yu-le-9.ctv": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:49"
-  },
-  "http://tvpull.dxhmt.cn:9081/tv/11523-1.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:50"
-  },
-  "https://stream1.freetv.fun/ji-nan-zong-he-1.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:50"
-  },
-  "https://stream1.freetv.fun/ji-nan-jiao-yu-1.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:51"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:41:09"
   },
   "https://stream1.freetv.fun/wu-xiang-xin-wen-zong-he-2.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:51"
-  },
-  "http://110.153.180.106:55555/out_3/index.m3u8?zxinjd": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:52"
-  },
-  "https://stream1.freetv.fun/an-hui-zong-yi-ti-yu-8.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:54"
-  },
-  "https://srs.iyb983.cn/video/CYS/index.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:55"
-  },
-  "https://stream1.freetv.fun/xi-zhu-sheng-huo-fu-wu-2.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:22:57"
-  },
-  "http://iptv.4666888.xyz/iptv2A.php?id=27": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:01"
-  },
-  "http://221.7.175.154:8445/tsfile/live/1020_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:01"
-  },
-  "https://tvpull.hmgbtv.com/hmtv/channelfb0e5c505477aa44/playlist.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:02"
-  },
-  "https://stream1.freetv.fun/san-li-tai-wan-1.ctv": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:03"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:41:08"
   },
   "https://stream1.freetv.fun/dong-sen-chao-shi-4.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:03"
-  },
-  "https://epg.pw/stream/ab6df63b64d0cc44a1f4f029ed847a26fa54a7aebd455578fb05a63f02c22f4b.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:03"
-  },
-  "http://198.204.228.26/live/chcjt.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:04"
-  },
-  "http://198.204.228.26/live/chcdz.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:05"
-  },
-  "https://stream1.freetv.fun/wei-lai-dian-ying-1.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:06"
-  },
-  "https://stream1.freetv.fun/tao-dian-ying-7.ctv": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:07"
-  },
-  "https://stream1.freetv.fun/jing-dian-dian-ying-15.ctv": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:07"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:41:24"
   },
   "https://stream1.freetv.fun/xing-kong-wei-shi-4.ctv": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:08"
-  },
-  "https://stream1.freetv.fun/dong-sen-yang-pian-3.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:08"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:41:29"
   },
   "https://stream1.freetv.fun/tian-ying-jing-dian-5.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:08"
-  },
-  "https://stream1.freetv.fun/wu-xing-ti-yu-9.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:08"
-  },
-  "https://stream1.freetv.fun/ipv6-mei-li-zu-qiu-4.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:09"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:41:43"
   },
   "http://cdn.jdshipin.com:8880/huya.php?id=29465866": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:09"
-  },
-  "https://stream1.freetv.fun/mei-li-zu-qiu-1.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:09"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:41:33"
   },
   "http://cdn.jdshipin.com:8880/huya.php?id=26355790": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:10"
-  },
-  "https://stream1.freetv.fun/he-bei-shao-er-ke-jiao-10.ctv": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:11"
-  },
-  "https://t.freetv.fun/live/xi-zhu-sheng-huo-fu-wu-1.flv": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:12"
-  },
-  "https://www.freetv.top/migu/673168223.m3u8?migutoken=4e8d5766579c6bef231494cabd07e5b49d965804790214280c9791e4c331fd90311cb62ea43d3a1899229bfa57be4afe5a567b32a6b78153fc9a9801e28a39435e078b48c211e71d6083519be4": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:13"
-  },
-  "https://live.ottiptv.cc/huya/20985816": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:14"
-  },
-  "http://74.91.26.218:82/live/cctv10hd.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:16"
-  },
-  "http://74.91.26.218:82/live/cctv15hd.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:17"
-  },
-  "https://rbmn-live.akamaized.net/hls/live/590964/BoRB-AT/master_3360.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:19"
-  },
-  "https://lsfb.avap.jilintv.cn/zqvk7vpj/channel/43ea5771aa44421591f9dfd2b71f1b9b/index.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:20"
-  },
-  "http://218.84.35.38:3000/m3u8/live/tctv-2/index.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:20"
-  },
-  "https://ali-m-l.cztv.com/channels/lantian/channel003/1080p.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:25"
-  },
-  "http://192.151.150.154/live/cctv3hd.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:32"
-  },
-  "http://192.151.150.154/live/cctv14hd.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:32"
-  },
-  "http://192.151.150.154/live/cctv4k.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:32"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:41:34"
   },
   "http://192.151.150.154/live/cctv8k.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:32"
-  },
-  "http://192.151.150.154/live/dszn.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:32"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:41:55"
   },
   "http://192.151.150.154/live/cctv6hd.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:33"
-  },
-  "http://192.151.150.154/live/wsjk.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:33"
-  },
-  "http://192.151.150.154/live/lgs.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:33"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:41:54"
   },
   "http://192.151.150.154/live/cctv7hd.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:34"
-  },
-  "http://192.151.150.154/live/cctv13hd.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:34"
-  },
-  "http://192.151.150.154/live/gxpd.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:34"
-  },
-  "http://192.151.150.154/live/btvkk.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:35"
-  },
-  "http://192.151.150.154/live/jswshd.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:35"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:41:54"
   },
   "http://192.151.150.154/live/btws.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:36"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:41:59"
   },
   "http://192.151.150.154/live/ahwshd.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:36"
-  },
-  "http://192.151.150.154/live/gdwshd.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:37"
-  },
-  "http://192.151.150.154/live/hljwshd.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:38"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:41:59"
   },
   "http://192.151.150.154/live/dnwshd.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:39"
-  },
-  "http://192.151.150.154/live/xmws.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:40"
-  },
-  "http://192.151.150.154/live/snwshd.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:41"
-  },
-  "http://107.150.60.122/live/cctv4k.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:43"
-  },
-  "http://107.150.60.122/live/cctv17hd.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:44"
-  },
-  "http://pplee.vicp.net:4022/udp/233.18.204.172:5140": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:46"
-  },
-  "http://pplee.vicp.net:4022/udp/233.18.204.211:5140": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:46"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:41:59"
   },
   "http://pplee.vicp.net:4022/udp/233.18.204.90:5140": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:47"
-  },
-  "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv4hd": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:49"
-  },
-  "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=gdwshd": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:53"
-  },
-  "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=gswshd": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:54"
-  },
-  "http://61.184.46.85:85/tsfile/live/1003_1.m3u8?key=txiptv&playlive=1&authid=0$\u8346\u5dde\u7535\u4fe1": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:54"
-  },
-  "http://192.151.150.154/live/tjwshd.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:55"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:42:08"
   },
   "http://61.184.46.85:85/tsfile/live/1019_1.m3u8?key=txiptv&playlive=1&authid=0$\u8346\u5dde\u7535\u4fe1": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:57"
-  },
-  "http://107.150.60.122/live/cctv14hd.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:23:58"
-  },
-  "http://home.amucn.net:8800/udp/239.49.0.82:8000": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:00"
-  },
-  "http://ali-m-l.cztv.com/channels/lantian/channel001/720p.m3u8$1\u7518\u7535HD\u76f4": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:00"
-  },
-  "http://ali-m-l.cztv.com:80/channels/lantian/channel001/1080p.m3u8$2\u7518\u7535FD\u76f4": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:00"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:42:17"
   },
   "http://1.94.31.214/php/hntv.php?id=hnws": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:00"
-  },
-  "http://39.165.39.49:85/tsfile/live/1124_1.m3u8?key=txiptv&playlive=0&authid=0": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:02"
-  },
-  "http://ali-m-l.cztv.com/channels/lantian/channel006/1080p.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:02"
-  },
-  "http://61.184.46.85:85/tsfile/live/1013_1.m3u8?key=txiptv&playlive=1&authid=0$\u8346\u5dde\u7535\u4fe1": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:02"
-  },
-  "http://tvpull.dxhmt.cn:9081/tv/10622-1.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:02"
-  },
-  "http://61.184.46.85:85/tsfile/live/1010_1.m3u8?key=txiptv&playlive=1&authid=0$\u8346\u5dde\u7535\u4fe1": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:04"
-  },
-  "http://iptv.4666888.xyz/iptv2A.php?id=35": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:05"
-  },
-  "https://event.pull.hebtv.com:443/live/live101.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:08"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:42:20"
   },
   "http://67.220.71.199:2347/livehttpplay?channel_id=42026http://vipkentken.top:8080/VIP01697172669118799/80fba95604f6/34901": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:11"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:42:30"
   },
   "http://cdns.jp-primehome.com:8000/zhongying/live/playlist.m3u8?cid=cs22": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:20"
-  },
-  "http://cdns.jp-primehome.com:8000/zhongying/live/playlist.m3u8?cid=cs27": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:20"
-  },
-  "http://cdns.jp-primehome.com:8000/zhongying/live/playlist.m3u8?cid=cs01": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:21"
-  },
-  "http://cdns.jp-primehome.com:8000/zhongying/live/playlist.m3u8?cid=cs26": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:21"
-  },
-  "http://23.237.104.106:8080/USA_HBO_ZONE/tracks-v1a1/mono.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:22"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:42:41"
   },
   "http://cdns.jp-primehome.com:8000/zhongying/live/playlist.m3u8?cid=cs19": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:24"
-  },
-  "http://feilong123.vip/409990236/tv.php?id=ssdy": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:24"
-  },
-  "http://feilong123.vip/409990236/tv.php?id=ssxj": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:24"
-  },
-  "http://cdns.jp-primehome.com:8000/zhongying/live/playlist.m3u8?cid=cs10": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:26"
-  },
-  "http://61.85.197.53:1935/jtv_live/myStream/playlist.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:28"
-  },
-  "http://bgdc.live:25461/catrinamcdermott/catrinamcdermott/215728": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:30"
-  },
-  "http://epicboss.live/bjune@teksavvy.com/5193594414/30171": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:33"
-  },
-  "http://23.237.104.106:8080/USA_FUSE/index.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:33"
-  },
-  "https://cdn.live247stream.com/hyder/tv/playlist.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:35"
-  },
-  "http://cdns.jp-primehome.com:8000/zhongying/live/playlist.m3u8?cid=bs23": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:35"
-  },
-  "http://live-hls-web-aja.getaj.net/AJA/02.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:37"
-  },
-  "http://cdn2.live247stream.com/desiplus/tv/playlist.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:38"
-  },
-  "http://iptv.zkbhj.com/tv/url/go?id=188da1cd42026cce4e3c6fd900520b5bf2325e82e1723382000c25c9009b1449703a53d8cb741b92224765715d1a7388d43b8da7f422852ecf86f83de913c00f": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:38"
-  },
-  "http://iptv.zkbhj.com/tv/url/go?id=22631bd2308603231957203b0436f7cdf2325e82e1723382000c25c9009b1449703a53d8cb741b92224765715d1a7388d43b8da7f422852ecf86f83de913c00f": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:42"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:42:46"
   },
   "https://live.ottiptv.cc/huya/880214": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:45"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:42:59"
   },
   "http://fr3d0m.tebasya.work:8080/JVanmci423/dncSExXxmS/1174": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:47"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:43:05"
   },
   "http://fr3d0m.tebasya.work:8080/JVanmci423/dncSExXxmS/1176": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:47"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:42:54"
   },
   "https://live.ottiptv.cc/huya/11336719": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:48"
-  },
-  "https://live.ottiptv.cc/huya/11602077": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:50"
-  },
-  "https://live.ottiptv.cc/huya/11279251": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:50"
-  },
-  "https://live.ottiptv.cc/huya/11352909": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:50"
-  },
-  "https://live.ottiptv.cc/huya/11352965": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:52"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:43:07"
   },
   "https://live.ottiptv.cc/huya/11601981": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:54"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:43:04"
   },
   "http://live.nctv.top/douyu1.php?id=7537296": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:55"
-  },
-  "http://live.nctv.top/douyu1.php?id=3870925": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:56"
-  },
-  "http://live.nctv.top/douyu1.php?id=9629943": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:56"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:43:11"
   },
   "http://live.nctv.top/douyu1.php?id=8666105": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:56"
-  },
-  "http://live.nctv.top/douyu1.php?id=8666210": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:57"
-  },
-  "https://brat-samsung-us.amagi.tv/playlist.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:57"
-  },
-  "https://live.ottiptv.cc/huya/11342394": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:58"
-  },
-  "https://cdn-3.pishow.tv/live/1123/master.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:58"
-  },
-  "https://live.ottiptv.cc/huya/11274154": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:58"
-  },
-  "http://live.nctv.top/douyu1.php?id=9409722": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:58"
-  },
-  "http://live.nctv.top/douyu1.php?id=10419558": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:59"
-  },
-  "http://live.nctv.top/douyu1.php?id=9286868": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:24:59"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:43:12"
   },
   "http://live.nctv.top/douyu1.php?id=9442889": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:00"
-  },
-  "http://1.94.31.214/php/hntv.php?id=jczy": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:00"
-  },
-  "https://tftp4ge3drmt1go5nhcju8yzdrptpptwzc3jpq731h45mqpssqmudp7so.100ycdn.com/live-ws.kksmg.com/live/sdi5/playlist.m3u8?wsSession=8a15d23fe661e20e47cce670-177203770982085&wsIPSercert=832abf7ce82ccc02b32b56b105f24835&wsBindIP=2&wsserid=1168187559701054860": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:01"
-  },
-  "https://tftp1go3nhqbtfa3d1mtugessa4mscwszqh3qppizg5m8f3ts65e.100ycdn.com/live-ws.kksmg.com/live/sdi4/playlist.m3u8?wsSession=e18328672261b2e3fcadcc17-177204266364389&wsIPSercert=832abf7ce82ccc02b32b56b105f24835&wsBindIP=2&wsserid=1168276898037564649": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:01"
-  },
-  "https://tftp6graunmttghanhctofa3uymmcpf5gkmmzqczgs45upiu1ha5xpw.100ycdn.com/live-ws.kksmg.com/live/webcam1/playlist.m3u8?wsSession=3ccfdb4284eaea73bb7cab60-177204275008725&wsIPSercert=832abf7ce82ccc02b32b56b105f24835&wsBindIP=2&wsserid=1168218612390266553": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:02"
-  },
-  "https://rvsh.jtw.sh.gov.cn/live/310120a4-3d7c-4a7d-82dc-71fde233e060_sub/index.m3u8?t=1902119782&k=e5d9cad0fb4bde78": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:02"
-  },
-  "http://gcalic.v.myalicdn.com/gc/xiongmao18_1/index.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:02"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:43:16"
   },
   "https://videodowntx.9xiuzb.com/9xiu/114593892.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:03"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:43:18"
   },
   "https://live.ottiptv.cc/huya/29465851": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:04"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:43:19"
   },
   "https://live01.qujigeq.cn/live/90502954.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:05"
-  },
-  "http://lvbaiducdnct.inter.ptqy.gitv.tv/tslive/c59_fast_999_1080P_t10/c59_fast_999_1080P_t10.m3u8?d": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:07"
-  },
-  "https://live.ottiptv.cc/huya/31031541": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:09"
-  },
-  "https://kbpull.kktv8.com/livekktv/156877059/playlist.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:09"
-  },
-  "http://live.nctv.top/douyu1.php?id=10308234": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:10"
-  },
-  "http://live.nctv.top/douyu1.php?id=236461": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:11"
-  },
-  "http://live.nctv.top/douyu1.php?id=9317739": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:11"
-  },
-  "http://live.nctv.top/douyu1.php?id=9742136": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:12"
-  },
-  "https://188sp.711888.xyz/188/video.php": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:12"
-  },
-  "https://cfss.cc/api/kg/14853206.mp4": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:13"
-  },
-  "https://cfss.cc/api/kg/596344.mp4": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:14"
-  },
-  "https://cfss.cc/api/kg/2808.mp4": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:14"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:43:31"
   },
   "https://cfss.cc/api/kg/592679.mp4": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:15"
-  },
-  "https://cfss.cc/api/kg/756738.mp4": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:15"
-  },
-  "https://cfss.cc/api/kg/601548.mp4": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:15"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:43:29"
   },
   "https://live01.qujigeq.cn/live/52495774.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:16"
-  },
-  "https://cfss.cc/api/kg/596406.mp4": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:18"
-  },
-  "https://cfss.cc/api/kg/1129.mp4": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:18"
-  },
-  "https://cfss.cc/api/kg/6725099.mp4": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:18"
-  },
-  "https://cfss.cc/api/kg/647748.mp4": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:19"
-  },
-  "https://cfss.cc/api/kg/756472.mp4": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:19"
-  },
-  "https://cfss.cc/api/kg/5030038.mp4": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:19"
-  },
-  "https://cfss.cc/api/kg/34453.mp4": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:19"
-  },
-  "https://cfss.cc/api/kg/57894.mp4": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:19"
-  },
-  "https://cfss.cc/api/kg/758257.mp4": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:20"
-  },
-  "https://cfss.cc/api/kg/598167.mp4": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:20"
-  },
-  "https://cfss.cc/api/kg/21152.mp4": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:20"
-  },
-  "https://cfss.cc/api/kg/758285.mp4": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:20"
-  },
-  "https://cfss.cc/api/kg/158894.mp4": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:21"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:43:31"
   },
   "https://cfss.cc/api/kg/1128.mp4": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:21"
-  },
-  "https://cfss.cc/api/kg/3770369.mp4": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:23"
-  },
-  "https://cfss.cc/api/kg/2697588.mp4": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:23"
-  },
-  "https://cfss.cc/api/kg/203329.mp4": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:23"
-  },
-  "https://cfss.cc/api/kg/6761264.mp4": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:24"
-  },
-  "https://vd4.bdstatic.com/mda-nmcex5u2u9puxz6d/576p/h264/1670928165588976698/mda-nmcex5u2u9puxz6d.mp4": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:26"
-  },
-  "http://221.13.235.173:9901/tsfile/live/0001_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:30"
-  },
-  "http://36.40.237.59:9999/tsfile/live/0004_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:32"
-  },
-  "http://120.198.95.220:9901/tsfile/live/1020_1.m3u8?key=txiptv&playlive=1&down=1": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:33"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:43:39"
   },
   "http://125.42.150.124:9901/tsfile/live/1001_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:46"
-  },
-  "http://125.42.150.164:9901/tsfile/live/1002_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:46"
-  },
-  "http://221.13.235.139:9901/tsfile/live/0006_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:48"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:43:45"
   },
   "http://221.13.235.173:9901/tsfile/live/0006_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:48"
-  },
-  "http://125.42.150.124:9901/tsfile/live/1006_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:48"
-  },
-  "http://36.40.237.59:9999/tsfile/live/0125_2.m3u8?key=txiptv&playlive=0&authid=0": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:56"
-  },
-  "http://125.42.150.164:9901/tsfile/live/0122_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:25:59"
-  },
-  "http://101.66.194.126:9901/tsfile/live/0017_1.m3u8?key=txiptv&playlive=0&authid=0": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:26:01"
-  },
-  "http://112.123.243.37:50085/tsfile/live/0142_1.m3u8?key=txiptv&playlive=0&authid=0": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:26:01"
-  },
-  "http://112.123.243.37:50085/tsfile/live/0137_1.m3u8?key=txiptv&playlive=0&authid=0": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:26:02"
-  },
-  "http://125.42.150.124:9901/tsfile/live/0126_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:26:07"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:44:02"
   },
   "http://125.42.150.164:9901/tsfile/live/0126_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:26:08"
-  },
-  "http://218.13.170.98:9901/tsfile/live/0110_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:26:10"
-  },
-  "http://36.136.38.87:9901/tsfile/live/0107_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:26:11"
-  },
-  "http://36.136.38.87:9901/tsfile/live/0003_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:26:11"
-  },
-  "http://120.198.95.220:9901/tsfile/live/1012_1.m3u8?key=txiptv&playlive=1&down=1": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:26:12"
-  },
-  "http://221.13.235.173:9901/tsfile/live/1005_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:26:13"
-  },
-  "http://101.66.194.126:9901/tsfile/live/0138_1.m3u8?key=txiptv&playlive=0&authid=0": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:26:14"
-  },
-  "http://218.13.170.98:9901/tsfile/live/0018_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:26:15"
-  },
-  "http://125.42.150.124:9901/tsfile/live/0107_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:26:15"
-  },
-  "http://125.42.150.124:9901/tsfile/live/0143_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:26:15"
-  },
-  "http://125.42.150.164:9901/tsfile/live/0107_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:26:16"
-  },
-  "http://36.136.38.87:9901/tsfile/live/1006_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:26:17"
-  },
-  "http://221.13.235.139:9901/tsfile/live/1006_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:26:19"
-  },
-  "http://120.198.95.220:9901/tsfile/live/1034_1.m3u8?key=txiptv&playlive=1&down=1": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:26:22"
-  },
-  "http://124.228.160.176:9901/tsfile/live/1044_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:26:22"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:44:21"
   },
   "http://221.13.235.139:9901/tsfile/live/1002_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:26:24"
-  },
-  "http://14.29.45.79/tvcdn.stream3.hndt.com/tv/65c4a6d5017e1000b2b6ea2500000000_transios/playlist.m3u8?wsSecret=ace0af1d897567d5961dccfd469643cf&wsTime=1778774900&wsSession=757839d8668a988c8ff4954f-177876404879899&wsIPSercert=f1ed5e80c31ab65580d88c6bbb451005&wsBindIP=2&wsserid=1168265745811782710": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:26:29"
-  },
-  "http://120.198.95.220:9901/tsfile/live/1042_1.m3u8?key=txiptv&playlive=1&down=1": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:26:29"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:44:34"
   },
   "http://p2.ytelc.com/videojs.php?id=https://sjlivecdn9.cbg.cn/202605142106/app_2/_definst_/ls_2.stream/chunklist.m3u8": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:26:31"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:44:38"
   },
   "http://121.19.134.141:808/tsfile/live/1026_1.m3u8?key=txiptv&playlive=1&authid=0": {
-    "fail_count": 1,
-    "last_fail": "2026-05-14 21:26:31"
+    "fail_count": 2,
+    "last_fail": "2026-05-14 21:44:46"
   },
-  "http://49.234.31.101:7033/tsfile/live/1078_1.m3u8?key=txiptv&playlive=1&authid=0": {
+  "http://38.75.136.137:98/gslb/dsdqpub/nxss.m3u8?auth=testpub": {
     "fail_count": 1,
-    "last_fail": "2026-05-14 21:26:32"
+    "last_fail": "2026-05-14 21:39:35"
+  },
+  "http://38.75.136.137:98/gslb/dsdqpub/fyyy.m3u8?auth=testpub": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:39:35"
+  },
+  "http://38.75.136.137:98/gslb/dsdqpub/hbwshd.m3u8?auth=testpub": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:39:38"
+  },
+  "http://38.75.136.137:98/gslb/dsdqpub/scwshd.m3u8?auth=testpub": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:39:40"
+  },
+  "http://107.150.60.122/live/snwshd.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:39:40"
+  },
+  "http://38.75.136.137:98/gslb/dsdqpub/szwshd.m3u8?auth=testpub": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:39:40"
+  },
+  "https://epg.pw/stream/7b470f9fc5c305db0c8622117b7b25ca00eb35ba3e93e865cf0ff9df5c736681.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:39:41"
+  },
+  "https://stream1.freetv.fun/yan-zhou-zong-he-19.ctv": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:39:43"
+  },
+  "https://stream1.freetv.fun/yan-zhou-jing-sai-34.ctv": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:39:43"
+  },
+  "https://stream1.freetv.fun/jiang-men-zong-he-7.ctv": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:39:43"
+  },
+  "https://stream1.freetv.fun/yan-zhou-ying-shi-7.ctv": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:39:44"
+  },
+  "https://stream1.freetv.fun/yan-zhou-jing-sai-2.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:39:44"
+  },
+  "https://stream1.freetv.fun/shan-tou-zong-he-4.ctv": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:39:45"
+  },
+  "https://stream1.freetv.fun/hang-zhou-ming-zhu-2.ctv": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:39:48"
+  },
+  "https://stream1.freetv.fun/zhe-jiang-jing-ji-sheng-huo-8.ctv": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:39:49"
+  },
+  "http://ali-m-l.cztv.com/channels/lantian/channel07/720p.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:39:49"
+  },
+  "https://stream1.freetv.fun/hang-zhou-sheng-huo-3.ctv": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:39:50"
+  },
+  "http://tvfile.jyrmt.cn:80/nmip-media/channellive/channel104452/playlist.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:39:52"
+  },
+  "https://stream1.freetv.fun/hu-zhou-gong-gong-3.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:39:53"
+  },
+  "http://l.cztvcloud.com/channels/lantian/SXzhuji3/720p.m3u8?zzhed": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:39:55"
+  },
+  "http://l.cztvcloud.com/channels/lantian/SXxiaoshan2/720p.m3u8?zzhed?": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:39:57"
+  },
+  "https://stream1.freetv.fun/qu-jiang-xin-wen-zong-he-1.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:39:57"
+  },
+  "https://stream1.freetv.fun/qu-jiang-xin-wen-zong-he-2.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:39:58"
+  },
+  "https://t.freetv.fun/live/shao-xing-wen-hua-ying-yuan-2.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:00"
+  },
+  "https://stream1.freetv.fun/shao-xing-wen-hua-ying-yuan-3.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:01"
+  },
+  "http://l.cztvcloud.com/channels/lantian/SXdongtou1/720p.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:02"
+  },
+  "https://stream1.freetv.fun/yong-jia-xin-wen-zong-he-2.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:02"
+  },
+  "https://stream1.freetv.fun/wu-yi-xin-wen-zong-he-3.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:03"
+  },
+  "https://stream1.freetv.fun/kai-hua-xin-wen-zong-he-2.ctv": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:05"
+  },
+  "https://stream1.freetv.fun/lan-xi-xin-wen-zong-he-1.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:08"
+  },
+  "https://stream1.freetv.fun/shang-yu-wen-hua-ying-yuan-2.ctv": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:12"
+  },
+  "https://stream1.freetv.fun/ipv6-shang-hai-du-shi-3.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:12"
+  },
+  "https://stream1.freetv.fun/ipv6-dong-fang-ying-shi-8.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:13"
+  },
+  "https://stream1.freetv.fun/ipv6-dong-fang-ying-shi-9.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:13"
+  },
+  "https://stream1.freetv.fun/ipv6-dong-man-xiu-chang-11.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:13"
+  },
+  "https://stream1.freetv.fun/di-yi-cai-jing-13.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:15"
+  },
+  "https://stream1.freetv.fun/sheng-huo-shi-shang-9.ctv": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:16"
+  },
+  "http://stream.thmz.com/wxtv3/playlist.m3u8?_upt=1758133b1706166861": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:19"
+  },
+  "https://stream1.freetv.fun/tai-zhou-yi-tao-xin-wen-zong-he-4.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:20"
+  },
+  "http://live1.habctv.com/ggpdsl/sd/live.m3u8?zjiangsd": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:21"
+  },
+  "https://lianshui-tv-hls.cm.jstv.com:443/lianshui-tv/lsxw.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:21"
+  },
+  "https://t.freetv.fun/live/su-zhou-sheng-huo-zi-xun.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:23"
+  },
+  "https://stream1.freetv.fun/lian-yun-gang-xin-wen-zong-he-3.ctv": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:24"
+  },
+  "https://stream1.freetv.fun/hu-nan-du-shi-4.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:25"
+  },
+  "https://stream1.freetv.fun/hu-nan-dian-shi-ju-7.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:27"
+  },
+  "https://stream1.freetv.fun/hu-nan-dian-shi-ju-2.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:27"
+  },
+  "https://stream1.freetv.fun/hu-nan-dian-ying-2.ctv": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:27"
+  },
+  "https://stream1.freetv.fun/hu-nan-du-shi-13.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:28"
+  },
+  "https://stream1.freetv.fun/hu-nan-yu-le-9.ctv": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:28"
+  },
+  "https://stream1.freetv.fun/hu-nan-guo-ji-4.ctv": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:29"
+  },
+  "https://stream1.freetv.fun/wu-yi-xin-wen-zong-he-1.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:32"
+  },
+  "https://stream1.freetv.fun/hu-bei-long-shang-1.ctv": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:33"
+  },
+  "https://stream1.freetv.fun/wu-yi-jing-ji-1.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:36"
+  },
+  "https://stream1.freetv.fun/nan-zhu-du-shi-sheng-huo-3.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:37"
+  },
+  "https://t.freetv.fun/live/yan-xi-xin-wen.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:38"
+  },
+  "http://175.155.106.72:89/live1/live1.m3u8?zsicd": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:40"
+  },
+  "https://m3u8.channel.dzsm.com/nmip-media/channellive/channel105549/playlist.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:41"
+  },
+  "https://stream1.freetv.fun/xu-zhou-xin-wen-zong-he-2.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:42"
+  },
+  "https://stream1.freetv.fun/xu-zhou-xin-wen-zong-he-3.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:42"
+  },
+  "https://m3u8.channel.dzsm.com/nmip-media/channellive/channel101257/playlist.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:42"
+  },
+  "https://stream1.freetv.fun/de-yang-xin-wen-zong-he-2.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:43"
+  },
+  "http://live.spccmc.com:90/live/spxwzh.m3u8?%E5%85%B3%E6%B3%A8%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7[%E6%99%B4%E5%9B%AD]": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:44"
+  },
+  "https://stream1.freetv.fun/yan-yuan-zong-he-1.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:44"
+  },
+  "https://stream1.freetv.fun/nan-zhu-ying-shi-yu-le-4.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:45"
+  },
+  "https://stream1.freetv.fun/zhang-zhou-xin-wen-zong-he-1.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:49"
+  },
+  "https://stream1.freetv.fun/fu-jian-dian-shi-ju-1.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:50"
+  },
+  "https://stream1.freetv.fun/fu-jian-dian-shi-ju-4.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:50"
+  },
+  "https://stream1.freetv.fun/fu-jian-gong-gong-4.ctv": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:53"
+  },
+  "https://stream1.freetv.fun/fu-jian-jing-ji-6.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:54"
+  },
+  "https://stream1.freetv.fun/ipv6-hai-nan-xin-wen-6.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:54"
+  },
+  "https://stream1.freetv.fun/ipv6-hai-nan-wen-lu-7.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:56"
+  },
+  "http://tvpull.dxhmt.cn:9081/tv/11729-1.m3u8?zhend": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:57"
+  },
+  "https://stream1.freetv.fun/fu-jian-shao-er-4.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:58"
+  },
+  "http://tvpull.dxhmt.cn:9081/tv/10425-1.m3u8?zhend": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:40:59"
+  },
+  "http://jwplay.hebyun.com.cn/live/xtsrmtzs/1500k/tzwj_video.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:02"
+  },
+  "https://stream1.freetv.fun/shi-jia-zhuang-xin-wen-zong-he-2.ctv": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:05"
+  },
+  "https://stream1.freetv.fun/shi-jia-zhuang-xin-wen-zong-he-6.ctv": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:05"
+  },
+  "https://stream1.freetv.fun/shi-jia-zhuang-yu-le-1.ctv": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:06"
+  },
+  "https://play.kankanlive.com/live/1683944827526991.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:08"
+  },
+  "http://110.153.180.106:55555/out_2/index.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:09"
+  },
+  "http://110.153.180.106:55555/out_3/index.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:09"
+  },
+  "https://stream1.freetv.fun/shan-dong-shao-er-4.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:09"
+  },
+  "https://stream1.freetv.fun/yun-cheng-ke-ji-jiao-yu-2.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:13"
+  },
+  "http://111.53.96.67:8081/live/1/index.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:13"
+  },
+  "http://dspdhls.appcoo.com:8888/live/dspd/index.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:14"
+  },
+  "http://zbbf2.ahbztv.com/live/418.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:16"
+  },
+  "https://stream1.freetv.fun/hei-long-jiang-ying-shi-1.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:20"
+  },
+  "https://stream1.freetv.fun/hei-long-jiang-xin-wen-fa-zhi-7.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:20"
+  },
+  "https://stream1.freetv.fun/hei-long-jiang-shao-er-2.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:21"
+  },
+  "http://live.qthnews.org.cn:1935/live/live2/800k/tzwj_video.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:22"
+  },
+  "http://r.jdshipin.com/62WM7": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:22"
+  },
+  "http://r.jdshipin.com/jUx8K": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:23"
+  },
+  "https://stream1.freetv.fun/jing-dian-dian-ying-8.ctv": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:27"
+  },
+  "https://stream1.freetv.fun/tao-dian-ying-3.ctv": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:27"
+  },
+  "http://107.150.60.122/live/chcdz.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:28"
+  },
+  "https://stream1.freetv.fun/xing-kong-wei-shi-11.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:28"
+  },
+  "https://www.freetv.top/migu/796070308.m3u8?migutoken=f4f71100ed3cd756f336e1f3b6d522c1338ee1ffd14316eea89e461d4e31e29395a265a9f1ec26b947fb0e7dc16296db47ae3bfea73caaee6901d17bfede63775878c0ab44c872939ba5b53baf": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:31"
+  },
+  "https://stream1.freetv.fun/cnqia-tong-3.ctv": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:31"
+  },
+  "https://stream1.freetv.fun/he-bei-shao-er-ke-jiao-2.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:32"
+  },
+  "https://stream1.freetv.fun/jin-ying-qia-tong-13.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:36"
+  },
+  "http://cdn.jdshipin.com:8880/huya.php?id=23824164": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:38"
+  },
+  "http://74.91.26.218:82/live/cctv5hd.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:38"
+  },
+  "http://cdn.jdshipin.com:8880/huya.php?id=29465849": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:39"
+  },
+  "http://192.151.150.154/live/cctv5p.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:39"
+  },
+  "https://stream.hrbtv.net/xwzh/playlist.m3u8?_upt=ef41dd531755913594": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:41"
+  },
+  "http://120.70.60.179:9901/tsfile/live/1006_1.m3u8?authid=0&key=txiptv&playlive=1": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:42"
+  },
+  "https://ali-m-l.cztv.com/channels/lantian/channel012/1080p.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:43"
+  },
+  "http://visit.jjbctv.com:1935/live/xwzhmb/playlist.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:49"
+  },
+  "http://192.151.150.154/live/cctv8hd.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:54"
+  },
+  "http://10.223.3.189/PLTV/88888888/224/3221225685/10000100000000060000000000012483_0.smil/index.m3u8?fmt=ts2hls&rrsip=10.223.5.36&zoneoffset=480&servicetype=2&icpid=shlt&limitflux=-1&limitdur=-1&tenantId=8601&GuardEncType=2&accountinfo=%7E%7EV2.0%7E56V5TkueA7dU3RqeLWr8eg%7EGBgYt2G4g3mp1H7Khhun9o6Zuj3ZkcZIB_HquE1b4VEarRFWx1w4xcRrXpOi2MxRI2bJNcVCpNQZiqYy2TQFYgBt4on5bTDSw95vyOkgHqI%7EExtInfo24S_eFPZ-q3aI4rQpB83xQ%3A20250510113236%2C120574%2C139.227.17.230%2C20250510113236%2CUmai%3ACHAN%2F181358%40BESTV.SMG.SMG%2C120574%2C-1%2C0%2C1%2C%2C%2C7%2C%2C%2C%2C4%2C%2C10000100000000060000000000012483_0%2CEND&VIP=null": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:54"
+  },
+  "http://192.151.150.154/live/cctv2hd.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:54"
+  },
+  "http://192.151.150.154/live/dyjc.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:54"
+  },
+  "http://192.151.150.154/live/sjdl.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:54"
+  },
+  "http://192.151.150.154/live/nxss.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:54"
+  },
+  "http://192.151.150.154/live/ystq.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:54"
+  },
+  "http://192.151.150.154/live/fyyy.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:55"
+  },
+  "http://192.151.150.154/live/ysjp.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:55"
+  },
+  "http://192.151.150.154/live/dfwshd.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:58"
+  },
+  "http://192.151.150.154/live/nfws.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:41:59"
+  },
+  "http://192.151.150.154/live/nmgws.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:00"
+  },
+  "http://192.151.150.154/live/gdtvs5.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:04"
+  },
+  "http://107.150.60.122/live/cctv1hd.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:04"
+  },
+  "http://107.150.60.122/live/cctv12hd.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:05"
+  },
+  "http://pplee.vicp.net:4022/udp/233.18.204.217:5140": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:08"
+  },
+  "http://pplee.vicp.net:4022/udp/233.18.204.110:5140": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:08"
+  },
+  "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv9hd": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:13"
+  },
+  "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv17hd": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:13"
+  },
+  "http://111.170.156.74:3344/\u592e\u89c6/cctv.php?id=cctv4k#http://38.75.136.137:98/gslb/dsdqpub/cctv4k.m3u8?auth=testpub": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:13"
+  },
+  "http://38.75.136.137:98/gslb/dsdqpub/cctv8k.m3u8?auth=testpub": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:13"
+  },
+  "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv12hd": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:14"
+  },
+  "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv10hd": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:14"
+  },
+  "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv15hd": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:14"
+  },
+  "http://61.184.46.85:85/tsfile/live/1005_1.m3u8?key=txiptv&playlive=1&authid=0$\u8346\u5dde\u7535\u4fe1": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:15"
+  },
+  "http://www.520345.xyz:8188/rtp/239.69.1.111:10304?$3840x2160": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:19"
+  },
+  "http://61.184.46.85:85/tsfile/live/1004_1.m3u8?key=txiptv&playlive=1&authid=0$\u8346\u5dde\u7535\u4fe1": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:20"
+  },
+  "https://ali-m-l.cztv.com/channels/lantian/channel001/1080p.m3u8$3\u7518\u7535FD\u76f4": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:20"
+  },
+  "http://tv.pull.hebtv.com/jishi/nongminpindao.m3u8?t=1893427200&k=f07ae1d5be12d118d136be90e032bfce": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:20"
+  },
+  "http://tvpull.dxhmt.cn:9081/tv/11326-1.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:21"
+  },
+  "http://1.94.31.214/php/hntv.php?id=xsj": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:23"
+  },
+  "http://iptv.4666888.xyz/iptv2A.php?id=32": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:25"
+  },
+  "http://iptv.4666888.xyz/iptv2A.php?id=25": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:25"
+  },
+  "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv3hd": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:25"
+  },
+  "http://iptv.4666888.xyz/iptv2A.php?id=57": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:26"
+  },
+  "http://iptv.4666888.xyz/iptv2A.php?id=48": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:27"
+  },
+  "http://23.237.104.106:8080/USA_5STARMAX/tracks-v1a1/mono.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:27"
+  },
+  "http://74.91.26.218:82/live/ctsjy.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:28"
+  },
+  "https://liveh34.vtvprime.vn/hls/SCTV10/01.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:29"
+  },
+  "https://ntd02.akamaized.net/HD-NY/tracks-v3a1/mono.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:30"
+  },
+  "http://74.91.26.218:82/live/ctvnews.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:30"
+  },
+  "https://liveh34.vtvprime.vn/hls/DONGTHAPTV/03.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:33"
+  },
+  "https://liveh34.vtvprime.vn/hls/SCTV12/03.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:33"
+  },
+  "https://liveh34.vtvprime.vn/hls/NINHBINHTV/03.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:33"
+  },
+  "http://live.shaoxing.com.cn/video/s10001-sxtv3/index.m3u8?zzhed": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:35"
+  },
+  "https://server.zillarbarta.com/ZBCINEMA/index.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:37"
+  },
+  "https://liveh34.vtvprime.vn/hls/SCTV8/01.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:38"
+  },
+  "http://cdns.jp-primehome.com:8000/zhongying/live/playlist.m3u8?cid=cs05": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:39"
+  },
+  "http://cdns.jp-primehome.com:8000/zhongying/live/playlist.m3u8?cid=cs03": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:40"
+  },
+  "http://cdns.jp-primehome.com:8000/zhongying/live/playlist.m3u8?cid=cs02": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:40"
+  },
+  "http://cdns.jp-primehome.com:8000/zhongying/live/playlist.m3u8?cid=cs12": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:42"
+  },
+  "http://cdns.jp-primehome.com:8000/zhongying/live/playlist.m3u8?cid=cs09": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:43"
+  },
+  "http://cdns.jp-primehome.com:8000/zhongying/live/playlist.m3u8?cid=cs15": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:43"
+  },
+  "http://61.85.197.53:1935/jtv_live/myStream/chunklist_w1542137203.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:46"
+  },
+  "http://fr3d0m.tebasya.work:8080/JVanmci423/dncSExXxmS/1173": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:50"
+  },
+  "https://v2.tustreaming.cl/chilechannel/index.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:54"
+  },
+  "http://fr3d0m.tebasya.work:8080/JVanmci423/dncSExXxmS/1175": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:54"
+  },
+  "http://iptv.zkbhj.com/tv/url/go?id=269ccbfcaddd5a80e4366cc007620dfff2325e82e1723382000c25c9009b1449703a53d8cb741b92224765715d1a7388d43b8da7f422852ecf86f83de913c00f": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:56"
+  },
+  "http://iptv.zkbhj.com/tv/url/go?id=023c6f5c22ab16bc1522811c64e2ee48f2325e82e1723382000c25c9009b1449703a53d8cb741b92224765715d1a7388d43b8da7f422852ecf86f83de913c00f": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:56"
+  },
+  "http://iptv.zkbhj.com/tv/url/go?id=6270d446d0cbc40f4be353e8013efc04f2325e82e1723382000c25c9009b1449703a53d8cb741b92224765715d1a7388d43b8da7f422852ecf86f83de913c00f": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:57"
+  },
+  "http://bgdc.live:25461/catrinamcdermott/catrinamcdermott/215482": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:57"
+  },
+  "https://live20.bozztv.com/giatv/giatv-KMKTV/KMKTV/chunks.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:58"
+  },
+  "http://iptv.zkbhj.com/tv/url/go?id=31c41d899589de3591b8ac0157fc3a26f2325e82e1723382000c25c9009b1449703a53d8cb741b92224765715d1a7388d43b8da7f422852ecf86f83de913c00f": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:42:59"
+  },
+  "http://46.151.196.223:14432/": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:02"
+  },
+  "http://fr3d0m.tebasya.work:8080/JVanmci423/dncSExXxmS/1158": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:05"
+  },
+  "https://live.ottiptv.cc/huya/11342390": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:05"
+  },
+  "https://live.ottiptv.cc/huya/11342421": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:05"
+  },
+  "https://live.ottiptv.cc/huya/11352876": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:06"
+  },
+  "https://live.ottiptv.cc/huya/11342423": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:07"
+  },
+  "http://iptv.zkbhj.com/tv/url/go?id=f1be0d493321f4c33715e1b7e70c09d0f2325e82e1723382000c25c9009b1449703a53d8cb741b92224765715d1a7388d43b8da7f422852ecf86f83de913c00f": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:07"
+  },
+  "https://live.ottiptv.cc/huya/29982645": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:09"
+  },
+  "http://live.nctv.top/douyu1.php?id=9369468": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:11"
+  },
+  "https://live.ottiptv.cc/huya/660002": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:11"
+  },
+  "http://live.nctv.top/douyu1.php?id=9568091": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:12"
+  },
+  "https://live.ottiptv.cc/huya/11352967": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:14"
+  },
+  "http://live.nctv.top/douyu1.php?id=9817729": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:15"
+  },
+  "http://hy.zubo.cc.cd/?id=20985830": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:15"
+  },
+  "http://1.94.31.214/php/hntv.php?id=hnly": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:16"
+  },
+  "https://live.ottiptv.cc/huya/16028551": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:16"
+  },
+  "https://tftp0gaa1hcjagozdcmttgyan45djq311475uf3issh5pchzgg55p.100ycdn.com/live-ws.kksmg.com/live/sdi6/playlist.m3u8?wsSession=5b0157b25e26fa5fbe3ebedf-177204125960201&wsIPSercert=832abf7ce82ccc02b32b56b105f24835&wsBindIP=2&wsserid=1168218615997031039": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:17"
+  },
+  "https://down-hls.qxiu.com/live/460662/index.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:18"
+  },
+  "https://lvbdcdncmn.inter.71edge.com/tslive/l1/c52_lb_553_300_t10/I67sb6wvoWaxfjPEdSuB8xyBShFln4Poub7LGIzPt5oGLcKaLXD21aR_t20nEIxJFmaf_i6EYQ77gA-gLJ3xOTtq6K7hpgCREwLfbuNMXruJdFta9-ai9bYk4cTMbhQgRh9SCkE3yt46X4E0qOVADDdga3TMRSLnFscFYr-_s4Sd2sgykmnFa4-hdgX9599FiW_RX5VYGH9B1jyj748_CAu4VgqqTDwxUx8w556tCWY7mlb1r84RWuip72e4H8-HkUuBUoFeD4aw9m1HOUfgwx7ixDqJUFOmq9F-LeKLTZ2Ap6fobRuaUiaSqHsCWvuy9XWe5KWBiZv6bUJ8oAuqkA/1a6758d872929c8d41a7629db52a831f7/c52_lb_553_300_t10.m3u8?key=0baa5db205ac0d29618a2e8d7964b7e4e&dis_t=1752408084&uuid=6f1d53dc-6873a014-459&qdpv=3&qd_bid=1&qd_sft=0&pv=0.1&cpt=0": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:19"
+  },
+  "https://lvbdcdncmn.inter.71edge.com/tslive/l1/c52_lb_568_300_t10/JuZaYFfgAtgzeXENAS1zAE098-EGizvi9nPyECctaYL6rieOqt7Q1KcZ4FGU4o3UUwpf5CbV_nUsDbQg6NsUgbaKgmctqIUwA_QC1rbrgBQxdxXRLPaFs_72-dTZ9RfNKlNk-q4ijiT_NDcjcHKt9xDb1Eqjc_SZlsuONXiTyrN7Pf0NpHYoo8TtkhTnxhUA1rZTDlGr_OhabLQs7kUhuQmWsru0TSRbLz5HGJh_c3Dyx5K_G39iq69d-esVm-DuOSYw2HZW5BZdIPhr87zSBI2nAkwdKUaqY00Hzz-AXgJ6-Cx--ZL-3uMHEMgiE9SUmFSErHMOhGX8s8ogQkI3lg/11e4badc79479921d33b383ae671d68fc/c52_lb_568_300_t10.m3u8?key=0baa5db205ac0d296684015f97ee400bf&dis_t=1752408227&uuid=6f1d53dc-6873a0a3-45b&qdpv=3&qd_bid=1&qd_sft=0&pv=0.1&cpt=0": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:19"
+  },
+  "https://live.ottiptv.cc/huya/29465860": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:20"
+  },
+  "https://live01.qujigeq.cn/live/28524326.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:20"
+  },
+  "https://live01.qujigeq.cn/live/71096352.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:20"
+  },
+  "http://live.nctv.top/douyu1.php?id=10308312": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:25"
+  },
+  "https://xn--vusr00g.v.nxog.top/m/tv/xjj.php?id=3": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:27"
+  },
+  "http://av.npcq.cn/api.php": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:27"
+  },
+  "https://cfss.cc/api/kg/179586.mp4": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:30"
+  },
+  "https://cfss.cc/api/kg/1485652.mp4": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:31"
+  },
+  "https://cfss.cc/api/kg/756444.mp4": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:32"
+  },
+  "https://cfss.cc/api/kg/596504.mp4": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:32"
+  },
+  "https://cfss.cc/api/kg/60749.mp4": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:32"
+  },
+  "https://cfss.cc/api/kg/596434.mp4": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:33"
+  },
+  "https://live01.qujigeq.cn/live/97948697.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:33"
+  },
+  "https://live01.qujigeq.cn/live/87785313.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:34"
+  },
+  "https://cfss.cc/api/kg/237276.mp4": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:35"
+  },
+  "https://cfss.cc/api/kg/596581.mp4": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:36"
+  },
+  "https://cfss.cc/api/kg/7232105.mp4": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:37"
+  },
+  "https://cfss.cc/api/kg/33956.mp4": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:39"
+  },
+  "https://k0u3cydy43yaz.djvod.ndcimgs.com/bs2/photo-video-mz/5225864605208445410_36e3cffbcde751f5_4169_sl200hd15.mp4": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:40"
+  },
+  "https://vd4.bdstatic.com/mda-nmbgya8v797emg7u/576p/h264/1670847005358747234/mda-nmbgya8v797emg7u.mp4": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:40"
+  },
+  "https://k0ub7yffy10y9z.djvod.ndcimgs.com/bs3/video-hls/5210101864526740619_hlsb.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:43"
+  },
+  "https://k0ub7yffy10yezw2409x875ex5088x330xxez.djvod.ndcimgs.com/bs3/video-hls/5207287162232816373_hlsb.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:43"
+  },
+  "https://k0ub7yffy10yfz.djvod.ndcimgs.com/upic/2023/07/25/08/BMjAyMzA3MjUwODU3MzRfMzYxMjUyNDA3MV8xMDg4MTUzNTczMzFfMF8z_b_Bf67605afd92859a39e607f504f43c9f7.mp4": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:43"
+  },
+  "https://k0ub7yffy10y8z.djvod.ndcimgs.com/bs3/video-hls/5257671152053263747_hlsb.m3u8": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:43"
+  },
+  "http://120.198.95.220:9901/tsfile/live/1039_1.m3u8?key=txiptv&playlive=1&down=1": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:43:45"
+  },
+  "http://221.13.235.173:9901/tsfile/live/0002_1.m3u8?key=txiptv&playlive=1&authid=0": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:44:00"
+  },
+  "http://221.13.235.139:9901/tsfile/live/0002_1.m3u8?key=txiptv&playlive=1&authid=0": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:44:00"
+  },
+  "http://221.13.235.139:9901/tsfile/live/0004_1.m3u8?key=txiptv&playlive=1&authid=0": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:44:01"
+  },
+  "http://221.13.235.173:9901/tsfile/live/0007_1.m3u8?key=txiptv&playlive=1&authid=0": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:44:03"
+  },
+  "http://221.13.235.173:9901/tsfile/live/0009_1.m3u8?key=txiptv&playlive=1&authid=0": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:44:04"
+  },
+  "http://125.42.150.164:9901/tsfile/live/1011_1.m3u8?key=txiptv&playlive=1&authid=0": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:44:06"
+  },
+  "http://221.13.235.173:9901/tsfile/live/0013_1.m3u8?key=txiptv&playlive=1&authid=0": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:44:09"
+  },
+  "http://113.25.252.226:9901/tsfile/live/1046_1.m3u8?key=txiptv&playlive=1&authid=0": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:44:29"
+  },
+  "http://113.25.252.226:9901/tsfile/live/1044_1.m3u8?key=txiptv&playlive=1&authid=0": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:44:29"
+  },
+  "http://101.66.195.42:9901/tsfile/live/1011_1.m3u8?key=txiptv&playlive=0&authid=0": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:44:30"
+  },
+  "http://113.25.252.226:9901/tsfile/live/1004_1.m3u8?key=txiptv&playlive=1&authid=0": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:44:30"
+  },
+  "http://120.198.95.220:9901/tsfile/live/1031_1.m3u8?key=txiptv&playlive=1&down=1": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:44:32"
+  },
+  "http://221.13.235.139:9901/tsfile/live/1008_1.m3u8?key=txiptv&playlive=1&authid=0": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:44:32"
+  },
+  "http://49.234.31.101:7033/tsfile/live/1082_1.m3u8?key=txiptv&playlive=1&authid=0": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:44:37"
+  },
+  "http://49.234.31.101:7040/tsfile/live/1000_1.m3u8?key=txiptv&playlive=1&authid=0": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:44:38"
+  },
+  "http://121.19.134.73:808/tsfile/live/0140_1.m3u8?key=txiptv&playlive=1&authid=0": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:44:40"
+  },
+  "http://1.197.249.239:9901/tsfile/live/0136_1.m3u8?key=txiptv&playlive=1&authid=0": {
+    "fail_count": 1,
+    "last_fail": "2026-05-14 21:44:40"
   }
 }

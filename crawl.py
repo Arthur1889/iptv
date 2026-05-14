@@ -26,9 +26,8 @@ from tqdm import tqdm
 import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-# ================= 1. 分类与排序逻辑 =================
+# ================= 1. 配置与排序逻辑 =================
 CONFIG_FILE = "sources.json"
-NAME_JSON = "name.json"
 BLACKLIST_FILE = "blacklist.json"
 
 # 7. 频道分组排序顺序
@@ -52,21 +51,34 @@ ENV = get_env_config()
 
 # ================= 2. 核心功能函数 =================
 
+def clean_name(name):
+    """ 10. 清除名称中的杂质字眼 """
+    # 移除质量字眼、地理限制、在线时间等
+    noise = r'(HD|高清|超高清|蓝光|BD|\d+P|K|Not 24/7|Geo-blocked|\[.*?\]|\(.*?\)|\-)'
+    name = re.sub(noise, '', name, flags=re.I)
+    # 移除末尾多余空格和特殊符号
+    return name.strip().rstrip('-').strip()
+
 def get_group(name, height):
+    """ 11. 4K频道分组逻辑限定 """
     n = name.upper()
-    if height >= 2160 or "4K" in n: return "4K频道"
+    is_cv = any(k in n for k in ["CCTV", "卫视"])
+    
+    # 4K频道只放央视和卫视的4K/8K
+    if height >= 2160 and is_cv: return "4K频道"
+    
     if "CCTV" in n: return "央视频道"
     if "卫视" in n:
-        if any(k in n for k in ["凤凰", "TVB", "翡翠", "亚洲", "中视", "华视", "港", "澳", "台"]): return "港澳台"
+        if any(k in n for k in ["凤凰", "TVB", "翡翠", "亚洲", "中视", "华视", "凤凰", "星空"]): return "港澳台"
         return "地方卫视"
     if "山东" in n: return "山东频道"
     if any(k in n for k in ["电影", "影院", "CHC", "剧场", "私人"]): return "影视频道"
-    if any(k in n for k in ["纪录", "纪实", "探索", "地理"]): return "纪录纪实"
+    if any(k in n for k in ["纪录", "纪实", "探索", "求索", "地理"]): return "纪录纪实"
     if any(k in n for k in ["歌曲", "音乐", "MV", "DJ", "演唱会"]): return "歌曲及音乐MV"
-    if any(k in n for k in ["少儿", "卡通", "动漫", "动画"]): return "少儿动画"
-    if any(k in n for k in ["体育", "足球", "竞赛", "竞技"]): return "体育赛事"
+    if any(k in n for k in ["少儿", "卡通", "动漫", "动画", "卡酷"]): return "少儿动画"
+    if any(k in n for k in ["体育", "足球", "竞赛", "竞技", "五星", "劲爆"]): return "体育赛事"
     if any(k in n for k in ["综艺", "娱乐", "点播"]): return "娱乐频道"
-    if any(k in n for k in ["风云", "第一", "女性", "兵器", "文化"]): return "数字频道"
+    if any(k in n for k in ["风云", "第一", "女性", "兵器", "文化", "求索"]): return "数字频道"
     return "综合频道"
 
 def deep_analyze_stream(url):
@@ -99,26 +111,29 @@ def run():
             lines = r.text.split('\n')
             for i in range(len(lines)):
                 if lines[i].startswith('#EXTINF:'):
-                    name = lines[i].split(',')[-1].strip()
+                    raw_name = lines[i].split(',')[-1].strip()
                     link = lines[i+1].strip() if i+1 < len(lines) else ""
                     stats["raw"] += 1
-                    # 5 & 6. 过滤直播室及域名
+                    
+                    # 6. 过滤 catvod.com
                     if "catvod.com" in link: stats["catvod_drop"] += 1; continue
-                    if any(k in name for k in ["直播室", "轮播", "专题", "课堂", "测试"]): stats["junk_drop"] += 1; continue
+                    # 5. 过滤直播室
+                    if any(k in raw_name for k in ["直播室", "轮播", "专题", "课堂", "测试"]): stats["junk_drop"] += 1; continue
+                    
                     # 黑名单过滤
                     if link in bl_data and bl_data[link].get('fail_count', 0) >= 3:
                         last_fail = datetime.strptime(bl_data[link]['last_fail'], "%Y-%m-%d %H:%M:%S")
                         if datetime.now() - last_fail < timedelta(hours=24): stats["bl_skip"] += 1; continue
                     
                     if not link.startswith('http') or link in seen_urls: continue
-                    all_channels.append({"name": name, "url": link})
+                    all_channels.append({"name": raw_name, "url": link})
                     seen_urls.add(link)
         except: continue
     
-    # 建立统一去重池 { "频道标准名": { "4K桶": [源...], "标准桶": [源...] } }
+    # { "频道ID": { "High": [源...], "Std": [源...] } }
     unified_pool = {}
 
-    # 1. 探测进度条
+    # 1. 进度条：含有时间、速度、优质源
     with ThreadPoolExecutor(max_workers=ENV["workers"]) as executor:
         futures = {executor.submit(deep_analyze_stream, ch['url']): ch for ch in all_channels}
         with tqdm(total=len(all_channels), desc="[探测进度]", unit="ch", bar_format='{l_bar}{bar:20}{r_bar} 优质:{postfix}') as pbar:
@@ -128,14 +143,17 @@ def run():
                 if h > 0:
                     if ch['url'] in bl_data: del bl_data[ch['url']]
                     stats["passed"] += 1
-                    # 关键：提取标准频道名（去后缀）
-                    clean_name = re.sub(r'(HD|高清|蓝光|超清|\d+P|\[.*?\]|CCTV\d+)', '', ch['name'], flags=re.I).strip()
-                    # 针对CCTV特殊处理
-                    cctv_match = re.search(r'(CCTV[-]?\d+[\+]?)', ch['name'], re.I)
-                    sid = cctv_match.group(1).upper().replace('-', '') if cctv_match else clean_name
                     
-                    ch.update({'h': h, 'br': br, 'score': h * 1000 + br/1000, 'sid': sid})
+                    # 10. 强力清洗名称
+                    s_name = clean_name(ch['name'])
                     
+                    # 生成 sid (用于去重)
+                    cctv_match = re.search(r'(CCTV[-]?\d+[\+]?)', s_name, re.I)
+                    sid = cctv_match.group(1).upper().replace('-', '') if cctv_match else s_name
+                    
+                    ch.update({'h': h, 'br': br, 'score': h * 1000 + br/1000, 's_name': s_name, 'sid': sid})
+                    
+                    # 8. 双桶去重池
                     unified_pool.setdefault(sid, {"High": [], "Std": []})
                     if h >= 2160: unified_pool[sid]["High"].append(ch)
                     else: unified_pool[sid]["Std"].append(ch)
@@ -147,26 +165,28 @@ def run():
                 pbar.set_postfix_str(str(stats["passed"]))
                 pbar.update(1)
 
-    # 8. 频道去重 (4K留一，非4K留一)
+    # 择优与去重处理
     final_list = []
     for sid, buckets in unified_pool.items():
         for b_type in ["High", "Std"]:
             sources = buckets[b_type]
             if not sources: continue
+            # 选出该桶内分数最高的一个源
             sources.sort(key=lambda x: x['score'], reverse=True)
             best = sources[0]
-            group = get_group(best['name'], best['h'])
+            
+            group = get_group(best['s_name'], best['h'])
             
             # 4. 准入规则 (720P 或 核心保底)
             is_core = any(k in group for k in ["央视", "卫视"])
             if is_core or best['h'] >= 720:
-                final_list.append({"group": group, "name": best['name'], "url": best['url'], "h": best['h'], "sid": sid})
+                final_list.append({"group": group, "name": best['s_name'], "url": best['url'], "h": best['h'], "sid": sid})
 
-    # 9. 央视按照 1-17 排序逻辑
+    # 9. 央视按照 1-17 排序
     def sort_key(x):
         g_pri = GROUP_PRIORITY.get(x['group'], 99)
         cctv_num = 999
-        if "央视频道" in x['group']:
+        if "央视频道" in x['group'] or "4K频道" in x['group']:
             match = re.search(r'CCTV(\d+)', x['sid'], re.I)
             if match: cctv_num = int(match.group(1))
             elif "4K" in x['name']: cctv_num = 0
@@ -192,13 +212,14 @@ def run():
    - 抓取总数: {stats['raw']} | 屏蔽 CatVod: {stats['catvod_drop']}
    - 黑名单跳过: {stats['bl_skip']} | 关键词过滤: {stats['junk_drop']}
 
-2. 过滤情况:
+2. 过滤与去重:
    - 探测失败: {stats['ffmpeg_drop']}
-   - 重复处理: 频道级双桶去重 (4K与标准各保留最优)
+   - 重复处理: 已执行双桶择优（每频道 4K/标清 各留一）
+   - 名称清洗: 已剥离 HD/1080P/Geo-blocked 等后缀
 
 3. 最终情况:
    - 入选总数: {len(final_list)} 个
-   - 央视排序: 已按 1-17 顺序强制排列
+   - 排序规则: 12类分组 + 央视 1-17 精准排序
    - 总耗时: {duration // 60}分{duration % 60}秒
 ==================================================
 """)
