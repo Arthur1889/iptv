@@ -1,12 +1,11 @@
 import os, platform, subprocess, sys, json, re, time, ssl, warnings, logging
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-# ================= 0. 环境、干扰屏蔽与日志设置 =================
+# ================= 0. 环境与日志设置 =================
 warnings.filterwarnings("ignore")
 os.environ["WERKZEUG_RUN_MAIN"] = "true" 
 ssl._create_default_https_context = ssl._create_unverified_context
 
-# 配置日志文件
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
@@ -31,7 +30,6 @@ import easyocr
 import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-# 初始化 OCR
 READER = easyocr.Reader(['ch_sim', 'en'], gpu=False)
 
 # ================= 1. 配置与硬编码描述 =================
@@ -80,6 +78,10 @@ ALIAS_MAP = load_alias_map()
 # ================= 2. 核心功能函数 =================
 
 def get_standard_name(origin_name):
+    # 过滤掉时间戳样式的异常名称 (如截图中的 2026-05-07)
+    if re.match(r'\d{4}-\d{2}-\d{2}', origin_name):
+        return "未知频道"
+    
     name = re.sub(r'\.(cn|hk|tw|us|uk|org)$', '', origin_name.strip(), flags=re.I)
     for main_name, aliases in ALIAS_MAP.items():
         if any(a.strip().upper() in name.upper() for a in aliases): return main_name
@@ -89,8 +91,10 @@ def clean_channel_name(name, height=0, original_name=""):
     noise = r'(HD|高清|超高清|蓝光|频道|\[.*?\]|\(.*?\)|\d+[PpIi]|HEVC|H\.264|H\.265|[-_]\d+$)'
     source_text = original_name if original_name else name
     cleaned = re.sub(noise, '', source_text, flags=re.I).strip().rstrip('- ').strip()
+    
     standard_id = get_standard_name(cleaned)
     display_name = CCTV_DESC.get(standard_id, standard_id)
+    
     is_ultra = height >= 2160 or re.search(r'4K|8K|2160p', source_text, re.I)
     final_display = display_name
     if is_ultra and "4K" not in display_name.upper():
@@ -125,11 +129,10 @@ def visual_verify(url, target_name):
 
 def run():
     start_time = time.time()
-    stats = {"total_urls": 0, "unique_urls": 0, "quality_passed": 0, "final_count": 0}
+    stats = {"total_urls": 0, "unique_urls": 0, "low_res_filtered": 0, "quality_passed": 0, "final_count": 0}
     
-    logger.info("开始执行 IPTV 抓取与探测任务...")
+    logger.info("开始执行 IPTV 抓取与探测任务 (画质门槛: 720P)...")
     
-    # 第一步: 提取与去重
     if not os.path.exists(CONFIG_FILE):
         logger.error(f"找不到配置文件: {CONFIG_FILE}")
         return
@@ -147,8 +150,12 @@ def run():
                     raw_name = lines[i].split(',')[-1].strip()
                     link = lines[i+1].strip() if i+1 < len(lines) else ""
                     stats["total_urls"] += 1
+                    
+                    # 过滤 URL 去重、异常名称及关键词
                     if not link.startswith('http') or link in seen_urls: continue
+                    if re.match(r'\d{4}-\d{2}-\d{2}', raw_name): continue # 丢弃时间戳样式的假名
                     if any(k in raw_name for k in ["轮播", "直播室", "专题"]): continue
+                    
                     all_channels.append({"name": raw_name, "url": link})
                     seen_urls.add(link)
         except Exception as e:
@@ -157,25 +164,32 @@ def run():
     stats["unique_urls"] = len(all_channels)
     PBAR_FMT = '{l_bar}{bar:20}{r_bar} {n_fmt}/{total_fmt} [{elapsed}<{remaining}, {rate_fmt}] 优质源:{postfix}'
 
-    # 第四步: 第一级探测 (50 线程)
+    # 第一级探测 (50 线程)
     candidate_pool = {}
     with ThreadPoolExecutor(max_workers=ENV["workers"]) as executor:
         futures = {executor.submit(lambda c: (deep_analyze_stream(c['url']), c), ch): ch for ch in all_channels}
-        with tqdm(total=len(all_channels), desc="[画质扫描]", bar_format=PBAR_FMT) as pbar:
+        with tqdm(total=len(all_channels), desc="[720P+筛选]", bar_format=PBAR_FMT) as pbar:
             for f in as_completed(futures):
                 try:
                     (h, br), ch = f.result()
-                    if h >= 360:
+                    # 【核心优化】：画质大于等于 720P 才保留
+                    if h >= 720:
                         stats["quality_passed"] += 1
                         pbar.set_postfix_str(str(stats["quality_passed"]))
                         f_name, b_id, is_u = clean_channel_name(ch['name'], h, ch['name'])
+                        
+                        # 再次剔除未能识别的未知频道
+                        if b_id == "未知频道": continue
+                        
                         ch.update({'height': h, 'bitrate': br, 'name': f_name, 'epg_id': b_id, 'is_ultra': is_u, 'phys_score': h * 1000000 + br})
                         if b_id not in candidate_pool: candidate_pool[b_id] = []
                         candidate_pool[b_id].append(ch)
+                    else:
+                        stats["low_res_filtered"] += 1
                 except: pass
                 pbar.update(1)
 
-    # 第四步: 第二级探测 (OCR 验证)
+    # 第二级探测 (OCR 验证)
     best_sources = {}; ocr_tasks = []
     for ukey, sources in candidate_pool.items():
         sources.sort(key=lambda x: x['phys_score'], reverse=True)
@@ -184,7 +198,7 @@ def run():
     with ThreadPoolExecutor(max_workers=max(1, ENV["workers"] // 4)) as executor:
         futures = {executor.submit(visual_verify, ch['url'], ch['epg_id']): ch for ch in ocr_tasks 
                    if any(k in ch['epg_id'] for k in ["CCTV", "卫视"])}
-        with tqdm(total=len(ocr_tasks), desc="[OCR验证 ]", bar_format=PBAR_FMT) as pbar:
+        with tqdm(total=len(ocr_tasks), desc="[视觉校验]", bar_format=PBAR_FMT) as pbar:
             verified_found = 0
             for f in as_completed(futures):
                 try:
@@ -199,7 +213,7 @@ def run():
             for ch in ocr_tasks:
                 if ch['epg_id'] not in best_sources: best_sources[ch['epg_id']] = ch
 
-    # 第五步: 排序
+    # 排序逻辑回归
     def sort_logic(x):
         n = x['name'].upper()
         g_name = "央视频道" if "CCTV" in n else ("地方卫视" if "卫视" in n else "综合频道")
@@ -237,14 +251,15 @@ def run():
     duration = int(time.time() - start_time)
     summary = f"""
 ==================================================
-              IPTV 探测任务摘要报告
+              IPTV 探测任务摘要报告 (720P+)
 ==================================================
 1. 初始源梳理:
    - 抓取 URL 总数: {stats['total_urls']}
-   - 过滤重复/无效后: {stats['unique_urls']}
+   - 有效待测 URL: {stats['unique_urls']}
 
 2. 探测过滤情况:
-   - 画质连通性通过 (>=360p): {stats['quality_passed']}
+   - 因画质低于 720P 被淘汰: {stats['low_res_filtered']}
+   - 画质达标 (>=720P): {stats['quality_passed']}
    - OCR/视觉校验后精选: {stats['final_count']}
 
 3. 最终统计:

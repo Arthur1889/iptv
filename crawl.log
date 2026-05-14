@@ -27,3 +27,33 @@
    - 日志文件: crawl.log
 ==================================================
 
+2026-05-14 14:57:14,405 - WARNING - Using CPU. Note: This module is much faster with a GPU.
+2026-05-14 14:57:15,609 - INFO - 开始执行 IPTV 抓取与探测任务 (画质门槛: 720P)...
+2026-05-14 14:57:22,646 - WARNING - 无法读取源 stop_https://raw.githubusercontent.com/plsy1/iptv/main/multicast/multicast-qingdao.m3u: No connection adapters were found for 'stop_https://raw.githubusercontent.com/plsy1/iptv/main/multicast/multicast-qingdao.m3u'
+2026-05-14 14:57:22,647 - WARNING - 无法读取源 stop_https://raw.githubusercontent.com/YueChan/IPTV/main/hongkong.m3u: No connection adapters were found for 'stop_https://raw.githubusercontent.com/YueChan/IPTV/main/hongkong.m3u'
+2026-05-14 14:57:22,647 - WARNING - 无法读取源 stop_https://raw.githubusercontent.com/YueChan/IPTV/main/macau.m3u: No connection adapters were found for 'stop_https://raw.githubusercontent.com/YueChan/IPTV/main/macau.m3u'
+2026-05-14 14:57:22,648 - WARNING - 无法读取源 stop_https://raw.githubusercontent.com/YueChan/IPTV/main/taiwan.m3u: No connection adapters were found for 'stop_https://raw.githubusercontent.com/YueChan/IPTV/main/taiwan.m3u'
+2026-05-14 14:57:22,649 - WARNING - 无法读取源 stop_https://iptv-org.github.io/iptv/languages/eng.m3u: No connection adapters were found for 'stop_https://iptv-org.github.io/iptv/languages/eng.m3u'
+2026-05-14 14:57:22,649 - WARNING - 无法读取源 stop_https://raw.githubusercontent.com/LuenShor/IPTV/master/Global.m3u: No connection adapters were found for 'stop_https://raw.githubusercontent.com/LuenShor/IPTV/master/Global.m3u'
+2026-05-14 14:57:22,650 - WARNING - 无法读取源 stop_https://live.fanmingming.com/tv/m3u/ipv6.m3u: No connection adapters were found for 'stop_https://live.fanmingming.com/tv/m3u/ipv6.m3u'
+2026-05-14 14:57:22,651 - WARNING - 无法读取源 stop_https://iptv-org.github.io/iptv/countries/cn.m3u: No connection adapters were found for 'stop_https://iptv-org.github.io/iptv/countries/cn.m3u'
+2026-05-14 14:57:22,652 - WARNING - 无法读取源 stop_https://raw.githubusercontent.com/frankwuzp/iptv-cn/master/tv-ipv4-cn.m3u: No connection adapters were found for 'stop_https://raw.githubusercontent.com/frankwuzp/iptv-cn/master/tv-ipv4-cn.m3u'
+2026-05-14 15:02:26,740 - INFO - 
+==================================================
+              IPTV 探测任务摘要报告 (720P+)
+==================================================
+1. 初始源梳理:
+   - 抓取 URL 总数: 2688
+   - 有效待测 URL: 2464
+
+2. 探测过滤情况:
+   - 因画质低于 720P 被淘汰: 1792
+   - 画质达标 (>=720P): 672
+   - OCR/视觉校验后精选: 332
+
+3. 最终统计:
+   - 成功生成频道数: 332
+   - 总计运行耗时: 5分11秒
+   - 日志文件: crawl.log
+==================================================
+
