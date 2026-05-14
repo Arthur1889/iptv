@@ -51,7 +51,8 @@ GROUP_PRIORITY = {
 
 def get_env_config():
     sys_type = platform.system()
-config = {"os": sys_type, "ffprobe": "ffprobe", "ffmpeg": "ffmpeg", "timeout": 20, "workers": 40}
+    # 54行：已按建议调整为 timeout: 20, workers: 40 以防漏掉频道
+    config = {"os": sys_type, "ffprobe": "ffprobe", "ffmpeg": "ffmpeg", "timeout": 20, "workers": 40}
     if sys_type == "Windows":
         for p in [r"C:\ffmpeg\bin", r"D:\ffmpeg\bin"]:
             if os.path.exists(os.path.join(p, "ffmpeg.exe")):
