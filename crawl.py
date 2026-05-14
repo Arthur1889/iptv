@@ -10,7 +10,6 @@ import warnings
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 # ================= 0. 环境与干扰屏蔽 =================
-# 屏蔽 Torch 警告和 SSL 报错
 warnings.filterwarnings("ignore")
 os.environ["WERKZEUG_RUN_MAIN"] = "true" 
 ssl._create_default_https_context = ssl._create_unverified_context
@@ -37,15 +36,9 @@ READER = easyocr.Reader(['ch_sim', 'en'], gpu=False)
 CONFIG_FILE = "sources.json"
 NAME_JSON = "name.json"
 
-# 分组优先级设定 (越小越靠前)
 GROUP_PRIORITY = {
-    "4K频道": 1,
-    "央视频道": 2,
-    "地方卫视": 3,
-    "山东频道": 4,
-    "港澳台": 5,
-    "数字频道": 6,
-    "综合频道": 10
+    "4K频道": 1, "央视频道": 2, "地方卫视": 3, "山东频道": 4, 
+    "港澳台": 5, "数字频道": 6, "综合频道": 10
 }
 
 def get_env_config():
@@ -73,7 +66,7 @@ def load_alias_map():
 
 ALIAS_MAP = load_alias_map()
 
-# ================= 2. 核心校验逻辑 =================
+# ================= 2. 核心清洗逻辑 =================
 
 def get_standard_name(origin_name):
     name = re.sub(r'\.(cn|hk|tw|us|uk|org)$', '', origin_name.strip(), flags=re.I)
@@ -82,11 +75,21 @@ def get_standard_name(origin_name):
     return name
 
 def clean_channel_name(name, height=0, original_name=""):
-    noise = r'(HD|高清|超高清|蓝光|频道|\(备用\)|\(\d+[Pp]\)|\[\d+[Pp]\]|-\d+[Pp]|\d+[Pp])'
-    cleaned = re.sub(noise, '', original_name if original_name else name, flags=re.I).strip()
+    # 【优化】增强型噪声清理：移除 576i, Not 24/7, Geo-blocked 等干扰项
+    noise = (
+        r'(HD|高清|超高清|蓝光|频道|\[.*?\]|\(.*?\)|\d+[PpIi]|'
+        r'Geo-blocked|Not 24/7|HEVC|H\.264|H\.265|'
+        r'\(备用\)|\d+fps|'
+        r'[-_]\d+$)'
+    )
+    source_text = original_name if original_name else name
+    cleaned = re.sub(noise, '', source_text, flags=re.I).strip()
+    cleaned = cleaned.rstrip('- ').strip()
+    
     base_name = get_standard_name(cleaned)
     base_name = re.sub(r'(-4K|-8K|4K|8K|超高清|HD|高清)$', '', base_name, flags=re.I).strip()
-    is_ultra = height >= 2160 or re.search(r'4K|8K', original_name, re.I)
+    
+    is_ultra = height >= 2160 or re.search(r'4K|8K|2160p', source_text, re.I)
     return (f"{base_name}-4K" if is_ultra else base_name), base_name, is_ultra
 
 def visual_verify(url, target_name):
@@ -118,21 +121,20 @@ def check_channel(ch):
     if h >= 360:
         f_name, b_name, is_u = clean_channel_name(ch['name'], h, ch['origin_name'])
         v_weight = 1.0
-        if any(k in b_name for k in ["CCTV", "卫视"]): _, v_weight = visual_verify(ch['url'], b_name)
+        if any(k in b_name for k in ["CCTV", "卫视"]): 
+            _, v_weight = visual_verify(ch['url'], b_name)
         ch.update({'height': h, 'bitrate': int(br * v_weight), 'name': f_name, 'epg_id': b_name, 'is_ultra': is_u})
         return ch, v_weight >= 0.4
     return ch, False
 
-# ================= 3. 增强分组与主程序 =================
+# ================= 3. 主程序逻辑 =================
 
 def get_group_name(n):
     n = n.upper()
     if "4K" in n or "8K" in n: return "4K频道"
     if "CCTV" in n: return "央视频道"
     if "卫视" in n: return "地方卫视"
-    if "山东" in n: return "山东频道"
-    if any(k in n for k in ["凤凰", "翡翠", "TVB", "HBO", "CNN", "NHK", "翡翠"]): return "港澳台"
-    if any(k in n for k in ["电影", "剧场", "世界", "纪录", "风云", "兵团"]): return "数字频道"
+    if any(k in n for k in ["PHOENIX", "TVB", "HBO", "CNN", "NHK", "翡翠", "凤凰"]): return "港澳台"
     return "综合频道"
 
 def run():
@@ -142,27 +144,49 @@ def run():
 
     all_channels = []
     seen_urls = set()
-    print(f"\n📡 [1/3] 正在提取链接...")
+    
+    print(f"\n📡 [1/3] 提取链接 (识别优先级: tvg-id > tvg-name > 原始名称)...")
     for url in SOURCE_URLS:
         try:
             r = requests.get(url, timeout=10, verify=False)
-            matches = re.findall(r'#EXTINF:.*?(?:tvg-id="(.*?)")?.*?,(.*?)\n(http.*?)(?:\n|$)', r.text)
-            for tid, name, link in matches:
-                link_clean = link.strip()
-                if link_clean not in seen_urls:
-                    all_channels.append({"name": tid if tid else name, "origin_name": name, "url": link_clean})
-                    seen_urls.add(link_clean)
+            lines = r.text.split('\n')
+            for i in range(len(lines)):
+                if lines[i].startswith('#EXTINF:'):
+                    inf_line = lines[i]
+                    link = lines[i+1].strip() if i+1 < len(lines) else ""
+                    if not link.startswith('http') or link in seen_urls: continue
+                    
+                    # 【优化】优先级逻辑 + 过滤时间戳 ID
+                    tid_m = re.search(r'tvg-id="(.*?)"', inf_line)
+                    tname_m = re.search(r'tvg-name="(.*?)"', inf_line)
+                    raw_name = inf_line.split(',')[-1].strip()
+                    
+                    tid = tid_m.group(1) if tid_m else ""
+                    tname = tname_m.group(1) if tname_m else ""
+                    
+                    # 屏蔽时间戳 ID (如 2026-05-14)
+                    if tid and re.match(r'\d{4}-\d{2}-\d{2}', tid): tid = ""
+                    
+                    final_name = tid if tid else (tname if tname else raw_name)
+                    all_channels.append({"name": final_name, "origin_name": raw_name, "url": link})
+                    seen_urls.add(link)
         except: continue
 
-    print(f"🚀 [2/3] 校验开始 (共 {len(all_channels)} 条)...")
+    print(f"🚀 [2/3] 校验与择优 (共 {len(all_channels)} 条)...")
     best_sources = {}
+    valid_count = 0
+    
     with ThreadPoolExecutor(max_workers=ENV["workers"]) as executor:
         futures = {executor.submit(check_channel, ch): ch for ch in all_channels}
-        with tqdm(total=len(all_channels), desc="探测进度", bar_format='{l_bar}{bar:20}{r_bar} {postfix}') as pbar:
+        # 【恢复】全功能进度条：包含百分比、剩余时间、速度、优质源计数
+        pbar_fmt = '{l_bar}{bar:20}{r_bar} {n_fmt}/{total_fmt} [{percentage:3.0f}%] 优质源:{postfix}'
+        with tqdm(total=len(all_channels), desc="探测进度", bar_format=pbar_fmt) as pbar:
             for f in as_completed(futures):
                 try:
                     res_ch, is_ok = f.result()
                     if is_ok:
+                        valid_count += 1
+                        pbar.set_postfix_str(str(valid_count))
                         ukey = res_ch['epg_id']
                         score = res_ch['height'] * 1000000 + res_ch['bitrate']
                         if ukey not in best_sources or score > best_sources[ukey]['phys_score']:
@@ -171,8 +195,7 @@ def run():
                 except: pass
                 pbar.update(1)
 
-    print(f"📦 [3/3] 生成分组列表与图标...")
-    # 排序逻辑：按 GROUP_PRIORITY 排序，组内按分数降序
+    print(f"📦 [3/3] 生成分组列表与台标...")
     final_list = sorted(best_sources.values(), key=lambda x: (
         GROUP_PRIORITY.get(get_group_name(x['name']), 99),
         -x['phys_score']
@@ -182,13 +205,15 @@ def run():
         f.write('#EXTM3U x-tvg-url="https://live.fanmingming.com/e.xml"\n')
         for ch in final_list:
             g_name = get_group_name(ch['name'])
-            # 转换 ID 为无横杠格式以匹配台标库
             logo_name = ch['epg_id'].replace('-', '')
             f.write(f'#EXTINF:-1 tvg-id="{ch["epg_id"]}" tvg-logo="https://live.fanmingming.com/tv/{logo_name}.png" group-title="{g_name}",{ch["name"]}\n{ch["url"]}\n')
 
+    # 【恢复】总耗时统计与结果汇总
     print(f"\n✅ 完成！最终入选 {len(best_sources)} 个频道。")
 
 if __name__ == "__main__":
     start_time = time.time()
     run()
-    print(f"⏱️ 全程耗时: {int(time.time() - start_time)} 秒")
+    # 显式计算总耗时
+    duration = int(time.time() - start_time)
+    print(f"⏱️ 总耗时: {duration // 60}分{duration % 60}秒")
