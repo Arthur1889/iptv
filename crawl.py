@@ -31,10 +31,10 @@ import easyocr
 import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-# 初始化 OCR (本地建议尝试 gpu=True)
+# 初始化 OCR (本地有显卡建议设 gpu=True)
 READER = easyocr.Reader(['ch_sim', 'en'], gpu=False)
 
-# ================= 1. 配置与硬编码描述 =================
+# ================= 1. 配置与规则 =================
 CONFIG_FILE = "sources.json"
 NAME_JSON = "name.json"
 
@@ -57,7 +57,7 @@ def get_env_config():
     # 本地跑提升 workers 数量
     config = {"os": sys_type, "ffprobe": "ffprobe", "ffmpeg": "ffmpeg", "timeout": 12, "workers": 100}
     if sys_type == "Windows":
-        for p in [r"C:\ffmpeg\bin", r"D:\ffmpeg\bin", r"E:\ffmpeg\bin"]:
+        for p in [r"C:\ffmpeg\bin", r"D:\ffmpeg\bin"]:
             if os.path.exists(os.path.join(p, "ffmpeg.exe")):
                 config["ffmpeg"] = os.path.join(p, "ffmpeg.exe")
                 config["ffprobe"] = os.path.join(p, "ffprobe.exe")
@@ -78,24 +78,27 @@ def load_alias_map():
 
 ALIAS_MAP = load_alias_map()
 
-# ================= 2. 核心功能函数 =================
+# ================= 2. 核心逻辑函数 =================
 
 def get_standard_name(origin_name):
-    if re.match(r'\d{4}-\d{2}-\d{2}', origin_name): return "异常源"
-    name = re.sub(r'\.(cn|hk|tw|us|uk|org)$', '', origin_name.strip(), flags=re.I)
+    name_str = origin_name.strip()
+    # 1. 过滤异常源和单纯叫 "CCTV" 的不规范名
+    if re.match(r'\d{4}-\d{2}-\d{2}', name_str) or name_str.upper() == "CCTV" or len(name_str) < 2:
+        return "异常源"
+    
+    name = re.sub(r'\.(cn|hk|tw|us|uk|org)$', '', name_str, flags=re.I)
     for main_name, aliases in ALIAS_MAP.items():
         if any(a.strip().upper() in name.upper() for a in aliases): return main_name
     return name
 
-def clean_channel_name(name, height=0, original_name=""):
+def clean_channel_name(name, height=0):
     noise = r'(HD|高清|超高清|蓝光|频道|\[.*?\]|\(.*?\)|\d+[PpIi]|HEVC|H\.264|H\.265|[-_]\d+$)'
-    source_text = original_name if original_name else name
-    cleaned = re.sub(noise, '', source_text, flags=re.I).strip().rstrip('- ').strip()
+    cleaned = re.sub(noise, '', name, flags=re.I).strip().rstrip('- ').strip()
     sid = get_standard_name(cleaned)
     display = CCTV_DESC.get(sid, sid)
-    is_ultra = height >= 2160 or re.search(r'4K|8K|2160p', source_text, re.I)
-    final = f"{display}-4K" if is_ultra and "4K" not in display.upper() else display
-    return final, sid, is_ultra
+    is_u = height >= 2160
+    final = f"{display}-4K" if is_u and "4K" not in display.upper() else display
+    return final, sid, is_u
 
 def deep_analyze_stream(url):
     cmd = [ENV["ffprobe"], '-v', 'error', '-show_entries', 'stream=width,height,bit_rate', '-of', 'json', '-select_streams', 'v:0', url]
@@ -116,18 +119,22 @@ def visual_verify(url, target_name):
             os.remove(tmp_img)
             core = re.sub(r'[-频道]', '', target_name).upper()
             if any(k in content for k in ["CCTV", "卫视", core, "TV"]): return True, 1.2
-            return False, 0.5
+            return False, 0.4 # OCR 识别不匹配，大幅降分
     except:
         if os.path.exists(tmp_img): os.remove(tmp_img)
     return False, 1.0
 
-# ================= 3. 主逻辑 =================
+# ================= 3. 主程序 =================
 
 def run():
     start_time = time.time()
-    stats = {"raw": 0, "unique": 0, "ffmpeg_fail": 0, "ocr_fail": 0, "passed": 0}
-    
-    logger.info("本地任务启动：央视卫视保全 + 720P严选逻辑")
+    # 统计数据
+    stats = {"raw": 0, "unique": 0, "ffmpeg_drop": 0, "ocr_drop": 0, "passed": 0}
+    # 过滤记录列表
+    ffmpeg_filtered_log = []
+    ocr_filtered_log = []
+
+    logger.info("本地任务启动：正在读取源文件...")
     
     if not os.path.exists(CONFIG_FILE): return
     with open(CONFIG_FILE, 'r', encoding='utf-8') as f:
@@ -143,68 +150,72 @@ def run():
                     raw_name = lines[i].split(',')[-1].strip()
                     link = lines[i+1].strip() if i+1 < len(lines) else ""
                     stats["raw"] += 1
-                    # 5. 删除直播室/轮播相关
-                    if any(k in raw_name for k in ["直播室", "轮播", "专题", "课堂"]): continue
+                    
+                    # 直播室/垃圾源前置清理
+                    junk = ["直播室", "轮播", "专题", "课堂", "广播", "购物", "测试"]
+                    if any(k in raw_name for k in junk) or raw_name.upper() == "CCTV": continue
                     if not link.startswith('http') or link in seen_urls: continue
+                    
                     all_channels.append({"name": raw_name, "url": link})
                     seen_urls.add(link)
         except: continue
     
     stats["unique"] = len(all_channels)
-    PBAR_FMT = '{l_bar}{bar:25}{r_bar} {n_fmt}/{total_fmt} [{elapsed}<{remaining}, {rate_fmt}] 优质:{postfix}'
+    PBAR_FMT = '{l_bar}{bar:20}{r_bar} {n_fmt}/{total_fmt} [{elapsed}<{remaining}] 优质:{postfix}'
 
     candidate_pool = {}
-    # 4. FFmpeg 探测 (画质筛选)
+    # 第一阶段：FFmpeg 画质探测
     with ThreadPoolExecutor(max_workers=ENV["workers"]) as executor:
         futures = {executor.submit(lambda c: (deep_analyze_stream(c['url']), c), ch): ch for ch in all_channels}
-        with tqdm(total=len(all_channels), desc="[FFmpeg 扫描]", bar_format=PBAR_FMT) as pbar:
+        with tqdm(total=len(all_channels), desc="[1. 画质探测]", bar_format=PBAR_FMT) as pbar:
             for f in as_completed(futures):
                 try:
                     (h, br), ch = f.result()
-                    f_name, sid, is_u = clean_channel_name(ch['name'], h, ch['name'])
-                    if sid == "异常源": continue
+                    f_name, sid, is_u = clean_channel_name(ch['name'], h)
                     
                     is_core = any(k in sid.upper() for k in ["CCTV", "卫视"])
-                    # 策略：央卫保全(h>0)；其他(h>=720)
+                    # 央卫保全 + 非核心 720P 逻辑
                     if (is_core and h > 0) or (not is_core and h >= 720):
                         stats["passed"] += 1
-                        pbar.set_postfix_str(str(stats["passed"]))
                         ch.update({'height': h, 'br': br, 'name': f_name, 'sid': sid, 'is_u': is_u, 'score': h * 1000 + br/1000})
                         if sid not in candidate_pool: candidate_pool[sid] = []
                         candidate_pool[sid].append(ch)
                     else:
-                        stats["ffmpeg_fail"] += 1
-                except: stats["ffmpeg_fail"] += 1
+                        stats["ffmpeg_drop"] += 1
+                        ffmpeg_filtered_log.append(f"{ch['name']}, {ch['url']} (画质:{h}P)")
+                except: 
+                    stats["ffmpeg_drop"] += 1
+                pbar.set_postfix_str(str(stats["passed"]))
                 pbar.update(1)
 
-    # 4. OCR 验证 (台标去伪)
+    # 第二阶段：OCR 择优
     best_sources = {}; ocr_tasks = []
     for sid, sources in candidate_pool.items():
         sources.sort(key=lambda x: x['score'], reverse=True)
-        ocr_tasks.extend(sources[:2]) # 每个频道选前2个最好的跑OCR
+        ocr_tasks.extend(sources[:2]) # 每个频道挑前2个跑OCR
 
     with ThreadPoolExecutor(max_workers=max(1, ENV["workers"] // 4)) as executor:
         futures = {executor.submit(visual_verify, ch['url'], ch['sid']): ch for ch in ocr_tasks 
                    if any(k in ch['sid'] for k in ["CCTV", "卫视"])}
-        with tqdm(total=len(ocr_tasks), desc="[OCR 校验  ]", bar_format=PBAR_FMT) as pbar:
-            v_ok = 0
+        with tqdm(total=len(ocr_tasks), desc="[2. 台标校验]", bar_format=PBAR_FMT) as pbar:
             for f in as_completed(futures):
                 try:
-                    ch = futures[f]; is_real, weight = f.result()
-                    if weight < 1.0: stats["ocr_fail"] += 1
+                    ch = futures[f]; is_ok, weight = f.result()
+                    if not is_ok and weight < 1.0: 
+                        stats["ocr_drop"] += 1
+                        ocr_filtered_log.append(f"{ch['name']}, {ch['url']} (台标校验未通过)")
                     ch['score'] *= weight
                     ukey = ch['sid']
                     if ukey not in best_sources or ch['score'] > best_sources[ukey]['score']:
                         best_sources[ukey] = ch
-                        v_ok += 1; pbar.set_postfix_str(str(v_ok))
                 except: pass
                 pbar.update(1)
-            for ch in ocr_tasks: # 补偿非央卫频道择优
-                if ch['sid'] not in best_sources or ch['score'] > best_sources[ch['sid']]['score']:
-                    best_sources[ch['sid']] = ch
+            # 补偿非 OCR 频道
+            for ch in ocr_tasks:
+                if ch['sid'] not in best_sources: best_sources[ch['sid']] = ch
 
-    # 排序与输出
-    def sort_key(x):
+    # 第三阶段：排序与文件保存
+    def sort_logic(x):
         n = x['name'].upper()
         g = "央视频道" if "CCTV" in n else ("地方卫视" if "卫视" in n else "综合频道")
         if x['is_u']: g = "4K频道"
@@ -212,42 +223,40 @@ def run():
         match = re.search(r'CCTV[-]?(\d+)', x['sid'], re.I)
         return (GROUP_PRIORITY.get(g, 99), int(match.group(1)) if match else 200, -x['score'])
 
-    final_list = sorted(best_sources.values(), key=sort_key)
+    final_list = sorted(best_sources.values(), key=sort_logic)
 
+    # 1. 保存 tv.m3u
     with open("tv.m3u", "w", encoding="utf-8") as f:
         f.write('#EXTM3U x-tvg-url="https://live.fanmingming.com/e.xml"\n')
         for ch in final_list:
             n = ch['name'].upper()
             g = "央视频道" if "CCTV" in n else ("地方卫视" if "卫视" in n else "综合频道")
             if ch['is_u']: g = "4K频道"
-            if "山东" in n: g = "山东频道"
-            if any(k in n for k in ["CHC", "电影", "影视"]): g = "影视频道"
             lid = ch['sid'].replace('-', '').replace(' ', '').replace('+', 'plus')
             f.write(f'#EXTINF:-1 tvg-id="{ch["sid"]}" tvg-name="{ch["sid"]}" tvg-logo="https://live.fanmingming.com/tv/{lid}.png" group-title="{g}",{ch["name"]}\n{ch["url"]}\n')
 
-    # 2 & 6. 最终摘要报告
-    duration = int(time.time() - start_time)
-    summary = f"""
-==================================================
-              IPTV 探测任务摘要报告 (本地)
-==================================================
-1. 初始源梳理:
-   - 抓取原始 URL 总数: {stats['raw']}
-   - 移除重复/直播室/轮播后: {stats['unique']}
+    # 2. 保存过滤后的源到文件
+    with open("filtered_bad_sources.log", "w", encoding="utf-8") as f:
+        f.write("\n".join(ffmpeg_filtered_log))
+    with open("filtered_ocr_sources.log", "w", encoding="utf-8") as f:
+        f.write("\n".join(ocr_filtered_log))
 
-2. 过滤情况统计:
-   - FFmpeg 筛掉 (画质<720P 或连通失败): {stats['ffmpeg_fail']}
-   - OCR 筛掉 (台标不符或校验失败): {stats['ocr_fail']}
-   - 央视/卫视完整性策略: 已确保所有有信号频道保留最佳源
+    # 4. 打印摘要
+    duration = int(time.time() - start_time)
+    logger.info(f"""
+================ 任务摘要报告 ================
+1. 初始源梳理:
+   - 总 URL 提取数: {stats['raw']}
+   - 有效去重数: {stats['unique']}
+
+2. 过滤详情:
+   - FFmpeg 过滤 (画质/无效): {stats['ffmpeg_drop']} (详见 filtered_bad_sources.log)
+   - OCR 过滤 (台标伪造): {stats['ocr_drop']} (详见 filtered_ocr_sources.log)
 
 3. 最终情况:
-   - 成功入选频道总数: {len(final_list)}
-   - 任务总耗时: {duration // 60}分{duration % 60}秒
-   - 结果文件: tv.m3u
-   - 日志文件: crawl.log
-==================================================
-"""
-    logger.info(summary)
+   - 精选入选频道: {len(final_list)}
+   - 任务耗时: {duration // 60}分{duration % 60}秒
+==============================================""")
 
 if __name__ == "__main__":
     run()
