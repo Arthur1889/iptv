@@ -1,7 +1,14 @@
-1、name.py的工作路径就是当前文件夹下，所有生成的文件都在本文件夹下；
-2、从https://github.com/fanmingming/live/tree/main/tv提取标准名；
-3、从https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cn.m3u提取源列表，再进行下一步，作为别名数据库；
-别名规则：
-1、判断tvg-id、tvg-name、显示姓名是否含中文，优先级为：含中文优先>tvg-id>tvg-name>显示姓名。
+name.py脚本规则：
+总则：name.py的工作路径就是当前文件夹下，所有生成的文件都在本文件夹下；任务报告中，含别名总数、识别数量、未识别数量、耗时等；
+第一步：https://epg.112114.xyz提取标准名放入name.json；
+第二步：从https://epg.112114.xyz/alias提取别名，第一列数据是标准名，第二列是别名放入name.json；
+第三步：将nameoriginal.json识别到name.json中；
+第四步：从https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cn.m3u提取源列表，作为需识别数据库；
+
+别名识别规则：
+1、判断tvg-id、tvg-name、显示姓名是否含中文，优先级为：含中文优先>tvg-id>tvg-name。
 2、提取的别名去掉.cn@SD、.cn@HD、.hk@SD、1080p、720p、576p、576i、360p、[Not 24/7]、[Geo-blocked]、-、末尾空格、括号、540p、480p、180p、2160p等字符进行第一轮匹配，
 3、剩余的拼音的去掉TV字样、空格，转化为中文（如SichuanSatelliteTV.cn@SD，经过第一轮已经变成SichuanSatelliteTV，这轮变为四川卫视）进行第二轮匹配；
+4、剩余的根据一二轮去掉的字符，将标准名和别名均转为大写拼音进行匹配；
+5、每轮识别过程中，可以将已经写入name.json的别名都拿来比较下，匹配了就算成功。
+6、如频道是字母或拼音，统一大小写进行匹配；
