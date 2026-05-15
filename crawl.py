@@ -44,7 +44,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # ================= 1. 常量与排序规则 =================
 CONFIG_FILE = "sources.json"
-NAME_JSON = "name.json"
+NAME_JSON = os.path.join("iptvname", "name.json")
 BLACKLIST_FILE = "blacklist.json"
 
 # 第五步：定义的排序分组

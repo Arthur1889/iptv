@@ -4,6 +4,8 @@ BRTV Kaku Childrens Channel
 BRTV Science & Education Channel
 BRTV 北京卫视
 BRTV 北京卫视 [Not 24/7]
+Beijing Traffic Radio TV [Geo-blocked]
+Beijing Youth Radio [Geo-blocked]
 Bread TV面包台 (720p)
 Channel Law
 Chifeng Comprehensive News Chanel
@@ -60,13 +62,10 @@ Zhejiang TV International
 上虞1新闻综合 (720p) [Not 24/7]
 上虞3新商都 (720p) [Not 24/7]
 上虞經濟文化 (720p) [Not 24/7]
-东南卫视 (Southeast Television fka Fujian Television) (2160p)
-中国气象 (576p) [Not 24/7]
 乐清新闻 [Geo-blocked]
 乐清生活 [Geo-blocked]
 云南 Ⅰ 文山公共台 (1080p)
 云南 Ⅰ 文山综合台 (1080p) [Not 24/7]
-云南卫视 (576p) [Not 24/7]
 云南都市 (1080p)
 亚太台 (480p)
 交城電視台 (576p)
@@ -78,7 +77,6 @@ Zhejiang TV International
 余姚姚江文化 (576p)
 余姚新闻综合 (576p)
 兴隆综合
-兵团卫视 (540p) [Not 24/7]
 内江公共 (720p)
 内江科教 (720p)
 农安新闻综合 [Geo-blocked]
@@ -88,23 +86,17 @@ Zhejiang TV International
 前郭综合 [Geo-blocked]
 动画王国 (1080p)
 北京衛視 (1080p) [Geo-blocked]
-北京财经 [Not 24/7]
 北京青年 [Not 24/7]
 北碚综合 (576p) [Not 24/7]
 华亭电视台 (1080p)
 华数 (720p) [Not 24/7]
-南京少儿 (720p) [Not 24/7]
-南京教科 (720p) [Not 24/7]
 南川新闻综合 (360p)
 南川旅游经济 (360p)
 南阳新闻 (1080p) [Not 24/7]
 南陽公共頻道 (1080p) [Not 24/7]
 南陽科教頻道 (1080p) [Not 24/7]
-厦门卫视 (540p) [Not 24/7]
 吉州新聞綜合 (1080p)
-吴江新闻综合 (720p) [Not 24/7]
 和政电视台
-嘉佳卡通 (广东) (540p) [Not 24/7]
 四川 Ⅰ 四川影视台 (720p) [Not 24/7]
 四川 Ⅰ 四川新闻台 (720p) [Not 24/7]
 四川 Ⅰ 巴中综合台 (1080p) [Not 24/7]
@@ -112,7 +104,6 @@ Zhejiang TV International
 四川 Ⅰ 达州公共台 (720p) [Not 24/7]
 四川 Ⅰ 达州综合台 (720p) [Not 24/7]
 四川公共 (720p)
-四川妇女儿童 (720p) [Not 24/7]
 四平新闻综合 [Geo-blocked]
 大冶一套 [Geo-blocked]
 大冶二套 [Geo-blocked]
@@ -120,7 +111,6 @@ Zhejiang TV International
 大爱海外 (720p)
 娄底综合 (720p)
 孟州电视台 (1080p) [Not 24/7]
-宁夏卫视 (576p) [Not 24/7]
 安徽 Ⅰ 郎溪综合台 (1080p)
 安徽 Ⅰ 铜陵公共 (720p)
 安徽 Ⅰ 铜陵综合 (720p)
@@ -128,7 +118,6 @@ Zhejiang TV International
 家庭理财 (576p)
 家有购物 (720p) [Not 24/7]
 宿州公共 (1080p) [Not 24/7]
-宿州新闻综合 (1080p) [Not 24/7]
 宿州科教 (1080p) [Not 24/7]
 宿迁公共 (480p)
 少儿科教
@@ -143,7 +132,6 @@ Zhejiang TV International
 广东 Ⅰ 韶关公共台 (720p) [Not 24/7]
 广东 Ⅰ 韶关综合台 (720p) [Not 24/7]
 广水新闻综合 [Geo-blocked]
-康巴卫视 (720p) [Not 24/7]
 延边新闻综合 [Geo-blocked]
 建安电视台 (1080p) [Not 24/7]
 弈坛春秋 (576p)
@@ -168,7 +156,6 @@ Zhejiang TV International
 新泰鄉村黨建 (480p) [Not 24/7]
 新郑综合 (1080p) [Not 24/7]
 星空衛視 (576p)
-晋中公共 (1080p) [Not 24/7]
 景县电视一套 (360p) [Not 24/7]
 景县电视一套 (576p) [Not 24/7]
 智慧教育 (576p)
@@ -180,10 +167,6 @@ Zhejiang TV International
 江苏 Ⅰ 连云港公共 (480p) [Not 24/7]
 江苏 Ⅰ 连云港综合 (480p) [Not 24/7]
 江苏公共 (576p)
-江苏卫视 (1080p) [Not 24/7]
-江苏影视 (576p) [Not 24/7]
-江苏教育 (576p) [Not 24/7]
-江苏综艺 (576p) [Not 24/7]
 河源综合 (540p)
 洪雅新闻综合 (1080p)
 浙江 Ⅰ 绍兴影视 (720p)
@@ -191,7 +174,6 @@ Zhejiang TV International
 浙江公共 (1080p) [Not 24/7]
 海西州综合 (576p)
 涡阳新闻综合 (360p)
-深圳卫视 (1080p) [Not 24/7]
 湘潭公共 (576p)
 滁州公共 (450p)
 滁州市广播电视台 公共频道 (400p)
@@ -204,7 +186,6 @@ Zhejiang TV International
 滨州测试 (576p)
 滨海新闻 (1080p)
 滨海都市 (1080p)
-漳州新闻综合 (720p) [Not 24/7]
 灵台新闻综合 (1080p)
 甘肃公共 (540p) [Not 24/7]
 甘肃移动 (540p) [Not 24/7]
@@ -252,11 +233,7 @@ Zhejiang TV International
 蓬安新闻综合 (720p) [Not 24/7]
 蕪湖教育頻道 (576p)
 蕭山生活頻道 (720p) [Not 24/7]
-西安丝路 (404p) [Not 24/7]
 西安乐购购物 (180p) [Not 24/7]
-西安商务资讯 (180p) [Not 24/7]
-西安影视 (180p) [Not 24/7]
-西安新闻 (1080p) [Not 24/7]
 西安白鸽 (180p) [Not 24/7]
 辛集新聞頻道 (480p) [Not 24/7]
 辛集生活頻道 (480p) [Not 24/7]
@@ -268,13 +245,11 @@ Zhejiang TV International
 酒泉新闻综合 (576p)
 金昌公共頻道 (240p) [Geo-blocked]
 金昌綜合頻道 (720p) [Geo-blocked]
-金鹰卡通 (湖南) (540p) [Not 24/7]
 长乐综合 [Geo-blocked]
 长沙地铁移动 [Geo-blocked]
 长沙经贸 [Geo-blocked]
 长沙购物 [Geo-blocked]
 隨州綜合 (720p) [Not 24/7]
-隨州農村 (720p) [Not 24/7]
 集安综合 [Geo-blocked]
 霸州公共頻道 (576p) [Not 24/7]
 霸州少兒頻道 (576p) [Not 24/7]
