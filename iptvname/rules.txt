@@ -1,0 +1,7 @@
+1、name.py的工作路径就是当前文件夹下，所有生成的文件都在本文件夹下；
+2、从https://github.com/fanmingming/live/tree/main/tv提取标准名；
+3、从https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cn.m3u提取源列表，再进行下一步，作为别名数据库；
+别名规则：
+1、判断tvg-id、tvg-name、显示姓名是否含中文，优先级为：含中文优先>tvg-id>tvg-name>显示姓名。
+2、提取的别名去掉.cn@SD、.cn@HD、.hk@SD、1080p、720p、576p、576i、360p、[Not 24/7]、[Geo-blocked]、-、末尾空格、括号、540p、480p、180p、2160p等字符进行第一轮匹配，
+3、剩余的拼音的去掉TV字样、空格，转化为中文（如SichuanSatelliteTV.cn@SD，经过第一轮已经变成SichuanSatelliteTV，这轮变为四川卫视）进行第二轮匹配；
