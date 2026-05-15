@@ -13394,5 +13394,9 @@
   "https://piccpndks.v.kcdnvip.com/audio/tianjin_2/index.m3u8": {
     "fail_count": 1,
     "last_fail": "2026-05-14 22:27:13"
+  },
+    "http://198.204.240.250:82/live/cctv4k.m3u8": {
+    "fail_count": 3,
+    "last_fail": "2026-05-14 20:17:16"
   }
 }
