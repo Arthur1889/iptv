@@ -1,61 +1,119 @@
 import requests
 import re
 import json
+import os
+import sys
+from collections import defaultdict
+from pypinyin import lazy_pinyin
+import urllib3
 
-def clean_text(text):
-    """清除无意义字符，用于匹配"""
-    # 移除后缀名、括号内容及常见杂质词
-    text = re.sub(r'\.png$', '', text, flags=re.I)
-    text = re.sub(r'[\[\(\（\【\《].*?[\]\)\）\】\》]', '', text)
-    noise = r'(?i)\b(4K|8K|高清|HD|1080P|720P|超清|蓝光|BD|频道|TV)\b'
-    text = re.sub(noise, '', text)
-    return text.replace('-', '').replace(' ', '').strip().lower()
+# 禁用 SSL 警告（防止代理抓包干扰）
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+sys.stdout.reconfigure(encoding='utf-8')
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 
-def get_mapping():
-    print("正在获取标准库列表...")
-    # 1. 获取标准 ID (从 fanmingming 图标库)
-    # 使用 GitHub API 获取文件列表
-    api_url = "https://api.github.com/repos/fanmingming/live/contents/tv"
-    resp = requests.get(api_url)
-    if resp.status_code != 200:
-        print("无法访问 GitHub API，请检查网络或代理")
-        return
-    
-    # 提取标准 ID（去掉 .png）
-    std_items = {}
-    for item in resp.json():
-        if item['name'].endswith('.png'):
-            std_name = item['name'].replace('.png', '')
-            std_items[clean_text(std_name)] = std_name
+def has_chinese(text):
+    return any('\u4e00' <= char <= '\u9fa5' for char in text)
 
-    print(f"已加载 {len(std_items)} 个标准频道 ID")
+def clean_alias_rules(text):
+    """规则2：第一轮清洗"""
+    if not text: return ""
+    junk = [
+        r'\.cn@SD', r'\.cn@HD', r'\.hk@SD', r'\.png$',
+        r'2160p', r'1080p', r'720p', r'576p', r'576i', r'540p', r'480p', r'360p', r'180p',
+        r'\[Not 24/7\]', r'\[Geo-blocked\]', r'\(.*?\)', r'（.*?）', r'\[.*?\]'
+    ]
+    for p in junk:
+        text = re.sub(p, '', text, flags=re.I)
+    # 去掉末尾空格和特定符号
+    return text.replace('-', '').replace('_', '').strip()
 
-    print("正在抓取 iptv-org 原始源数据...")
-    # 2. 获取别名候选 (从 iptv-org cn.m3u)
-    m3u_url = "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cn.m3u"
-    m3u_content = requests.get(m3u_url).text
-    
-    # 提取 #EXTINF 中的频道名称
-    raw_names = re.findall(r'#EXTINF:.*?,(.*)', m3u_content)
-    raw_names = list(set(raw_names)) # 去重
-    print(f"已发现 {len(raw_names)} 个原始别名候选")
+def translate_and_pinyin(text):
+    """规则3：第二轮翻译与拼音"""
+    # 删掉 TV，将 Satellite 翻译为 卫视
+    text = re.sub(r'(?i)TV', '', text)
+    text = re.sub(r'(?i)Satellite', '卫视', text)
+    pure = text.replace(' ', '')
+    return "".join(lazy_pinyin(pure)).lower()
 
-    # 3. 开始匹配
-    name_mapping = {}
-    for raw in raw_names:
-        clean_raw = clean_text(raw)
-        for clean_std, original_std in std_items.items():
-            # 匹配逻辑：如果清洗后的别名包含清洗后的标准名
-            if clean_std and clean_std in clean_raw:
-                # 写入格式： "原始别名": "标准名"
-                name_mapping[raw.strip()] = original_std
-                break 
+def run_pipeline():
+    headers = {'User-Agent': 'Mozilla/5.0'}
+    # 网址与 crawl 逻辑一致
+    STD_API = "https://api.github.com/repos/fanmingming/live/contents/tv"
+    M3U_URL = "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cn.m3u"
 
-    # 4. 写入文件
-    with open('name.json', 'w', encoding='utf-8') as f:
-        json.dump(name_mapping, f, indent=2, ensure_ascii=False)
-    
-    print(f"处理完成！已生成 name.json，包含 {len(name_mapping)} 条映射关系。")
+    try:
+        # 1. 加载标准库 (fanmingming)
+        print(">>> [1/4] 正在获取标准库...", flush=True)
+        # 不传 proxies 参数，让 requests 自动寻找系统/Git 代理
+        resp = requests.get(STD_API, headers=headers, timeout=20, verify=False)
+        resp.raise_for_status()
+        
+        std_lookup = {}
+        pinyin_lookup = {}
+        for item in resp.json():
+            name = item.get('name', '')
+            if name.endswith('.png'):
+                sid = name.replace('.png', '')
+                c_std = clean_alias_rules(sid).lower()
+                std_lookup[c_std] = sid
+                # 预生成拼音索引
+                pk = "".join(lazy_pinyin(c_std.replace('台', '').replace('频道', ''))).lower()
+                pinyin_lookup[pk] = sid
+        print(f"✅ 标准库加载成功: {len(std_lookup)} 个频道")
+
+        # 2. 获取原始别名源 (iptv-org)
+        print("\n>>> [2/4] 正在抓取别名源源码...", flush=True)
+        r = requests.get(M3U_URL, headers=headers, timeout=30, verify=False)
+        r.raise_for_status()
+        m3u_text = r.text
+        
+        matches = re.findall(r'#EXTINF:-1.*?tvg-id="(.*?)".*?tvg-name="(.*?)".*?,(.*?)\n', m3u_text, re.S)
+        total = len(matches)
+        print(f"✅ 抓取成功，共有 {total} 个待处理频道")
+
+        # 3. 智能匹配聚合
+        print("\n>>> [3/4] 正在执行规则匹配...", flush=True)
+        aggregated = defaultdict(list)
+        for i, (tid, tname, dname) in enumerate(matches):
+            if i % 200 == 0 or i == total - 1:
+                sys.stdout.write(f"\r进度: [{i+1}/{total}]")
+                sys.stdout.flush()
+
+            raw_alias = dname.strip()
+            # 规则1优先级：含中文 > tid > dname
+            candidates = [tname, tid, dname]
+            best_raw = dname
+            for c in candidates:
+                if has_chinese(c):
+                    best_raw = c
+                    break
+            else:
+                best_raw = tid if tid else dname
+
+            cl = clean_alias_rules(best_raw)
+            mid = std_lookup.get(cl.lower())
+            
+            if not mid:
+                pk = translate_and_pinyin(cl)
+                mid = pinyin_lookup.get(pk)
+
+            if mid:
+                if raw_alias not in aggregated[mid]:
+                    aggregated[mid].append(raw_alias)
+
+        # 4. 保存
+        output_path = os.path.join(CURRENT_DIR, 'name.json')
+        with open(output_path, 'w', encoding='utf-8') as f:
+            json.dump({k: ",".join(v) for k, v in aggregated.items()}, f, indent=2, ensure_ascii=False)
+        
+        print(f"\n\n✨ 处理完成！结果已存至: {output_path}")
+
+    except Exception as e:
+        print(f"\n❌ 连接失败: {str(e)}")
+        print("\n💡 建议：既然 crawl 能跑通，请确保在同一个终端窗口运行此脚本。")
+
+    input("\n按回车退出...")
 
 if __name__ == "__main__":
-    get_mapping()
+    run_pipeline()
