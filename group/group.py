@@ -6,162 +6,189 @@ import time
 import urllib.request
 from collections import OrderedDict
 
-# 1. 严格锁定当前工作目录与所有关联文件路径
+# 1. 严格锁定当前工作目录与所有关联文件路径（保持不变）
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 URL_FILE_PATH = os.path.join(CURRENT_DIR, "url")
 GROUP_JSON_PATH = os.path.join(CURRENT_DIR, "group.json")
-CACHE_META_PATH = os.path.join(CURRENT_DIR, ".group_cache_meta")  # 缓存元数据文件
 
-CACHE_LIMIT_DAYS = 7  # 缓存有效期：7天
+# 本地保存网页源码的文件夹及缓存时间戳元数据
+HTML_SAVE_DIR = os.path.join(CURRENT_DIR, "html_cache")
+CACHE_META_PATH = os.path.join(CURRENT_DIR, ".url_cache_meta")
+
+CACHE_LIMIT_DAYS = 7  # 强缓存周期：7天（一星期）
 
 def clean_channel_name(name):
     """极致清洗：去除多余噪声和残留的括号，保持频道名纯粹"""
     if not name: return ""
     name = str(name).strip()
-    junk = [r'2160p', r'1080p', r'720p', r'hd', r'sd', r'超清', r'高清', r'[\(\（\[\【].*?[\)\）\]\】]']
+    junk = [r'2160p', r'1080p', r'720p', r'hd', r'sd', r'超清', r'高清', r'标清']
     for pattern in junk:
         name = re.sub(pattern, '', name, flags=re.I)
+    
+    # 强力消灭括号：连同括号本身及内部残留内容一起整个连根拔起
+    name = re.sub(r'\([^)]*\)|\[[^\]]*\]|（[^）]*）|【[^】]*】', '', name)
+    
+    # 清理前后残存的连接符和空格
+    name = re.sub(r'^[ \-_\|\+=]+|[ \-_\|\+=]+$', '', name)
     return name.strip()
 
 def get_target_urls():
     """从当前目录的 url 文件中读取待爬取的网址列表"""
     if not os.path.exists(URL_FILE_PATH):
-        backup_path = URL_FILE_PATH + ".txt"
-        if os.path.exists(backup_path):
-            return read_url_file(backup_path)
         print(f"❌ 错误：在当前目录下未找到【url】文件，请先创建它。")
         return []
-    return read_url_file(URL_FILE_PATH)
-
-def read_url_file(path):
     urls = []
-    with open(path, 'r', encoding='utf-8') as f:
+    with open(URL_FILE_PATH, 'r', encoding='utf-8') as f:
         for line in f:
             line = line.strip()
             if line and line.startswith("http"):
                 urls.append(line)
     return urls
 
-def is_cache_valid():
-    """检查缓存是否有效（是否存在且未满 7 天）"""
-    if not os.path.exists(GROUP_JSON_PATH) or not os.path.exists(CACHE_META_PATH):
-        return False
+def load_cache_meta():
+    """读取本地缓存时间表"""
+    if os.path.exists(CACHE_META_PATH):
+        try:
+            with open(CACHE_META_PATH, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except Exception:
+            return {}
+    return {}
+
+def save_cache_meta(meta):
+    """保存更新缓存时间表"""
     try:
-        with open(CACHE_META_PATH, 'r', encoding='utf-8') as f:
-            meta = json.load(f)
-            last_time = meta.get("last_success_time", 0)
-            # 计算时间差（秒转化为天）
-            days_passed = (time.time() - last_time) / (24 * 3600)
-            if days_passed < CACHE_LIMIT_DAYS:
-                print(f"ℹ️ 缓存命中：距离上一次爬取仅过去 {days_passed:.1f} 天（未满 {CACHE_LIMIT_DAYS} 天）。")
-                return True
+        with open(CACHE_META_PATH, 'w', encoding='utf-8') as f:
+            json.dump(meta, f, indent=2, ensure_ascii=False)
     except Exception:
-        return False  # 损坏则视作失效
-    return False
+        pass
+
+def get_url_filename(url, index):
+    """根据URL特征生成合法的本地稳固文件名"""
+    clean_url = re.sub(r'[\/\\\:\*\?\"\<\>\|]', '_', url)
+    if len(clean_url) > 60:
+        clean_url = clean_url[-60:]
+    return f"cache_{index}_{clean_url}.txt"
+
+def fetch_m3u_with_cache(target_url, index, cache_meta):
+    """💡 强缓存引擎：一星期内优先读取本地。GitHub Raw 极其稳定，用标准 urllib 直接请求"""
+    local_filename = get_url_filename(target_url, index)
+    local_path = os.path.join(HTML_SAVE_DIR, local_filename)
+    
+    last_success_time = cache_meta.get(target_url, 0)
+    days_passed = (time.time() - last_success_time) / (24 * 3600)
+    
+    # 🎯 强缓存命中：本地文件存在且未满7天，直接复用
+    if os.path.exists(local_path) and days_passed < CACHE_LIMIT_DAYS:
+        print(f"    📦 [缓存命中] 该直播源在一星期内已同步过（过去 {days_passed:.1f} 天），直接读取本地文件。")
+        try:
+            with open(local_path, 'r', encoding='utf-8') as f:
+                return f.read(), False
+        except Exception:
+            pass
+
+    # 🌐 未命中缓存：直接连网获取原始 M3U 文本
+    print(f"    🌐 [独立请求] 正在联网向远端同步原始 M3U 数据...")
+    
+    req = urllib.request.Request(target_url)
+    req.add_header('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36')
+    
+    try:
+        with urllib.request.urlopen(req, timeout=15) as response:
+            content = response.read().decode('utf-8', errors='ignore')
+            
+            # 请求成功，立即写入本地缓存文件夹
+            with open(local_path, 'w', encoding='utf-8') as f:
+                f.write(content)
+            
+            cache_meta[target_url] = time.time()
+            return content, True
+    except Exception as e:
+        print(f"    ❌ 连网同步失败 ({e})")
+        if os.path.exists(local_path):
+            print(f"    ℹ️ [降级保底] 自动载入本地历史缓存数据进行解析。")
+            try:
+                with open(local_path, 'r', encoding='utf-8') as f:
+                    return f.read(), False
+            except Exception:
+                pass
+        return None, False
 
 def main():
     print("==========================================")
-    print("     Group.py 地方频道分组自动化构建")
+    print("     Group.py 直播源智能解析与强分类")
     print("==========================================")
     
     start_time = time.time()
-    
-    # 💡 核心需求 4：建立爬取缓存机制，一周内则直接复用
-    if is_cache_valid():
-        try:
-            with open(GROUP_JSON_PATH, 'r', encoding='utf-8') as f:
-                existing_data = json.load(f)
-            print(f"📦 已直接载入本地现有的分组底库。")
-            print("==========================================")
-            print("         Group.py 自动化运行报告")
-            print("==========================================")
-            print(f"- 本次运行状态 : [跳过] 复用本地缓存")
-            print(f"- 现有电台总数 : {len(existing_data)} 个")
-            print("==========================================\n")
-            return
-        except Exception:
-            print("⚠️ 读取本地旧 JSON 失败，强制触发重新爬取...")
-
-    # 读取目标网址
     target_urls = get_target_urls()
     if not target_urls:
         return
         
-    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
-    group_dict = OrderedDict()
-
-    # 循环遍历 url 文件中的所有网址
-    for target_url in target_urls:
-        print(f">>> 正在请求目标地址: {target_url} ...")
-        try:
-            req = urllib.request.Request(target_url, headers=headers)
-            with urllib.request.urlopen(req, timeout=10) as response:
-                html = response.read().decode('utf-8', errors='ignore')
-        except Exception as e:
-            print(f"⚠️ 网页请求失败，跳过该源: {e}")
-            continue
-
-        # 区域块正则解析
-        sections = re.findall(r'(?:>|class=")([^"<>\s]{2,5}(?:省|市|地区|频道))["<>]*([\s\S]*?)(?=<div|class="|$)', html)
+    if not os.path.exists(HTML_SAVE_DIR):
+        os.makedirs(HTML_SAVE_DIR)
         
-        if not sections:
-            # 降级流解析
-            blocks = re.findall(r'([\u4e00-\u9fa5]{2,4}(?:卫视|频道|地方))', html)
-            for item in set(blocks):
-                cleaned = clean_channel_name(item)
-                if cleaned and len(cleaned) > 1:
-                    if "卫视" in cleaned: group_dict[cleaned] = "地方卫视"
-                    elif "CCTV" in cleaned.upper(): group_dict[cleaned] = "央视频道"
-        else:
-            # 标准块映射
-            for region_name, block_content in sections:
-                region_name = region_name.strip()
-                if any(x in region_name for x in ["首页", "导航", "链接", "关于", "could"]):
-                    continue
-                    
-                group_title = region_name if "频道" in region_name else f"{region_name}频道"
-                channels = re.findall(r'>([\u4e00-\u9fa5\w\-\+]{2,15})<', block_content)
+    cache_meta = load_cache_meta()
+    group_dict = OrderedDict()
+    
+    network_request_count = 0
+
+    # 开始循环解析文件里配置的 M3U 链接
+    for idx, t_url in enumerate(target_urls, start=1):
+        print(f" 🔍 正在处理数据源: {t_url}")
+        m3u_content, is_net = fetch_m3u_with_cache(t_url, idx, cache_meta)
+        if is_net: network_request_count += 1
+        if not m3u_content: continue
+        
+        # 💡 M3U 核心学习解析算法：
+        # 匹配形如: group-title="浙江频道",萧山新闻综合
+        # 正则解析：group-title="([^"]+)" 用于抓取分组名，,\s*([^\r\n]+) 用于抓取逗号后面的频道名
+        pattern = re.compile(r'group-title="([^"]+)".*?,\s*([^\r\n]+)', re.IGNORECASE)
+        matches = pattern.findall(m3u_content)
+        
+        print(f"    📊 正在扫描文本... 本源成功提取到 {len(matches)} 条直播项")
+        
+        for group_name, ch_name in matches:
+            ch_clean = clean_channel_name(ch_name)
+            group_clean = group_name.strip()
+            
+            # 过滤噪音数据
+            if not ch_clean or len(ch_clean) <= 1:
+                continue
                 
-                for ch in channels:
-                    ch_clean = clean_channel_name(ch)
-                    if not ch_clean or len(ch_clean) <= 1 or ch_clean.startswith("http"):
-                        continue
-                    
-                    if "CCTV" in ch_clean.upper():
-                        group_dict[ch_clean] = "央视频道"
-                    elif "卫视" in ch_clean:
-                        group_dict[ch_clean] = "地方卫视"
-                    else:
-                        group_dict[ch_clean] = group_title
+            # 去除组名中可能夹杂的特殊Emoji图标（保持组名纯净）
+            group_clean = re.sub(r'[^\u4e00-\u9fa5\w\-]', '', group_clean).strip()
+            if not group_clean:
+                group_clean = "地方频道"
+            
+            # 智能分流归档逻辑
+            if "CCTV" in ch_clean.upper() or ch_clean.startswith("中央"):
+                group_dict[ch_clean] = "央视频道"
+            elif "卫视" in ch_clean:
+                group_dict[ch_clean] = "地方卫视"
+            else:
+                # 完美继承 M3U 文件里自带的分组标签（例如“浙江频道”、“🎦浙江频道”洗完后变成“浙江频道”）
+                group_dict[ch_clean] = group_clean
 
-    # 兜底注入标准央视映射
+    # 3. 兜底高优注入，确保央视基础底库不丢
     for i in range(1, 18):
-        cctv_key = f"CCTV{i}"
-        if cctv_key not in group_dict:
-            group_dict[cctv_key] = "央视频道"
-    if "CCTV5+" not in group_dict: group_dict["CCTV5+"] = "央视频道"
+        group_dict[f"CCTV{i}"] = "央视频道"
+    group_dict["CCTV5+"] = "央视频道"
 
-    # 将最终成果安全写入当前目录的 group.json
+    # 4. 成功落地存储组装字典为 group.json
     with open(GROUP_JSON_PATH, 'w', encoding='utf-8') as f:
         json.dump(group_dict, f, indent=2, ensure_ascii=False)
         
-    # 💡 写入/更新缓存元数据文件，锁定当前成功时间戳
-    try:
-        with open(CACHE_META_PATH, 'w', encoding='utf-8') as f:
-            json.dump({"last_success_time": time.time()}, f)
-    except Exception:
-        pass
-
+    save_cache_meta(cache_meta)
     duration = time.time() - start_time
     
-    # 💡 核心需求 3：生成运行报告，展现收录成果
+    print("\n==========================================")
+    print("         Group.py 强缓存机制运行报告")
     print("==========================================")
-    print("         Group.py 自动化运行报告")
-    print("==========================================")
-    print(f"- 本次运行状态 : [成功] 远程网络爬取更新完成")
-    print(f"- 本次收录地方电台总数 : {len(group_dict)} 个")
-    print(f"- 任务总消耗时长       : {duration:.2f} 秒")
-    print(f"- 成果落地方向         : {os.path.basename(GROUP_JSON_PATH)}")
+    print(f"- 本次运行状态       : [完成] 数据已同步至当前目录")
+    print(f"- 本次真正连网请求数 : {network_request_count} 次 (其余均复用本地历史数据)")
+    print(f"- 本次智能收录电台数 : {len(group_dict)} 个")
+    print(f"- 任务总消耗时长     : {duration:.2f} 秒")
+    print(f"- 成果落地方向       : {os.path.basename(GROUP_JSON_PATH)}")
     print("==========================================\n")
 
 if __name__ == "__main__":

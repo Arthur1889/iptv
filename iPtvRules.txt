@@ -19,3 +19,4 @@
 8、如果tvg-id、tvg-name、显示名称本来就有4k或者8k标识，不需要修改。
 9、生产的文件名为tv.m3u；
 10、探测进度保持在一行，不要刷屏。
+11、https://live.fanmingming.com/e.xml这是epg节目单地址；
