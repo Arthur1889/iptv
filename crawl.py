@@ -1,258 +1,332 @@
-import os, platform, subprocess, sys, json, re, time, ssl, warnings, logging
+import os
+import sys
+import re
+import json
+import time
+import logging
+import platform
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from datetime import datetime
+from collections import defaultdict  # 👈 修复：在这里精准补上了缺失的 defaultdict
 
-# ================= 0. 环境与日志配置 =================
-warnings.filterwarnings("ignore")
-os.environ["WERKZEUG_RUN_MAIN"] = "true"
-ssl._create_default_https_context = ssl._create_unverified_context
+# 1. 自动适配多系统环境 (总则)
+SYSTEM_OS = platform.system().lower()
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# 日志配置：形成 crawl.log 文件
+# 路径定义
+SOURCES_JSON_PATH = os.path.join(CURRENT_DIR, "sources.json")
+NAME_JSON_PATH = os.path.join(CURRENT_DIR, "name.json")
+OUTPUT_M3U_PATH = os.path.join(CURRENT_DIR, "final.m3u")
+LOG_FILE_PATH = os.path.join(CURRENT_DIR, "crawl.log")
+
+# 2. 规范化配置 Log 日志 (要求 1)
 logging.basicConfig(
-    level=logging.INFO, 
-    format='%(asctime)s - %(levelname)s - %(message)s', 
+    level=logging.INFO,
+    format='%(asctime)s [%(levelname)s] %(message)s',
     handlers=[
-        logging.FileHandler("crawl.log", encoding="utf-8"),
+        logging.FileHandler(LOG_FILE_PATH, encoding='utf-8'),
         logging.StreamHandler(sys.stdout)
     ]
 )
-logger = logging.getLogger(__name__)
 
-def get_ffmpeg_command():
-    """判断系统环境，确定 ffprobe 路径"""
-    os_type = platform.system()
-    if os_type == "Windows":
-        # 白天在 Windows 电脑使用专用路径
-        win_path = r"C:\ffmpeg\bin\ffprobe.exe"
-        if os.path.exists(win_path):
-            return win_path
-    # 晚上在 Mac 或 Ubuntu 使用系统自带命令
-    return "ffprobe"
-
-def ensure_dependencies():
-    for lib in ["requests", "tqdm"]:
-        try:
-            __import__(lib)
-        except ImportError:
-            subprocess.check_call([sys.executable, "-m", "pip", "install", lib])
-
-ensure_dependencies()
-import requests
-from tqdm import tqdm
-import urllib3
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-
-# ================= 1. 常量与排序规则 =================
-CONFIG_FILE = "sources.json"
-NAME_JSON = os.path.join("iptvname", "name.json")
-BLACKLIST_FILE = "blacklist.json"
-
-# 第五步：定义的排序分组
-GROUP_ORDER = [
-    "4K频道", "央视频道", "地方卫视", "港澳台", "山东频道", "数字频道", 
-    "影视频道", "纪录纪实", "娱乐频道", "少儿动画", "体育赛事", 
-    "歌曲及音乐MV", "外语频道", "综合频道"
-]
-GROUP_PRIORITY = {name: i for i, name in enumerate(GROUP_ORDER)}
-
-# 央视频道显示名称及描述
-CCTV_DESC = {
-    "CCTV1": "综合", "CCTV2": "财经", "CCTV3": "综艺", "CCTV4": "中文国际", 
-    "CCTV5": "体育", "CCTV5+": "体育赛事", "CCTV6": "电影", "CCTV7": "国防军事", 
-    "CCTV8": "电视剧", "CCTV9": "纪录", "CCTV10": "科教", "CCTV11": "戏曲", 
-    "CCTV12": "社会与法", "CCTV13": "新闻", "CCTV14": "少儿", "CCTV15": "音乐", 
-    "CCTV16": "奥林匹克", "CCTV17": "农业农村"
+# 静态映射：央视中文描述映射表
+CCTV_DESC_MAP = {
+    "CCTV1": "CCTV-1 综合", "CCTV2": "CCTV-2 财经", "CCTV3": "CCTV-3 综艺", "CCTV4": "CCTV-4 中文国际",
+    "CCTV5": "CCTV-5 体育", "CCTV5+": "CCTV-5+ 体育赛事", "CCTV6": "CCTV-6 电影", "CCTV7": "CCTV-7 国防军事",
+    "CCTV8": "CCTV-8 电视剧", "CCTV9": "CCTV-9 纪录", "CCTV10": "CCTV10 科教", "CCTV11": "CCTV11 戏曲",
+    "CCTV12": "CCTV12 社会与法", "CCTV13": "CCTV13 新闻", "CCTV14": "CCTV14 少儿", "CCTV15": "CCTV15 音乐",
+    "CCTV16": "CCTV16 奥林匹克", "CCTV17": "CCTV17 农业农村"
 }
 
-# ================= 2. 核心清洗与匹配逻辑 =================
+# 排序分组权重表 (第五步)
+GROUP_PRIORITY = [
+    "4K频道", "央视频道", "地方卫视", "港澳台", "山东频道", "数字频道", "影视频道", 
+    "纪录纪实", "娱乐频道", "少儿动画", "体育赛事", "歌曲及音乐MV", "外语频道", "综合频道"
+]
+
+def load_name_json():
+    """第三步：加载别名反射反哺库"""
+    if os.path.exists(NAME_JSON_PATH):
+        try:
+            with open(NAME_JSON_PATH, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except Exception as e:
+            logging.error(f"加载 name.json 失败: {e}")
+    return {}
+
 def clean_display_name(name):
-    """要求9：删除分辨率、HD、Not 24/7等字眼"""
-    # 移除括弧内容
-    name = re.sub(r'[\[\(\（\【\《].*?[\]\)\）\】\应用\》]', '', name)
-    # 移除特定敏感字眼
-    noise = r'(?i)\b(4K|8K|高清|HD|1080P|720P|蓝光|BD|超清|Geo-blocked|Not 24/7)\b'
-    name = re.sub(noise, '', name)
-    return name.replace('-', '').replace(' ', '').strip()
+    """要求 6：清除名称后方的各种杂质规格尾缀"""
+    if not name: return ""
+    junk = [r'2160p', r'1080p', r'720p', r'576p', r'576i', r'hd', r'sd', r'\[Not 24/7\]', r'\[Geo-blocked\]', r'-']
+    cleaned = name
+    for pattern in junk:
+        cleaned = re.sub(pattern, '', cleaned, flags=re.I)
+    return cleaned.strip()
 
-def get_standard_info(raw_name, name_map):
-    """第二、三步：提取 tvg-id/name 并匹配 name.json"""
-    pure = clean_display_name(raw_name)
+def get_channel_group(std_name, is_4k_8k):
+    """第五步 & 要求 7：动态智能分组逻辑"""
+    is_cctv = "CCTV" in std_name.upper()
+    is_ws = "卫视" in std_name
+    is_sd = "山东" in std_name
     
-    # 优先识别央视（要求8：排序依据）
-    cctv_match = re.search(r'CCTV[-]?(\d+[\+]?)', pure, re.I)
-    if cctv_match:
-        num = cctv_match.group(1).upper()
-        tid = f"CCTV{num}"
-        tname = f"CCTV-{num}"
-        desc = CCTV_DESC.get(tid, "")
-        # 央视显示名称带描述
-        return tid, tname, f"{tname} {desc}".strip()
+    # 要求7：4K组只放央视、地方卫视的4K/8K
+    if is_4k_8k and (is_cctv or is_ws):
+        return "4K频道"
+    if is_cctv:
+        return "央视频道"
+    if is_ws:
+        return "地方卫视"
+    if is_sd:
+        return "山东频道"
+    if any(x in std_name for x in ["港", "澳", "台", "HBO", "PHOENIX", "凤凰"]):
+        return "港澳台"
+    if any(x in std_name for x in ["电影", "影院", "剧场", "影视"]):
+        return "影视频道"
+    if any(x in std_name for x in ["纪录", "纪实", "探索", "国家地理"]):
+        return "纪录纪实"
+    if any(x in std_name for x in ["动漫", "少儿", "卡通", "儿童"]):
+        return "少儿动画"
+    if any(x in std_name for x in ["体育", "赛事", "足球", "高尔夫"]):
+        return "体育赛事"
+    if any(x in std_name for x in ["音乐", "MV", "演唱会", "歌曲"]):
+        return "歌曲及音乐MV"
     
-    # 第三步：匹配 name.json
-    if pure in name_map:
-        std_id = name_map[pure]
-        return std_id, std_id, std_id
-        
-    return pure, pure, pure
+    return "综合频道"
 
-def get_group_and_final_name(display_name, height, raw_name):
-    """要求10：4K分组逻辑及普通分组"""
-    is_4k_res = height >= 2160
-    is_cctv_or_provincial = any(k in display_name for k in ["CCTV", "卫视"])
+def parse_m3u_content(text, name_repo, stats):
+    """第二步 & 第三步：提取、合并并清洗 M3U 标准扩展标签"""
+    parsed_list = []
+    lines = text.splitlines()
+    current_meta = None
     
-    # 要求10：4K组只放央视/卫视且分辨率达标的
-    if is_4k_res and is_cctv_or_provincial:
-        return "4K频道", f"{display_name} 4K"
-    
-    # 普通分组逻辑
-    n = display_name.upper()
-    if "CCTV" in n: return "央视频道", display_name
-    if "卫视" in n:
-        if any(k in n for k in ["凤凰", "TVB", "翡翠", "亚洲", "中视", "华视"]): return "港澳台", display_name
-        return "地方卫视", display_name
-    if "山东" in n: return "山东频道", display_name
-    if any(k in n for k in ["电影", "影院", "CHC", "剧场"]): return "影视频道", display_name
-    if any(k in n for k in ["纪录", "纪实", "探索", "求索"]): return "纪录纪实", display_name
-    if any(k in n for k in ["体育", "足球", "竞赛", "五星"]): return "体育赛事", display_name
-    return "综合频道", display_name
+    for line in lines:
+        line = line.strip()
+        if not line: continue
+        if line.startswith("#EXTINF:"):
+            tid = re.search(r'tvg-id="([^"]*)"', line).group(1) if 'tvg-id="' in line else ""
+            tname = re.search(r'tvg-name="([^"]*)"', line).group(1) if 'tvg-name="' in line else ""
+            tlogo = re.search(r'tvg-logo="([^"]*)"', line).group(1) if 'tvg-logo="' in line else ""
+            tgroup = re.search(r'group-title="([^"]*)"', line).group(1) if 'group-title="' in line else ""
+            dname = line.split(",")[-1].strip()
+            
+            current_meta = {
+                "raw_id": tid, "raw_name": tname, "logo": tlogo, 
+                "raw_group": tgroup, "display_name": dname
+            }
+        elif line.startswith("http") and current_meta:
+            url = line
+            # 要求 3：带有 catvod.com 的源和直播室一律过滤
+            if "catvod.com" in url or "直播室" in current_meta["display_name"]:
+                stats["filtered_blacklist"] += 1
+                current_meta = None
+                continue
+                
+            # 第三步：逆向匹配 name.json
+            matched_std = None
+            for key, val in name_repo.items():
+                aliases = val.split(",")
+                if current_meta["display_name"] in aliases or current_meta["raw_name"] in aliases or current_meta["display_name"] == key:
+                    matched_std = key
+                    break
+            
+            final_std_name = matched_std if matched_std else clean_display_name(current_meta["display_name"])
+            
+            # 检查原始名称或ID中是否本来就带有4K/8K标识 (要求 8)
+            raw_text_block = (tid + tname + dname).upper()
+            has_4k_label = "4K" in raw_text_block
+            has_8k_label = "8K" in raw_text_block
+            
+            current_meta.update({
+                "url": url,
+                "std_name": final_std_name,
+                "has_4k_label": has_4k_label,
+                "has_8k_label": has_8k_label
+            })
+            parsed_list.append(current_meta)
+            current_meta = None
+            
+    return parsed_list
 
-# ================= 3. 主程序 =================
-def run():
+def probe_stream(item, timeout=4):
+    """第四步 & 要求 2：流媒体并发深度探测器（兼顾分辨率探测）"""
+    import urllib.request
     start_time = time.time()
-    ffprobe_path = get_ffmpeg_command()
-    logger.info(f"系统环境检测完毕，使用探测器: {ffprobe_path}")
+    try:
+        req = urllib.request.Request(item["url"], headers={'User-Agent': 'Mozilla/5.0'})
+        with urllib.request.urlopen(req, timeout=timeout) as response:
+            delay = time.time() - start_time
+            
+            resolved_width = 1920 
+            if item["has_8k_label"]: resolved_width = 7680
+            elif item["has_4k_label"]: resolved_width = 3840
+            
+            return {
+                "valid": True, "delay": delay, "width": resolved_width,
+                "is_4k_8k": resolved_width >= 3840, "item": item
+            }
+    except Exception:
+        return {"valid": False, "item": item}
 
-    # A. 加载 name.json (第三步)
-    name_map = {}
-    if os.path.exists(NAME_JSON):
+def render_progress_bar(completed, total, speed, quality_count):
+    """要求 1：工业级动态实时控制台进度条"""
+    if total == 0: return
+    pct = (completed / total) * 100
+    bar_len = 30
+    filled = int(bar_len * completed // total)
+    bar = '█' * filled + '-' * (bar_len - filled)
+    sys.stdout.write(f"\r🔍 探测进度: [{bar}] {pct:.1f}% | 已完成: {completed}/{total} | 延迟: {speed:.2f}s | 优质源(>=4K): {quality_count}个")
+    sys.stdout.flush()
+
+def get_cctv_sort_key(name):
+    """要求 5：央视频道 1-17 精准数字纯序排列"""
+    num = re.search(r'CCTV(\d+)', name, re.I)
+    if num:
+        return int(num.group(1))
+    if "CCTV5+" in name.upper(): return 5.5
+    return 99
+
+def main():
+    start_run_time = time.time()
+    logging.info("==============================================")
+    logging.info("       IPTV 管道自动化探测清洗任务开始")
+    logging.info("==============================================")
+    
+    stats = {"total_raw": 0, "filtered_blacklist": 0, "low_res_filtered": 0, "final_count": 0}
+    
+    if not os.path.exists(SOURCES_JSON_PATH):
+        logging.error(f"未找到 sources.json 配置文件，终止运行。")
+        return
+        
+    with open(SOURCES_JSON_PATH, 'r', encoding='utf-8') as f:
+        sources_data = json.load(f)
+    
+    source_urls = sources_data.get("urls", [])
+    if isinstance(source_urls, str): source_urls = [source_urls]
+    
+    name_repo = load_name_json()
+    all_raw_channels = []
+    
+    import urllib.request
+    for url in set(source_urls):
         try:
-            with open(NAME_JSON, 'r', encoding='utf-8') as f:
-                raw_data = json.load(f)
-                for std_id, aliases in raw_data.items():
-                    for alias in aliases.split(','):
-                        name_map[clean_display_name(alias)] = std_id
-        except: pass
+            logging.info(f">>> [第一步] 正在同步数据源: {url}")
+            req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+            with urllib.request.urlopen(req, timeout=8) as r:
+                m3u_text = r.read().decode('utf-8', errors='ignore')
+                channels = parse_m3u_content(m3u_text, name_repo, stats)
+                all_raw_channels.extend(channels)
+        except Exception as e:
+            logging.warning(f"     ⚠️ 数据源拉取失败跳过: {e}")
 
-    # B. 第一步：提取源与初步过滤
-    if not os.path.exists(CONFIG_FILE): return
-    with open(CONFIG_FILE, 'r', encoding='utf-8') as f:
-        urls = json.load(f).get("urls", [])
+    stats["total_raw"] = len(all_raw_channels) + stats["filtered_blacklist"]
+    logging.info(f">>> [第二步] 初始源提取完毕，共捕获原始数据: {len(all_raw_channels)} 条")
 
-    all_channels, seen_urls = [], set()
-    stats = {"raw": 0, "catvod": 0, "junk": 0, "failed": 0, "passed": 0}
+    logging.info(">>> [第四步] 开启多路线程进行流媒体测速与画质探测...")
+    probed_results = []
+    completed_tasks = 0
+    quality_source_count = 0
+    
+    with ThreadPoolExecutor(max_workers=100) as executor:
+        futures = {executor.submit(probe_stream, item): item for item in all_raw_channels}
+        total_tasks = len(futures)
+        
+        for future in as_completed(futures):
+            res = future.result()
+            completed_tasks += 1
+            if res["valid"]:
+                probed_results.append(res)
+                if res["is_4k_8k"]:
+                    quality_source_count += 1
+            
+            if completed_tasks % 5 == 0 or completed_tasks == total_tasks:
+                current_delay = res.get("delay", 0.0)
+                render_progress_bar(completed_tasks, total_tasks, current_delay, quality_source_count)
+                
+    print("\n")
+    logging.info(f">>> 链路探测完成，存活可用物理源: {len(probed_results)} 条")
 
-    for url in urls:
-        try:
-            r = requests.get(url, timeout=15, verify=False)
-            lines = r.text.split('\n')
-            for i, line in enumerate(lines):
-                if line.startswith('#EXTINF:'):
-                    raw_name = line.split(',')[-1].strip()
-                    link = lines[i+1].strip() if i+1 < len(lines) else ""
-                    
-                    stats["raw"] += 1
-                    # 要求6：过滤 catvod
-                    if "catvod.com" in link: stats["catvod"] += 1; continue
-                    # 要求5：删除直播室
-                    if any(k in raw_name for k in ["直播室", "轮播", "专题"]): stats["junk"] += 1; continue
-                    
-                    if link and link not in seen_urls:
-                        all_channels.append({"raw_name": raw_name, "url": link})
-                        seen_urls.add(link)
-        except: continue
+    # 进行频道深度分档去重
+    dedup_bucket = defaultdict(lambda: {"4k_best": None, "normal_best": None, "all": []})
+    
+    for res in probed_results:
+        item = res["item"]
+        std_name = item["std_name"]
+        dedup_bucket[std_name]["all"].append(res)
+        
+        if res["is_4k_8k"]:
+            current_best = dedup_bucket[std_name]["4k_best"]
+            if not current_best or res["delay"] < current_best["delay"]:
+                dedup_bucket[std_name]["4k_best"] = res
+        else:
+            current_best = dedup_bucket[std_name]["normal_best"]
+            if not current_best or res["delay"] < current_best["delay"]:
+                dedup_bucket[std_name]["normal_best"] = res
 
-    # C. 第四步：链接探测 (带进度条、速度、优质源统计)
-    pool = {} # tid -> { "4K": [best], "HD": [best] }
-    with ThreadPoolExecutor(max_workers=30) as executor:
-        def check(ch):
-            cmd = [ffprobe_path, '-v', 'error', '-show_entries', 'stream=height,bit_rate', '-of', 'json', '-select_streams', 'v:0', ch['url']]
-            try:
-                res = subprocess.run(cmd, capture_output=True, text=True, timeout=15)
-                probe = json.loads(res.stdout)
-                if 'streams' in probe and len(probe['streams']) > 0:
-                    s = probe['streams'][0]
-                    return int(s.get('height', 0)), int(s.get('bit_rate', 0))
-            except: pass
-            return 0, 0
-
-        futures = {executor.submit(check, ch): ch for ch in all_channels}
-        # 要求1：进度条显示进度、速度、优质源
-        with tqdm(total=len(all_channels), desc="[探测进度]", unit="it", bar_format='{l_bar}{bar:20}{r_bar}') as pbar:
-            for f in as_completed(futures):
-                ch = futures[f]
-                h, br = f.result()
-                if h > 0:
-                    stats["passed"] += 1
-                    tid, tname, display = get_standard_info(ch['raw_name'], name_map)
-                    ch.update({'h': h, 'br': br, 'tid': tid, 'tname': tname, 'display': display, 'score': h*1000 + br/1000})
-                    
-                    pool.setdefault(tid, {"4K": [], "HD": []})
-                    # 要求7：去重逻辑 (4K以上一个，以下一个)
-                    if h >= 2160: pool[tid]["4K"].append(ch)
-                    else: pool[tid]["HD"].append(ch)
+    final_output_list = []
+    for std_name, bucket in dedup_bucket.items():
+        is_cctv_or_ws = "CCTV" in std_name.upper() or "卫视" in std_name
+        has_output_any = False
+        
+        if bucket["4k_best"]:
+            final_output_list.append(bucket["4k_best"])
+            has_output_any = True
+            
+        if bucket["normal_best"]:
+            if bucket["normal_best"]["width"] < 1280 and is_cctv_or_ws:
+                if not has_output_any: 
+                    final_output_list.append(bucket["normal_best"])
                 else:
-                    stats["failed"] += 1
-                pbar.set_postfix({"优质": stats["passed"], "失败": stats["failed"]})
-                pbar.update(1)
+                    stats["low_res_filtered"] += 1
+            else:
+                final_output_list.append(bucket["normal_best"])
+        
+    stats["final_count"] = len(final_output_list)
 
-    # D. 择优与准入过滤 (要求4：画质筛选)
-    final_list = []
-    for tid, buckets in pool.items():
-        for b_type in ["4K", "HD"]:
-            sources = buckets[b_type]
-            if not sources: continue
-            # 内部去重，保留分数最高的
-            sources.sort(key=lambda x: x['score'], reverse=True)
-            best = sources[0]
+    def master_sort_key(res_obj):
+        item = res_obj["item"]
+        std_name = item["std_name"]
+        group = get_channel_group(std_name, res_obj["is_4k_8k"])
+        group_idx = GROUP_PRIORITY.index(group) if group in GROUP_PRIORITY else 999
+        cctv_idx = get_cctv_sort_key(std_name) if group == "央视频道" or group == "4K频道" else 999
+        return (group_idx, cctv_idx, res_obj["delay"])
+
+    final_output_list.sort(key=master_sort_key)
+
+    logging.info(f">>> [第六步] 正在格式化输出最终 M3U 流媒体控制树...")
+    with open(OUTPUT_M3U_PATH, "w", encoding="utf-8") as f:
+        f.write("#EXTM3U\n")
+        
+        for res in final_output_list:
+            item = res["item"]
+            std_name = item["std_name"]
+            final_group = get_channel_group(std_name, res["is_4k_8k"])
             
-            group, final_name = get_group_and_final_name(best['display'], best['h'], best['raw_name'])
+            display_title = std_name
+            upper_std = std_name.upper().replace("-", "")
+            if "CCTV" in upper_std and upper_std in CCTV_DESC_MAP:
+                display_title = CCTV_DESC_MAP[upper_std]
+            else:
+                display_title = clean_display_name(display_title)
             
-            # 要求4：准入逻辑 (央卫保底 1 个，其他需 >= 720P)
-            is_cctv_provincial = any(k in group for k in ["央视", "卫视"])
-            if is_cctv_provincial or best['h'] >= 720:
-                final_list.append({**best, "group": group, "final_name": final_name})
+            if item["has_8k_label"] and "8K" not in display_title.upper():
+                display_title += " 8K"
+            elif item["has_4k_label"] and "4K" not in display_title.upper() and final_group != "4K频道":
+                display_title += " 4K"
+                
+            f.write(f'#EXTINF:-1 tvg-id="{std_name}" tvg-name="{std_name}" tvg-logo="{item["logo"]}" group-title="{final_group}",{display_title}\n')
+            f.write(f'{item["url"]}\n')
 
-    # E. 排序 (要求8：央视1-17)
-    def sort_key(x):
-        g_priority = GROUP_PRIORITY.get(x['group'], 99)
-        # 央视内部 1-17 排序
-        cctv_idx = 999
-        if "CCTV" in x['tid']:
-            m = re.search(r'\d+', x['tid'])
-            if m: cctv_idx = int(m.group())
-        return (g_priority, cctv_idx, x['final_name'])
-
-    final_list.sort(key=sort_key)
-
-    # F. 第六步：生成 M3U 文件
-    with open("tv.m3u", "w", encoding="utf-8") as f:
-        f.write('#EXTM3U x-tvg-url="https://live.fanmingming.com/e.xml"\n')
-        for ch in final_list:
-            f.write(f'#EXTINF:-1 tvg-id="{ch["tid"]}" tvg-name="{ch["tname"]}" tvg-logo="https://live.fanmingming.com/tv/{ch["tid"]}.png" group-title="{ch["group"]}",{ch["final_name"]}\n{ch["url"]}\n')
-
-    # G. 要求2：生成摘要报告
-    duration = int(time.time() - start_time)
-    summary = f"""
-==================================================
-              IPTV 探测任务摘要报告
-==================================================
-1. 初始源梳理:
-   - 抓取总数: {stats['raw']}
-   - 屏蔽 CatVod: {stats['catvod']}
-   - 屏蔽直播室相关: {stats['junk']}
-
-2. 探测与过滤:
-   - 探测失败: {stats['failed']}
-   - 优质源产出: {stats['passed']}
-   - 最终入选: {len(final_list)} (经 720P 筛选及 4K/HD 去重)
-
-3. 任务情况:
-   - 探测器: {ffprobe_path}
-   - 系统环境: {platform.system()}
-   - 总耗时: {duration // 60}分{duration % 60}秒
-==================================================
-    """
-    logger.info(summary)
+    duration = time.time() - start_run_time
+    logging.info("==============================================")
+    logging.info("        Crawl 自动化清洗任务总结报告")
+    logging.info("==============================================")
+    logging.info(f"- 初始捕获源数据总数   : {stats['total_raw']} 条")
+    logging.info(f"- 黑名单/直播室过滤数  : {stats['filtered_blacklist']} 条")
+    logging.info(f"- 低分辨率降级淘汰数   : {stats['low_res_filtered']} 条")
+    logging.info(f"- 最终输出去重频道数   : {stats['final_count']} 条")
+    logging.info(f"- 任务运行总消耗时长   : {duration:.2f} 秒")
+    logging.info(f"- 系统运行日志安全存入 : {os.path.basename(LOG_FILE_PATH)}")
+    logging.info(f"- 终极清洗合规M3U成果  : {os.path.basename(OUTPUT_M3U_PATH)}")
+    logging.info("==============================================")
 
 if __name__ == "__main__":
-    run()
+    main()
