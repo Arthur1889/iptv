@@ -3,7 +3,7 @@ from collections import defaultdict
 from pypinyin import lazy_pinyin
 import urllib3
 
-# 1. 环境配置
+# 1. 环境配置 (总则)
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 sys.stdout.reconfigure(encoding='utf-8')
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -14,19 +14,45 @@ ORIGINAL_JSON_PATH = os.path.join(CURRENT_DIR, "nameoriginal.json")
 OUTPUT_JSON_PATH = os.path.join(CURRENT_DIR, "name.json")
 UNMATCHED_PATH = os.path.join(CURRENT_DIR, "unmatched.txt")
 
+# 规则11：本地缓存路径定义
+CACHE_EPG_HOME = os.path.join(CURRENT_DIR, "cache_epg_home.txt")
+CACHE_EPG_ALIAS = os.path.join(CURRENT_DIR, "cache_epg_alias.txt")
+
+def is_cache_valid(file_path, days=7):
+    """规则11：检查缓存文件是否在 1 周内有效"""
+    if not os.path.exists(file_path):
+        return False
+    file_time = os.path.getmtime(file_path)
+    return (time.time() - file_time) < (days * 24 * 3600)
+
+def get_content_with_cache(url, cache_path, headers, timeout=30):
+    """规则11：核心缓存机制控制"""
+    if is_cache_valid(cache_path, days=7):
+        print(f"   [本地缓存有效] 直接读取: {os.path.basename(cache_path)}")
+        with open(cache_path, "r", encoding="utf-8") as f:
+            return f.read()
+    else:
+        print(f"   [缓存失效/不存在] 正在请求网络: {url}")
+        r = requests.get(url, headers=headers, timeout=timeout, verify=False)
+        r.raise_for_status()
+        with open(cache_path, "w", encoding="utf-8") as f:
+            f.write(r.text)
+        return r.text
+
 def has_chinese(text):
-    """规则 1：判断含中文"""
+    """规则1：判断含中文"""
     if not text: return False
     return any('\u4e00' <= char <= '\u9fa5' for char in text)
 
 def clean_alias(text):
-    """规则 2 & 8：彻底除污（HTML标签、规格、末尾空格）"""
+    """规则2 & 8：彻底清洗杂质、HTML标签、成对括号及末尾空格"""
     if not text: return ""
-    # 规则 8：粉碎 HTML 标签
-    text = re.sub(r'<[^>]+>', '', str(text))
-    # 规则 2：清理规格后缀和括号
-    # 使用非贪婪匹配处理成对括号：(...) [...] 【...】
-    text = re.sub(r'[\(\（\[\【\《].*?[\)\）\]\】\》]', '', text)
+    text = str(text)
+    # 规则8：粉碎所有 HTML 标签
+    text = re.sub(r'<[^>]+>', '', text)
+    # 规则2：移除规格括号及内容
+    text = re.sub(r'[\(\（\[\【\《].*?[\)\）\]\】\技巧\》]', '', text)
+    # 规则2：特定后缀过滤
     junk = [
         r'\.cn@SD', r'\.cn@HD', r'\.hk@SD', r'\.png$',
         r'2160p', r'1080p', r'720p', r'576p', r'576i', r'540p', r'480p', r'360p', r'180p',
@@ -34,89 +60,106 @@ def clean_alias(text):
     ]
     for p in junk:
         text = re.sub(p, '', text, flags=re.I)
-    # 规则 2：去掉横杠、下划线并严格去掉末尾空格
+    # 规则2：去横杠、去下划线并去掉末尾空格
     text = text.replace('-', '').replace('_', '').strip()
     return text
 
 def get_pinyin_variants(text):
-    """规则 3, 4, 6, 10：增强语义补偿及拼音转换"""
+    """规则3, 4, 6, 10：超强矩阵式语义补偿与全大写拼音生成"""
     if not text: return []
     
-    # 基础处理
+    # 基础过滤：去空格、去独立TV
     base = clean_alias(text).replace(' ', '')
-    base = re.search(r'(?i)(.*?)TV', base).group(1) if 'TV' in base.upper() else base
+    base = re.sub(r'TV|Television', '', base, flags=re.I)
     
-    # 规则 10：语义补偿映射表
+    # 规则10：矩阵式高级语义补偿库 (修复了错位括号与内嵌修饰符)
     repls = [
-        (r'(?i)Satellite', ['卫视']),
-        (r'(?i)News', ['新闻', '综合']),
-        (r'(?i)Generalist|Comprehensive', ['综合']),
-        (r'(?i)Documentary', ['纪录', '纪实']),
-        (r'(?i)Childrens?|Cartoon', ['少儿', '动漫']),
-        (r'(?i)Movie|Cine', ['电影']),
-        (r'(?i)Sports', ['体育']),
-        (r'(?i)Science', ['科教']),
-        (r'(?i)BRTV', ['北京']),
-        (r'(?i)SZTV', ['深圳']),
-        (r'(?i)HBS', ['湖南'])
+        (r'Satellite', ['卫视']),
+        (r'News', ['新闻', '综合']),
+        (r'Generalist|Comprehensive|CCTV1$', ['综合']),
+        (r'Documentary|Docu|Doc', ['纪录', '纪实']),
+        (r'Childrens?|Cartoon|Kaku', ['少儿', '动漫', '卡通']),
+        (r'Movie|Cine|Chuanqi', ['电影', '影院', '传奇']),
+        (r'Sports|Sport', ['体育']),
+        (r'Science|Edu|Discovery', ['科教', '科学', '教育']),
+        (r'Finance|Economy|Business', ['财经', '经济']),
+        (r'Entertainment|Variety', ['综艺', '娱乐']),
+        (r'International|World', ['国际']),
+        (r'Music', ['音乐']),
+        # 常见地方台及广播台缩写补偿
+        (r'BRTV', ['北京']),
+        (r'GDT?V', ['广东']),
+        (r'SZTV', ['深圳']),
+        (r'HBS|HUNAN', ['湖南']),
+        (r'ZTV|ZJTV', ['浙江']),
+        (r'SMG', ['东方', '上海'])
     ]
     
-    variants = [base]
+    variants = {base}
     for pattern, subs in repls:
-        temp_list = []
+        temp_set = set()
         for v in variants:
             for s in subs:
-                new_v = re.sub(pattern, s, v)
+                new_v = re.sub(pattern, s, v, flags=re.I)
                 if new_v != v:
-                    temp_list.append(new_v)
-        variants.extend(temp_list)
+                    temp_set.add(new_v)
+        variants.update(temp_set)
     
-    # 转化为大写拼音 (规则 4 & 6)
+    # 将所有生成的中文语义组合转化为大写拼音
     py_results = set()
-    for v in set(variants):
-        # 规则 4：去掉常见后缀增加碰撞
-        v_pure = re.sub(r'卫视$|台$|频道$|综合$|新闻$', '', v)
+    for v in variants:
+        # 规则4：切除常见的尾部干扰后缀，扩大对撞成功率
+        v_pure = re.sub(r'卫视$|台$|频道$|综合$|新闻$|卡通$|少儿$', '', v)
         py = "".join(lazy_pinyin(v_pure)).upper()
         if py: py_results.add(py)
+        
     return list(py_results)
 
 def run_pipeline():
     start_time = time.time()
-    headers = {'User-Agent': 'Mozilla/5.0'}
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
     name_map = defaultdict(set)
-    search_index = {} 
+    search_index = {} # 全局滚动查找匹配索引
 
     def update_index(std, val):
         """规则 5：实时更新匹配索引库"""
         if not val: return
-        # A. 清洗后的全小写 (规则 6)
         search_index[clean_alias(val).lower()] = std
-        # B. 拼音变体 (规则 10)
         for py in get_pinyin_variants(val):
             search_index[py] = std
 
     try:
-        # 第一步 & 第二步：抓取标准名与别名
-        print(">>> [1/4] 抓取 epg.112114.xyz 数据库...")
-        r_home = requests.get("https://epg.112114.xyz", headers=headers, timeout=20, verify=False)
-        # 抓取包含 title 和 页面文本的频道名
-        stds = re.findall(r'title="([^"]+)"', r_home.text)
-        stds += re.findall(r'[\u4e00-\u9fa5]{2,10}(?:\d+[\+]?|超高?清)?', r_home.text)
+        # --- 第一步：抓取/读取标准名库 ---
+        print(">>> [1/4] 获取 epg.112114.xyz 标准主页数据...")
+        html_home = get_content_with_cache(
+            url="https://epg.112114.xyz", 
+            cache_path=CACHE_EPG_HOME, 
+            headers=headers, 
+            timeout=25
+        )
+        stds = re.findall(r'title="([^"]+)"', html_home)
+        stds += re.findall(r'[\u4e00-\u9fa5]{2,10}(?:\d+[\+]?|超高?清)?', html_home)
         
         for s in set(stds):
             if s and not s.startswith("http"):
-                s_std = clean_alias(s) # 规则 8：粉碎 </br>
+                s_std = clean_alias(s) # 规则8
                 if s_std:
                     name_map[s_std].add(s_std)
-                    # 规则 9：自动加 HD 别名
+                    # 规则9：每个标准名自动额外追加一个 "标准名HD" 别名
                     hd_name = f"{s_std}HD"
                     name_map[s_std].add(hd_name)
                     update_index(s_std, s_std)
-                    update_index(s_std, hd_name) # 让 HD 也进入索引
+                    update_index(s_std, hd_name)
 
-        # 抓取别名页
-        r_alias = requests.get("https://epg.112114.xyz/alias", headers=headers, timeout=20, verify=False)
-        for line in r_alias.text.splitlines():
+        # --- 第二步：提取线上别名映射表 ---
+        print(">>> [2/4] 获取 epg.112114.xyz/alias 别名数据...")
+        html_alias = get_content_with_cache(
+            url="https://epg.112114.xyz/alias", 
+            cache_path=CACHE_EPG_ALIAS, 
+            headers=headers, 
+            timeout=25
+        )
+        for line in html_alias.splitlines():
             parts = re.split(r'-->|:', line)
             if len(parts) >= 2:
                 std_raw = parts[1].strip() if '-->' in line else parts[0].strip()
@@ -126,7 +169,7 @@ def run_pipeline():
                     name_map[std].add(clean_alias(alias_raw))
                     update_index(std, alias_raw)
 
-        # 第三步：合并本地 nameoriginal.json
+        # --- 第三步：识别并读入本地 nameoriginal.json ---
         if os.path.exists(ORIGINAL_JSON_PATH):
             print(f">>> [3/4] 合并本地 {os.path.basename(ORIGINAL_JSON_PATH)}...")
             with open(ORIGINAL_JSON_PATH, 'r', encoding='utf-8') as f:
@@ -139,26 +182,28 @@ def run_pipeline():
                         name_map[std].add(clean_alias(a))
                         update_index(std, a)
 
-        # 第四步：从 iptv-org 提取识别数据库
-        print(">>> [4/4] 识别 iptv-org 源列表...")
-        r_m3u = requests.get("https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cn.m3u", headers=headers, timeout=30, verify=False)
-        with open(M3U_RAW_PATH, "w", encoding="utf-8") as f: f.write(r_m3u.text)
+        # --- 第四步：抓取/读取需识别数据库 (iptv-org M3U) ---
+        print(">>> [4/4] 获取并处理 iptv-org 源列表...")
+        m3u_text = get_content_with_cache(
+            url="https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cn.m3u",
+            cache_path=M3U_RAW_PATH, 
+            headers=headers,
+            timeout=35
+        )
 
         stats = {"total": 0, "matched": 0}
         unmatched = set()
 
-        for line in r_m3u.text.splitlines():
+        for line in m3u_text.splitlines():
             if line.startswith("#EXTINF:"):
                 stats["total"] += 1
                 tid = (re.search(r'tvg-id="([^"]*)"', line).group(1) if 'tvg-id="' in line else "")
                 tname = (re.search(r'tvg-name="([^"]*)"', line).group(1) if 'tvg-name="' in line else "")
                 dname = line.split(",")[-1].strip()
 
-                # 规则 1：优先级判断
                 best = dname if has_chinese(dname) else tid if has_chinese(tid) else tname if has_chinese(tname) else (tid or tname or dname)
 
-                # 匹配逻辑
-                target = search_index.get(clean_alias(best).lower())
+                target = search_index.get(clean_alias(best).lower()) 
                 if not target:
                     for py in get_pinyin_variants(best):
                         if py in search_index:
@@ -166,7 +211,6 @@ def run_pipeline():
                             break
 
                 if target:
-                    # 规则 7：回填所有信息
                     for info in [tid, tname, dname]:
                         if info:
                             c = clean_alias(info)
@@ -176,9 +220,13 @@ def run_pipeline():
                 else:
                     unmatched.add(dname)
 
-        # 整理并写入文件 (再次确保规则 8)
-        final_json = {k: ",".join(sorted(list({clean_alias(a) for a in v if clean_alias(a)}))) 
-                      for k, v in name_map.items() if k}
+        # 最终整理输出 (确保规则8)
+        final_json = {}
+        for k, v in name_map.items():
+            k_clean = clean_alias(k)
+            if k_clean:
+                v_clean = {clean_alias(a) for a in v if clean_alias(a)}
+                final_json[k_clean] = ",".join(sorted(list(v_clean)))
         
         with open(OUTPUT_JSON_PATH, 'w', encoding='utf-8') as f:
             json.dump(final_json, f, indent=2, ensure_ascii=False)
@@ -191,7 +239,7 @@ def run_pipeline():
         print(f"        name.py 任务识别报告")
         print(f"==========================================")
         print(f"- 别名识别总数: {stats['total']}")
-        print(f"- 成功识别数量: {stats['matched']}")
+        print(f"- 成功匹配数量: {stats['matched']}")
         print(f"- 未能识别数量: {len(unmatched)}")
         print(f"- 执行总耗时: {duration:.2f} 秒")
         print(f"==========================================\n")
