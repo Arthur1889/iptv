@@ -281,8 +281,8 @@ def main():
     logging.info(f">>> [第六步] 正在写入最终优化版 tv.m3u 文件...")
     
     with open(OUTPUT_M3U_PATH, "w", encoding="utf-8") as f:
-        # 💡 完美挂载 fanmingming 标准 EPG 节目单源头
-        f.write('#EXTM3U x-tvg-url="https://live.fanmingming.cn/e.xml"\n')
+        # 💡【关键升级】：在 M3U 第一行精准嵌入 x-tvg-url 复合指针，实现 APTV 导入时无感全自动识别
+        f.write('#EXTM3U x-tvg-url="http://epg.51zmt.top:12210/e.xml,https://live.fanmingming.cn/e.xml"\n')
         for res in final_output_list:
             item = res["item"]
             std_name = item["std_name"]
@@ -299,9 +299,9 @@ def main():
                 elif item["has_4k_label"] and "4K" not in display_title.upper():
                     display_title += " 4K"
                     
-            # 💡【核心修正】：消除切分出来带来的减号干扰，将 "CCTV-1" 精准修正为 "CCTV1"，与 fanmingming 的 e.xml 完美对接
+            # 顺着空格切开，精准拿回带减号的官方标准字段（例如 "CCTV-1"），完美对碰 51zmt 库
             if "CCTV" in display_title:
-                formatted_tvg_id = display_title.split(" ")[0].replace("-", "")
+                formatted_tvg_id = display_title.split(" ")[0]
             else:
                 formatted_tvg_id = std_name
                 
