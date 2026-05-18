@@ -4,23 +4,16 @@ import re
 import json
 import time
 import urllib.request
-from concurrent.futures import ThreadPoolExecutor, as_completed
-from threading import Lock
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 PARENT_DIR = os.path.dirname(CURRENT_DIR)
 
+# 定义核心路径
 SOURCES_JSON_PATH = os.path.join(PARENT_DIR, "sources.json")
 NAME_JSON_PATH = os.path.join(CURRENT_DIR, "name.json")
 GROUP_JSON_PATH = os.path.join(CURRENT_DIR, "group.json")
+UNKNOWN_JSON_PATH = os.path.join(CURRENT_DIR, "unknown.json")
 CACHE_FILE_PATH = os.path.join(CURRENT_DIR, "sources_cache.json")
-
-# ==================== 🔑 硅基流动官方终极配置 ====================
-AI_API_KEY = "sk-esofoeqfopwrwqfvhfwuiyzmdsukqbqwzxvdopynmfzwativ"
-AI_API_URL = "https://api.siliconflow.cn/v1/chat/completions"
-# 🌟 听你的，全线换成速度极快、分类极准、完美支持 JSON 格式的千问 2.5 经典模型
-AI_MODEL = "Qwen/Qwen2.5-7B-Instruct" 
-# =========================================================================
 
 VALID_GROUPS = [
     "4K频道", "央视频道", "地方卫视", "港澳台", "山东频道", "上海频道", 
@@ -28,11 +21,20 @@ VALID_GROUPS = [
     "纪录纪实", "娱乐频道", "少儿动画", "体育赛事", "外语频道", "综合频道"
 ]
 
-data_lock = Lock()
-print_lock = Lock()
+def clean_dirty_keys(name_str):
+    """
+    🧹 强力洗脏：瞬间剔除老代码大模型留在 JSON 里的 {"标准名":", [", \\ 等碎骨头
+    """
+    if not name_str:
+        return ""
+    name_str = re.sub(r'\{.*?:', '', name_str)
+    name_str = re.sub(r'[\[\]\{\}\"\']', '', name_str)
+    return name_str.replace('\\', '').strip()
 
 def load_raw_channel_names():
-    # 🌟 完美的本地缓存保护机制：1 天内如果存在有效缓存，优先载入，绝对不重复联网请求
+    """
+    💾 稳健的本地 M3U 缓存机制
+    """
     if os.path.exists(CACHE_FILE_PATH) and os.path.getsize(CACHE_FILE_PATH) > 10:
         file_time = os.path.getmtime(CACHE_FILE_PATH)
         if time.time() - file_time < 86400:
@@ -49,7 +51,7 @@ def load_raw_channel_names():
         print(f"❌ 错误：未在上级目录找到 sources.json 文件")
         return []
         
-    print("⏳ 缓存失效或不存在，开始从 sources.json 的网络源中批量解析原始名称...")
+    print("⏳ 开始从 sources.json 的网络源中批量解析原始名称...")
     with open(SOURCES_JSON_PATH, 'r', encoding='utf-8') as f:
         data = json.load(f)
     urls = data.get("urls", [])
@@ -76,151 +78,158 @@ def load_raw_channel_names():
         json.dump(result_list, cf, indent=2, ensure_ascii=False)
     return result_list
 
-def ask_ai_single_channel_json(raw_name):
-    # 🧼 精准防御：转义双引号、剥离换行，防止 JSON 字典断裂
-    clean_name = raw_name.replace('"', '\\"').replace('\n', '').replace('\r', '').strip()
+def regex_classify_channel(raw_name):
+    """
+    ⚙️ 纯本地高性能正则规则引擎
+    """
+    name = raw_name.upper().strip()
     
-    prompt = f"分析这个电视频道名称，直接返回格式：标准名,分组名。输入频道：{clean_name}"
-    
-    data = {
-        "model": AI_MODEL,
-        "messages": [{"role": "user", "content": prompt}],
-        "temperature": 0.1,
-        "response_format": {"type": "json_object"} # 🌟 千问原生支持完美的 JSON 强约束控制
-    }
-    
-    # 🌟 核心改进：标准的 JSON 二进制序列化，杜绝多线程下的任何拼接截断
-    req_body = json.dumps(data, ensure_ascii=False).encode('utf-8')
-    
-    headers = {
-        "Authorization": f"Bearer {AI_API_KEY.strip()}",
-        "Content-Type": "application/json; charset=utf-8",
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
-        "Content-Length": str(len(req_body)) # 🌟 强制宣告字节长度，锁死网关，绝不接受任何中途截断！
-    }
-    
-    try:
-        req = urllib.request.Request(AI_API_URL, data=req_body, headers=headers, method="POST")
-        with urllib.request.urlopen(req, timeout=15) as response:
-            res_json = json.loads(response.read().decode('utf-8'))
-            content = res_json['choices'][0]['message']['content'].strip()
-            
-            # 支持纯文本及 JSON 格式自适应解析
-            if "{" in content and "}" in content:
-                start = content.find('{')
-                end = content.rfind('}')
-                js_data = json.loads(content[start:end+1])
-                std_name = js_data.get("standard") or js_data.get("Standard")
-                group_name = js_data.get("group") or js_data.get("Group")
-                if std_name and group_name:
-                    return raw_name, str(std_name).strip(), str(group_name).strip()
-            
-            content_line = content.split("\n")[0].strip()
-            if "," in content_line:
-                std_name, group_name = content_line.split(",", 1)
-                return raw_name, std_name.strip(), group_name.strip()
-    except Exception as e:
-        with print_lock:
-            print(f"\n❌ [API ERROR] 频道: {raw_name} -> {e}")
-    return raw_name, None, None
+    # 1. 影视轮播、音乐MV
+    if re.search(r'专场|合集|点播|精选|首|小时|串烧|视频|音乐|歌台|演唱会|歌曲|D|MV', name):
+        if re.search(r'歌|音乐|唱|DJ|MV', name):
+            return raw_name, "歌曲及音乐MV"
+        return raw_name, "影视轮播"
+
+    # 2. 4K频道
+    if '4K' in name or '8K' in name:
+        std = re.sub(r'(4K|8K|HD|FHD|高清|超清|\s)', '', raw_name)
+        return std, "4K频道"
+
+    # 3. 央视频道
+    if 'CCTV' in name or '中央' in name:
+        match = re.search(r'CCTV[-_]*\s*(\d+|NEWS|体育|电影|电视剧|纪实|科教|戏曲|社会|少儿|音乐|国防|农业|乡村|经典|健康|风云|兵器|台球|高尔夫|文化)', name, re.I)
+        if match:
+            return f"CCTV-{match.group(1)}", "央视频道"
+        return "CCTV-综合", "央视频道"
+
+    # 4. 地方卫视
+    if '卫视' in name:
+        std = re.sub(r'(HD|FHD|高清|超清|频道|\s)', '', raw_name)
+        return std, "地方卫视"
+
+    # 5. 港澳台系列
+    if re.search(r'翡翠|明珠|凤凰|本港|TVB|HBO|CNBC|CNN|BBC|DISCOVERY|FOX|MOVI|KBS|NHK|港|澳|台', name):
+        std = re.sub(r'(HD|FHD|高清|超清|\s)', '', raw_name)
+        return std, "港澳台"
+
+    # 6. 少儿动画
+    if re.search(r'卡通|少儿|动漫|动画|金鹰|炫动|卡酷', name):
+        return re.sub(r'(HD|高清|\s)', '', raw_name), "少儿动画"
+
+    # 7. 体育赛事
+    if re.search(r'体育|五星|劲爆|足球|篮球|台球|赛车', name):
+        return re.sub(r'(HD|高清|\s)', '', raw_name), "体育赛事"
+
+    # 8. 地域划分
+    if '山东' in name or '齐鲁' in name:
+        return raw_name, "山东频道"
+    if '上海' in name or '东方' in name:
+        return raw_name, "上海频道"
+
+    # 9. 影视/纪录
+    if re.search(r'纪录|纪实|探索|地理|求索', name):
+        return re.sub(r'(HD|高清|\s)', '', raw_name), "纪录纪实"
+    if re.search(r'电影|剧场|影院|影视|连续剧|剧', name):
+        return re.sub(r'(HD|高清|\s)', '', raw_name), "影视频道"
+
+    # 10. 常规地方台
+    if re.search(r'新闻|综合|公共|生活|科教|都市|文礼|文旅', name):
+        return re.sub(r'(HD|高清|\s)', '', raw_name), "地方频道"
+
+    return None, None
 
 def main():
     print("==========================================================")
-    print(" 🧠 智能分拣外挂 sort.py 启动（千问并发安全去重流）")
+    print(" 🚀 字典算法自愈系统启动（100%本地，已绝育400错误）")
     print("==========================================================")
     
-    # 完美的本地缓存载入机制
     raw_names = load_raw_channel_names()
     if not raw_names:
-        print("❌ 错误：未能获取到任何原始数据！")
+        print("❌ 错误：未获取到有效原始数据！")
         return
 
+    # 自动洗刷历史损坏数据
     name_repo = {}
     if os.path.exists(NAME_JSON_PATH):
         try:
             with open(NAME_JSON_PATH, 'r', encoding='utf-8') as f:
-                name_repo = json.load(f)
+                old = json.load(f)
+                name_repo = {clean_dirty_keys(k): clean_dirty_keys(v) for k, v in old.items() if clean_dirty_keys(k)}
         except: pass
 
     group_repo = {}
     if os.path.exists(GROUP_JSON_PATH):
         try:
             with open(GROUP_JSON_PATH, 'r', encoding='utf-8') as f:
-                group_repo = json.load(f)
+                old = json.load(f)
+                group_repo = {clean_dirty_keys(k): clean_dirty_keys(v) for k, v in old.items() if clean_dirty_keys(k)}
         except: pass
 
-    # 🌟 增量去重：已经清洗过的老台绝对不在本次请求中占用 API 额度
+    unknown_list = []
+    if os.path.exists(UNKNOWN_JSON_PATH):
+        try:
+            with open(UNKNOWN_JSON_PATH, 'r', encoding='utf-8') as f:
+                old = json.load(f)
+                unknown_list = [clean_dirty_keys(x) for x in old if clean_dirty_keys(x)]
+        except: pass
+
+    # 建立现存资产索引，实施精准增量过滤
     existing_keys = set(group_repo.keys())
     for std_k, aliases in name_repo.items():
         existing_keys.add(std_k.upper())
         for a in aliases.split(","):
             existing_keys.add(a.strip().upper())
+    for uk in unknown_list:
+        existing_keys.add(uk.upper())
 
-    filtered_unknowns = [n for n in raw_names if n.upper() not in existing_keys]
-    total_unknowns = len(filtered_unknowns)
+    # 过滤出真正需要处理的新词
+    filtered_names = [n for n in raw_names if clean_dirty_keys(n).upper() not in existing_keys]
     
-    print(f"🧬 本次真正需要向网络 AI 发起分拣的【未知新怪名】: {total_unknowns} 个。")
-    if total_unknowns == 0:
-        print("✨ 完美！当前所有抓取到的源在本地已全量清洗，无需重复请求网络 AI。")
+    total_new = len(filtered_names)
+    print(f"🧬 检测到本地已安全收录大部分频道。本次新增未入库怪名: {total_new} 个。")
+    
+    if total_new == 0:
+        # 如果没有新增，直接用干净的结构重写一次，把以前留存的脏格式彻底重置掉
+        with open(NAME_JSON_PATH, 'w', encoding='utf-8') as f: json.dump(name_repo, f, indent=2, ensure_ascii=False)
+        with open(GROUP_JSON_PATH, 'w', encoding='utf-8') as f: json.dump(group_repo, f, indent=2, ensure_ascii=False)
+        with open(UNKNOWN_JSON_PATH, 'w', encoding='utf-8') as f: json.dump(unknown_list, f, indent=2, ensure_ascii=False)
+        print("✨ 本地字典当前 100% 纯净，历史脏数据清洗完毕，已全部就位。")
         return
 
-    print("🌐 5路并发网道已铺设，新模型全速轰鸣中...")
-
     success_count = 0
-    processed_count = 0
-    
-    with ThreadPoolExecutor(max_workers=5) as executor:
-        futures = {executor.submit(ask_ai_single_channel_json, name): name for name in filtered_unknowns}
-        
-        for future in as_completed(futures):
-            raw_name, std_name, group_name = future.result()
-            processed_count += 1
+    isolated_count = 0
+
+    for raw_name in filtered_names:
+        pure_raw = clean_dirty_keys(raw_name)
+        if not pure_raw: continue
             
-            # 🌟 规则 9 本地拦截：凡是带有合集专场的怪名，在本地秒分类，100% 隔离高频异常风险
-            if re.search(r'专场|合集|点播|精选|首|小时|串烧|视频|音乐|歌台', raw_name):
-                target_group = "歌曲及音乐MV" if re.search(r'歌|音乐|唱|DJ|MV', raw_name) else "影视轮播"
-                with data_lock:
-                    group_repo[raw_name] = target_group
-                continue
+        std_name, group_name = regex_classify_channel(pure_raw)
+        
+        if std_name and group_name:
+            success_count += 1
+            if std_name in name_repo:
+                current_aliases = [a.strip() for a in name_repo[std_name].split(",")]
+                if pure_raw not in current_aliases and pure_raw != std_name:
+                    name_repo[std_name] = f"{name_repo[std_name]}, {pure_raw}"
+            else:
+                if pure_raw != std_name:
+                    name_repo[std_name] = pure_raw
+            group_repo[pure_raw] = group_name
+        else:
+            isolated_count += 1
+            if pure_raw not in unknown_list:
+                unknown_list.append(pure_raw)
 
-            if std_name and group_name:
-                if any(word in std_name for word in ["属于", "包含", "分类", "内容"]):
-                    std_name = "SKIP"
+    # 数据全量回写落地
+    with open(NAME_JSON_PATH, 'w', encoding='utf-8') as f:
+        json.dump(name_repo, f, indent=2, ensure_ascii=False)
+    with open(GROUP_JSON_PATH, 'w', encoding='utf-8') as f:
+        json.dump(group_repo, f, indent=2, ensure_ascii=False)
+    with open(UNKNOWN_JSON_PATH, 'w', encoding='utf-8') as f:
+        json.dump(unknown_list, f, indent=2, ensure_ascii=False)
 
-                if group_name not in VALID_GROUPS:
-                    group_name = "综合频道"
-
-                with data_lock:
-                    if std_name.upper() == "SKIP":
-                        target_group = "歌曲及音乐MV" if re.search(r'歌|音乐|唱|DJ|MV', raw_name) else "影视轮播"
-                        group_repo[raw_name] = target_group
-                    else:
-                        success_count += 1
-                        if std_name in name_repo:
-                            current_aliases = [a.strip() for a in name_repo[std_name].split(",")]
-                            if raw_name not in current_aliases:
-                                name_repo[std_name] = f"{name_repo[std_name]}, {raw_name}"
-                        else:
-                            name_repo[std_name] = raw_name
-                        group_repo[std_name] = group_name
-
-            # ⏳ 单行滚动进度条
-            pct = (processed_count / total_unknowns) * 100
-            progress_msg = f"\r⏳ 处理进度: {processed_count}/{total_unknowns} [{pct:.1f}%] | 成功捕获电视: {success_count} 个"
-            with print_lock:
-                sys.stdout.write(progress_msg)
-                sys.stdout.flush()
-
-            # 每 5 个安全写盘，不丢失任何清洗成果
-            if processed_count % 5 == 0 or processed_count == total_unknowns:
-                with data_lock:
-                    with open(NAME_JSON_PATH, 'w', encoding='utf-8') as f:
-                        json.dump(name_repo, f, indent=2, ensure_ascii=False)
-                    with open(GROUP_JSON_PATH, 'w', encoding='utf-8') as f:
-                        json.dump(group_repo, f, indent=2, ensure_ascii=False)
-
-    print("\n==========================================================")
-    print(f"🎉 智能增量分拣完毕！你的基础对照字典已完成无损净化。")
+    print("==========================================================")
+    print(f"🎉 跑数大捷！新精确分类: {success_count} 个 | 独立隔离至 unknown.json: {isolated_count} 个。")
     print("==========================================================")
 
 if __name__ == "__main__":
