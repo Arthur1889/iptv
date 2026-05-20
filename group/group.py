@@ -22,9 +22,8 @@ PROVINCES = [
 def clean_channel_name(name):
     if not name: return ""
     name = str(name).strip()
-    # 彻底切掉可能粘连在后面的空格或者网页残留尾巴
-    name = name.split(" ")[0]
-    junk = [r'直播', r'在线', r'高清', r'超清', r'频道', r'电视台']
+    name = name.split(" ")[0]  # 切掉尾部可能存在的空格和网页解释
+    junk = [r'直播', r'在线', r'高清', r'超清']
     for pattern in junk:
         name = re.sub(pattern, '', name, flags=re.I)
     return name.strip()
@@ -33,7 +32,7 @@ def regex_classify_channel(clean_name, url_hint):
     name = clean_name.upper()
     url_hint = url_hint.lower()
 
-    if 'CCTV' in name or '中央' in name or 'CETV' in name or '教育' in name or "cctv" in url_hint: 
+    if 'CCTV' in name or '中央' in name or 'CETV' in name or '教育' in name: 
         return "央视频道"
     if re.search(r'翡翠|明珠|凤凰|本港|TVB|HBO|CNBC|CNN|BBC|DISCOVERY|FOX|中天|三立|纬来|台视|无线|HOY|港|澳|台', name) or "gangaotai" in url_hint: 
         return "港澳台"
@@ -45,7 +44,11 @@ def regex_classify_channel(clean_name, url_hint):
         return "卫视频道"
 
     for prov in PROVINCES:
-        if prov in clean_name or prov.lower() in url_hint: 
+        if prov in clean_name: 
+            return f"{prov}频道"
+
+    for prov in PROVINCES:
+        if prov.lower() in url_hint:
             return f"{prov}频道"
 
     return "地方频道"
@@ -89,11 +92,10 @@ def fetch_clipboard_or_local_cache(target_url, index, cache_meta, total_count):
     local_filename = get_url_filename(target_url, index)
     local_path = os.path.join(HTML_SAVE_DIR, local_filename)
     
-    # 7天离线免打扰
     if os.path.exists(local_path):
         days_passed = (time.time() - cache_meta.get(target_url, 0)) / (24 * 3600)
         if days_passed < 7:
-            print(f"  📦 [本地快照激活] #{index} 节点直接读取本地副本")
+            print(f"  📦 [本地缓存激活] #{index} 节点直接载入本地快照。")
             with open(local_path, 'r', encoding='utf-8') as f: return f.read(), False
 
     print(f"\n🎬 ===================== [ 进度: {index} / {total_count} ] =====================")
@@ -101,18 +103,18 @@ def fetch_clipboard_or_local_cache(target_url, index, cache_meta, total_count):
     webbrowser.open(target_url, new=2)
     
     print(f"  💡 [提示] 请直接在网页里：【Ctrl+A】全选 -> 【Ctrl+C】复制")
-    input(f"  👉 完成后，请回到终端【敲击回车(Enter)】执行分拣...")
+    input(f"  👉 完成后，请回到终端【敲击回车(Enter)】解锁分拣...")
     
     clipboard_content = get_clipboard_text()
     if clipboard_content:
         with open(local_path, 'w', encoding='utf-8') as f: f.write(clipboard_content)
         cache_meta[target_url] = time.time()
-        print(f"  💾 [快照已成功落地]: {local_filename}")
+        print(f"  💾 [快照已固化]: {local_filename}")
     return clipboard_content, True
 
 def main():
     print("==========================================")
-    print(" 🚀 不间断滚动捕获·高保真分拣引擎启动")
+    print(" 🚀 非贪婪精准边界·高保真分拣引擎启动")
     print("==========================================")
     start_time = time.time()
     target_urls = get_target_urls()
@@ -124,10 +126,17 @@ def main():
     manual_op_count = 0
     total_count = len(target_urls)
 
-    # 🌟 核心升级：滚雪球匹配正则，精准捕捉不带换行符、粘连在一块的电台大军
-    # 能够精准从 “CCTV-1 综合CCTV-2 财经湖南卫视湖南经视频道” 文本中切分出独立的台
+    # 精准的非贪婪电台捕捉正则，严格限制台名长度为 2-7 个字，防止连体婴儿
     channel_extract_pattern = re.compile(
-        r'([a-zA-Z0-9\-\+]+卫视|[a-zA-Z0-9\-\+]+台|[a-zA-Z0-9\-\+]+频道|CCTV[-a-zA-Z0-9\+]+(?:\s[\u4e00-\u9fa5]+)?|[\u4e00-\u9fa5]+卫视|[\u4e00-\u9fa5]+频道|[\u4e00-\u9fa5]+一套|[\u4e00-\u9fa5]+二套|快乐垂钓|四海钓鱼|湖南快乐购)'
+        r'(CCTV[-a-zA-Z0-9\+]+(?:\s[\u4e00-\u9fa5]+)?|'  # CCTV-1 综合
+        r'CETV-?\d|'                                      # CETV-1
+        r'CGTN[\u4e00-\u9fa5\s\w\+]*频道|'                 # CGTN 纪录频道
+        r'[\u4e00-\u9fa5]{2,7}?卫视|'                     # 湖南卫视
+        r'[\u4e00-\u9fa5]{2,7}?频道|'                     # 湖南经视频道
+        r'[\u4e00-\u9fa5]{2,7}?一套|'                     # 张家界一套
+        r'[\u4e00-\u9fa5]{2,7}?二套|'                     # 张家界二套
+        r'QTV[\u4e00-\u9fa50-9]*|'                        # 青岛QTV系列
+        r'快乐垂钓|四海钓鱼|中国气象频道|收藏天下频道|中华美食频道)'
     )
 
     for idx, t_url in enumerate(target_urls, start=1):
@@ -135,28 +144,30 @@ def main():
         if is_manual: manual_op_count += 1
         if not text_content: continue
 
-        # 🪐 1. 扁平化清洗，抹除所有多余的换行符，变成纯粹的不间断文本流
+        # 🪐 1. 扁平化整合为一整行纯文本
         flat_text = " ".join(text_content.splitlines())
 
-        # 🪐 2. 精准定位“XX节目表”到“热门电视台”之间的核心数据区间
-        start_match = re.search(r'[\u4e00-\u9fa5]+节目表', flat_text)
+        # 🪐 2. 🧠 彻底避开贪婪匹配！用非贪婪正则精准咬死“从少儿后面紧跟的节目表开始”
+        # 无论前面怎么粘连，黄金内容区绝对在 导航栏的“少儿” 后面
+        boundary_match = re.search(r'少儿.*?([\u4e00-\u9fa5]+节目表)', flat_text)
         end_match = re.search(r'热门电视台', flat_text)
         
-        if not start_match:
-            print(f"  ⚠️  注意：未能在缓存文本中匹配到“节目表”分水岭，跳过节点 #{idx}。")
+        if not boundary_match:
+            print(f"  ⚠️  注意：未能在缓存文本中精确定位到“节目表”分水岭，跳过节点 #{idx}。")
             continue
             
-        start_pos = start_match.end()
+        start_pos = boundary_match.end()
         end_pos = end_match.start() if end_match else len(flat_text)
         pure_zone = flat_text[start_pos:end_pos].strip()
 
-        # 🪐 3. 运行滚动捕获正则，将粘连的文本切成独立的电台数组
+        # 🪐 3. 执行非贪婪滚动匹配
         page_channels = channel_extract_pattern.findall(pure_zone)
-        print(f"  📊 滚动切片成功 -> 收录本页纯净台数: {len(page_channels)} 个")
+        print(f"  📊 边界切片成功 -> 从本地快照中成功提取独立电台数: {len(page_channels)} 个")
         
         for ch_name in page_channels:
             ch_clean = clean_channel_name(ch_name)
             if not ch_clean or len(ch_clean) <= 1: continue
+            
             group_clean = regex_classify_channel(ch_clean, t_url)
             group_dict[ch_clean] = group_clean
 
@@ -169,7 +180,7 @@ def main():
 
     save_cache_meta(cache_meta)
     duration = time.time() - start_time
-    print(f"\n🎉 运行报告：大功告成！全口径滚动提取生效。大集群共计完美收录了 {len(group_dict)} 个优质频道。")
+    print(f"\n🎉 完美收工！大集群共计收录了 {len(group_dict)} 个无暇电台，快去看看全新的 group.json 吧！")
 
 if __name__ == "__main__":
     main()
