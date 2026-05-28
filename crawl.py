@@ -17,10 +17,11 @@ CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 SOURCES_JSON_PATH = os.path.join(CURRENT_DIR, "sources.json")
 NAME_JSON_PATH = os.path.join(CURRENT_DIR, "name.json")
 BLACKLIST_JSON_PATH = os.path.join(CURRENT_DIR, "blacklist.json")
+GROUP_JSON_PATH = os.path.join(CURRENT_DIR, "group.json")  # 最高优先级分组映射文件
 OUTPUT_M3U_PATH = os.path.join(CURRENT_DIR, "tv.m3u")
 LOG_FILE_PATH = os.path.join(CURRENT_DIR, "crawl.log")
 
-# 1. 配置日志规范并形成文件 (要求1)
+# 配置日志规范并形成文件 (要求1)
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s [%(levelname)s] %(message)s',
@@ -33,7 +34,7 @@ logging.basicConfig(
 print_lock = Lock()
 last_print_time = 0
 
-# 央视频道标准中文描述映射 (要求6)
+# 央视频道标准中文描述映射
 CCTV_DESC_MAP = {
     "CCTV1": "CCTV-1 综合", "CCTV2": "CCTV-2 财经", "CCTV3": "CCTV-3 综艺",
     "CCTV4": "CCTV-4 中文国际", "CCTV5": "CCTV-5 体育", "CCTV5+": "CCTV-5+ 体育赛事",
@@ -43,11 +44,11 @@ CCTV_DESC_MAP = {
     "CCTV15": "CCTV-15 音乐", "CCTV16": "CCTV-16 奥林匹克", "CCTV17": "CCTV-17 农业农村"
 }
 
-# 排序优先级权重字典 (第五步、要求5)
+# 按照最新的第五步调整的精确重排排序优先级权重列表 (第五步)
 GROUP_PRIORITY = [
-    "4K频道", "央视频道", "地方卫视", "港澳台", "山东频道", "上海频道", 
-    "地方频道", "影视频道", "歌曲及音乐MV", "纪录纪实", "娱乐频道", 
-    "少儿动画", "体育赛事", "海外频道", "综合频道", "电视剧直播", "动漫直播"
+    "4K频道", "央视频道", "地方卫视", "山东频道", "上海频道", "地方频道", 
+    "影视频道", "歌曲及音乐MV", "纪录纪实", "娱乐频道", "电视剧直播", 
+    "动漫直播", "港澳台", "海外频道", "体育赛事", "少儿动画", "综合频道"
 ]
 
 PROVINCES = [
@@ -56,19 +57,29 @@ PROVINCES = [
     "云南", "陕西", "甘肃", "青海", "宁夏", "新疆", "海南", "西藏", "黑龙江", "内蒙古"
 ]
 
-# 🌟 补齐缺失的核心函数：从 sources.json 的源列表中提取源
+# 二级城市到省份老家的纠偏映射库 (注：上海、山东在后面会单独拦截成分支频道，其余地级市全部归入地方频道)
+CITY_TO_PROVINCE = {
+    "绍兴": "浙江", "宁波": "浙江", "温州": "浙江", "金华": "浙江", "台州": "浙江", "嘉兴": "浙江", "湖州": "浙江", "丽水": "浙江", "衢州": "浙江", "舟山": "浙江", "龙泉": "浙江", "萧山": "浙江", "余姚": "浙江", "兰溪": "浙江",
+    "涟水": "江苏", "南京": "江苏", "苏州": "江苏", "无锡": "江苏", "常州": "江苏", "南通": "江苏", "扬州": "江苏", "盐城": "江苏", "徐州": "江苏", "淮安": "江苏", "连云港": "江苏", "泰州": "江苏", "宿迁": "江苏", "镇江": "江苏", "江阴": "江苏", "宜兴": "江苏", "溧水": "江苏", "如东": "江苏", "昆山": "江苏",
+    "青岛": "山东", "淄博": "山东", "烟台": "山东", "潍坊": "山东", "济宁": "山东", "泰安": "山东", "威海": "山东", "日照": "山东", "临沂": "山东", "德州": "山东", "聊城": "山东", "滨州": "山东", "菏泽": "山东", "莒县": "山东", "章丘": "山东", "商河": "山东", "新泰": "山东", "寿光": "山东", "齐鲁": "山东",
+    "深圳": "广东", "广州": "广东", "珠江": "广东", "中山": "广东", "佛山": "广东", "惠州": "广东", "东莞": "广东", "梅州": "广东", "茂名": "广东", "河源": "广东", "潮州": "广东", "汕头": "广东", "江门": "广东", "云浮": "广东", "肇庆": "广东", "揭阳": "广东", "阳江": "广东", "蛇口": "广东", "潮安": "广东", "开平": "广东", "清远": "广东",
+    "邢台": "河北", "石家庄": "河北", "唐山": "河北", "保定": "河北", "秦皇岛": "河北", "邯郸": "河北", "张家口": "河北", "衡水": "河北", "沧州": "河北", "廊坊": "河北", "承德": "河北",
+    "禹州": "河南", "洛阳": "河南", "郑州": "河南", "商都": "河南", "鹤壁": "河南", "新乡": "河南", "焦作": "河南", "沁阳": "河南", "濮阳": "河南", "安阳": "河南", "许昌": "河南", "周口": "河南", "川汇": "河南", "南阳": "河南", "延津": "河南", "项城": "河南",
+    "营山": "四川", "绵阳": "四川", "成都": "四川", "自贡": "四川", "宜宾": "四川", "遂宁": "四川", "乐山": "四川", "广元": "四川", "巴中": "四川", "德阳": "四川", "南充": "四川", "广安": "四川", "眉山": "四川", "雅安": "四川", "泸州": "四川", "攀枝花": "四川", "仪陇": "四川", "内江": "四川", "三峡": "四川",
+    "淮北": "安徽", "合肥": "安徽", "滁州": "安徽", "安庆": "安徽", "六安": "安徽", "毫州": "安徽", "亳州": "安徽", "铜陵": "安徽", "宿州": "安徽", "岳西": "安徽", "芜湖": "安徽", "肥西": "安徽", "蚌埠": "安徽", "马鞍山": "安徽", "蒙城": "安徽",
+    "福州": "福建", "泉州": "福建", "晋江": "福建", "宁德": "福建", "三明": "福建", "莆田": "福建", "仙游": "福建", "龙岩": "福建", "新罗": "福建", "漳州": "福建", "厦门": "福建",
+    "黄石": "湖北", "荆州": "湖北", "荆门": "湖北", "武汉": "湖北", "襄阳": "湖北", "宜昌": "湖北", "十堰": "湖北", "鄂州": "湖北", "随州": "湖北", "孝感": "湖北", "咸宁": "湖北", "赤壁": "湖北", "恩施": "湖北",
+    "长沙": "湖南", "株洲": "湖南", "湘潭": "湖南", "衡阳": "湖南", "邵阳": "湖南", "岳阳": "湖南", "常德": "湖南", "张家界": "湖南", "益阳": "湖南", "郴州": "湖南", "永州": "湖南", "怀化": "湖南", "娄底": "湖南", "湘西": "湖南",
+    "七台河": "黑龙江", "哈尔滨": "黑龙江", "大庆": "黑龙江", "伊春": "黑龙江", "齐齐哈尔": "黑龙江", "鹤岗": "黑龙江", "牡丹江": "黑龙江",
+    "通海": "云南", "昆明": "云南", "丽江": "云南", "楚雄": "云南", "红河": "云南", "蒙自": "云南", "绿春": "云南", "个旧": "云南", "保山": "云南", "玉溪": "云南", "文山": "云南", "版纳": "云南", "普洱": "云南",
+    "壶关": "山西", "太原": "山西", "大同": "山西", "阳泉": "山西", "长治": "山西", "晋城": "山西", "朔州": "山西", "晋中": "山西", "运城": "山西", "忻州": "山西", "临汾": "山西", "吕梁": "山西"
+}
+
 def get_target_urls():
-    if not os.path.exists(SOURCES_JSON_PATH):
-        # 兜底兼容旧格式文件
-        old_path = os.path.join(CURRENT_DIR, "sources.txt")
-        if os.path.exists(old_path):
-            with open(old_path, 'r', encoding='utf-8') as f:
-                return [line.strip() for line in f if line.strip().startswith("http")]
-        return []
+    if not os.path.exists(SOURCES_JSON_PATH): return []
     try:
         with open(SOURCES_JSON_PATH, 'r', encoding='utf-8') as f:
             data = json.load(f)
-            # 兼容字典格式或数组格式的 sources.json
             if isinstance(data, list):
                 return [u.strip() for u in data if str(u).strip().startswith("http")]
             elif isinstance(data, dict):
@@ -98,9 +109,9 @@ def save_json_file(path, data):
 
 def clean_display_name(name):
     if not name: return ""
-    # 清理要求6指定的各种乱糟糟的画质和阻断后缀
+    # 要求6：频道名称后边不要有指定的这些字眼 (扩充了576p, 606p)
     junk_words = [
-        r'2160p', r'1080p', r'720p', r'480p', r'404p', r'360p', 
+        r'2160p', r'1080p', r'720p', r'606p', r'576p', r'480p', r'404p', r'360p', 
         r'hd', r'sd', r'\[Not 24/7\]', r'\[Geo-blocked\]', r'超高清', r'高清'
     ]
     cleaned = name
@@ -112,31 +123,37 @@ def clean_display_name(name):
 def normalize_cctv_name(name):
     upper_name = name.upper().replace("-", "").replace(" ", "")
     if "CCTV5+" in upper_name or "CCTV5PLUS" in upper_name: return "CCTV5+"
-    if "CCTV4K" in upper_name: return "CCTV4K" 
-    if "CCTV8K" in upper_name: return "CCTV8K" 
+    if "CCTV4K" in upper_name: return "CCTV4K" # 要求8特留
+    if "CCTV8K" in upper_name: return "CCTV8K" # 要求8特留
     match = re.search(r'CCTV(\d+)', upper_name)
     if match: return f"CCTV{match.group(1)}"
     return name
 
-def determine_final_group(std_name, raw_group, is_4k_8k):
+def determine_final_group(std_name, raw_group, is_4k_8k, group_repo):
     """
-    结合13条分组规则和特定Emoji组别进行归类 (要求7、分组规则)
+    终极洗涤分组映射函数，实现 group.json 降维打击拦截和 13 条判定逻辑
     """
     name_up = std_name.upper()
     rg = raw_group.strip() if raw_group else ""
 
-    # 1. 强力过滤名单：规则11指定的直接死刑组，返回 None 代表丢弃
+    # 1. 强力过滤名单：原始组别命中规则 11 指定的名字，直接就地丢弃
     if any(x in rg for x in ["游戏直播", "听书直播", "老年直播", "解说直播", "监控直播", "蜘蛛直播", "zuqiu直播", "咪视界直播", "KK直播", "瑜伽裤直播", "Ai直播", "钓鱼直播", "API随机点播"]):
         return None
 
+    is_cctv = "CCTV" in name_up or "中央台" in name_up or "CGTN" in name_up
+    is_ws = "卫视" in name_up and "朝鲜语" not in name_up
+
     # 2. 4K/8K 核心规范组拦截 (要求7)
-    is_cctv = "CCTV" in name_up or "中央台" in name_up
-    is_ws = "卫视" in name_up
-    is_df = any(x in name_up for x in PROVINCES) or "频道" in name_up
-    if is_4k_8k and (is_cctv or is_ws or is_df):
+    # 分组里只放央视、地方卫视、地方频道的 4K/8K 优质源
+    is_df_zone = any(x in name_up for x in PROVINCES) or any(x in name_up for x in CITY_TO_PROVINCE)
+    if is_4k_8k and (is_cctv or is_ws or is_df_zone):
         return "4K频道"
 
-    # 3. 按照规则映射原始组别名
+    # 3. 🌟 最高优先级：匹配当前目录下 group.json 的自定义分组
+    if std_name in group_repo:
+        return group_repo[std_name]
+
+    # 4. 其次按照 13 条分组规则映射原始组别名
     if "地方台直播" in rg: return "地方频道"
     if "港澳台直播" in rg: return "港澳台"
     if any(x in rg for x in ["延伸西亚", "马来西亚直播", "越南直播", "印度直播", "日本直播", "韩国直播", "美国直播", "英国直播", "爱尔兰直播", "全球直播"]): return "海外频道"
@@ -149,19 +166,29 @@ def determine_final_group(std_name, raw_group, is_4k_8k):
     if any(x in rg for x in ["动漫直播", "沙雕动画直播"]): return "动漫直播"
     if any(x in rg for x in ["音乐直播", "周杰伦歌曲", "歌手合集"]): return "歌曲及音乐MV"
 
-    # 4. 保底兜底逻辑分类
+    # 5. 保底兜底逻辑（城市二级族谱精确纠偏）
+    matched_province = None
+    for city, province in CITY_TO_PROVINCE.items():
+        if city in std_name:
+            matched_province = province
+            break
+
     if is_cctv: return "央视频道"
     if is_ws: return "地方卫视"
-    if "上海" in std_name: return "上海频道"
-    if "山东" in std_name or "齐鲁" in std_name: return "山东频道"
-    for prov in PROVINCES:
-        if prov in std_name: return "地方频道"
+    
+    # 判定专属省份分支频道
+    target_prov = matched_province if matched_province else next((p for p in PROVINCES if p in std_name), None)
+    
+    if target_prov == "山东": return "山东频道"
+    if target_prov == "上海": return "上海频道"
+    if target_prov: return "地方频道"  # 注：除了山东上海以外的地方频道
 
-    if any(x in name_up for x in ["港", "澳", "台", "HBO", "PHOENIX", "凤凰"]): return "港澳台"
+    # 兜底垂直判断
+    if any(x in name_up for x in ["港", "澳", "台", "HBO", "PHOENIX", "凤凰", "翡翠台", "明珠台"]): return "港澳台"
     if any(x in name_up for x in ["电影", "影院", "剧场", "影视"]): return "影视频道"
     if any(x in name_up for x in ["纪录", "纪实", "探索"]): return "纪录纪实"
     if any(x in name_up for x in ["动漫", "少儿", "卡通", "儿童"]): return "少儿动画"
-    if any(x in name_up for x in ["体育", "赛事", "足球"]): return "体育赛事"
+    if any(x in name_up for x in ["体育", "赛事", "足球", "五星体育"]): return "体育赛事"
     if any(x in name_up for x in ["音乐", "MV", "歌曲"]): return "歌曲及音乐MV"
     
     return "综合频道"
@@ -186,6 +213,7 @@ def parse_m3u_content(text, name_repo, blacklist, stats):
         elif line.startswith("http") and current_meta:
             url = line
             
+            # 要求3：带有 catvod.com 的源和黑名单库源直接过滤
             if "catvod.com" in url or url in blacklist:
                 stats["filtered_blacklist"] += 1
                 current_meta = None
@@ -240,6 +268,7 @@ def probe_stream(item, timeout=4):
         return {"valid": False, "item": item}
 
 def render_progress_bar(completed, total, quality_count, start_time):
+    # 要求11：探测进度严格保持在一行，不要刷屏
     global last_print_time
     now = time.time()
     if now - last_print_time < 0.1 and completed < total: return
@@ -257,6 +286,7 @@ def render_progress_bar(completed, total, quality_count, start_time):
     sys.stdout.flush()
 
 def get_cctv_sort_key(name):
+    # 要求5：央视频道严格按照 1-17 排序权重
     if "CCTV5+" in name.upper(): return 5.5
     if "CCTV4K" in name.upper(): return 18
     if "CCTV8K" in name.upper(): return 19
@@ -274,6 +304,7 @@ def main():
     fail_counter = defaultdict(int)
     blacklist_data = load_json_file(BLACKLIST_JSON_PATH)
     name_repo = load_json_file(NAME_JSON_PATH)
+    group_repo = load_json_file(GROUP_JSON_PATH)  # 最高优先级字典导入
     
     target_urls = get_target_urls()
     if not target_urls:
@@ -294,6 +325,7 @@ def main():
     stats["total_raw"] = len(all_raw_channels) + stats["filtered_blacklist"]
     logging.info(f"-> 【粗筛大池固化】物理全量明细共计: {len(all_raw_channels)} 条")
 
+    # 针对单一频道设置流控桶，防止单个台测速队列过长拖慢进度
     pre_bucket = defaultdict(list)
     for item in all_raw_channels:
         if len(pre_bucket[item["std_name"]]) < 8:
@@ -318,6 +350,7 @@ def main():
                 probed_results.append(res)
                 if res["is_4k_8k"]: quality_count += 1
             else:
+                # 第四步：3次连接失败建立黑名单持久化拦截
                 bad_url = res["item"]["url"]
                 fail_counter[bad_url] += 1
                 if fail_counter[bad_url] >= 3:
@@ -325,6 +358,7 @@ def main():
             render_progress_bar(completed_tasks, len(futures), quality_count, probe_start_time)
     print("\n")
 
+    # 要求4与要求9：对频道去重，4k及以上保留一个，以下质量最好的保留一个
     dedup_bucket = defaultdict(lambda: {"4k_best": None, "normal_best": None})
     for res in probed_results:
         std_name = res["item"]["std_name"]
@@ -345,6 +379,7 @@ def main():
             has_output = True
         
         if bucket["normal_best"]:
+            # 要求2：视频质量要大于等于720P，但如果央视频道和地方卫视只有720P及以下分辨率，保留至少一个低保
             if bucket["normal_best"]["height"] < 720:
                 if is_cctv_or_ws and not has_output:
                     final_verified_list.append(bucket["normal_best"])
@@ -353,12 +388,13 @@ def main():
             else:
                 final_verified_list.append(bucket["normal_best"])
 
+    # 执行第五步重排的综合权重矩阵排序
     def master_sort_key(res_obj):
         item = res_obj["item"]
         std_name = item["std_name"]
-        group = determine_final_group(std_name, item["raw_group"], res_obj["is_4k_8k"])
+        group = determine_final_group(std_name, item["raw_group"], res_obj["is_4k_8k"], group_repo)
         
-        if not group: return (9999, 9999, 9999)
+        if not group: return (9999, 9999, 9999) # 被彻底过滤的死刑源丢到最后
         
         group_idx = GROUP_PRIORITY.index(group) if group in GROUP_PRIORITY else 999
         cctv_idx = get_cctv_sort_key(std_name) if group in ["央视频道", "4K频道"] else 999
@@ -366,22 +402,26 @@ def main():
 
     final_verified_list.sort(key=master_sort_key)
 
+    # 第六步：生成包含 EPG 注入及回看机制的标准 M3U
     written_count = 0
     with open(OUTPUT_M3U_PATH, "w", encoding="utf-8") as f:
-        f.write('#EXTM3U x-tvg-url="https://live.fanmingming.cn/e.xml,http://epg.51zmt.top:12210/e.xml" catchup="append" catchup-source="?playseek=${(b)yyyyMMddHHmmss}-${(e)yyyyMMddHHmmss}"\n')
+        # 要求12：标准 EPG 节目单地址头部注入
+        f.write('#EXTM3U x-tvg-url="https://live.fanmingming.com/e.xml,http://epg.51zmt.top:12210/e.xml" catchup="append" catchup-source="?playseek=${(b)yyyyMMddHHmmss}-${(e)yyyyMMddHHmmss}"\n')
         
         for res in final_verified_list:
             item = res["item"]
             std_name = item["std_name"]
-            final_group = determine_final_group(std_name, item["raw_group"], res["is_4k_8k"])
+            final_group = determine_final_group(std_name, item["raw_group"], res["is_4k_8k"], group_repo)
             if not final_group: continue 
 
             display_title = std_name
             upper_std = std_name.upper().replace("-", "").replace(" ", "")
             
+            # 要求6与第六步：央视频道显示名称时带全中文描述
             if "CCTV" in upper_std and upper_std in CCTV_DESC_MAP:
                 display_title = CCTV_DESC_MAP[upper_std]
 
+            # 要求7与要求9：4K/8K 频道本身不加额外描述
             formatted_tvg = display_title.split(" ")[0].replace("-", "") if "CCTV" in display_title else std_name
             
             f.write(f'#EXTINF:-1 tvg-id="{formatted_tvg}" tvg-name="{formatted_tvg}" tvg-logo="{item["logo"]}" group-title="{final_group}",{display_title}\n')
@@ -391,6 +431,7 @@ def main():
     stats["final_count"] = written_count
     save_json_file(BLACKLIST_JSON_PATH, blacklist_data)
 
+    # 任务结束打印并形成 log 文件 (要求1)
     duration = time.time() - start_run_time
     logging.info("==============================================")
     logging.info("        Crawl 管道自动化清洗任务总结报告")
