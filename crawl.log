@@ -875,3 +875,24 @@
 2026-05-29 13:25:19,999 [INFO] - 最终输出 tv.m3u 有效源 : 865 条
 2026-05-29 13:25:19,999 [INFO] - 任务运行总计消耗时长   : 33.46 秒
 2026-05-29 13:25:19,999 [INFO] ==============================================
+2026-05-29 13:41:05,769 [INFO] ==============================================
+2026-05-29 13:41:05,770 [INFO]  🚀 IPTV 管道工自动化分拣系统启动 | 环境: WINDOWS
+2026-05-29 13:41:05,770 [INFO] ==============================================
+2026-05-29 13:41:05,795 [INFO] -> 正在跨境拉取数据源: https://raw.githubusercontent.com/Guovin/TV/gd/output/result.m3u
+2026-05-29 13:41:07,532 [INFO] -> 正在跨境拉取数据源: https://raw.githubusercontent.com/babylife/China-ShangHai-IPTV-list/master/IPTV_Enhanced_change.m3u
+2026-05-29 13:41:08,836 [INFO] -> 正在跨境拉取数据源: https://raw.githubusercontent.com/hujingguang/ChinaIPTV/main/cnTV_AutoUpdate.m3u8
+2026-05-29 13:41:09,650 [INFO] -> 正在跨境拉取数据源: https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cn.m3u
+2026-05-29 13:41:10,932 [INFO] -> 正在跨境拉取数据源: https://raw.githubusercontent.com/Jsnzkpg/Jsnzkpg/Jsnzkpg/Jsnzkpg1.m3u
+2026-05-29 13:41:12,868 [INFO] -> 正在跨境拉取数据源: https://raw.githubusercontent.com/xcc360/SHCU-TV/refs/heads/main/IPTV.m3u
+2026-05-29 13:41:14,223 [INFO] -> 正在跨境拉取数据源: https://raw.githubusercontent.com/mzky/checklist/refs/heads/master/itvlist.m3u
+2026-05-29 13:41:15,776 [INFO] -> 【粗筛大池固化】物理全量明细共计: 2398 条
+2026-05-29 13:41:15,777 [INFO] -> 启动高并发网络探测，测速队列精简后剩余: 2056 条
+2026-05-29 13:41:38,142 [INFO] ==============================================
+2026-05-29 13:41:38,142 [INFO]         Crawl 管道自动化清洗任务总结报告
+2026-05-29 13:41:38,142 [INFO] ==============================================
+2026-05-29 13:41:38,143 [INFO] - 初始总计扫入原始数据   : 5514 条
+2026-05-29 13:41:38,143 [INFO] - 命中黑名单/猫片阻断数  : 3116 条
+2026-05-29 13:41:38,143 [INFO] - 垃圾低分辨率拦截过滤   : 88 条
+2026-05-29 13:41:38,143 [INFO] - 最终输出 tv.m3u 有效源 : 710 条
+2026-05-29 13:41:38,143 [INFO] - 任务运行总计消耗时长   : 32.37 秒
+2026-05-29 13:41:38,143 [INFO] ==============================================
