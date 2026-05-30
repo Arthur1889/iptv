@@ -1,9 +1,8 @@
 name.py脚本规则：
 总则：name.py的工作路径就是当前文件夹下，所有生成的文件都在本文件夹下；任务报告中，含别名总数、识别数量、未识别数量、耗时等；
-第一步：https://epg.112114.xyz提取标准名放入name.json；
-第二步：从https://epg.112114.xyz/alias提取别名，第一列数据是标准名，第二列是别名放入name.json；
-第三步：将nameoriginal.json识别到name.json中；
-第四步：从https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cn.m3u提取源列表，作为需识别数据库；
+第一步：从上级目录中的group.json文件提取标准名放入name.json；
+第二步：将nameoriginal.json识别到name.json中；
+第三步：从上级目录sources_cache.txt提取tvg-id、tvg-name、显示名称，作为需识别数据库；
 
 别名识别规则：
 1、判断tvg-id、tvg-name、显示姓名是否含中文，优先级为：含中文优先>tvg-id>tvg-name。
@@ -16,4 +15,3 @@ name.py脚本规则：
 8、name.json标准名称里不能有"</br>"
 9、在别名里加"标准名HD"、"标准名.cn@SD"、"标准名.cn@HD"、"标准名 (2160p)"、"标准名 (720p)"、"标准名 (1080p)";;
 10、语义补偿库非常好，多增加一些，或者给一个词多个最可能的语义进行尝试；
-11、从网址下载内容的周期为1周一次;
