@@ -1,5 +1,4 @@
 {
-    "note": "IPTV 源列表 - 可以在此随时增删",
     "urls": [
         "https://raw.githubusercontent.com/Guovin/TV/gd/output/result.m3u",
         "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cn.m3u",
