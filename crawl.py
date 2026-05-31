@@ -435,15 +435,30 @@ def main():
                 display_title = CCTV_DESC_MAP[upper_std]
 
             formatted_tvg = display_title.split(" ")[0].replace("-", "") if "CCTV" in display_title else std_name
-            
-# 假设你的所有logo都存放在这个基础路径下
-base_logo_url = "https://epg.112114.xyz/logo/"
-
-# 拼接：基础路径 + tvg-id名称 + .png
-new_logo_url = f"{base_logo_url}{formatted_tvg}.png"
-
-f.write(f'#EXTINF:-1 tvg-id="{formatted_tvg}" tvg-name="{formatted_tvg}" tvg-logo="{new_logo_url}" group-title="{final_group}",{display_title}\n')
-            f.write(f'{item["url"]}\n')
+# ... 前面的代码 ...
+    for res in final_verified_list:
+        item = res["item"]
+        std_name = item["std_name"]
+        final_group = determine_final_group(std_name, item["raw_group"], res["is_4k_8k"], group_repo)
+        if not final_group: continue
+        
+        display_title = std_name
+        upper_std = std_name.upper().replace("-", "").replace(" ", "")
+        if "CCTV" in upper_std and upper_std in CCTV_DESC_MAP:
+            display_title = CCTV_DESC_MAP[upper_std]
+        
+        formatted_tvg = display_title.split(" ")[0].replace("-", "") if "CCTV" in display_title else std_name
+        
+        # 你的逻辑：统一使用 tvg-id 作为 logo 文件名
+        base_logo_url = "https://epg.112114.xyz/logo/"
+        new_logo_url = f"{base_logo_url}{formatted_tvg}.png"
+        
+        # 确保下面这两行有完全一致的 8 个空格缩进 (相对于文件行首)
+        f.write(f'#EXTINF:-1 tvg-id="{formatted_tvg}" tvg-name="{formatted_tvg}" tvg-logo="{new_logo_url}" group-title="{final_group}",{display_title}\n')
+        f.write(f'{item["url"]}\n')
+        
+        written_count += 1
+    # ... 后面的代码 ...
             written_count += 1
 
     stats["final_count"] = written_count
