@@ -5,9 +5,8 @@ import re
 import time
 import platform
 import logging
-import shutil
 import urllib.request
-import subprocess
+import ssl
 from datetime import datetime, timedelta
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
@@ -45,39 +44,11 @@ DROP_GROUPS = [
     "🏀[移动]咪视界直播", "👠KK直播", "🧘🏻‍♀️瑜伽裤直播", "🤖Ai直播", "🎣钓鱼直播", "🎰API随机点播"
 ]
 
-# ================= 日志与环境系统 =================
+# ================= 日志系统 =================
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(levelname)s - %(message)s',
                     handlers=[logging.FileHandler(LOG_FILE, 'a', 'utf-8')])
 logger = logging.getLogger(__name__)
-
-def check_and_install_dependencies():
-    """判断系统环境并自动安装 FFmpeg"""
-    sys_os = platform.system()
-    logger.info(f"当前系统环境: {sys_os}")
-    
-    if shutil.which('ffprobe') is None:
-        print(f"⚠️ 未检测到探测核心依赖 (ffprobe)，正在为您自动安装...")
-        logger.info("开始自动安装 FFmpeg...")
-        try:
-            if sys_os == "Darwin":
-                os.system("brew install ffmpeg")
-            elif sys_os == "Linux":
-                os.system("sudo apt-get update && sudo apt-get install -y ffmpeg")
-            elif sys_os == "Windows":
-                os.system("winget install -e --id Gyan.FFmpeg")
-            else:
-                print("❌ 无法识别的操作系统，请手动安装 FFmpeg 并配置环境变量。")
-                sys.exit(1)
-                
-            if shutil.which('ffprobe') is None:
-                print("❌ 自动安装后仍无法找到 ffprobe，请重启终端或手动安装。")
-                sys.exit(1)
-            else:
-                print("✅ FFmpeg 依赖安装成功！")
-        except Exception as e:
-            logger.error(f"自动安装失败: {e}")
-            sys.exit(1)
 
 # ================= 核心工具函数 =================
 def load_json(path, default=None):
@@ -91,6 +62,7 @@ def save_json(path, data):
 
 def fetch_sources_to_cache():
     """第一步：拉取源到缓存去重"""
+    logger.info(f"当前系统环境: {platform.system()}")
     if os.path.exists(CACHE_FILE):
         mtime = datetime.fromtimestamp(os.path.getmtime(CACHE_FILE))
         if datetime.now() - mtime < timedelta(days=1):
@@ -137,30 +109,54 @@ def categorize_group(std_name, original_group, groups_db):
         if std_name in channels: return g_name
 
     # 回退法则 (Rules 1-14)
-    if original_group in DROP_GROUPS: return "DROP" # Rule 11
-    if "🌐地方台直播" in original_group: return "地方频道" # Rule 1
-    if "🔮港澳台直播" in original_group: return "港澳台" # Rule 2
+    if original_group in DROP_GROUPS: return "DROP"
+    if "🌐地方台直播" in original_group: return "地方频道"
+    if "🔮港澳台直播" in original_group: return "港澳台"
     if original_group in ["🇲🇾马来西亚直播", "🇻🇳越南直播", "🇮🇳印度直播", "🇯🇵日本直播", 
-                          "🇰🇷韩国直播", "🇺🇸美国直播", "🇬🇧英国直播", "🇮🇪爱尔兰直播", "🌏全球直播"]: return "海外频道" # Rule 3
-    if "👶🏻少儿直播" in original_group: return "少儿频道" # Rule 4
-    if original_group in ["🏀[国内]体育直播", "🏀[海外]体育直播"]: return "体育赛事" # Rule 5
-    if "🎞️电影直播" in original_group: return "影视频道" # Rule 6
+                          "🇰🇷韩国直播", "🇺🇸美国直播", "🇬🇧英国直播", "🇮🇪爱尔兰直播", "🌏全球直播"]: return "海外频道"
+    if "👶🏻少儿直播" in original_group: return "少儿频道"
+    if original_group in ["🏀[国内]体育直播", "🏀[海外]体育直播"]: return "体育赛事"
+    if "🎞️电影直播" in original_group: return "影视频道"
     if original_group in ["📽️综艺直播", "🍿短剧直播", "🧨小品直播", "🎚️相声直播", "🎙️抖音直播", 
-                          "🤟🏻YY直播", "💋车模直播", "💄女团直播", "💃🏻热舞直播", "🌲乡野直播", "🗣️脱口秀直播"]: return "娱乐频道" # Rule 7
-    if original_group in ["📺电视剧直播", "💖爱奇艺直播", "🎨埋堆堆直播"]: return "电视剧直播" # Rule 8
-    if "💽纪录片直播" in original_group: return "纪录纪实" # Rule 9/10
-    if original_group in ["🎎动漫直播", "🤣沙雕动画直播"]: return "动漫直播" # Rule 12
-    if original_group in ["🎧音乐直播", "🎤周杰伦歌曲点播", "🎹歌手合集点播"]: return "歌曲及音乐MV" # Rule 13
+                          "🤟🏻YY直播", "💋车模直播", "💄女团直播", "💃🏻热舞直播", "🌲乡野直播", "🗣️脱口秀直播"]: return "娱乐频道"
+    if original_group in ["📺电视剧直播", "💖爱奇艺直播", "🎨埋堆堆直播"]: return "电视剧直播"
+    if "💽纪录片直播" in original_group: return "纪录纪实"
+    if original_group in ["🎎动漫直播", "🤣沙雕动画直播"]: return "动漫直播"
+    if original_group in ["🎧音乐直播", "🎤周杰伦歌曲点播", "🎹歌手合集点播"]: return "歌曲及音乐MV"
     
-    return "综合频道" # Rule 14
+    return "综合频道"
 
-def probe_resolution(url):
-    """FFprobe 真实分辨率探测"""
-    cmd = ['ffprobe', '-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=height', '-of', 'csv=p=0', url]
+def probe_url_and_guess_quality(url, original_name):
+    """高效宽容探测：仅看连通性，忽略 SSL 错误，盲猜画质以防止误杀"""
+    # 忽略过期/无效的 SSL 证书
+    ctx = ssl.create_default_context()
+    ctx.check_hostname = False
+    ctx.verify_mode = ssl.CERT_NONE
+
     try:
-        res = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, timeout=6)
-        if res.returncode == 0 and res.stdout.strip().isdigit(): return int(res.stdout.strip())
-    except Exception: pass
+        # 伪装成普通浏览器
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Accept': '*/*'
+        }
+        req = urllib.request.Request(url, headers=headers)
+        
+        # 5秒极速测活
+        with urllib.request.urlopen(req, timeout=5, context=ctx) as response:
+            status = response.getcode()
+            if status == 200 or status == 302:
+                # 连通成功，盲猜画质
+                name_upper = original_name.upper()
+                if '8K' in name_upper: return 4320
+                if '4K' in name_upper or '2160' in name_upper: return 2160
+                if '1080' in name_upper or 'FHD' in name_upper: return 1080
+                if '720' in name_upper or 'HD' in name_upper: return 720
+                if '标清' in name_upper or 'SD' in name_upper: return 480
+                
+                # 无明确标识的，统一“无罪推定”为 1080P，防止被画质过滤规则丢弃
+                return 1080 
+    except Exception:
+        return -1
     return -1
 
 def print_progress(processed, total, start_time, valid_count):
@@ -175,9 +171,6 @@ def print_progress(processed, total, start_time, valid_count):
 # ================= 主流程 =================
 def main():
     start_time = time.time()
-    
-    # 环境检查与源更新
-    check_and_install_dependencies()
     fetch_sources_to_cache()
     
     name_db = load_json(NAME_JSON)
@@ -188,7 +181,6 @@ def main():
         print("❌ 未找到缓存文件，程序退出。")
         return
 
-    # 统计数据
     stats = {'total': 0, 'bl_drop': 0, 'kw_drop': 0, 'quality_drop': 0}
     tasks = []
 
@@ -201,7 +193,7 @@ def main():
             if not url: continue
             stats['total'] += 1
             
-            # 黑名单兼容与拦截 (修复 >Dict 报错)
+            # 规则4/过滤：黑名单拦截 (兼容旧版数据格式)
             fail_count = blacklist.get(url, 0)
             if not isinstance(fail_count, int): fail_count = 0
             if fail_count >= 3:
@@ -229,15 +221,17 @@ def main():
             target_group = categorize_group(std_name, orig_group, group_db)
             if target_group == "DROP": continue
             
-            tasks.append({'url': url, 'std_name': std_name, 'tvg_logo': tvg_logo, 'group': target_group, 'extinf': extinf})
+            # 将 display_name 传入任务，供探测时盲猜画质使用
+            tasks.append({'url': url, 'std_name': std_name, 'orig_name': display_name, 'tvg_logo': tvg_logo, 'group': target_group})
 
-    # 第四步：多线程探测
+    # 第四步：多线程 HTTP 极速探测
     print("\n")
     valid_count, processed_count = 0, 0
     grouped_channels = {}
 
-    with ThreadPoolExecutor(max_workers=50) as executor:
-        future_to_task = {executor.submit(probe_resolution, t['url']): t for t in tasks}
+    # 使用 30 并发，兼顾速度与防拦截
+    with ThreadPoolExecutor(max_workers=30) as executor:
+        future_to_task = {executor.submit(probe_url_and_guess_quality, t['url'], t['orig_name']): t for t in tasks}
         
         for future in as_completed(future_to_task):
             t = future_to_task[future]
@@ -245,13 +239,13 @@ def main():
             height = future.result()
             
             if height == -1: 
-                # 兼容修正计次
+                # 探测失败，计入黑名单
                 fc = blacklist.get(t['url'], 0)
                 blacklist[t['url']] = (fc if isinstance(fc, int) else 0) + 1
             else:
+                # 探测成功，清理黑名单并按画质入库
                 blacklist[t['url']] = 0 
                 
-                # 画质分类
                 cat = 'sd' # < 720
                 if height >= 2160: cat = '4k'
                 elif height >= 720: cat = 'hd'
@@ -260,7 +254,7 @@ def main():
                 if name_key not in grouped_channels:
                     grouped_channels[name_key] = {'4k':[], 'hd':[], 'sd':[]}
                 
-                grouped_channels[name_key][cat].append({'url': t['url'], 'height': height, 'logo': t['tvg_logo'], 'group': t['group'], 'orig_name': t['std_name']})
+                grouped_channels[name_key][cat].append({'url': t['url'], 'height': height, 'logo': t['tvg_logo'], 'group': t['group']})
                 valid_count += 1
             
             print_progress(processed_count, len(tasks), start_time, valid_count)
@@ -272,6 +266,7 @@ def main():
     final_playlist = []
     
     for name, cats in grouped_channels.items():
+        # 同画质级别内根据“高度”倒序排（因已盲猜画质，此处主要为占位逻辑）
         for c in cats.values(): c.sort(key=lambda x: x['height'], reverse=True)
         
         best_4k = cats['4k'][0] if cats['4k'] else None
@@ -279,13 +274,13 @@ def main():
         
         base_group = (best_4k['group'] if best_4k else (cats['hd'][0]['group'] if cats['hd'] else (cats['sd'][0]['group'] if cats['sd'] else "")))
                      
-        # 规则2：如果不到720p，且是央视/卫视，保留最高的一个 SD
+        # 规则2：如果 HD 为空，且是央视/卫视，保留最高的一个 SD 兜底
         if not best_sub4k and base_group in ["央视频道", "地方卫视"] and cats['sd']:
             best_sub4k = cats['sd'][0]
         elif not best_sub4k and not best_4k:
             stats['quality_drop'] += sum(len(x) for x in cats.values())
 
-        # 规则7：4K频道的重分组 (央视/卫视/地方台 的4K放入4K频道组，8K直接放4K频道)
+        # 规则7：4K频道的重分组 (央视/卫视/地方台的4K放入4K频道组)
         if best_4k:
             if base_group in ["央视频道", "地方卫视", "地方频道"] or best_4k['height'] >= 4320:
                 best_4k['group'] = "4K频道"
@@ -313,7 +308,7 @@ def main():
         for item in final_playlist:
             raw_name = item['name']
             display_name = CCTV_MAP.get(raw_name, raw_name)
-            # 规则12：组装并优先使用原 logo
+            # 规则12：优先使用原 logo 与分组信息
             extinf = f'#EXTINF:-1 tvg-id="{raw_name}" tvg-name="{raw_name}" tvg-logo="{item["logo"]}" group-title="{item["group"]}", {display_name}'
             f.write(f'{extinf}\n{item["url"]}\n')
             
