@@ -135,23 +135,21 @@ def normalize_cctv_name(name):
 def determine_final_group(std_name, raw_group, is_4k_8k, group_repo):
     name_up = std_name.upper()
     rg = raw_group.strip() if raw_group else ""
-
-drop_list = ["游戏直播", "听书直播", "老年直播", "解说直播", "监控直播", "蜘蛛直播", 
-             "zuqiu直播", "咪视界直播", "KK直播", "瑜伽裤直播", "Ai直播", "钓鱼直播", 
-             "API随机点播", "直播室"]
-
-if any(x in rg or x in std_name for x in drop_list): 
-    return None
+    
+    drop_list = ["游戏直播", "听书直播", "老年直播", "解说直播", "监控直播", "蜘蛛直播", "zuqiu直播", "咪视界直播", "KK直播", "瑜伽裤直播", "Ai直播", "钓鱼直播", "API随机点播", "直播室"]
+    
+    # 严格缩进检查，确保这行 if 和下面一行 return 都在 def 内部
+    if any(x in rg or x in std_name for x in drop_list):
+        return None
 
     is_cctv = "CCTV" in name_up or "中央台" in name_up or "CGTN" in name_up
     is_ws = "卫视" in name_up and "朝鲜语" not in name_up
-
     is_df_zone = any(x in name_up for x in PROVINCES) or any(x in name_up for x in CITY_TO_PROVINCE)
-    if is_4k_8k and (is_cctv or is_ws or is_df_zone):
-        return "4K频道"
-
-    if std_name in group_repo:
-        return group_repo[std_name]
+    
+    if is_4k_8k and (is_cctv or is_ws or is_df_zone): return "4K频道"
+    if std_name in group_repo: return group_repo[std_name]
+    
+    # ... 你的后续逻辑 ...
 
     if "地方台直播" in rg: return "地方频道"
     if "港澳台直播" in rg: return "港澳台"
