@@ -418,14 +418,15 @@ def main():
 
     final_verified_list.sort(key=master_sort_key)
 
+# 找到你代码中原来的 written_count = 0 这一行，将其及其后的所有写入逻辑替换为以下内容：
     written_count = 0
-    # 确保这一行前面只有 4 个空格
     with open(OUTPUT_M3U_PATH, "w", encoding="utf-8") as f:
         f.write('#EXTM3U x-tvg-url="https://live.fanmingming.com/e.xml,http://epg.51zmt.top:12210/e.xml" catchup="append" catchup-source="?playseek=${(b)yyyyMMddHHmmss}-${(e)yyyyMMddHHmmss}"\n')
         
         for res in final_verified_list:
             item = res["item"]
             std_name = item["std_name"]
+            # 使用 determine_final_group 确定分组
             final_group = determine_final_group(std_name, item["raw_group"], res["is_4k_8k"], group_repo)
             if not final_group: continue 
 
@@ -434,15 +435,15 @@ def main():
             if "CCTV" in upper_std and upper_std in CCTV_DESC_MAP:
                 display_title = CCTV_DESC_MAP[upper_std]
 
+            # 生成标准的 tvg-id，并用它生成 Logo 地址
             formatted_tvg = display_title.split(" ")[0].replace("-", "") if "CCTV" in display_title else std_name
-            
-            # 生成 Logo 地址
             base_logo_url = "https://epg.112114.xyz/logo/"
             new_logo_url = f"{base_logo_url}{formatted_tvg}.png"
             
-            # 确保这些行前面有 8 个空格
+            # 写入 M3U 内容
             f.write(f'#EXTINF:-1 tvg-id="{formatted_tvg}" tvg-name="{formatted_tvg}" tvg-logo="{new_logo_url}" group-title="{final_group}",{display_title}\n')
             f.write(f'{item["url"]}\n')
+            
             written_count += 1
 
     stats["final_count"] = written_count
