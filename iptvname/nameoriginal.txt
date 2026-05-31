@@ -197,3 +197,5 @@ TVB无线新闻,TVBNews.hk,TVB News
 湖南卫视4K,湖南高清,湖南超高清
 四川卫视4K,四川高清,四川超高清
 广东影视4K,广东影视高清,广东影视超高清
+
+人间卫视,Beautiful Life TV",Beautiful Life TV

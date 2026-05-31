@@ -39,9 +39,6 @@
 源行: #EXTINF:-1,央广购物
 提取 => id: [], name: [], display: [央广购物]
 ------------------------------------------------------------
-源行: #EXTINF:-1,CGTN
-提取 => id: [], name: [], display: [CGTN]
-------------------------------------------------------------
 源行: #EXTINF:-1,生活时尚
 提取 => id: [], name: [], display: [生活时尚]
 ------------------------------------------------------------
@@ -330,9 +327,6 @@
 源行: #EXTINF:-1 group-title="🔥[三网4]央卫视直播" tvg-name="CGTN外语纪录" tvg-logo="https://epg.112114.xyz/logo/CGTN外语纪录.png" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",CGTN外语纪录
 提取 => id: [], name: [CGTN外语纪录], display: [CGTN外语纪录]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🔥[三网4]央卫视直播" tvg-name="CGTN" tvg-logo="https://epg.112114.xyz/logo/CGTN.png" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",CGTN
-提取 => id: [], name: [CGTN], display: [CGTN]
-------------------------------------------------------------
 源行: #EXTINF:-1 group-title="🔥[三网4]央卫视直播" tvg-name="赛事最经典" tvg-logo="https://epg.112114.xyz/logo/赛事最经典.png" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",赛事最经典
 提取 => id: [], name: [赛事最经典], display: [赛事最经典]
 ------------------------------------------------------------
@@ -359,15 +353,6 @@
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="🔥[三网5]央卫视直播" tvg-name="CCTV-16奥林匹克" tvg-logo="https://epg.112114.xyz/logo/CCTV-16奥林匹克.png" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",CCTV-16奥林匹克
 提取 => id: [], name: [CCTV-16奥林匹克], display: [CCTV-16奥林匹克]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🔥[移动]央卫视直播" tvg-name="CGTN" tvg-logo="https://epg.112114.xyz/logo/CGTN.png" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",CGTN
-提取 => id: [], name: [CGTN], display: [CGTN]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🔥[移动]央卫视直播" tvg-name="CGTN" tvg-logo="https://epg.112114.xyz/logo/CGTN.png" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",CGTN
-提取 => id: [], name: [CGTN], display: [CGTN]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🔥[移动]央卫视直播" tvg-name="CGTN" tvg-logo="https://epg.112114.xyz/logo/CGTN.png" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",CGTN
-提取 => id: [], name: [CGTN], display: [CGTN]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="🔥[移动]央卫视直播" tvg-name="CEC汉语文化" tvg-logo="https://epg.112114.xyz/logo/CEC汉语文化.png" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",CEC汉语文化
 提取 => id: [], name: [CEC汉语文化], display: [CEC汉语文化]
@@ -4695,12 +4680,6 @@
 源行: #EXTINF:-1 tvg-name="CCTV9测试" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/CCTV9测试.png" group-title="央视频道" response-time="45ms",CCTV9测试
 提取 => id: [], name: [CCTV9测试], display: [CCTV9测试]
 ------------------------------------------------------------
-源行: #EXTINF:-1 tvg-name="CGTN" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/CGTN.png" group-title="央视频道" response-time="20ms",CGTN
-提取 => id: [], name: [CGTN], display: [CGTN]
-------------------------------------------------------------
-源行: #EXTINF:-1 tvg-name="CCTV赛事" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/CCTV赛事.png" group-title="央视频道" response-time="30ms",CCTV赛事
-提取 => id: [], name: [CCTV赛事], display: [CCTV赛事]
-------------------------------------------------------------
 源行: #EXTINF:-1 tvg-name="上海卫视" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/上海卫视.png" group-title="卫视频道" response-time="24ms",上海卫视
 提取 => id: [], name: [上海卫视], display: [上海卫视]
 ------------------------------------------------------------
@@ -4844,9 +4823,6 @@
 ------------------------------------------------------------
 源行: #EXTINF:-1 tvg-name="四海垂钓" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/四海垂钓.png" group-title="体育频道" response-time="15ms",四海垂钓
 提取 => id: [], name: [四海垂钓], display: [四海垂钓]
-------------------------------------------------------------
-源行: #EXTINF:-1 tvg-name="CCTV赛事" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/CCTV赛事.png" group-title="体育频道" response-time="30ms",CCTV赛事
-提取 => id: [], name: [CCTV赛事], display: [CCTV赛事]
 ------------------------------------------------------------
 源行: #EXTINF:-1 tvg-name="广东体育" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/广东体育.png" group-title="体育频道" response-time="44ms",广东体育
 提取 => id: [], name: [广东体育], display: [广东体育]
@@ -5103,9 +5079,6 @@
 源行: #EXTINF:-1,金色学堂HD
 提取 => id: [], name: [], display: [金色学堂HD]
 ------------------------------------------------------------
-源行: #EXTINF:-1,CGTN
-提取 => id: [], name: [], display: [CGTN]
-------------------------------------------------------------
 源行: #EXTINF:-1,CHC家庭影院HD
 提取 => id: [], name: [], display: [CHC家庭影院HD]
 ------------------------------------------------------------
@@ -5195,9 +5168,6 @@
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="港澳台" tvg-logo="https://i.imgur.com/YxFRoft.png" tvg-id="Good 2",Good 2
 提取 => id: [Good 2], name: [], display: [Good 2]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="港澳台" tvg-logo="https://i.imgur.com/hkwcBM9.png" tvg-id="Beautiful Life TV",Beautiful Life TV
-提取 => id: [Beautiful Life TV], name: [], display: [Beautiful Life TV]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="港澳台" tvg-logo="https://i.imgur.com/kFMHayP.png" tvg-id="Supreme Master TV",Supreme Master TV
 提取 => id: [Supreme Master TV], name: [], display: [Supreme Master TV]
@@ -8690,12 +8660,6 @@
 ------------------------------------------------------------
 源行: #EXTINF:-1 tvg-id="CCTV4Asia.cn@SD",CCTV-4 Asia (720p)
 提取 => id: [CCTV4Asia.cn@SD], name: [], display: [CCTV-4 Asia (720p)]
-------------------------------------------------------------
-源行: #EXTINF:-1 tvg-id="CGTN.cn@SD",CGTN (1080p)
-提取 => id: [CGTN.cn@SD], name: [], display: [CGTN (1080p)]
-------------------------------------------------------------
-源行: #EXTINF:-1 tvg-id="CGTN.cn@SD",CGTN (1080p)
-提取 => id: [CGTN.cn@SD], name: [], display: [CGTN (1080p)]
 ------------------------------------------------------------
 源行: #EXTINF:-1 tvg-id="CGTNDocumentary.cn@SD",CGTN Documentary (1080p)
 提取 => id: [CGTNDocumentary.cn@SD], name: [], display: [CGTN Documentary (1080p)]

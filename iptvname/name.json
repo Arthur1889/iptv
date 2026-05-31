@@ -393,7 +393,8 @@
         "CCTV5+体育赛事",
         "CCTV5+斯特",
         "CCTV5Plus.cn@SD",
-        "CCTV5＋"
+        "CCTV5＋",
+        "CCTV赛事"
     ],
     "CCTV6": [
         "CCTV-06",
@@ -1146,9 +1147,7 @@
         "CCTVNEWS (720p)",
         "CCTVNEWS.cn@HD",
         "CCTVNEWS.cn@SD",
-        "CCTVNEWSHD",
-        "CCTVNEWS新闻",
-        "CCTVNEWS新闻频道"
+        "CCTVNEWSHD"
     ],
     "CGTN俄语": [
         "CGTN俄罗斯语",
@@ -10939,6 +10938,17 @@
         "朝鲜 TV조선.cn@SD",
         "朝鲜 TV조선HD"
     ],
+    "人间卫视": [
+        "Beautiful Life TV",
+        "Beautiful Life TV\"",
+        "人间卫视",
+        "人间卫视 (1080p)",
+        "人间卫视 (2160p)",
+        "人间卫视 (720p)",
+        "人间卫视.cn@HD",
+        "人间卫视.cn@SD",
+        "人间卫视HD"
+    ],
     "兵器科技": [
         "CCTV-兵器科技",
         "CCTV兵器",
@@ -11003,6 +11013,12 @@
         "早期教育"
     ],
     "CGTN英语": [
+        "CCTVNEWS",
+        "CCTVNEWS新闻",
+        "CCTVNEWS新闻频道",
+        "CGTN",
+        "CGTN (1080p)",
+        "CGTN.cn@SD",
         "CGTN英语",
         "CGTN英语 (1080p)",
         "CGTN英语 (2160p)",
