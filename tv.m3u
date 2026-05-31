@@ -1,5 +1,3 @@
 #EXTM3U x-tvg-url="https://live.fanmingming.com/e.xml,http://epg.51zmt.top:12210/e.xml" catchup="append" catchup-source="?playseek=${(b)yyyyMMddHHmmss}-${(e)yyyyMMddHHmmss}"
-#EXTINF:-1 tvg-id="CCTV10" tvg-name="CCTV10" tvg-logo="" group-title="央视频道",CCTV-10 科教
-https://cdn4.skygo.mn/live/disk1/CCTV-10/HLSv3-FTA/CCTV-10.m3u8
 #EXTINF:-1 tvg-id="秘密花园" tvg-name="秘密花园" tvg-logo="https://epg.112114.xyz/logo/秘密花园.png" group-title="歌曲及音乐MV",秘密花园
 https://k0u3cydy43yaz.djvod.ndcimgs.com/bs2/photo-video-mz/5225864605208445410_36e3cffbcde751f5_4169_sl200hd15.mp4
