@@ -459,7 +459,6 @@ def main():
         
         written_count += 1
     # ... 后面的代码 ...
-            written_count += 1
 
     stats["final_count"] = written_count
     save_json_file(BLACKLIST_JSON_PATH, blacklist_data)
