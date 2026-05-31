@@ -148,6 +148,8 @@ def determine_final_group(std_name, raw_group, is_4k_8k, group_repo):
     
     if is_4k_8k and (is_cctv or is_ws or is_df_zone): return "4K频道"
 # 修改后：遍历 group_repo 的值，检查 std_name 是否在列表中
+    # 在 151 行之前插入：
+        print(f"DEBUG: 正在处理频道: {std_name}")
     for group_name, channels_str in group_repo.items():
         # 将字符串 "CCTV1, CCTV2, CETV1" 转为列表进行匹配
         channels_list = [c.strip() for c in channels_str.split(",")]
