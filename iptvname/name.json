@@ -1140,14 +1140,21 @@
         "中国气象频道.cn@SD",
         "中国气象频道HD"
     ],
-    "CCTVNEWS": [
+    "CGTN英语": [
         "CCTVNEWS",
-        "CCTVNEWS (1080p)",
-        "CCTVNEWS (2160p)",
-        "CCTVNEWS (720p)",
-        "CCTVNEWS.cn@HD",
-        "CCTVNEWS.cn@SD",
-        "CCTVNEWSHD"
+        "CCTVNEWS新闻",
+        "CCTVNEWS新闻频道",
+        "CGTN",
+        "CGTN (1080p)",
+        "CGTN.cn@SD",
+        "CGTN英语",
+        "CGTN英语 (1080p)",
+        "CGTN英语 (2160p)",
+        "CGTN英语 (720p)",
+        "CGTN英语.cn@HD",
+        "CGTN英语.cn@SD",
+        "CGTN英语HD",
+        "CGTN英语新闻"
     ],
     "CGTN俄语": [
         "CGTN俄罗斯语",
@@ -11011,22 +11018,6 @@
         "CETV早教HD",
         "CETV早期教育",
         "早期教育"
-    ],
-    "CGTN英语": [
-        "CCTVNEWS",
-        "CCTVNEWS新闻",
-        "CCTVNEWS新闻频道",
-        "CGTN",
-        "CGTN (1080p)",
-        "CGTN.cn@SD",
-        "CGTN英语",
-        "CGTN英语 (1080p)",
-        "CGTN英语 (2160p)",
-        "CGTN英语 (720p)",
-        "CGTN英语.cn@HD",
-        "CGTN英语.cn@SD",
-        "CGTN英语HD",
-        "CGTN英语新闻"
     ],
     "广东珠江": [
         "GDTV-2",

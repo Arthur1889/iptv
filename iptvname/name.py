@@ -15,7 +15,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PARENT_DIR = os.path.dirname(BASE_DIR)
 
 # 输入文件
-GROUP_JSON = os.path.join(PARENT_DIR, 'group.json')
+GROUP_JSON = os.path.join(PARENT_DIR, 'group', 'group.json')
 SOURCES_CACHE = os.path.join(PARENT_DIR, 'sources_cache.txt')
 
 # 兼容识别你的 nameoriginal 文件格式 (.txt 或 .json)
