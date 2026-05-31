@@ -177,6 +177,7 @@ NewTV中国功夫,NEWTV中国功夫,中国功夫
 宁夏卫视,NingxiaTV.cn,Ningxia TV
 新疆卫视,XinjiangTV.cn,Xinjiang TV
 
+
 # ================= 港澳台补丁 =================
 翡翠台,Jade.hk,TVB Jade,Jade TV
 凤凰中文,PhoenixChinese.cn,Phoenix Chinese Channel

@@ -1,7 +1,7 @@
 name.py脚本规则：
 总则：name.py的工作路径就是当前文件夹下，所有生成的文件都在本文件夹下；任务报告中，含别名总数、识别数量、未识别数量、耗时等；
 第一步：从上级目录中的group.json文件提取标准名放入name.json；
-第二步：将nameoriginal.json识别到name.json中,nameoriginal.json中每组第一个名称匹配第一步的标准名，如果匹配成功，将后边都加入别名；
+第二步：将nameoriginal.json识别到name.json中,nameoriginal.json中每组第一个名称匹配第一步的标准名，如果匹配成功，将后边都加入别名；如果出现了group.json中没有的标准名，以nameoriginal.json中的为准。
 第三步：从上级目录sources_cache.txt提取tvg-id、tvg-name、显示名称，作为需识别数据库；
 
 别名识别规则：

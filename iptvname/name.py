@@ -3,68 +3,105 @@ import re
 import json
 import time
 
-# 尝试导入拼音库（用于规则4），如果没有安装也不报错，平滑降级使用语义库
+# 尝试导入拼音库，未安装则降级为纯语义匹配 (不会报错卡壳)
 try:
     from pypinyin import pinyin, Style
     HAS_PINYIN = True
 except ImportError:
     HAS_PINYIN = False
 
-# ================= 配置路径 =================
+# ================= 路径配置 =================
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PARENT_DIR = os.path.dirname(BASE_DIR)
 
-# 输入文件 (按总则要求，部分在上级目录，部分在当前目录)
+# 输入文件
 GROUP_JSON = os.path.join(PARENT_DIR, 'group.json')
 SOURCES_CACHE = os.path.join(PARENT_DIR, 'sources_cache.txt')
+
+# 兼容识别你的 nameoriginal 文件格式 (.txt 或 .json)
+NAME_ORIGINAL_TXT = os.path.join(BASE_DIR, 'nameoriginal.txt')
 NAME_ORIGINAL_JSON = os.path.join(BASE_DIR, 'nameoriginal.json')
 
-# 输出文件 (当前目录)
+# 输出文件
 NAME_JSON = os.path.join(BASE_DIR, 'name.json')
 UNMATCHED_TXT = os.path.join(BASE_DIR, 'unmatched.txt')
 
-# ================= 规则 10: 语义补偿库 =================
-# 涵盖拼音翻译、常见英文后缀、错别字等，进行降维打击
+# ================= 规则 10: 超级语义补偿库 =================
+# 一个词对应多个可能的语义，全方位拦截降维打击
 SEMANTIC_LIB = {
-    "SICHUANSATELLITE": "四川卫视", "ZHEJIANGSATELLITE": "浙江卫视",
-    "HUNANSATELLITE": "湖南卫视", "JIANGSUSATELLITE": "江苏卫视",
-    "BEIJINGSATELLITE": "北京卫视", "BTV": "北京卫视",
-    "GUANGDONGSATELLITE": "广东卫视", "SHANDONGSATELLITE": "山东卫视",
-    "ANHUISATELLITE": "安徽卫视", "HENANSATELLITE": "河南卫视",
-    "LIAONINGSATELLITE": "辽宁卫视", "HEILONGJIANGSATELLITE": "黑龙江卫视",
-    "TIANJINSATELLITE": "天津卫视", "HUBEISATELLITE": "湖北卫视",
-    "SICHUAN": "四川卫视", "ZHEJIANG": "浙江卫视", "HUNAN": "湖南卫视",
-    "JIANGSU": "江苏卫视", "BEIJING": "北京卫视", "SHANDONG": "山东卫视",
-    "CCTV1": "CCTV-1 综合", "CCTV2": "CCTV-2 财经", "CCTV3": "CCTV-3 综艺",
-    "CCTV4": "CCTV-4 中文国际", "CCTV5": "CCTV-5 体育", "CCTV5+": "CCTV-5+ 体育赛事",
-    "CCTV6": "CCTV-6 电影", "CCTV7": "CCTV-7 国防军事", "CCTV8": "CCTV-8 电视剧",
-    "CCTV9": "CCTV-9 纪录", "CCTV10": "CCTV-10 科教", "CCTV11": "CCTV-11 戏曲",
-    "CCTV12": "CCTV-12 社会与法", "CCTV13": "CCTV-13 新闻", "CCTV14": "CCTV-14 少儿",
-    "CCTV15": "CCTV-15 音乐", "CCTV16": "CCTV-16 奥林匹克", "CCTV17": "CCTV-17 农业农村",
-    "CHCDONGZUO": "CHC动作电影", "CHCJIATING": "CHC家庭影院", "CHCDIANYING": "CHC高清电影"
+    "SICHUANSATELLITE": ["四川卫视", "四川台"],
+    "ZHEJIANGSATELLITE": ["浙江卫视", "浙江台"],
+    "HUNANSATELLITE": ["湖南卫视", "湖南台"],
+    "JIANGSUSATELLITE": ["江苏卫视", "江苏台"],
+    "BEIJINGSATELLITE": ["北京卫视", "北京台"],
+    "BTV": ["北京卫视"],
+    "GUANGDONGSATELLITE": ["广东卫视", "广东台"],
+    "SHANDONGSATELLITE": ["山东卫视", "山东台"],
+    "ANHUISATELLITE": ["安徽卫视", "安徽台"],
+    "HENANSATELLITE": ["河南卫视", "河南台"],
+    "LIAONINGSATELLITE": ["辽宁卫视", "辽宁台"],
+    "HEILONGJIANGSATELLITE": ["黑龙江卫视", "龙江卫视"],
+    "TIANJINSATELLITE": ["天津卫视", "天津台"],
+    "HUBEISATELLITE": ["湖北卫视", "湖北台"],
+    "SICHUAN": ["四川卫视"], "ZHEJIANG": ["浙江卫视"],
+    "HUNAN": ["湖南卫视"], "JIANGSU": ["江苏卫视"],
+    "BEIJING": ["北京卫视"], "SHANDONG": ["山东卫视"],
+    "CCTV1": ["CCTV1", "CCTV-1", "CCTV-1综合", "中央一台", "中央一套"],
+    "CCTV2": ["CCTV2", "CCTV-2", "CCTV-2财经", "中央二台", "中央二套"],
+    "CCTV3": ["CCTV3", "CCTV-3", "CCTV-3综艺", "中央三台", "中央三套"],
+    "CCTV4": ["CCTV4", "CCTV-4", "CCTV-4中文国际", "中央四台", "中央四套"],
+    "CCTV5": ["CCTV5", "CCTV-5", "CCTV-5体育", "中央五台", "中央五套"],
+    "CCTV5+": ["CCTV5+", "CCTV-5+", "CCTV-5+体育赛事"],
+    "CCTV6": ["CCTV6", "CCTV-6", "CCTV-6电影", "中央六台", "中央六套"],
+    "CCTV7": ["CCTV7", "CCTV-7", "CCTV-7国防军事", "中央七台", "中央七套"],
+    "CCTV8": ["CCTV8", "CCTV-8", "CCTV-8电视剧", "中央八台", "中央八套"],
+    "CCTV9": ["CCTV9", "CCTV-9", "CCTV-9纪录", "中央九台", "中央九套"],
+    "CCTV10": ["CCTV10", "CCTV-10", "CCTV-10科教", "中央十台", "中央十套"],
+    "CCTV11": ["CCTV11", "CCTV-11", "CCTV-11戏曲", "中央十一台", "中央十一套"],
+    "CCTV12": ["CCTV12", "CCTV-12", "CCTV-12社会与法", "中央十二台"],
+    "CCTV13": ["CCTV13", "CCTV-13", "CCTV-13新闻", "中央十三台", "中央十三套"],
+    "CCTV14": ["CCTV14", "CCTV-14", "CCTV-14少儿", "中央十四台", "中央十四套"],
+    "CCTV15": ["CCTV15", "CCTV-15", "CCTV-15音乐", "中央十五台", "中央十五套"],
+    "CCTV16": ["CCTV16", "CCTV-16", "CCTV-16奥林匹克", "中央十六台"],
+    "CCTV17": ["CCTV17", "CCTV-17", "CCTV-17农业农村", "中央十七台"],
+    "CCTV4K": ["CCTV4K", "CCTV-4K", "CCTV-4K超高清"],
+    "CCTV8K": ["CCTV8K", "CCTV-8K", "CCTV-8K超高清"],
+    "CGTN": ["CGTN", "中国国际电视台"],
+    "PHOENIXINFO": ["凤凰卫视资讯台", "凤凰资讯"],
+    "PHOENIXCHINESE": ["凤凰卫视中文台", "凤凰中文"],
+    "PHOENIXHONGKONG": ["凤凰卫视香港台", "凤凰香港"],
+    "CHCDONGZUO": ["CHC动作电影"], "CHCJIATING": ["CHC家庭影院"], "CHCDIANYING": ["CHC高清电影"]
 }
 
 # 全局数据库
-name_db = {}          # 结构: { "标准名": set(["别名1", "别名2"]) }
-alias_to_std = {}     # 反向索引: { "大写别名": "标准名" } 用于规则 5 快速比对
-pinyin_to_std = {}    # 拼音索引: { "标准名拼音大写": "标准名" } 用于规则 4
+name_db = {}          # { "标准名": set(["别名1", "别名2"]) }
+alias_to_std = {}     # { "大写别名": "标准名" }
+pinyin_to_std = {}    # { "大写拼音": "标准名" }
 
 # ================= 核心工具函数 =================
 
 def to_pinyin_upper(text):
-    """转大写拼音 (去掉空格)"""
+    """转大写拼音 (无空格)"""
     if not HAS_PINYIN: return text.upper()
     py_list = pinyin(text, style=Style.NORMAL)
     return "".join([item[0] for item in py_list]).replace(" ", "").upper()
 
-def add_alias_to_db(std_name, alias):
-    """规则 5 & 6: 添加别名并更新反向索引，统一大写匹配"""
+def add_std(std_name):
+    """添加标准名 (包含过滤规则8: 不能有 </br>)"""
+    std_name = str(std_name).replace("</br>", "").strip()
+    if not std_name: return
+    if std_name not in name_db:
+        name_db[std_name] = set()
+        add_alias(std_name, std_name) # 标准名自身也是一种别名
+        pinyin_to_std[to_pinyin_upper(std_name)] = std_name
+
+def add_alias(std_name, alias):
+    """添加别名，自动更新匹配索引 (支持规则5: 滚雪球式更新匹配库)"""
+    alias = str(alias).strip()
     if not alias: return
-    clean_alias = str(alias).strip()
-    if not clean_alias: return
-    
-    name_db[std_name].add(clean_alias)
-    alias_to_std[clean_alias.upper()] = std_name
+    name_db[std_name].add(alias)
+    # 规则 6: 统一转大写建立索引
+    alias_to_std[alias.upper()] = std_name
 
 def load_json(path):
     if os.path.exists(path):
@@ -74,183 +111,186 @@ def load_json(path):
     return {}
 
 def has_chinese(text):
-    """判断是否包含中文"""
     return bool(re.search(r'[\u4e00-\u9fa5]', text)) if text else False
 
-def get_prioritized_candidates(src):
-    """规则 1: 优先级 含中文优先 > tvg-id > tvg-name"""
-    cands = [
-        {'type': 'display', 'val': src.get('display', '')},
-        {'type': 'id', 'val': src.get('id', '')},
-        {'type': 'name', 'val': src.get('name', '')}
-    ]
-    # 过滤空值
-    cands = [c for c in cands if c['val'].strip()]
+def get_candidates(src):
+    """规则 1: 提取比对字段，严格遵循 优先级：含中文 > tvg-id > tvg-name"""
+    id_val = src.get('id', '').strip()
+    name_val = src.get('name', '').strip()
+    disp_val = src.get('display', '').strip()
     
-    # 拆分为中文和非中文组
-    chinese_cands = [c for c in cands if has_chinese(c['val'])]
-    non_chinese_cands = [c for c in cands if not has_chinese(c['val'])]
+    chinese_cands = []
+    other_cands = []
     
-    # 按 id, name (在组内) 的原始顺序排序，优先返回含中文的
-    return [c['val'] for c in chinese_cands] + [c['val'] for c in non_chinese_cands]
+    # 优先挑出所有含中文的
+    for v in [disp_val, id_val, name_val]:
+        if v and has_chinese(v) and v not in chinese_cands:
+            chinese_cands.append(v)
+            
+    # 其余遵循规则: tvg-id > tvg-name > display
+    for v in [id_val, name_val, disp_val]:
+        if v and not has_chinese(v) and v not in other_cands:
+            other_cands.append(v)
+            
+    return chinese_cands + other_cands
 
 def clean_round_1(text):
-    """规则 2: 第一轮清洗，去杂质后缀和末尾空格"""
-    # 激进清除要求中的字符 (忽略大小写)
+    """规则 2: 第一轮去杂质后缀"""
     patterns = [
-        r'(?i)\.cn@SD', r'(?i)\.cn@HD', r'(?i)\.hk@SD', 
-        r'\(1080p\)', r'\(720p\)', r'\(576p\)', r'\(576i\)', r'\(360p\)', r'\(540p\)', r'\(480p\)', r'\(180p\)', r'\(2160p\)',
-        r'(?i)\[Not 24/7\]', r'(?i)\[Geo-blocked\]', r'-'
+        r'(?i)\.cn@sd', r'(?i)\.cn@hd', r'(?i)\.hk@sd', 
+        r'\(\s*1080[pi]\s*\)', r'\(\s*720[pi]\s*\)', r'\(\s*576[pi]\s*\)', r'\(\s*360[pi]\s*\)',
+        r'\(\s*540[pi]\s*\)', r'\(\s*480[pi]\s*\)', r'\(\s*180[pi]\s*\)', r'\(\s*2160[pi]\s*\)',
+        r'(?i)\[not 24/7\]', r'(?i)\[geo-blocked\]', r'-'
     ]
+    res = text
     for p in patterns:
-        text = re.sub(p, '', text)
-    return text.strip()
+        res = re.sub(p, '', res)
+    return res.rstrip() # 去掉末尾空格
 
-def match_logic(target_name):
-    """执行 1-4 轮的匹配逻辑，只要匹配上就返回 标准名"""
-    if not target_name: return None
-    
-    # === 规则 2 & 5: 第一轮 ===
-    clean_name = clean_round_1(target_name)
-    if clean_name.upper() in alias_to_std:
-        return alias_to_std[clean_name.upper()]
-        
-    # === 规则 3: 第二轮 (去 TV、空格，进语义库) ===
-    # 比如 SichuanSatelliteTV -> SICHUANSATELLITE
-    no_tv = re.sub(r'(?i)TV', '', clean_name).replace(' ', '').upper()
-    if no_tv in SEMANTIC_LIB:
-        translated_name = SEMANTIC_LIB[no_tv]
-        if translated_name.upper() in alias_to_std:
-            return alias_to_std[translated_name.upper()]
-            
-    # === 规则 4: 第三/四轮 (大写拼音匹配) ===
-    py_target = to_pinyin_upper(no_tv)
-    if py_target in pinyin_to_std:
-        return pinyin_to_std[py_target]
-        
-    return None
+def clean_round_2(text):
+    """规则 3: 去除 TV、空格，准备进行中文/拼音映射"""
+    res = re.sub(r'(?i)TV', '', text)
+    res = res.replace(' ', '')
+    return res
 
 # ================= 主流程 =================
 
 def main():
     start_time = time.time()
-    print("🚀 开始执行 name.py 源识别清洗任务...")
+    print("🚀 开始执行严谨版 name.py 识别清洗任务...")
 
-    # ===== 第一步: 读取 group.json 提取标准名 (规则 1 & 8) =====
+    # ===== 第一步: 从 group.json 提取标准名 =====
     groups = load_json(GROUP_JSON)
-    std_names_count = 0
-    for group_name, channels in groups.items():
-        for ch in channels:
-            # 规则 8: 不能有 </br>
-            std_name = ch.replace("</br>", "").strip()
-            if std_name not in name_db:
-                name_db[std_name] = set([std_name])
-                alias_to_std[std_name.upper()] = std_name
-                # 为规则4预热拼音库
-                pinyin_to_std[to_pinyin_upper(std_name)] = std_name
-                std_names_count += 1
-    
-    print(f"✅ 第一步完成: 从 group.json 提取标准名 {std_names_count} 个")
+    for category, channel_str in groups.items():
+        # 🚨 破案了：从字符串里劈出频道名，而不是劈字母
+        if isinstance(channel_str, str):
+            channels = [x.strip() for x in channel_str.split(',') if x.strip()]
+            for ch in channels:
+                add_std(ch)
 
-    # ===== 第二步: 合并 nameoriginal.json (规则 2) =====
-    original_names = load_json(NAME_ORIGINAL_JSON)
-    orig_matched = 0
-    # 兼容字典格式 {"标准名": ["别名1", "别名2"]}
-    if isinstance(original_names, dict):
-        for key_name, aliases in original_names.items():
-            if key_name in name_db:
-                for alias in aliases:
-                    add_alias_to_db(key_name, alias)
-                orig_matched += 1
-    print(f"✅ 第二步完成: 从 nameoriginal.json 合并已有别名，命中 {orig_matched} 组")
+    print(f"✅ 第一步: 导入 group.json 完成。当前标准名池: {len(name_db)} 个")
 
-    # ===== 第三步: 解析 sources_cache.txt 识别源 =====
+    # ===== 第二步: 合并 nameoriginal 文件 =====
+    # 智能兼容加载逻辑 (完美支持你的 nameoriginal.txt 或 json)
+    orig_data = []
+    if os.path.exists(NAME_ORIGINAL_JSON):
+        try:
+            raw = load_json(NAME_ORIGINAL_JSON)
+            if isinstance(raw, list): orig_data = raw
+            elif isinstance(raw, dict): orig_data = [[k] + (v if isinstance(v, list) else [v]) for k, v in raw.items()]
+        except: pass
+    elif os.path.exists(NAME_ORIGINAL_TXT):
+        with open(NAME_ORIGINAL_TXT, 'r', encoding='utf-8') as f:
+            for line in f:
+                parts = [x.strip() for x in line.split(',') if x.strip()]
+                if parts: orig_data.append(parts)
+
+    for group in orig_data:
+        std = group[0]
+        # 💡 "如果出现了group.json中没有的标准名，以nameoriginal中的为准"
+        add_std(std) 
+        for alias in group[1:]:
+            add_alias(std, alias)
+
+    print(f"✅ 第二步: 合并原始别名库完成。当前标准名池扩展至: {len(name_db)} 个")
+
+    # ===== 插入步骤 (规则 9): 提前批量生成后缀别名 =====
+    # 💡 为什么要提前？因为提前把 "CCTV1HD" 放入别名库，在第三步遇到 M3U 里的 "CCTV1HD" 就能瞬间秒配！
+    for std in list(name_db.keys()):
+        suffixes = ["HD", ".cn@SD", ".cn@HD", " (2160p)", " (720p)", " (1080p)"]
+        for suf in suffixes:
+            add_alias(std, f"{std}{suf}")
+
+    # ===== 第三步: 解析 sources_cache.txt =====
     sources = []
     if os.path.exists(SOURCES_CACHE):
         with open(SOURCES_CACHE, 'r', encoding='utf-8') as f:
             lines = f.read().splitlines()
             for i in range(len(lines)):
                 if lines[i].startswith("#EXTINF"):
-                    extinf = lines[i]
-                    # 提取数据
-                    tvg_id = (re.search(r'tvg-id="([^"]+)"', extinf) or [None, ""])[1]
-                    tvg_name = (re.search(r'tvg-name="([^"]+)"', extinf) or [None, ""])[1]
-                    display = extinf.split(',')[-1].strip() if ',' in extinf else ""
-                    
-                    if display or tvg_id or tvg_name:
-                        sources.append({
-                            'id': tvg_id,
-                            'name': tvg_name,
-                            'display': display,
-                            'raw_line': extinf
-                        })
-    
-    print(f"📦 解析到来源列表: {len(sources)} 条源数据，开始识别匹配...")
+                    line = lines[i]
+                    tvg_id = (re.search(r'tvg-id="([^"]*)"', line) or [None, ""])[1]
+                    tvg_name = (re.search(r'tvg-name="([^"]*)"', line) or [None, ""])[1]
+                    display = line.split(',')[-1].strip() if ',' in line else ""
+                    sources.append({'id': tvg_id, 'name': tvg_name, 'display': display, 'raw_line': line})
 
-    # ===== 执行多轮识别匹配 =====
+    print(f"📦 解析到 {len(sources)} 条源数据，开始深度匹配...")
+
+    # ===== 执行多级匹配逻辑 =====
     matched_count = 0
     unmatched_sources = []
 
     for src in sources:
-        candidates = get_prioritized_candidates(src)
+        candidates = get_candidates(src)
         matched_std = None
-        
-        # 依次按优先级尝试匹配
+
         for cand in candidates:
-            matched_std = match_logic(cand)
-            if matched_std:
-                break # 一旦某轮匹配成功，跳出尝试
-        
+            # 第一轮：直接去杂质比对
+            clean1 = clean_round_1(cand)
+            if clean1.upper() in alias_to_std:
+                matched_std = alias_to_std[clean1.upper()]
+                break
+                
+            # 第二轮：去 TV 查纯净版
+            clean2 = clean_round_2(clean1)
+            if clean2.upper() in alias_to_std:
+                matched_std = alias_to_std[clean2.upper()]
+                break
+                
+            # 规则 10: 尝试语义库补偿匹配
+            if clean2.upper() in SEMANTIC_LIB:
+                for s_cand in SEMANTIC_LIB[clean2.upper()]:
+                    if s_cand.upper() in alias_to_std:
+                        matched_std = alias_to_std[s_cand.upper()]
+                        break
+            if matched_std: break
+
+            # 第三/四轮：强转大写拼音匹配
+            py_cand = to_pinyin_upper(clean2)
+            if py_cand in pinyin_to_std:
+                matched_std = pinyin_to_std[py_cand]
+                break
+
+        # 规则 7: 匹配成功，将源的三要素全部塞进别名库，滚雪球式壮大图谱
         if matched_std:
             matched_count += 1
-            # 规则 7: 匹配上了，将全部三大件均加入该标准名的别名库
             for val in [src['id'], src['name'], src['display']]:
-                add_alias_to_db(matched_std, val)
+                if val: add_alias(matched_std, val)
         else:
             unmatched_sources.append(src)
 
-    # ===== 规则 9: 批量注入后缀别名 =====
-    for std in list(name_db.keys()):
-        synthetic_aliases = [
-            f"{std}HD", f"{std}.cn@SD", f"{std}.cn@HD", 
-            f"{std} (2160p)", f"{std} (720p)", f"{std} (1080p)"
-        ]
-        for syn in synthetic_aliases:
-            add_alias_to_db(std, syn)
-
-    # ===== 收尾与导出 =====
-    # 格式化导出 name.json
+    # ===== 终末导出 =====
+    # 输出整洁排版的 JSON
     final_output = {k: sorted(list(v)) for k, v in name_db.items()}
     with open(NAME_JSON, 'w', encoding='utf-8') as f:
         json.dump(final_output, f, ensure_ascii=False, indent=4)
         
-    # 规则 11: 导出未匹配列表
+    # 规则 11: 未匹配清单
     with open(UNMATCHED_TXT, 'w', encoding='utf-8') as f:
-        f.write("=== 以下频道的 tvg-id / tvg-name / display 无法与标准名匹配 ===\n\n")
+        f.write("=== 以下频道的源无法与任何标准名匹配 ===\n\n")
         for u in unmatched_sources:
-            f.write(f"原行信息: {u['raw_line']}\n")
-            f.write(f"提取字段 => id: [{u['id']}], name: [{u['name']}], display: [{u['display']}]\n")
+            f.write(f"源行: {u['raw_line']}\n")
+            f.write(f"提取 => id: [{u['id']}], name: [{u['name']}], display: [{u['display']}]\n")
             f.write("-" * 60 + "\n")
 
-    # 统计数据报告
+    # 统计数据
     total_aliases = sum(len(v) for v in name_db.values())
     elapsed = time.time() - start_time
-    pinyin_status = "开启 (pypinyin)" if HAS_PINYIN else "未安装库, 已降级为纯语义词典映射"
-
-    report = f"""
+    pinyin_status = "🟢 开启 (pypinyin原生驱动)" if HAS_PINYIN else "🟡 降级 (内置语义字典驱动)"
+    
+    print(f"""
 ====================================
-      📝 name.py 识别任务报告
+      📝 name.py 深度识别任务报告
 ====================================
-🔹 来源总数: {len(sources)} 个源
-✅ 识别成功: {matched_count} 个
-❌ 未识别数: {len(unmatched_sources)} 个 (已写入 {os.path.basename(UNMATCHED_TXT)})
+🔹 M3U 缓存来源: {len(sources)} 条源
+✅ 识别匹配成功: {matched_count} 条
+❌ 未识别被遗弃: {len(unmatched_sources)} 条 (详见 unmatched.txt)
 🗃️ 拼音匹配引擎: {pinyin_status}
-🗂️ 最终别名词库: 共包含 {std_names_count} 个标准名，累计扩充至 {total_aliases} 个别名映射
-⏱️ 处理总耗时: {elapsed:.2f} 秒
-📁 输出文件路径: {NAME_JSON}
+🗂️ 最终别名图谱: 共 {len(name_db)} 个标准名，扩容至 {total_aliases} 个极品别名
+⏱️ 脚本处理耗时: {elapsed:.2f} 秒
+📁 终极名册输出: {os.path.basename(NAME_JSON)}
 ====================================
-"""
-    print(report)
+""")
 
 if __name__ == "__main__":
     main()
