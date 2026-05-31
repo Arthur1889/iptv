@@ -147,7 +147,12 @@ def determine_final_group(std_name, raw_group, is_4k_8k, group_repo):
     is_df_zone = any(x in name_up for x in PROVINCES) or any(x in name_up for x in CITY_TO_PROVINCE)
     
     if is_4k_8k and (is_cctv or is_ws or is_df_zone): return "4K频道"
-    if std_name in group_repo: return group_repo[std_name]
+# 修改后：遍历 group_repo 的值，检查 std_name 是否在列表中
+    for group_name, channels_str in group_repo.items():
+        # 将字符串 "CCTV1, CCTV2, CETV1" 转为列表进行匹配
+        channels_list = [c.strip() for c in channels_str.split(",")]
+        if std_name in channels_list:
+            return group_name
     
     # ... 你的后续逻辑 ...
 
