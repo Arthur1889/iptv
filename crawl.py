@@ -436,7 +436,13 @@ def main():
 
             formatted_tvg = display_title.split(" ")[0].replace("-", "") if "CCTV" in display_title else std_name
             
-            f.write(f'#EXTINF:-1 tvg-id="{formatted_tvg}" tvg-name="{formatted_tvg}" tvg-logo="{item["logo"]}" group-title="{final_group}",{display_title}\n')
+# 假设你的所有logo都存放在这个基础路径下
+base_logo_url = "https://epg.112114.xyz/logo/"
+
+# 拼接：基础路径 + tvg-id名称 + .png
+new_logo_url = f"{base_logo_url}{formatted_tvg}.png"
+
+f.write(f'#EXTINF:-1 tvg-id="{formatted_tvg}" tvg-name="{formatted_tvg}" tvg-logo="{new_logo_url}" group-title="{final_group}",{display_title}\n')
             f.write(f'{item["url"]}\n')
             written_count += 1
 
