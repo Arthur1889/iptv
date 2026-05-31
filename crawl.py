@@ -148,8 +148,9 @@ def determine_final_group(std_name, raw_group, is_4k_8k, group_repo):
     
     if is_4k_8k and (is_cctv or is_ws or is_df_zone): return "4K频道"
 # 修改后的代码（直接利用标准字典查询）
-    return group_repo.get(std_name, "综合频道")
-    
+    group_from_json = group_repo.get(std_name)
+    if group_from_json:
+        return group_from_json  # 只有匹配到了才返回，匹配不到则继续向下走 "综合频道")
     # ... 你的后续逻辑 ...
 
     if "地方台直播" in rg: return "地方频道"
