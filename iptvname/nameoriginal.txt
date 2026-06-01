@@ -185,7 +185,6 @@ NewTV中国功夫,NEWTV中国功夫,中国功夫
 TVB无线新闻,TVBNews.hk,TVB News
 国学频道,国学
 
-
 # 4K频道#
 北京卫视4K,北京高清,北京超高清
 广东卫视4K,广东超高清,广东高清
@@ -199,3 +198,7 @@ TVB无线新闻,TVBNews.hk,TVB News
 广东影视4K,广东影视高清,广东影视超高清
 
 人间卫视,Beautiful Life TV",Beautiful Life TV
+东方卫视,上海卫视
+农林卫视,中国农林卫视
+安多卫视,Ando TV,安多
+北京卡酷少儿,少儿卫视
