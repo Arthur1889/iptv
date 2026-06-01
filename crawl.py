@@ -151,7 +151,7 @@ def determine_final_group(std_name, raw_group, is_4k_8k, group_repo):
     rg = raw_group.strip() if raw_group else ""
     
     # [要求 3 & 分组11] 强制垃圾分类抛弃逻辑（保持不变）
-    drop_list = ["游戏直播", "听书直播", "老年直播", "解说直播", "监控直播", "蜘蛛直播", "zuqiu直播", "咪视界直播", "KK直播", "瑜伽裤直播", "Ai直播", "钓鱼直播", "API随机点播", "直播室"]
+    drop_list = ["游戏直播", "听书直播", "老年直播", "解说直播", "监控直播", "蜘蛛直播", "zuqiu直播", "咪视界直播", "KK直播", "瑜伽裤直播", "Ai直播", "钓鱼直播", "API随机点播", "直播室" "测试"]
     if any(x in rg or x in name_up for x in drop_list):
         return None
 
