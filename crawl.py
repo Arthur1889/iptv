@@ -137,22 +137,7 @@ def determine_final_group(std_name, raw_group, group_repo):
     drop_list = ["游戏直播", "听书直播", "老年直播", "解说直播", "监控直播", "蜘蛛直播", "zuqiu直播", "咪视界直播", "KK直播", "瑜伽裤直播", "Ai直播", "钓鱼直播", "API随机点播", "直播室", "测试"]
     if any(x in rg or x in name_up for x in drop_list):
         return None
-
-def sort_key(x):
-    # 直接使用顶部的全局变量 GROUP_PRIORITY
-    g_idx = GROUP_PRIORITY.index(x["group"]) if x["group"] in GROUP_PRIORITY else 999
-    
-    sub_idx = 99
-    if x["group"] == "4K频道":
-        if "CCTV" in x["std_name"]: sub_idx = 1
-        elif "卫视" in x["std_name"]: sub_idx = 2
-        else: sub_idx = 3
-    
-    cctv_num = re.search(r'CCTV-(\d+)', x["std_name"])
-    cctv_idx = int(cctv_num.group(1)) if cctv_num else 999
-    
-    return (g_idx, sub_idx, cctv_idx, -x["resolution"])
-
+        
     # 第一优先级：匹配 group_standard.json
     group_from_json = group_repo.get(std_name)
     if group_from_json:
@@ -190,7 +175,20 @@ def sort_key(x):
     if is_ws: return "地方卫视"
     if is_df_zone: return "地方频道"
     return "综合频道"
-
+def sort_key(x):
+    # 使用全局变量 GROUP_PRIORITY
+    g_idx = GROUP_PRIORITY.index(x["group"]) if x["group"] in GROUP_PRIORITY else 999
+    
+    sub_idx = 99
+    if x["group"] == "4K频道":
+        if "CCTV" in x["std_name"]: sub_idx = 1
+        elif "卫视" in x["std_name"]: sub_idx = 2
+        else: sub_idx = 3
+    
+    cctv_num = re.search(r'CCTV-(\d+)', x["std_name"])
+    cctv_idx = int(cctv_num.group(1)) if cctv_num else 999
+    
+    return (g_idx, sub_idx, cctv_idx, -x["resolution"])
 # =====================================================================
 # 3. 探测、去重与输出控制
 # =====================================================================
