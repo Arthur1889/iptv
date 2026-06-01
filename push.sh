@@ -1,59 +1,93 @@
 #!/bin/bash
 
-# 1. 自动定位脚本所在目录（核心：解决从不同路径调用脚本的问题）
-cd "$(dirname "$0")"
+# =====================================================================
+# IPTV Auto Push Tool (Mac/Linux Version)
+# =====================================================================
 
-# --- 颜色定义 ---
+# 1. 定位到脚本当前所在目录 (对应 cd /d "%~dp0")
+cd "$(dirname "$0")"
+BASE_DIR=$(pwd)
+
+# 颜色高亮定义
 GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 YELLOW='\033[1;33m'
+RED='\033[0;31m'
 NC='\033[0m'
 
-echo -e "${BLUE}==== 📺 IPTV 自动同步工具 (Mac/Ubuntu 通用) ====${NC}"
+echo -e "${BLUE}===========================================${NC}"
+echo -e "${BLUE}    IPTV Auto Push Tool (Unix Version)     ${NC}"
+echo -e "${BLUE}===========================================${NC}"
 
-# 2. 智能选择 Python 解释器
-# 优先使用当前目录下的虚拟环境，如果没有，则退而求其次使用系统 python3
+# 2. 智能选择 Python 解释器 (优先使用虚拟环境)
+echo -e "${YELLOW}[1/6] Checking Python environment...${NC}"
 if [ -f "./.venv/bin/python3" ]; then
     PYTHON_CMD="./.venv/bin/python3"
+    echo -e "Using Virtual Environment: ${GREEN}${PYTHON_CMD}${NC}"
 else
     PYTHON_CMD="python3"
+    echo -e "Using System Python: ${GREEN}${PYTHON_CMD}${NC}"
 fi
 
-echo -e "${YELLOW}[1/3] 正在运行爬虫 (使用: $PYTHON_CMD)...${NC}"
-$PYTHON_CMD crawl.py
+# 3. 检查 iptvname/nameoriginal.txt 是否有变动
+echo -e "${YELLOW}[2/6] Checking iptvname updates...${NC}"
+if [ -f "iptvname/nameoriginal.txt" ]; then
+    echo "Updating iptvname database..."
+    cd "${BASE_DIR}/iptvname"
+    $PYTHON_CMD name.py
+    cd "${BASE_DIR}"
+fi
 
+# 4. 检查 group/group.json 是否有变动
+echo -e "${YELLOW}[3/6] Checking group updates...${NC}"
+if [ -f "group/group.json" ]; then
+    echo "Converting group standard configurations..."
+    cd "${BASE_DIR}/group"
+    $PYTHON_CMD convert.py
+    cd "${BASE_DIR}"
+fi
+
+# 5. 运行爬虫核心脚本
+echo -e "${YELLOW}[4/6] Running crawl.py...${NC}"
+$PYTHON_CMD crawl.py
 if [ $? -ne 0 ]; then
-    echo "❌ 脚本运行失败，请检查依赖。"
+    echo -e "${RED}[ERROR] crawl.py failed. Please check dependencies.${NC}"
     exit 1
 fi
 
-# 3. 检查文件变动
-echo -e "${YELLOW}[2/3] 检查文件变动...${NC}"
-status=$(git status --porcelain)
+# 6. 检查文件变动 (等同于 for /f "tokens=*" %%i in ('git status --porcelain'))
+echo -e "${YELLOW}[5/6] Checking for changes...${NC}"
+git add .
+CHANGES=$(git status --porcelain)
 
-if [ -z "$status" ]; then
-    echo -e "${GREEN}✨ 内容无变化，无需提交。${NC}"
+if [ -z "$CHANGES" ]; then
+    echo -e "${GREEN}[SKIP] No changes detected, nothing to push.${NC}"
     exit 0
 fi
 
-# 4. 提交并推送
-echo -e "${BLUE}检测到更新，准备推送至 GitHub...${NC}"
+# 7. 提交并推送
+echo -e "${BLUE}Detected changes. Preparing to push to GitHub...${NC}"
+DEFAULT_MSG="Update IPTV list: $(date +'%Y-%m-%d %H:%M:%S')"
 
-# 如果是在无人值守环境（如定时任务），可以取消下行注释并删除 read 行
-# msg="Auto Update: $(date +'%Y-%m-%d %H:%M:%S')"
-
-echo -e "${YELLOW}请输入 Commit 备注 (直接回车使用默认值):${NC}"
+echo -e "${YELLOW}Enter Commit Message (Press Enter for default):${NC}"
 read msg
+
 if [ -z "$msg" ]; then
-    msg="Update IPTV list: $(date +'%Y-%m-%d %H:%M:%S')"
+    msg=$DEFAULT_MSG
 fi
 
-git add .
+echo -e "${YELLOW}[6/6] Pushing to GitHub...${NC}"
 git commit -m "$msg"
-git push origin main
+
+# 自动获取当前所在的分支名 (完美对齐 Windows 端的自动获取分支逻辑)
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+git push origin "$BRANCH"
 
 if [ $? -eq 0 ]; then
-    echo -e "${GREEN}✅ 所有操作已完成！${NC}"
+    echo -e "\n${BLUE}===========================================${NC}"
+    echo -e "${GREEN} SUCCESS: Pushed to ${BRANCH} branch.${NC}"
+    echo -e "${BLUE}===========================================${NC}"
 else
-    echo -e "❌ 推送失败。如果是首次在 Ubuntu 运行，请确保已配置 Token。"
+    echo -e "\n${RED} ERROR: Push failed. Check your network or Git config.${NC}"
+    exit 1
 fi
