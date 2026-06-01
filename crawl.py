@@ -420,6 +420,7 @@ def main():
                     "url": url,
                     "logo": task["logo"],
                     "tvgid": task["std_name"],
+                    "tvgname": task["std_name"],
                     "group": task["group"],
                     "resolution": res
                 })
@@ -439,9 +440,20 @@ def main():
 
     # [要求 10 & 13] 生成最终文件
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
-        f.write('#EXTM3U x-tvg-url="https://epg.112114.xyz/"\n')
+        # 头部同时声明 112114 和 epg.pw 两个 EPG 网址，供其他频道备用分流
+        f.write('#EXTM3U x-tvg-url="https://epg.112114.xyz/pp.xml.gz,https://epg.pw/xmltv/feed/chn.xml"\n')
+        
         for ch in final_list:
-            f.write(f'#EXTINF:-1 tvg-id="{ch["std_name"]}" tvg-name="{ch["std_name"]}" tvg-logo="{ch["logo"]}" group-title="{ch["group"]}",{ch["std_name"]}\n')
+            # 【核心修改】：针对前 5 个核心组，重写台标为 112114 官方标准台标路径
+            if ch["group"] in ["4K频道", "央视频道", "地方卫视", "山东频道", "地方频道"]:
+                # 去除名字中的空格等杂质，匹配 112114 的台标命名规范
+                clean_logo_name = ch["std_name"].replace(" ", "")
+                logo_url = f"https://epg.112114.xyz/logo/{clean_logo_name}.png"
+            else:
+                # 其他频道（海外、少儿动漫等）使用原始抓取到的台标
+                logo_url = ch["logo"] if ch["logo"] else ""
+                
+            f.write(f'#EXTINF:-1 tvg-id="{ch["tvgid"]}" tvg-name="{ch["tvgname"]}" tvg-logo="{logo_url}" group-title="{ch["group"]}",{ch["std_name"]}\n')
             f.write(f'{ch["url"]}\n')
 
     # 保存黑名单
