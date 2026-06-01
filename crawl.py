@@ -348,7 +348,7 @@ def main():
     tasks = []
     for item in parsed_items:
         std_name = clean_and_normalize_name(item["raw_name"], name_lookup)
-        final_group = determine_final_group(std_name, item["group"], group_repo)
+        final_group = determine_final_group(std_name, item["group"], "4K" in std_name.upper() or "8K" in std_name.upper(), group_repo)
         
         if not final_group:
             stats["quality_filtered"] += 1
