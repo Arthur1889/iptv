@@ -276,12 +276,6 @@
 源行: #EXTINF:-1 group-title="🔥[三网1]央卫视直播" tvg-name="最强综艺趴" tvg-logo="https://epg.112114.xyz/logo/最强综艺趴.png" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",最强综艺趴
 提取 => id: [], name: [最强综艺趴], display: [最强综艺趴]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🔥[三网2]央卫视直播" tvg-name="CCTV-4中文国际" tvg-logo="https://epg.112114.xyz/logo/CCTV-4中文国际.png" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",CCTV-4中文国际
-提取 => id: [], name: [CCTV-4中文国际], display: [CCTV-4中文国际]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🔥[三网2]央卫视直播" tvg-name="CCTV-7国防军事" tvg-logo="https://epg.112114.xyz/logo/CCTV-7国防军事.png" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",CCTV-7国防军事
-提取 => id: [], name: [CCTV-7国防军事], display: [CCTV-7国防军事]
-------------------------------------------------------------
 源行: #EXTINF:-1 group-title="🔥[三网2]央卫视直播" tvg-name="CCTV-16奥林匹克" tvg-logo="https://epg.112114.xyz/logo/CCTV-16奥林匹克.png" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",CCTV-16奥林匹克
 提取 => id: [], name: [CCTV-16奥林匹克], display: [CCTV-16奥林匹克]
 ------------------------------------------------------------
@@ -318,15 +312,6 @@
 源行: #EXTINF:-1 group-title="🔥[三网3]央卫视直播" tvg-name="广东体育" tvg-logo="https://epg.112114.xyz/logo/广东体育.png" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",广东体育
 提取 => id: [], name: [广东体育], display: [广东体育]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🔥[三网4]央卫视直播" tvg-name="CCTV4中文国际" tvg-logo="https://epg.112114.xyz/logo/CCTV4中文国际.png" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",CCTV4中文国际
-提取 => id: [], name: [CCTV4中文国际], display: [CCTV4中文国际]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🔥[三网4]央卫视直播" tvg-name="CCTV7国防军事" tvg-logo="https://epg.112114.xyz/logo/CCTV7国防军事.png" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",CCTV7国防军事
-提取 => id: [], name: [CCTV7国防军事], display: [CCTV7国防军事]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🔥[三网4]央卫视直播" tvg-name="CGTN外语纪录" tvg-logo="https://epg.112114.xyz/logo/CGTN外语纪录.png" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",CGTN外语纪录
-提取 => id: [], name: [CGTN外语纪录], display: [CGTN外语纪录]
-------------------------------------------------------------
 源行: #EXTINF:-1 group-title="🔥[三网4]央卫视直播" tvg-name="赛事最经典" tvg-logo="https://epg.112114.xyz/logo/赛事最经典.png" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",赛事最经典
 提取 => id: [], name: [赛事最经典], display: [赛事最经典]
 ------------------------------------------------------------
@@ -344,12 +329,6 @@
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="🔥[三网4]央卫视直播" tvg-name="中国农林卫视" tvg-logo="https://epg.112114.xyz/logo/中国农林卫视.png" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",中国农林卫视
 提取 => id: [], name: [中国农林卫视], display: [中国农林卫视]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🔥[三网5]央卫视直播" tvg-name="CCTV-4中文国际" tvg-logo="https://epg.112114.xyz/logo/CCTV-4中文国际.png" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",CCTV-4中文国际
-提取 => id: [], name: [CCTV-4中文国际], display: [CCTV-4中文国际]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🔥[三网5]央卫视直播" tvg-name="CCTV-7国防军事" tvg-logo="https://epg.112114.xyz/logo/CCTV-7国防军事.png" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",CCTV-7国防军事
-提取 => id: [], name: [CCTV-7国防军事], display: [CCTV-7国防军事]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="🔥[三网5]央卫视直播" tvg-name="CCTV-16奥林匹克" tvg-logo="https://epg.112114.xyz/logo/CCTV-16奥林匹克.png" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",CCTV-16奥林匹克
 提取 => id: [], name: [CCTV-16奥林匹克], display: [CCTV-16奥林匹克]
@@ -4847,9 +4826,6 @@
 ------------------------------------------------------------
 源行: #EXTINF:-1 tvg-name="梅州2" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/梅州2.png" group-title="其他频道" response-time="100ms",梅州2
 提取 => id: [], name: [梅州2], display: [梅州2]
-------------------------------------------------------------
-源行: #EXTINF:-1 tvg-name="党建新闻" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/党建新闻.png" group-title="其他频道" response-time="12ms",党建新闻
-提取 => id: [], name: [党建新闻], display: [党建新闻]
 ------------------------------------------------------------
 源行: #EXTINF:-1 tvg-name="靓彩河北" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/靓彩河北.png" group-title="其他频道" response-time="13ms",靓彩河北
 提取 => id: [], name: [靓彩河北], display: [靓彩河北]
