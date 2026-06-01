@@ -171,20 +171,6 @@ def determine_final_group(std_name, raw_group, group_repo):
     if is_ws: return "地方卫视"
     if is_df_zone: return "地方频道"
     return "综合频道"
-def sort_key(x):
-    # 使用全局变量 GROUP_PRIORITY
-    g_idx = GROUP_PRIORITY.index(x["group"]) if x["group"] in GROUP_PRIORITY else 999
-    
-    sub_idx = 99
-    if x["group"] == "4K频道":
-        if "CCTV" in x["std_name"]: sub_idx = 1
-        elif "卫视" in x["std_name"]: sub_idx = 2
-        else: sub_idx = 3
-    
-    cctv_num = re.search(r'CCTV-(\d+)', x["std_name"])
-    cctv_idx = int(cctv_num.group(1)) if cctv_num else 999
-    
-    return (g_idx, sub_idx, cctv_idx, -x["resolution"])
 # =====================================================================
 # 3. 探测、去重与输出控制
 # =====================================================================
@@ -209,7 +195,7 @@ def probe_url(url):
     except:
         return False, 0
 
-def process_and_deduplicate(channels):
+def process_and_deduplicate(channels, group_priority):
     """[要求 2, 4, 5] 核心归类去重与排序管道"""
     channel_groups = defaultdict(list)
     for ch in channels:
@@ -246,7 +232,22 @@ def process_and_deduplicate(channels):
         if high_4k: final_retained.append(high_4k)
         if standard: final_retained.append(standard)
 
-    final_retained.sort(key=sort_key)
+    # 局部重新定义内部排序，强制使用传入的参数防止 NameError
+    def internal_sort_key(x):
+        g_idx = group_priority.index(x["group"]) if x["group"] in group_priority else 999
+        
+        sub_idx = 99
+        if x["group"] == "4K频道":
+            if "CCTV" in x["std_name"]: sub_idx = 1
+            elif "卫视" in x["std_name"]: sub_idx = 2
+            else: sub_idx = 3
+            
+        cctv_num = re.search(r'CCTV-(\d+)', x["std_name"])
+        cctv_idx = int(cctv_num.group(1)) if cctv_num else 999
+        
+        return (g_idx, sub_idx, cctv_idx, -x["resolution"])
+
+    final_retained.sort(key=internal_sort_key)
     return final_retained
 
 # =====================================================================
