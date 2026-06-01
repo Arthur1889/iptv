@@ -56,10 +56,10 @@ CCTV_DESC_MAP = {
     "CCTV9": "CCTV-9 纪录", "CCTV10": "CCTV-10 科教", "CCTV11": "CCTV-11 戏曲",
     "CCTV12": "CCTV-12 社会与法", "CCTV13": "CCTV-13 新闻", "CCTV14": "CCTV-14 少儿",
     "CCTV15": "CCTV-15 音乐", "CCTV16": "CCTV-16 奥林匹克", "CCTV17": "CCTV-17 农业农村",
-    "CCTV4K": "CCTV4K 超高清", "CCTV8K": "CCTV8K 超高清"
+    "CCTV4K": "CCTV4K 超高清", "CCTV8K": "CCTV8K 超高清", "CETV1": "中国教育-1", "CETV2": "中国教育-2", "CETV3": "中国教育-3", "CETV4": "中国教育-4"
 }
 
-GROUP_PRIORITY = ["4K频道", "央视频道", "地方卫视", "山东频道", "地方频道", "影视频道", "歌曲及音乐MV", "纪录纪实", "娱乐频道", "电视剧直播", "动漫直播", "港澳台", "海外频道", "体育赛事", "少儿频道", "综合频道" ]
+GROUP_PRIORITY = ["4K频道", "央视频道", "地方卫视", "山东频道", "地方频道", "影视频道", "歌曲及音乐MV", "纪录纪实", "娱乐频道", "电视剧直播", "少儿动漫", "港澳台", "海外频道", "体育赛事", "综合频道" ]
 
 # 地区标识用于 4K 归类兜底
 PROVINCES = ["北京", "天津", "河北", "山西", "内蒙古", "辽宁", "吉林", "黑龙江", "上海", "江苏", "浙江", "安徽", "福建", "江西", "山东", "河南", "湖北", "湖南", "广东", "广西", "海南", "重庆", "四川", "贵州", "云南", "西藏", "陕西", "甘肃", "青海", "宁夏", "新疆"]
@@ -123,53 +123,87 @@ def clean_and_normalize_name(raw_name, name_lookup):
     
     return std_name
 
-def determine_final_group(std_name, raw_group, group_repo):
-    """绝对优先级的智能分组引擎 (匹配 group_standard.json > 4K规则 > 13条Fallback)"""
+def determine_final_group(std_name, raw_group, is_4k_8k, group_repo):
+    """绝对优先级的智能分组引擎 (核心5组优先匹配 > 4K规则 > 13条Fallback兜底)"""
     name_up = std_name.upper()
     rg = raw_group.strip() if raw_group else ""
-    is_4k_8k = "4K" in name_up or "8K" in name_up
-
-    # [要求 3 & 分组11] 强制垃圾分类抛弃
-    drop_list = ["游戏直播", "听书直播", "老年直播", "解说直播", "监控直播", "蜘蛛直播", "zuqiu直播", "咪视界直播", "KK直播", "瑜伽裤直播", "Ai直播", "钓鱼直播", "API随机点播", "直播室", "测试"]
+    
+    # [要求 3 & 分组11] 强制垃圾分类抛弃逻辑（保持不变）
+    drop_list = ["游戏直播", "听书直播", "老年直播", "解说直播", "监控直播", "蜘蛛直播", "zuqiu直播", "咪视界直播", "KK直播", "瑜伽裤直播", "Ai直播", "钓鱼直播", "API随机点播", "直播室"]
     if any(x in rg or x in name_up for x in drop_list):
         return None
-        
-    # 第一优先级：匹配 group_standard.json
+
+    # =====================================================================
+    # 核心阶段一：前 5 个核心基础分组的“绝对优先判定”
+    # =====================================================================
+    
+    # 基础属性识别
+    is_cctv = "CCTV" in name_up or "中央台" in name_up or "CGTN" in name_up
+    is_ws = "卫视" in name_up and "朝鲜语" not in name_up
+    
+    # 智能地域识别 (地级市与省份映射)
+    matched_province = None
+    for city, province in CITY_TO_PROVINCE.items():
+        if city in std_name:
+            matched_province = province
+            break
+    target_prov = matched_province if matched_province else next((p for p in PROVINCES if p in std_name), None)
+
+    # 1. 优先执行 4K 频道判定规则 [要求 7 & 8]
+    if "CCTV4K" in name_up or "CCTV8K" in name_up: 
+        return "4K频道"
+    if is_4k_8k and (is_cctv or is_ws or target_prov):
+        return "4K频道"
+
+    # 2. 匹配外部标准映射表 (group_standard.json 中的强制核心分类)
     group_from_json = group_repo.get(std_name)
+    if group_from_json in ["4K频道", "央视频道", "地方卫视", "山东频道", "地方频道"]:
+        return group_from_json
+
+    # 3. 强力判定：央视频道
+    if is_cctv: 
+        return "央视频道"
+        
+    # 4. 强力判定：地方卫视
+    if is_ws: 
+        return "地方卫视"
+        
+    # 5. 强力判定：山东频道与地方频道
+    if target_prov == "山东": 
+        return "山东频道"
+    if target_prov: 
+        return "地方频道"
+
+    # =====================================================================
+    # 核心阶段二：当无法满足前 5 个基础核心组时，走后续的 Fallback 规则
+    # =====================================================================
+    
+    # 走 group_standard.json 剩余的分组映射
     if group_from_json:
         return group_from_json
 
-    # 判断区域与央视属性
-    is_cctv = any(x in name_up for x in ["CCTV", "中央台", "CGTN"])
-    is_ws = "卫视" in name_up and "朝鲜语" not in name_up
-    is_df_zone = any(x in name_up for x in PROVINCES)
-
-    # 第二优先级：[要求 7 & 8] 4K频道特殊规则
-    if "CCTV4K" in name_up or "CCTV8K" in name_up: return "4K频道"
-    if is_4k_8k and (is_cctv or is_ws or is_df_zone): return "4K频道"
-
-    # 第三优先级：按原始组别执行 13 条兜底规则
+    # 13条特定原始组别关键字 Fallback 兜底
     if "地方台直播" in rg: return "地方频道"
     if "港澳台直播" in rg: return "港澳台"
-    if any(x in rg for x in ["马来西亚", "越南", "印度", "日本", "韩国", "美国", "英国", "爱尔兰", "全球"]): return "海外频道"
-    if "少儿直播" in rg: return "少儿频道"
+    if any(x in rg for x in ["延伸西亚", "马来西亚直播", "越南直播", "印度直播", "日本直播", "韩国直播", "美国直播", "英国直播", "爱尔兰直播", "全球直播"]): return "海外频道"
+    if "少儿直播" in rg: return "少儿动漫"
     if "体育直播" in rg: return "体育赛事"
     if "电影直播" in rg: return "影视频道"
-    if any(x in rg for x in ["综艺", "短剧", "小品", "相声", "抖音", "YY直播", "车模", "女团", "热舞", "乡野", "脱口秀"]): return "娱乐频道"
-    if any(x in rg for x in ["电视剧直播", "爱奇艺", "埋堆堆"]): return "电视剧直播"
+    if any(x in rg for x in ["综艺直播", "短剧直播", "小品直播", "相声直播", "抖音直播", "YY直播", "车模直播", "女团直播", "热舞直播", "乡野直播", "脱口秀直播"]): return "娱乐频道"
+    if any(x in rg for x in ["电视剧直播", "爱奇艺直播", "埋堆堆直播"]): return "电视剧直播"
     if "纪录片直播" in rg: return "纪录纪实"
-    if any(x in rg for x in ["动漫直播", "沙雕动画"]): return "动漫直播"
-    if any(x in rg for x in ["音乐直播", "周杰伦", "歌手合集"]): return "歌曲及音乐MV"
+    if any(x in rg for x in ["动漫直播", "沙雕动画直播"]): return "少儿动漫"
+    if any(x in rg for x in ["音乐直播", "周杰伦歌曲", "歌手合集"]): return "歌曲及音乐MV"
 
-    if any(k in std_name for k in ["电影", "影视", "影片", "影院"]):
-        return "影视频道"
-    if any(k in std_name for k in ["短剧", "剧场"]):
-        return "电视剧直播"
-
-    # 最终智能兜底
-    if is_cctv: return "央视频道"
-    if is_ws: return "地方卫视"
-    if is_df_zone: return "地方频道"
+    # 根据台名关键字 Fallback 分流
+    if any(x in name_up for x in ["港", "澳", "台", "HBO", "PHOENIX", "凤凰", "翡翠台", "明珠台"]): return "港澳台"
+    if any(x in name_up for x in ["电影", "影院", "剧场", "影视"]): return "影视频道"
+    if any(x in name_up for x in ["纪录", "纪实", "探索"]): return "纪录纪实"
+    if any(x in name_up for x in ["动漫", "少儿", "卡通", "儿童"]): return "少儿动漫"
+    if any(x in name_up for x in ["体育", "赛事", "足球", "五星体育", "武搏"]): return "体育赛事"
+    if any(x in name_up for x in ["音乐", "MV", "歌曲"]): return "歌曲及音乐MV"
+    
+    # 终极 Fallback
     return "综合频道"
 # =====================================================================
 # 3. 探测、去重与输出控制
