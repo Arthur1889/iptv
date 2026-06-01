@@ -69,9 +69,9 @@ CCTV_DESC_MAP = {
     "CETV1": "中国教育-1", "CETV2": "中国教育-2", "CETV3": "中国教育-3", "CETV4": "中国教育-4",
     
     # 🌟 新增：CGTN 中国国际电视台全系列（支持无符号强匹配）
-    "CGTN": "CGTN 英语", "CGTNMAIN": "CGTN 英语", "CGTNDOC": "CGTN 纪录", 
-    "CGTNFRANCAIS": "CGTN 法语", "CGTNESPANOL": "CGTN 西语", 
-    "CGTNARABIC": "CGTN 阿语", "CGTNRUSSIAN": "CGTN 俄语"
+    "CGTN英语": "CGTN 英语", "CGTN纪录": "CGTN 纪录", 
+    "CGTN法语": "CGTN 法语", "CGTN西语": "CGTN 西语", 
+    "CGTN阿语": "CGTN 阿语", "CGTN俄语": "CGTN 俄语"
 }
 
 GROUP_PRIORITY = ["4K频道", "央视频道", "地方卫视", "山东频道", "地方频道", "影视频道", "歌曲及音乐MV", "纪录纪实", "娱乐频道", "电视剧直播", "少儿动漫", "港澳台", "海外频道", "体育赛事", "综合频道" ]
