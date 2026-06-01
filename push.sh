@@ -19,10 +19,10 @@ echo -e "${BLUE}===========================================${NC}"
 echo -e "${BLUE}    IPTV Auto Push Tool (Unix Version)     ${NC}"
 echo -e "${BLUE}===========================================${NC}"
 
-# 2. 智能选择 Python 解释器 (优先使用虚拟环境)
+# 2. 智能选择 Python 解释器 (使用绝对路径，彻底解决子目录找不到虚拟环境的 Bug)
 echo -e "${YELLOW}[1/6] Checking Python environment...${NC}"
-if [ -f "./.venv/bin/python3" ]; then
-    PYTHON_CMD="./.venv/bin/python3"
+if [ -f "${BASE_DIR}/.venv/bin/python3" ]; then
+    PYTHON_CMD="${BASE_DIR}/.venv/bin/python3"
     echo -e "Using Virtual Environment: ${GREEN}${PYTHON_CMD}${NC}"
 else
     PYTHON_CMD="python3"
