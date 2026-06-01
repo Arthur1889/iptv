@@ -134,9 +134,24 @@ def determine_final_group(std_name, raw_group, group_repo):
     is_4k_8k = "4K" in name_up or "8K" in name_up
 
     # [要求 3 & 分组11] 强制垃圾分类抛弃
-    drop_list = ["游戏直播", "听书直播", "老年直播", "解说直播", "监控直播", "蜘蛛直播", "zuqiu直播", "咪视界直播", "KK直播", "瑜伽裤直播", "Ai直播", "钓鱼直播", "API随机点播", "直播室"]
+    drop_list = ["游戏直播", "听书直播", "老年直播", "解说直播", "监控直播", "蜘蛛直播", "zuqiu直播", "咪视界直播", "KK直播", "瑜伽裤直播", "Ai直播", "钓鱼直播", "API随机点播", "直播室", "测试"]
     if any(x in rg or x in name_up for x in drop_list):
         return None
+
+def sort_key(x):
+    # 直接使用顶部的全局变量 GROUP_PRIORITY
+    g_idx = GROUP_PRIORITY.index(x["group"]) if x["group"] in GROUP_PRIORITY else 999
+    
+    sub_idx = 99
+    if x["group"] == "4K频道":
+        if "CCTV" in x["std_name"]: sub_idx = 1
+        elif "卫视" in x["std_name"]: sub_idx = 2
+        else: sub_idx = 3
+    
+    cctv_num = re.search(r'CCTV-(\d+)', x["std_name"])
+    cctv_idx = int(cctv_num.group(1)) if cctv_num else 999
+    
+    return (g_idx, sub_idx, cctv_idx, -x["resolution"])
 
     # 第一优先级：匹配 group_standard.json
     group_from_json = group_repo.get(std_name)
@@ -164,6 +179,11 @@ def determine_final_group(std_name, raw_group, group_repo):
     if "纪录片直播" in rg: return "纪录纪实"
     if any(x in rg for x in ["动漫直播", "沙雕动画"]): return "动漫直播"
     if any(x in rg for x in ["音乐直播", "周杰伦", "歌手合集"]): return "歌曲及音乐MV"
+
+    if any(k in std_name for k in ["电影", "影视", "影片", "影院"]):
+        return "影视频道"
+    if any(k in std_name for k in ["短剧", "剧场"]):
+        return "电视剧直播"
 
     # 最终智能兜底
     if is_cctv: return "央视频道"
@@ -231,13 +251,6 @@ def process_and_deduplicate(channels):
                 
         if high_4k: final_retained.append(high_4k)
         if standard: final_retained.append(standard)
-
-    # [要求 5] 终极排序
-    def sort_key(x):
-        g_idx = GROUP_ORDER.index(x["group"]) if x["group"] in GROUP_ORDER else 999
-        cctv_num = re.search(r'CCTV-(\d+)', x["std_name"])
-        cctv_idx = int(cctv_num.group(1)) if cctv_num else 999
-        return (g_idx, cctv_idx, -x["resolution"])
 
     final_retained.sort(key=sort_key)
     return final_retained
@@ -369,7 +382,7 @@ def main():
     print("\n[+] 探测完毕，正在执行深度去重与排序...")
     
     # 4. 后置聚合与生成
-    final_list = process_and_deduplicate(valid_channels)
+    final_list = process_and_deduplicate(valid_channels, GROUP_PRIORITY)
     stats["final_retained"] = len(final_list)
     stats["quality_filtered"] += (len(valid_channels) - len(final_list))
 

@@ -4839,9 +4839,6 @@
 源行: #EXTINF:-1 tvg-name="广东体育" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/广东体育.png" group-title="体育频道" response-time="71ms",广东体育
 提取 => id: [], name: [广东体育], display: [广东体育]
 ------------------------------------------------------------
-源行: #EXTINF:-1 tvg-name="风云足球" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/风云足球.png" group-title="体育频道" response-time="78ms",风云足球
-提取 => id: [], name: [风云足球], display: [风云足球]
-------------------------------------------------------------
 源行: #EXTINF:-1 tvg-name="惠州1" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/惠州1.png" group-title="其他频道" response-time="47ms",惠州1
 提取 => id: [], name: [惠州1], display: [惠州1]
 ------------------------------------------------------------
@@ -5252,21 +5249,6 @@
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="港澳台" tvg-logo="https://i.imgur.com/k4fhcPl.png" tvg-id="民视新闻HD",民视新闻HD
 提取 => id: [民视新闻HD], name: [], display: [民视新闻HD]
-------------------------------------------------------------
-源行: #EXTINF:-1 tvg-id="风云足球" tvg-name="风云足球" tvg-logo="https://www.xn--rgv465a.top/tvlogo/风云足球.png" group-title="💰央视付费频道",风云足球
-提取 => id: [风云足球], name: [风云足球], display: [风云足球]
-------------------------------------------------------------
-源行: #EXTINF:-1 tvg-id="风云足球" tvg-name="风云足球" tvg-logo="https://www.xn--rgv465a.top/tvlogo/风云足球.png" group-title="💰央视付费频道",风云足球
-提取 => id: [风云足球], name: [风云足球], display: [风云足球]
-------------------------------------------------------------
-源行: #EXTINF:-1 tvg-id="风云足球" tvg-name="风云足球" tvg-logo="https://www.xn--rgv465a.top/tvlogo/风云足球.png" group-title="💰央视付费频道",风云足球
-提取 => id: [风云足球], name: [风云足球], display: [风云足球]
-------------------------------------------------------------
-源行: #EXTINF:-1 tvg-id="风云足球" tvg-name="风云足球" tvg-logo="https://www.xn--rgv465a.top/tvlogo/风云足球.png" group-title="💰央视付费频道",风云足球
-提取 => id: [风云足球], name: [风云足球], display: [风云足球]
-------------------------------------------------------------
-源行: #EXTINF:-1 tvg-id="风云足球" tvg-name="风云足球" tvg-logo="https://www.xn--rgv465a.top/tvlogo/风云足球.png" group-title="💰央视付费频道",风云足球
-提取 => id: [风云足球], name: [风云足球], display: [风云足球]
 ------------------------------------------------------------
 源行: #EXTINF:-1 tvg-id="广东体育" tvg-name="广东体育" tvg-logo="https://www.xn--rgv465a.top/tvlogo/广东体育.png" group-title="☘️广东频道",广东体育
 提取 => id: [广东体育], name: [广东体育], display: [广东体育]
@@ -8432,21 +8414,6 @@
 ------------------------------------------------------------
 源行: #EXTINF:-1 tvg-id="睛彩广场舞" tvg-name="睛彩广场舞" tvg-logo="https://www.xn--rgv465a.top/tvlogo/睛彩广场舞.png" group-title="🏀体育频道",睛彩广场舞
 提取 => id: [睛彩广场舞], name: [睛彩广场舞], display: [睛彩广场舞]
-------------------------------------------------------------
-源行: #EXTINF:-1 tvg-id="风云足球" tvg-name="风云足球" tvg-logo="https://www.xn--rgv465a.top/tvlogo/风云足球.png" group-title="🏀体育频道",风云足球
-提取 => id: [风云足球], name: [风云足球], display: [风云足球]
-------------------------------------------------------------
-源行: #EXTINF:-1 tvg-id="风云足球" tvg-name="风云足球" tvg-logo="https://www.xn--rgv465a.top/tvlogo/风云足球.png" group-title="🏀体育频道",风云足球
-提取 => id: [风云足球], name: [风云足球], display: [风云足球]
-------------------------------------------------------------
-源行: #EXTINF:-1 tvg-id="风云足球" tvg-name="风云足球" tvg-logo="https://www.xn--rgv465a.top/tvlogo/风云足球.png" group-title="🏀体育频道",风云足球
-提取 => id: [风云足球], name: [风云足球], display: [风云足球]
-------------------------------------------------------------
-源行: #EXTINF:-1 tvg-id="风云足球" tvg-name="风云足球" tvg-logo="https://www.xn--rgv465a.top/tvlogo/风云足球.png" group-title="🏀体育频道",风云足球
-提取 => id: [风云足球], name: [风云足球], display: [风云足球]
-------------------------------------------------------------
-源行: #EXTINF:-1 tvg-id="风云足球" tvg-name="风云足球" tvg-logo="https://www.xn--rgv465a.top/tvlogo/风云足球.png" group-title="🏀体育频道",风云足球
-提取 => id: [风云足球], name: [风云足球], display: [风云足球]
 ------------------------------------------------------------
 源行: #EXTINF:-1 tvg-id="魅力足球" tvg-name="魅力足球" tvg-logo="https://www.xn--rgv465a.top/tvlogo/魅力足球.png" group-title="🏀体育频道",魅力足球
 提取 => id: [魅力足球], name: [魅力足球], display: [魅力足球]

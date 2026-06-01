@@ -26,7 +26,7 @@ CCTV第一剧场,第一剧场,CCTV-第一剧场,CCTV第一剧场HD,风云剧场,
 CCTV发现之旅,发现之旅,CCTV-发现之旅,中央新影-发现之旅
 CCTV风云剧场,风云剧场,CCTV-风云剧场,CCTV风云剧场HD
 CCTV风云音乐,风云音乐,CCTV-风云音乐,CCTV风云音乐HD
-CCTV风云足球风云足球,,CCTV-风云足球,CCTV风云足球HD
+CCTV风云足球,风云足球,,CCTV-风云足球,CCTV风云足球HD
 CCTV央视台球,央视台球,CCTV-央视台球,CCTV央视台球HD,CCTV-台球
 CCTV高尔夫球,高尔夫网球,CCTV高尔夫·网球,CCTV-高尔夫网琿,CCTV高尔夫网球,CCTV-高尔夫网球,CCTV高尔夫网球HD,CCTV-央视高网
 CCTV怀旧剧场,怀旧剧场,CCTV-怀旧剧场,CCTV怀旧剧场HD,CCTV怀旧剧圿,CCTV-怀旧剧圿
