@@ -50,13 +50,28 @@ NAME_JSON_PATH = os.path.join(BASE_DIR, "iptvname", "name.json")
 
 # 预设的央视映射与标准组序
 CCTV_DESC_MAP = {
+    # 核心央视频道标准映射与中文描述
     "CCTV1": "CCTV-1 综合", "CCTV2": "CCTV-2 财经", "CCTV3": "CCTV-3 综艺",
     "CCTV4": "CCTV-4 中文国际", "CCTV5": "CCTV-5 体育", "CCTV5+": "CCTV-5+ 体育赛事",
     "CCTV6": "CCTV-6 电影", "CCTV7": "CCTV-7 国防军事", "CCTV8": "CCTV-8 电视剧",
     "CCTV9": "CCTV-9 纪录", "CCTV10": "CCTV-10 科教", "CCTV11": "CCTV-11 戏曲",
     "CCTV12": "CCTV-12 社会与法", "CCTV13": "CCTV-13 新闻", "CCTV14": "CCTV-14 少儿",
     "CCTV15": "CCTV-15 音乐", "CCTV16": "CCTV-16 奥林匹克", "CCTV17": "CCTV-17 农业农村",
-    "CCTV4K": "CCTV4K 超高清", "CCTV8K": "CCTV8K 超高清", "CETV1": "中国教育-1", "CETV2": "中国教育-2", "CETV3": "中国教育-3", "CETV4": "中国教育-4"
+    "CCTV4K": "CCTV4K 超高清", "CCTV8K": "CCTV8K 超高清", "CCTV5PLUS": "CCTV-5+ 体育赛事",
+    
+    # 常用央视数字付费频道（防止清洗后错分类到其他组）
+    "CCTV兵器科技": "CCTV 兵器科技", "CCTV风云足球": "CCTV 风云足球", "CCTV高尔夫网球": "CCTV 高尔夫网球",
+    "CCTV风云音乐": "CCTV 风云音乐", "CCTV风云剧场": "CCTV 风云剧场", "CCTV第一剧场": "CCTV 第一剧场",
+    "CCTV怀旧剧场": "CCTV懷舊劇場", "CCTV大国健康": "CCTV 大国健康", "CCTV台球": "CCTV 台球",
+    "CCTV女性时尚": "CCTV 女性时尚", "CCTV地理世界": "CCTV 地理世界",
+    
+    # 中国教育电视台系列
+    "CETV1": "中国教育-1", "CETV2": "中国教育-2", "CETV3": "中国教育-3", "CETV4": "中国教育-4",
+    
+    # 🌟 新增：CGTN 中国国际电视台全系列（支持无符号强匹配）
+    "CGTN": "CGTN 英语", "CGTNMAIN": "CGTN 英语", "CGTNDOC": "CGTN 纪录", 
+    "CGTNFRANCAIS": "CGTN 法语", "CGTNESPANOL": "CGTN 西语", 
+    "CGTNARABIC": "CGTN 阿语", "CGTNRUSSIAN": "CGTN 俄语"
 }
 
 GROUP_PRIORITY = ["4K频道", "央视频道", "地方卫视", "山东频道", "地方频道", "影视频道", "歌曲及音乐MV", "纪录纪实", "娱乐频道", "电视剧直播", "少儿动漫", "港澳台", "海外频道", "体育赛事", "综合频道" ]
