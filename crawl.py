@@ -475,10 +475,12 @@ def main():
     passed_4k_sources = 0
 
     # 3. 开启多线程并发探测
-    tasks = [check_channel(session, name, url, semaphore) for name, url in all_results]
-    await asyncio.gather(*tasks)
-        future_to_url = {executor.submit(check_task, task): task for task in tasks}
-        
+    # 注意：确保这里没有遗留的 await asyncio.gather(*tasks) 
+    # 因为既然你已经决定用 ThreadPoolExecutor，就不需要这一行异步等待了
+    
+    # 修正缩进后的逻辑：
+    with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
+        future_to_url = {executor.submit(check_task, task): task for task in tasks}        
         for future in concurrent.futures.as_completed(future_to_url):
             completed += 1
             task, is_valid, res, resp_time = future.result()
