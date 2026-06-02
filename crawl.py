@@ -294,18 +294,65 @@ def process_and_deduplicate(channels, group_priority):
         if standard: final_retained.append(standard)
 
     # 局部重新定义内部排序，强制使用传入的参数防止 NameError
+    # 局部重新定义内部排序，强制使用传入的参数防止 NameError
     def internal_sort_key(x):
+        # 1. 基础大组排序优先级
         g_idx = group_priority.index(x["group"]) if x["group"] in group_priority else 999
         
+        # 2. 针对 4K 频道的次级精细排序
         sub_idx = 99
         if x["group"] == "4K频道":
-            if "CCTV" in x["std_name"]: sub_idx = 1
-            elif "卫视" in x["std_name"]: sub_idx = 2
+            if "CCTV" in x["std_name"].upper(): sub_idx = 1
+            elif "卫视" in x["std_name"].upper(): sub_idx = 2
             else: sub_idx = 3
-            
-        cctv_num = re.search(r'CCTV-(\d+)', x["std_name"])
-        cctv_idx = int(cctv_num.group(1)) if cctv_num else 999
+
+        # 3. 🌟【核心修复】：央视/教育/国际台精细升序权重
+        cctv_idx = 999
+        name_upper = x["std_name"].upper().replace(" ", "").replace("-", "")
         
+        # A. 普通纯数字央视（CCTV1 - CCTV17）
+        num_match = re.search(r'CCTV(\d+)', name_upper)
+        if num_match:
+            cctv_idx = int(num_match.group(1))
+            # 解决 CCTV5+ 应该排在 CCTV5 后面的问题
+            if "5+" in name_upper or "5PLUS" in name_upper:
+                cctv_idx = 5.5
+        
+        # B. 央视付费数字/超高清频道特例按序分流 (紧跟在 CCTV17 后面)
+        elif "CCTV4K" in name_upper: cctv_idx = 18
+        elif "CCTV8K" in name_upper: cctv_idx = 19
+        elif "CCTV风云足球" in name_upper: cctv_idx = 20
+        elif "CCTV高尔夫网球" in name_upper: cctv_idx = 21
+        elif "CCTV台球" in name_upper: cctv_idx = 22
+        elif "CCTV兵器科技" in name_upper: cctv_idx = 23
+        elif "CCTV风云音乐" in name_upper: cctv_idx = 24
+        elif "CCTV风云剧场" in name_upper: cctv_idx = 25
+        elif "CCTV第一剧场" in name_upper: cctv_idx = 26
+        elif "CCTV怀旧剧场" in name_upper: cctv_idx = 27
+        elif "CCTV电视指南" in name_upper: cctv_idx = 28
+        elif "CCTV世界地理" in name_upper: cctv_idx = 29
+        elif "CCTV发现之旅" in name_upper: cctv_idx = 30
+        elif "CCTV文化精品" in name_upper: cctv_idx = 31
+        elif "CCTV中学生" in name_upper: cctv_idx = 32
+        elif "CCTV老故事" in name_upper: cctv_idx = 33
+        
+        # C. 中国教育电视台系列排在央视付费台后面
+        elif "CETV1" in name_upper: cctv_idx = 41
+        elif "CETV2" in name_upper: cctv_idx = 42
+        elif "CETV3" in name_upper: cctv_idx = 43
+        elif "CETV4" in name_upper: cctv_idx = 44
+        
+        # D. CGTN 系列国际台垫底
+        elif "CGTN" in name_upper:
+            cctv_idx = 50
+            if "英语" in name_upper: cctv_idx = 51
+            elif "纪录" in name_upper: cctv_idx = 52
+            elif "法语" in name_upper: cctv_idx = 53
+            elif "西语" in name_upper: cctv_idx = 54
+            elif "阿语" in name_upper: cctv_idx = 55
+            elif "俄语" in name_upper: cctv_idx = 56
+
+        # 4. 返回多维排序元组 (大组序号, 4K子序号, 央视内部序号, 分辨率降序)
         return (g_idx, sub_idx, cctv_idx, -x["resolution"])
 
     final_retained.sort(key=internal_sort_key)
