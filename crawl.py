@@ -563,26 +563,28 @@ async def main():
     loop_start_time = time.time()
     passed_sources = 0
     passed_4k_sources = 0
-
+    
     # ==========================================
-    # 3. 开启纯异步并发探测 (高频刷新无盲区版)
+    # 3. 开启纯异步并发探测 (彻底修复版 - 解决数据丢失暗坑)
     # ==========================================
     async with aiohttp.ClientSession() as my_session:
-        # 降级并发到 20-30，防止 Linux 瞬间建立过多 Socket 导致网络层假死
-        semaphore = asyncio.Semaphore(25) 
+        # 保持 30 并发，兼顾速度与 Linux 稳定性
+        semaphore = asyncio.Semaphore(30) 
 
+        # 🌟 修改点 1：让辅助协程直接把 task 连同结果一起打包返回
         async def semaphore_task(task):
             async with semaphore:
                 try:
-                    # 严格限制超时，防止死源拖慢全局
-                    return await asyncio.wait_for(
+                    is_valid, res, resp_time = await asyncio.wait_for(
                         probe_url_async(my_session, task["url"]), 
                         timeout=5.0
                     )
+                    return task, is_valid, res, resp_time
                 except Exception:
-                    return False, 0, 999
+                    return task, False, 0, 999
 
-        task_futures = {asyncio.create_task(semaphore_task(t)): t for t in tasks}
+        # 直接创建协程任务列表
+        tasks_list = [semaphore_task(t) for t in tasks]
         total_tasks = len(tasks)
         completed = 0
         
@@ -592,11 +594,11 @@ async def main():
 
         print("[+] 异步探测引擎已启动，正在激活连接池...")
 
-        for future in asyncio.as_completed(task_futures.keys()):
+        # 🌟 修改点 2：直接解包拿数据，再也不会出现 KeyError
+        for future in asyncio.as_completed(tasks_list):
             completed += 1
             try:
-                is_valid, res, resp_time = await future
-                task = task_futures[future]
+                task, is_valid, res, resp_time = await future
             except Exception:
                 continue
 
@@ -621,7 +623,7 @@ async def main():
                 except: fails = 0
                 blacklist[task["url"]] = fails + 1
 
-            # 🌟【优化点】：改为每 1 个任务都强制刷新输出，绝不留白
+            # 🌟 进度条刷新（再也不会被 continue 误伤跳过了）
             elapsed_loop = time.time() - loop_start_time
             avg_time = elapsed_loop / completed if completed > 0 else 0
             remaining_time = avg_time * (total_tasks - completed)
@@ -631,21 +633,19 @@ async def main():
                 m, s = divmod(int(seconds), 60)
                 return f"{m:02d}:{s:02d}"
 
-            # 动态渲染进度条
             bar_length = 15
             percent = completed / total_tasks if total_tasks > 0 else 0
             filled_length = int(round(bar_length * percent))
             bar = '█' * filled_length + '░' * (bar_length - filled_length)
 
             short_name = task['std_name'][:6]
-            # 用 \r 实时覆盖单行，清空残余字符
             print(
                 f"\r进度:[{bar}] {completed}/{total_tasks} ({percent*100:.1f}%) | "
                 f"⏱️ 剩:{fmt_duration(remaining_time)}/总:{fmt_duration(total_predict_time)} | "
                 f"当前:{short_name:<6} | ✅通过:{passed_sources} | ✨4K+:{passed_4k_sources}   ", 
                 end="", flush=True
             )
-        print() # 彻底结束后换行
+        print() # 探测完成后换行
         
     # 4. 后置聚合与生成
     final_list = process_and_deduplicate(valid_channels, GROUP_PRIORITY)
