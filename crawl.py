@@ -404,39 +404,79 @@ def main():
     total_tasks = len(tasks)
     completed = 0
     
-    # 3. 开启多线程并发探测 (max_workers=20 表示同时测 20 个源，可根据网络情况微调)
+    # 🌟 新增：初始化用于计算时间的计时器与统计器
+    loop_start_time = time.time()
+    passed_sources = 0
+    passed_4k_sources = 0
+
+    # 3. 开启多线程并发探测
     with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
-        # 提交所有任务
         future_to_url = {executor.submit(check_task, task): task for task in tasks}
         
-        # 只要有任务完成就立刻处理结果
         for future in concurrent.futures.as_completed(future_to_url):
             completed += 1
             task, is_valid, res = future.result()
             url = task["url"]
             
-            # 单行进度刷新
-            print(f"\r进度: {completed}/{total_tasks} | 正在测: {task['std_name'][:10]:<10} | 优质源: {len(valid_channels)}", end="", flush=True)
-
+            # 🌟 新增：实时统计通过源与4K源数量
             if is_valid:
-                if url in blacklist: del blacklist[url]
+                passed_sources += 1
+                if res >= 2160:
+                    passed_4k_sources += 1
+
+                if url in blacklist: 
+                    del blacklist[url]
                 valid_channels.append({
-                    "std_name": task["std_name"], # 此时是纯净的标准别名，如 CETV1、CCTV1
+                    "std_name": task["std_name"],
                     "url": url,
                     "logo": task["logo"],
-                    "tvgid": task["std_name"],     # 严格遵守要求：用 name.json 里的标准名作为 tvg-id
-                    "tvgname": task["std_name"],   # 严格遵守要求：用 name.json 里的标准名作为 tvg-name
+                    "tvgid": task["std_name"],     
+                    "tvgname": task["std_name"],   
                     "group": task["group"],
                     "resolution": res
                 })
             else:
-                try:
-                    fails = int(blacklist.get(url, 0))
-                except (ValueError, TypeError):
-                    fails = 0
+                try: fails = int(blacklist.get(url, 0))
+                except (ValueError, TypeError): fails = 0
                 blacklist[url] = fails + 1
 
-    print("\n[+] 探测完毕，正在执行深度去重与排序...")
+            # =====================================================================
+            # 🌟【核心新增】：动态进度条、预计时间与剩余时间数学计算
+            # =====================================================================
+            elapsed_loop = time.time() - loop_start_time  # 已耗时
+            
+            # 计算剩余时间和预计总时间 (避免刚开始completed为0时除以0)
+            if completed > 0:
+                avg_time_per_task = elapsed_loop / completed
+                total_predict_time = avg_time_per_task * total_tasks
+                remaining_time = max(0.0, total_predict_time - elapsed_loop)
+            else:
+                total_predict_time = 0.0
+                remaining_time = 0.0
+
+            # 格式化时间为 mm:ss
+            def fmt_duration(seconds):
+                m, s = divmod(int(seconds), 60)
+                return f"{m:02d}:{s:02d}"
+
+            # 构建 15 格字符进度条 [████░░░说明░░░░░]
+            bar_length = 15
+            percent = completed / total_tasks if total_tasks > 0 else 0
+            filled_length = int(round(bar_length * percent))
+            bar = '█' * filled_length + '░' * (bar_length - filled_length)
+
+            # 限制频道名长度，防止控制台单行过长发生错位换行
+            short_name = task['std_name'][:6]
+
+            # 单行整齐打印刷新 (用 \r 回车不换行，末尾用空格清除旧残余)
+            print(
+                f"\r进度:[{bar}] {completed}/{total_tasks} ({percent*100:.1f}%) | "
+                f"⏱️ 剩:{fmt_duration(remaining_time)}/总:{fmt_duration(total_predict_time)} | "
+                f"当前:{short_name:<6} | ✅通过:{passed_sources} | ✨4K+:{passed_4k_sources}   ", 
+                end="", 
+                flush=True
+            )
+            # =====================================================================
     
     # 4. 后置聚合与生成
     final_list = process_and_deduplicate(valid_channels, GROUP_PRIORITY)
