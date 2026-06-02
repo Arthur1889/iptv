@@ -39,7 +39,7 @@ def is_cache_valid(cache_path, max_age_days=1):
 # 下载远程源列表
 # =====================================================================
 async def parse_m3u_content(content):
-    """从 M3U 文本中提取频道名称、URL 和原始分组(group-title)"""
+    """从 M3U 文本中提取频道名称、URL、原始分组以及原厂的 logo 和 id"""
     items = []
     lines = content.splitlines()
     current_item = {}
@@ -47,15 +47,28 @@ async def parse_m3u_content(content):
     for line in lines:
         line = line.strip()
         if line.startswith("#EXTINF"):
-            # 🌟 核心修改：利用正则捕获 group-title
+            # 1. 捕获原始分组
             grp_match = re.search(r'group-title="(.*?)"', line)
             grp = grp_match.group(1) if grp_match else ""
             
-            # 捕获频道名称
+            # 2. 🌟 新增：捕获原始 tvg-logo
+            logo_match = re.search(r'tvg-logo="(.*?)"', line)
+            raw_logo = logo_match.group(1) if logo_match else ""
+            
+            # 3. 🌟 新增：捕获原始 tvg-id (即 epg-url 对应的台号)
+            id_match = re.search(r'tvg-id="(.*?)"', line)
+            raw_id = id_match.group(1) if id_match else ""
+            
+            # 4. 捕获频道名称
             name_match = re.search(r',(.*)$', line)
             name = name_match.group(1) if name_match else ""
             
-            current_item = {"raw_name": name.strip(), "group": grp.strip()}
+            current_item = {
+                "raw_name": name.strip(), 
+                "group": grp.strip(),
+                "raw_logo": raw_logo.strip(),
+                "raw_id": raw_id.strip()
+            }
         elif line.startswith("http") and current_item:
             current_item["url"] = line
             items.append(current_item)
@@ -481,8 +494,8 @@ async def main():
                     with open(CACHE_PATH, 'w', encoding='utf-8') as f:
                         f.write("#EXTM3U\n")
                         for item in parsed_items:
-                            # 🌟 核心修改：保存时带上原始分组信息
-                            f.write(f'#EXTINF:-1 group-title="{item.get("group", "")}",{item["raw_name"]}\n')
+                            # 🌟 修复点：保存时带上所有原厂标签，供下次读取
+                            f.write(f'#EXTINF:-1 group-title="{item.get("group", "")}" tvg-logo="{item.get("raw_logo", "")}" tvg-id="{item.get("raw_id", "")}",{item["raw_name"]}\n')
                             f.write(f"{item['url']}\n")
                     print(f"[+] 缓存已成功更新，共 {len(parsed_items)} 条频道。")
                 else:
@@ -564,9 +577,16 @@ async def main():
             stats["blacklist_filtered"] += 1
             continue
             
+        # 🌟 判断该频道的标准名是否显式存在于 group_standard.json 中
+        is_matched_json = std_name in group_repo
+
         tasks.append({
-            "std_name": std_name, "url": url, "logo": item["logo"], 
-            "group": final_group
+            "std_name": std_name, 
+            "url": url, 
+            "group": final_group,
+            "is_matched_json": is_matched_json,              # 🌟 标记是否命中标准库
+            "raw_logo": item.get("raw_logo", ""),             # 🌟 携带原始 logo
+            "raw_id": item.get("raw_id", "")                  # 🌟 携带原始 id (EPG)
         })
 
     # 2. 定义单个探测任务的包装函数
@@ -692,22 +712,21 @@ async def main():
                 if "美洲" in ch["std_name"]: display_name = "CCTV-4 美洲"
                 if "4K" not in final_group: final_group = "央视频道"
 
-            # 3. 🌟【核心双轨制分流】：根据是否在 group_standard.json 中决定 logo 和 epg 策略
-            # 检查这个标准名是不是通过 group_standard.json 手动配置过的核心台
-            is_standard_managed = ch["std_name"] in name_repo.values() or final_group in ["4K频道", "央视频道", "地方卫视", "山东频道", "地方频道"]
+            # 3. 🌟【核心双轨制分流】：根据是否在 group_standard.json 或 5 大核心组中决定 logo 和 epg 策略
+            # 检查当前频道是否属于 5 大核心分组，或者显式存在于 group_standard.json 字典中
+            is_standard_managed = final_group in ["4K频道", "央视频道", "地方卫视", "山东频道", "地方频道"] or ch["std_name"] in group_repo
             
             if is_standard_managed:
-                # 方案 A：如果是标准分组管理的频道，强行采用 112114 的标准中文台标，不带多余参数
-                clean_logo_name = display_name.replace(" ", "")
-                logo_url = f"https://epg.112114.xyz/logo/{clean_logo_name}.png"
-                epg_param = "" # 使用全局头部 EPG，这里保持干净
+                # 方案 A：核心标准频道，tvg-logo 直接赋值为标准中文名（供播放器本地或动态匹配高清晰标），不带原厂杂质参数
+                logo_url = display_name
+                epg_param = "" 
             else:
-                # 方案 B：如果是其他野生频道（如野生少儿动漫、歌曲等），严格保留它原始抓到的 logo 和 epg-url
+                # 方案 B：野生频道（如野生少儿、歌曲、娱乐等），严格保留原始抓到的原厂 tvg-logo 和 epg-url
                 logo_url = ch["logo"] if ch["logo"] else ""
-                # 如果原始数据里有 epg-url，单独为该行保留（需要确保你 valid_channels 里保存了该字段，如果没有可不加）
+                # 如果原始数据中含有独立的 epg-url 属性，单独为该行保留
                 epg_param = f' epg-url="{ch.get("epgurl", "")}"' if ch.get("epgurl") else ""
 
-            # 4. 严格写入：tvg-id/name 保持纯净英文（绝不污染），只有核心台在最后转换为中文描述
+            # 4. 严格写入：根据分流策略渲染标准的 #EXTINF 属性行
             f.write(f'#EXTINF:-1 tvg-id="{ch["tvgid"]}" tvg-name="{ch["tvgname"]}" tvg-logo="{logo_url}" group-title="{final_group}"{epg_param},{display_name}\n')
             f.write(f'{ch["url"]}\n')
 
