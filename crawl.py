@@ -472,7 +472,7 @@ async def main():
         return task, is_valid, res, resp_time
     print(f"[调试] 待探测任务总数: {len(tasks)}")
     if len(tasks) > 0:
-    print(f"[调试] 第一个待探测URL: {tasks[0]['url']}")
+        print(f"[调试] 第一个待探测URL: {tasks[0]['url']}")
     total_tasks = len(tasks)
     completed = 0
     
