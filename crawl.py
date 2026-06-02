@@ -650,10 +650,16 @@ async def main():
                 if task["url"] in blacklist: 
                     del blacklist[task["url"]]
                 
+                # 🌟【修复点】：将 task["logo"] 修正为 task["raw_logo"]
                 valid_channels.append({
-                    "std_name": task["std_name"], "url": task["url"], "logo": task["logo"],
-                    "tvgid": task["std_name"], "tvgname": task["std_name"], "group": task["group"],
-                    "resolution": res, "avg_time": resp_time
+                    "std_name": task["std_name"], 
+                    "url": task["url"], 
+                    "logo": task["raw_logo"], # <-- 修正这里
+                    "tvgid": task["std_name"], 
+                    "tvgname": task["std_name"], 
+                    "group": task["group"],
+                    "resolution": res, 
+                    "avg_time": resp_time
                 })
             else:
                 try: fails = int(blacklist.get(task["url"], 0))
