@@ -28,7 +28,7 @@ CCTV风云剧场,风云剧场,CCTV-风云剧场,CCTV风云剧场HD
 CCTV风云音乐,风云音乐,CCTV-风云音乐,CCTV风云音乐HD
 CCTV风云足球,风云足球,,CCTV-风云足球,CCTV风云足球HD
 CCTV央视台球,央视台球,CCTV-央视台球,CCTV央视台球HD,CCTV-台球
-CCTV高尔夫球,高尔夫网球,CCTV高尔夫·网球,CCTV-高尔夫网琿,CCTV高尔夫网球,CCTV-高尔夫网球,CCTV高尔夫网球HD,CCTV-央视高网
+CCTV高尔夫网球,高尔夫网球,CCTV高尔夫·网球,CCTV-高尔夫网琿,CCTV高尔夫网球,CCTV-高尔夫网球,CCTV高尔夫网球HD,CCTV-央视高网
 CCTV怀旧剧场,怀旧剧场,CCTV-怀旧剧场,CCTV怀旧剧场HD,CCTV怀旧剧圿,CCTV-怀旧剧圿
 CCTV老故事,老故事,CCTV-老故事,CCTV老故亿,中央新影-老故事,中央新影-老故亿,重温经典
 CCTV女性时尚,女性时尚,CCTV-女性时尚,CCTV女性时尚,CCTV-女性时尚,CCTV女性时尚HD
@@ -43,18 +43,18 @@ CETV2,CETV-2,CETV2中国教育,CETV2 中国教育,中国教育2,中国教育2HD,
 CETV3,CETV-3,CETV3中国教育,CETV3 中国教育,中国教育3,中国教育3HD,中国教育-3
 CETV4,CETV-4,CETV4中国教育,CETV4 中国教育,中国教育4,中国教育4HD,中国教育-4
 CETV早教,CETV早期教育,早期教育
-CGTN英语,CCTVNEWS,CGTN,CGTN英语新闻,CCTVNEWS新闻,CCTVNEWS新闻频道
-CGTN俄语,CGTN俄罗斯语,CGTN俄罗斯语频道
-CGTN阿语,CGTN阿拉伯语,CGTN阿拉伯语频道
-CGTN西语,CGTN西班牙语,CGTN西班牙语频道
-CGTN法语,CGTN法语频道
-CGTN纪录,CGTN记录频道,CGTN外语纪录
+CGTN英语,CCTVNEWS,CGTN,CGTN英语新闻,CCTVNEWS新闻,CCTVNEWS新闻频道,CGTN.cn@SD
+CGTN俄语,CGTN俄罗斯语,CGTN俄罗斯语频道,CGTNRussian,CGTNRussian.cn@SD
+CGTN阿语,CGTN阿拉伯语,CGTN阿拉伯语频道,CGTNArabic,CGTNArabic.cn@SD
+CGTN西语,CGTN西班牙语,CGTN西班牙语频道,CGTNSpanish,CGTNSpanish.cn@SD
+CGTN法语,CGTN法语频道,CGTNFrench,CGTNFrench.cn@SD
+CGTN纪录,CGTN记录频道,CGTN外语纪录,CGTNDocumentary,CGTNDocumentary.cn@SD
 
 广东珠江,GDTV-2,珠江,珠江频道,珠江台,广东珠江高清,珠江高清
 
 翡翠台,TVb翡翠台,tvb翡翠台,TVB翡翠台
 明珠台,TVb明珠台,tvb明珠台,TVB明珠台,TVB Pearl
-北京卫视,北京卫视4K,北京卫视4K超高清
+北京卫视
 凤凰中文,凤凰卫视中文台
 凤凰香港,凤凰卫视香港台
 福建文体,福建体育
@@ -139,7 +139,7 @@ NewTV中国功夫,NEWTV中国功夫,中国功夫
 深圳卫视,ShenzhenTV.cn,Shenzhen TV
 安徽卫视,AnhuiTV.cn,Anhui TV
 湖北卫视,HubeiTV.cn,Hubei TV
-四川卫视,四川卫视4K,四川卫视4K25,四川卫视4K50,SichuanTV.cn,Sichuan TV
+四川卫视,SichuanTV.cn,Sichuan TV
 
 # ================= 山东频道补全 (地市级) =================
 山东卫视,ShandongTV.cn,Shandong TV,SDTV
@@ -194,7 +194,7 @@ TVB无线新闻,TVBNews.hk,TVB News
 浙江卫视4K,浙江高清,浙江超高清
 山东卫视4K,山东高清,山东超高清
 湖南卫视4K,湖南高清,湖南超高清
-四川卫视4K,四川高清,四川超高清
+四川卫视4K,四川高清,四川超高清,,四川卫视4K,四川卫视4K25,四川卫视4K50
 广东影视4K,广东影视高清,广东影视超高清
 
 人间卫视,Beautiful Life TV",Beautiful Life TV
