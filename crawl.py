@@ -427,18 +427,19 @@ def process_and_deduplicate(channels, group_priority):
 async def main():
     start_time = time.time()
     
-    # 【插入逻辑】：每日缓存处理
+    # 【必须包含这部分逻辑，将读取到的内容赋值给 source_urls】
     if is_cache_valid(CACHE_PATH):
         print(f"[*] 检测到有效缓存，正在读取: {CACHE_PATH}")
-        with open(CACHE_PATH, 'r', encoding='utf-8') as f:
-            # 假设缓存文件里每行格式是 "name,url"
-            parsed_items = [line.strip().split(',', 1) for line in f if ',' in line]
-            # 转换回你的原始字典格式
-            parsed_items = [{"raw_name": item[0], "url": item[1]} for item in parsed_items]
+        # ... (你的读取缓存逻辑)
     else:
         print(f"[*] 缓存不存在或已过期，开始从网络更新...")
+        # 1. 确保这里确实加载了 sources.json
+        with open(SOURCES_PATH, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+            source_urls = data.get("urls", [])  # <--- 这一行定义了 source_urls
+
         async with aiohttp.ClientSession() as session:
-            # 这里的 source_urls 是你的 sources.json 里的链接列表
+            # 2. 这里现在就可以安全使用 source_urls 了
             parsed_items = await fetch_and_parse_all(session, source_urls)
             
             # 保存到缓存文件
