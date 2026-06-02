@@ -70,7 +70,7 @@ def auto_check_environment():
     print(f"[*] 启动 IPTV 聚合爬虫...")
     print(f"[*] 当前系统环境检测为: {sys_type}")
     
-    required_packages = ["requests"]
+    required_packages = ["requests", "aiohttp", "tqdm"]
     for pkg in required_packages:
         try:
             __import__(pkg)
