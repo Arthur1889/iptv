@@ -463,8 +463,8 @@ def main():
 
     # 2. 定义单个探测任务的包装函数
     def check_task(task):
-        is_valid, res = probe_url(task["url"])
-        return task, is_valid, res
+        is_valid, res, resp_time = probe_url(task["url"])
+        return task, is_valid, res, resp_time
 
     total_tasks = len(tasks)
     completed = 0
@@ -481,7 +481,7 @@ def main():
         
         for future in concurrent.futures.as_completed(future_to_url):
             completed += 1
-            task, is_valid, res = future.result()
+            task, is_valid, res, resp_time = future.result()
             url = task["url"]
             
             # 🌟 新增：实时统计通过源与4K源数量
@@ -510,6 +510,7 @@ def main():
                     "tvgname": task["std_name"],   
                     "group": task["group"],
                     "resolution": res
+                    "avg_time": resp_time
                 })
             else:
                 try: fails = int(blacklist.get(url, 0))
