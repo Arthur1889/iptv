@@ -511,7 +511,7 @@ def main():
                     "tvgid": task["std_name"],     
                     "tvgname": task["std_name"],   
                     "group": task["group"],
-                    "resolution": res
+                    "resolution": res,
                     "avg_time": resp_time
                 })
             else:
