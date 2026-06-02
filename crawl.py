@@ -12,6 +12,45 @@ from collections import defaultdict
 from urllib.parse import urlparse
 
 # =====================================================================
+# 检查源列表有效期
+# =====================================================================
+def is_cache_valid(cache_path, max_age_days=1):
+    """检查缓存文件是否存在且是否在有效期内"""
+    if not os.path.exists(cache_path):
+        return False
+    # 获取文件最后修改时间
+    file_time = os.path.getmtime(cache_path)
+    # 计算当前时间与文件修改时间的差值
+    delta_days = (time.time() - file_time) / (3600 * 24)
+    return delta_days < max_age_days
+# =====================================================================
+# 下载远程源列表
+# =====================================================================
+async def parse_m3u_content(content):
+    """从 M3U 文本内容中提取频道名称和 URL"""
+    items = []
+    # 正则提取：匹配 #EXTINF 行，并捕获名称和下一行的 URL
+    pattern = re.compile(r'#EXTINF:-1.*?,(.*?)\n(http.*?)\n', re.IGNORECASE)
+    matches = pattern.findall(content)
+    for name, url in matches:
+        items.append({"raw_name": name.strip(), "url": url.strip()})
+    return items
+
+async def fetch_and_parse_all(session, source_urls):
+    """异步下载 sources.json 中的所有链接并汇总"""
+    all_parsed_items = []
+    for url in source_urls:
+        try:
+            async with session.get(url, timeout=10) as resp:
+                if resp.status == 200:
+                    content = await resp.text()
+                    items = await parse_m3u_content(content)
+                    all_parsed_items.extend(items)
+                    logger.info(f"成功获取源 {url}, 解析到 {len(items)} 个频道")
+        except Exception as e:
+            logger.error(f"下载源 {url} 失败: {e}")
+    return all_parsed_items
+# =====================================================================
 # 0. 环境自检与依赖自动安装
 # =====================================================================
 def auto_check_environment():
@@ -386,6 +425,26 @@ def process_and_deduplicate(channels, group_priority):
 # =====================================================================
 async def main():
     start_time = time.time()
+    
+    # 【插入逻辑】：每日缓存处理
+    if is_cache_valid(CACHE_PATH):
+        print(f"[*] 检测到有效缓存，正在读取: {CACHE_PATH}")
+        with open(CACHE_PATH, 'r', encoding='utf-8') as f:
+            # 假设缓存文件里每行格式是 "name,url"
+            parsed_items = [line.strip().split(',', 1) for line in f if ',' in line]
+            # 转换回你的原始字典格式
+            parsed_items = [{"raw_name": item[0], "url": item[1]} for item in parsed_items]
+    else:
+        print(f"[*] 缓存不存在或已过期，开始从网络更新...")
+        async with aiohttp.ClientSession() as session:
+            # 这里的 source_urls 是你的 sources.json 里的链接列表
+            parsed_items = await fetch_and_parse_all(session, source_urls)
+            
+            # 保存到缓存文件
+            with open(CACHE_PATH, 'w', encoding='utf-8') as f:
+                for item in parsed_items:
+                    f.write(f"{item['raw_name']},{item['url']}\n")
+        print(f"[+] 缓存已更新至: {CACHE_PATH}")
     
     # 1. 加载配置字典
     group_repo = load_json(GROUP_JSON_PATH, {})
