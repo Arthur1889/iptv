@@ -457,11 +457,15 @@ async def main():
             parsed_items = await fetch_and_parse_all(session, source_urls)
             
             # 写入缓存前检查列表是否为空
-            if parsed_items:
-                with open(CACHE_PATH, 'w', encoding='utf-8') as f:
-                    for item in parsed_items:
-                        f.write(f"{item['raw_name']},{item['url']}\n")
-                print(f"[+] 缓存已成功更新，共 {len(parsed_items)} 条频道。")
+        # 修改后
+        if parsed_items:
+            with open(CACHE_PATH, 'w', encoding='utf-8') as f:
+                f.write("#EXTM3U\n")  # 必须包含 M3U 头部
+                for item in parsed_items:
+                    # 写入标准的 M3U 结构
+                    f.write(f"#EXTINF:-1,{item['raw_name']}\n")
+                    f.write(f"{item['url']}\n")
+            print(f"[+] 缓存已成功更新，共 {len(parsed_items)} 条频道。")
             else:
                 print("[!] 解析结果为空，跳过缓存写入。")
         except Exception as e:
