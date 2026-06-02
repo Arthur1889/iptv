@@ -433,36 +433,42 @@ def process_and_deduplicate(channels, group_priority):
 async def main():
     start_time = time.time()
     
-    # 【必须包含这部分逻辑，将读取到的内容赋值给 source_urls】
-    if is_cache_valid(CACHE_PATH):
-        print(f"[*] 检测到有效缓存，正在读取: {CACHE_PATH}")
-        # ... (你的读取缓存逻辑)
-    else:
-        print(f"[*] 缓存不存在或已过期，开始从网络更新...")
-        # 1. 确保这里确实加载了 sources.json
+    # 🌟 1. 优先初始化变量，防止未定义报错
+    source_urls = []
+    
+    # 先把 sources.json 的内容读出来，后面网络下载和黑名单过滤可能都要用
+    if os.path.exists(SOURCES_PATH):
         with open(SOURCES_PATH, 'r', encoding='utf-8') as f:
             data = json.load(f)
-            source_urls = data.get("urls", [])  # <--- 这一行定义了 source_urls
-
-    # 确保在 main() 中 session 在作用域内被正确处理
-    async with aiohttp.ClientSession() as session:
-        try:
-            # 这一行比上面的 async with 多缩进 4 个空格！
-            parsed_items = await fetch_and_parse_all(session, source_urls)
+            source_urls = data.get("urls", [])
+    
+    # 🌟 2. 核心缓存判断双轨制
+    if is_cache_valid(CACHE_PATH):
+        print(f"[*] 检测到有效缓存，直接读取本地缓存: {CACHE_PATH}")
+        # 如果缓存有效，下面不需要再用 session 重新下载了
+    else:
+        print(f"[*] 缓存不存在或已过期，开始从网络更新...")
+        if not source_urls:
+            print("[-] 错误: sources.json 中未找到有效的 urls 列表！")
+            return
             
-            # 写入缓存前检查列表是否为空
-            if parsed_items:
-                with open(CACHE_PATH, 'w', encoding='utf-8') as f:
-                    f.write("#EXTM3U\n")  # 新的 M3U 头部
-                    for item in parsed_items:
-                        f.write(f"#EXTINF:-1,{item['raw_name']}\n")
-                        f.write(f"{item['url']}\n")
-                print(f"[+] 缓存已成功更新，共 {len(parsed_items)} 条频道。")
-            else:
-                print("[!] 解析结果为空，跳过缓存写入。")
-        except Exception as e:
-            # 这里必须有这一段，否则 try 会报错
-            logger.error(f"批量下载失败: {e}")
+        # 只有在缓存失效时，才开启异步会话去网络下载
+        async with aiohttp.ClientSession() as session:
+            try:
+                parsed_items = await fetch_and_parse_all(session, source_urls)
+                
+                # 写入新缓存
+                if parsed_items:
+                    with open(CACHE_PATH, 'w', encoding='utf-8') as f:
+                        f.write("#EXTM3U\n")
+                        for item in parsed_items:
+                            f.write(f"#EXTINF:-1,{item['raw_name']}\n")
+                            f.write(f"{item['url']}\n")
+                    print(f"[+] 缓存已成功更新，共 {len(parsed_items)} 条频道。")
+                else:
+                    print("[!] 网络解析结果为空，跳过缓存写入。")
+            except Exception as e:
+                logger.error(f"批量下载失败: {e}")
     
     # 1. 加载配置字典
     group_repo = load_json(GROUP_JSON_PATH, {})
