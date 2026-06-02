@@ -450,7 +450,7 @@ async def main():
             source_urls = data.get("urls", [])  # <--- 这一行定义了 source_urls
 
 # 确保在 main() 中 session 在作用域内被正确处理
-async with aiohttp.ClientSession() as session:
+    async with aiohttp.ClientSession() as session:
     # 这一步是为了防止某个源卡死整个程序
     try:
         parsed_items = await fetch_and_parse_all(session, source_urls)
