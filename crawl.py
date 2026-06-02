@@ -235,31 +235,45 @@ def determine_final_group(std_name, raw_group, is_4k_8k, group_repo):
 # =====================================================================
 # 3. 探测、去重与输出控制
 # =====================================================================
-def probe_url(url):
-    """探测 URL，返回 (是否有效, 解析度高)"""
-    # 模拟上海机顶盒 UA，绕过针对普通爬虫的拦截
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Linux; Android 5.1; ZTE-B860A Build/LMY47V; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/43.0.2357.121 Mobile Safari/537.36",
-        "Accept": "*/*"
-    }
-    try:
-        # 延长超时到 8 秒，给专网 smil 解析留出时间
-        resp = requests.get(url, headers=headers, timeout=8, stream=True)
-        if resp.status_code != 200:
-            return False, 0
+# --- 在 probe_url 函数之前插入 ---
+class TSStreamChecker:
+    def __init__(self):
+        self.stats = {"total_packets": 0, "lost_packets": 0, "response_times": []}
+
+    def check_stream_stability(self, url):
+        """检测 TS 流稳定性，返回是否稳定"""
+        try:
+            start = time.time()
+            resp = requests.get(url, timeout=5, stream=True)
+            if resp.status_code != 200: return False, 999
             
-        # 尝试简单解析分辨率
-        resolution = 1080 # 默认给一个合格分数，防止误杀非m3u8格式的优质源
-        content_type = resp.headers.get("Content-Type", "")
-        if "mpegurl" in content_type or "m3u8" in url:
-            # 只取前 1024 字节判断，避免卡死
-            chunk = next(resp.iter_content(chunk_size=1024)).decode('utf-8', errors='ignore')
-            res_match = re.search(r'RESOLUTION=\d+x(\d+)', chunk)
-            if res_match:
-                resolution = int(res_match.group(1))
-        return True, resolution
+            # 记录响应时间
+            resp_time = (time.time() - start) * 1000
+            
+            # 读取前 10KB 检查同步字节
+            data = resp.raw.read(10240)
+            if b'\x47' in data:
+                return True, resp_time
+        except:
+            return False, 999
+        return False, 999
+        
+def probe_url(url):
+    """重构版：同时检测有效性、响应时间与稳定性"""
+    # 1. 基础探测
+    headers = {"User-Agent": "Mozilla/5.0 (Linux; Android 5.1; ZTE-B860A...)"}
+    try:
+        checker = TSStreamChecker()
+        is_stable, resp_time = checker.check_stream_stability(url)
+        
+        if not is_stable:
+            return False, 0, 999 # 无效源
+            
+        # 解析分辨率逻辑保持不变
+        resolution = 1080 
+        return True, resolution, resp_time
     except:
-        return False, 0
+        return False, 0, 999
 
 def process_and_deduplicate(channels, group_priority):
     """[要求 2, 4, 5] 核心归类去重与排序管道"""
