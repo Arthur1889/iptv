@@ -310,24 +310,24 @@ class TSStreamChecker:
         return False, 999
         
 async def probe_url_async(url):
-    # 模拟真实浏览器行为
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         "Accept": "*/*",
         "Connection": "keep-alive"
     }
     try:
-        # 使用随函数传入的 session，检查超时和状态码
+        # 使用 allow_redirects=True 让它自动跟随重定向
         async with session.get(url, headers=headers, timeout=5, allow_redirects=True) as resp:
+            # 这里的 resp.url 就是最终重定向后的地址
             if resp.status == 200:
                 return True, 1080, 50
             else:
-                # 打印出具体的状态码，看看是不是 403 Forbidden 或 404
-                logger.debug(f"URL: {url} 返回状态码: {resp.status}")
+                # 打印最终到达的 URL 和状态码
+                print(f"[调试] 最终URL: {resp.url}, 状态码: {resp.status}")
                 return False, 0, 999
     except Exception as e:
-        # 如果这里有报错，说明网络本身就不通
-        logger.debug(f"探测失败: {url}, 错误: {str(e)}")
+        # 记录报错原因
+        print(f"[调试] 探测异常: {url}, 错误: {e}")
         return False, 0, 999
 
 def process_and_deduplicate(channels, group_priority):
