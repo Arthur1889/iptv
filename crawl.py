@@ -124,8 +124,7 @@ def build_name_lookup(name_json_data):
     return lookup
 
 def clean_and_normalize_name(raw_name, name_lookup):
-    """执行名称清洗、标准化和要求6、8、9的处理"""
-    # [要求 9] 保护 4K/8K 标识
+    """【纯净版】只负责执行名称清洗和 name.json 的标准名映射"""
     has_4k = "4K" in raw_name.upper()
     has_8k = "8K" in raw_name.upper()
     
@@ -140,21 +139,10 @@ def clean_and_normalize_name(raw_name, name_lookup):
         cleaned = re.sub(pattern, '', cleaned)
     cleaned = cleaned.strip('- ').strip()
 
-    # 标准化映射匹配
+    # 严格匹配你的 name.json 别名表，获取最干净的标准别名（如 CETV-1、CCTV-1）
     std_name = name_lookup.get(cleaned.upper(), cleaned)
     
-    # [要求 8 & 央视描述] 特殊处理 CCTV 格式
-    upper_name = std_name.upper()
-    if "CCTV5+" in upper_name or "CCTV5PLUS" in upper_name:
-        return CCTV_DESC_MAP["CCTV5+"]
-    if "CCTV4K" in upper_name: return CCTV_DESC_MAP["CCTV4K"]
-    if "CCTV8K" in upper_name: return CCTV_DESC_MAP["CCTV8K"]
-    
-    cctv_match = re.search(r'^CCTV(\d+)$', upper_name)
-    if cctv_match:
-        return CCTV_DESC_MAP.get(f"CCTV{cctv_match.group(1)}", std_name)
-        
-    # 如果原始名字有 4K 但清洗或映射后丢失了，恢复标记
+    # 恢复 4K/8K 标签
     if has_4k and "4K" not in std_name.upper(): std_name += " 4K"
     if has_8k and "8K" not in std_name.upper(): std_name += " 8K"
     
@@ -431,11 +419,11 @@ def main():
             if is_valid:
                 if url in blacklist: del blacklist[url]
                 valid_channels.append({
-                    "std_name": task["std_name"],
+                    "std_name": task["std_name"], # 此时是纯净的标准别名，如 CETV1、CCTV1
                     "url": url,
                     "logo": task["logo"],
-                    "tvgid": task["std_name"],
-                    "tvgname": task["std_name"],
+                    "tvgid": task["std_name"],     # 严格遵守要求：用 name.json 里的标准名作为 tvg-id
+                    "tvgname": task["std_name"],   # 严格遵守要求：用 name.json 里的标准名作为 tvg-name
                     "group": task["group"],
                     "resolution": res
                 })
@@ -455,20 +443,33 @@ def main():
 
     # [要求 10 & 13] 生成最终文件
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
-        # 头部同时声明 112114 和 epg.pw 两个 EPG 网址，供其他频道备用分流
         f.write('#EXTM3U x-tvg-url="https://epg.112114.xyz/pp.xml.gz,https://epg.pw/xmltv/feed/chn.xml"\n')
         
         for ch in final_list:
-            # 【核心修改】：针对前 5 个核心组，重写台标为 112114 官方标准台标路径
-            if ch["group"] in ["4K频道", "央视频道", "地方卫视", "山东频道", "地方频道"]:
-                # 去除名字中的空格等杂质，匹配 112114 的台标命名规范
-                clean_logo_name = ch["std_name"].replace(" ", "")
-                logo_url = f"https://epg.112114.xyz/logo/{clean_logo_name}.png"
-            else:
-                # 其他频道（海外、少儿动漫等）使用原始抓取到的台标
-                logo_url = ch["logo"] if ch["logo"] else ""
-                
-            f.write(f'#EXTINF:-1 tvg-id="{ch["tvgid"]}" tvg-name="{ch["tvgname"]}" tvg-logo="{logo_url}" group-title="{ch["group"]}",{ch["std_name"]}\n')
+            # 1. 此时 ch["std_name"] 依然是name.json映射出的纯净标准名（不带中文描述，如 CETV-1, CCTV-1）
+            # 去除两端和内部空格，用于拼装标准台标名
+            clean_std_name = ch["std_name"].replace(" ", "")
+            
+            # 2. 默认全量使用纯净标准名拼装 112114 的官方高清台标
+            logo_url = f"https://epg.112114.xyz/logo/{clean_std_name}.png"
+            
+            # 如果是非核心组，且原始抓取到了有效 logo，可以选择保留原始作为Fallback（或者无脑用标准名，看你偏好）
+            if ch["group"] not in ["4K频道", "央视频道", "地方卫视", "山东频道", "地方频道"]:
+                if not clean_std_name and ch["logo"]: 
+                    logo_url = ch["logo"] # 如果连标准名都没有，才用原始旧台标
+
+            # 3. 临门一脚：只有最后的【显示名称】去查中文描述，绝对不污染 tvg-id、tvg-name 和 tvg-logo
+            display_name = ch["std_name"]
+            lookup_key = clean_std_name.upper().replace("-", "")
+            
+            if lookup_key in CCTV_DESC_MAP:
+                display_name = CCTV_DESC_MAP[lookup_key]
+            elif "CCTV4" in lookup_key:
+                if "欧洲" in ch["std_name"]: display_name = "CCTV-4 欧洲"
+                if "美洲" in ch["std_name"]: display_name = "CCTV-4 美洲"
+
+            # 4. 严格写入：tvg-id 和 tvg-name 保持干净的标准别名，tvg-logo 绑定标准别名，只有末尾显示名带描述！
+            f.write(f'#EXTINF:-1 tvg-id="{ch["tvgid"]}" tvg-name="{ch["tvgname"]}" tvg-logo="{logo_url}" group-title="{ch["group"]}",{display_name}\n')
             f.write(f'{ch["url"]}\n')
 
     # 保存黑名单
