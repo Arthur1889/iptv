@@ -448,30 +448,41 @@ def main():
         f.write('#EXTM3U x-tvg-url="https://epg.112114.xyz/pp.xml.gz,https://epg.pw/xmltv/feed/chn.xml"\n')
         
         for ch in final_list:
-            # 1. 此时 ch["std_name"] 依然是name.json映射出的纯净标准名（不带中文描述，如 CETV-1, CCTV-1）
-            # 去除两端和内部空格，用于拼装标准台标名
+            # 1. 提取无符号特征码用于中央台拦截
             clean_std_name = ch["std_name"].replace(" ", "")
-            
-            # 2. 默认全量使用纯净标准名拼装 112114 的官方高清台标
-            logo_url = f"https://epg.112114.xyz/logo/{clean_std_name}.png"
-            
-            # 如果是非核心组，且原始抓取到了有效 logo，可以选择保留原始作为Fallback（或者无脑用标准名，看你偏好）
-            if ch["group"] not in ["4K频道", "央视频道", "地方卫视", "山东频道", "地方频道"]:
-                if not clean_std_name and ch["logo"]: 
-                    logo_url = ch["logo"] # 如果连标准名都没有，才用原始旧台标
-
-            # 3. 临门一脚：只有最后的【显示名称】去查中文描述，绝对不污染 tvg-id、tvg-name 和 tvg-logo
-            display_name = ch["std_name"]
             lookup_key = clean_std_name.upper().replace("-", "")
             
+            # 默认继承多线程探测出的状态
+            display_name = ch["std_name"]
+            final_group = ch["group"]
+            
+            # 2. 优先对央视/教育/CGTN进行最高级别纠正，确保它们100%归入“央视频道”
             if lookup_key in CCTV_DESC_MAP:
                 display_name = CCTV_DESC_MAP[lookup_key]
+                if "4K" not in final_group and "8K" not in final_group:
+                    final_group = "央视频道"
             elif "CCTV4" in lookup_key:
                 if "欧洲" in ch["std_name"]: display_name = "CCTV-4 欧洲"
                 if "美洲" in ch["std_name"]: display_name = "CCTV-4 美洲"
+                if "4K" not in final_group: final_group = "央视频道"
 
-            # 4. 严格写入：tvg-id 和 tvg-name 保持干净的标准别名，tvg-logo 绑定标准别名，只有末尾显示名带描述！
-            f.write(f'#EXTINF:-1 tvg-id="{ch["tvgid"]}" tvg-name="{ch["tvgname"]}" tvg-logo="{logo_url}" group-title="{ch["group"]}",{display_name}\n')
+            # 3. 🌟【核心双轨制分流】：根据是否在 group_standard.json 中决定 logo 和 epg 策略
+            # 检查这个标准名是不是通过 group_standard.json 手动配置过的核心台
+            is_standard_managed = ch["std_name"] in name_repo.values() or final_group in ["4K频道", "央视频道", "地方卫视", "山东频道", "地方频道"]
+            
+            if is_standard_managed:
+                # 方案 A：如果是标准分组管理的频道，强行采用 112114 的标准中文台标，不带多余参数
+                clean_logo_name = display_name.replace(" ", "")
+                logo_url = f"https://epg.112114.xyz/logo/{clean_logo_name}.png"
+                epg_param = "" # 使用全局头部 EPG，这里保持干净
+            else:
+                # 方案 B：如果是其他野生频道（如野生少儿动漫、歌曲等），严格保留它原始抓到的 logo 和 epg-url
+                logo_url = ch["logo"] if ch["logo"] else ""
+                # 如果原始数据里有 epg-url，单独为该行保留（需要确保你 valid_channels 里保存了该字段，如果没有可不加）
+                epg_param = f' epg-url="{ch.get("epgurl", "")}"' if ch.get("epgurl") else ""
+
+            # 4. 严格写入：tvg-id/name 保持纯净英文（绝不污染），只有核心台在最后转换为中文描述
+            f.write(f'#EXTINF:-1 tvg-id="{ch["tvgid"]}" tvg-name="{ch["tvgname"]}" tvg-logo="{logo_url}" group-title="{final_group}"{epg_param},{display_name}\n')
             f.write(f'{ch["url"]}\n')
 
     # 保存黑名单
