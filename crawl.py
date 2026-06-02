@@ -451,20 +451,22 @@ async def main():
 
 # 确保在 main() 中 session 在作用域内被正确处理
     async with aiohttp.ClientSession() as session:
-    # 这一步是为了防止某个源卡死整个程序
-    try:
-        parsed_items = await fetch_and_parse_all(session, source_urls)
-        
-        # 写入缓存前检查列表是否为空
-        if parsed_items:
-            with open(CACHE_PATH, 'w', encoding='utf-8') as f:
-                for item in parsed_items:
-                    f.write(f"{item['raw_name']},{item['url']}\n")
-            print(f"[+] 缓存已成功更新，共 {len(parsed_items)} 条频道。")
-        else:
-            print("[!] 解析结果为空，跳过缓存写入。")
-    except Exception as e:
-        logger.error(f"批量下载失败: {e}")
+        # 这一步是为了防止某个源卡死整个程序
+        try:
+            # 这一行必须比上面的 async with 多缩进 4 个空格！
+            parsed_items = await fetch_and_parse_all(session, source_urls)
+            
+            # 写入缓存前检查列表是否为空
+            if parsed_items:
+                with open(CACHE_PATH, 'w', encoding='utf-8') as f:
+                    for item in parsed_items:
+                        f.write(f"{item['raw_name']},{item['url']}\n")
+                print(f"[+] 缓存已成功更新，共 {len(parsed_items)} 条频道。")
+            else:
+                print("[!] 解析结果为空，跳过缓存写入。")
+        except Exception as e:
+            # 确保 logger 已经在文件顶部定义过
+            logger.error(f"批量下载失败: {e}")
     
     # 1. 加载配置字典
     group_repo = load_json(GROUP_JSON_PATH, {})
