@@ -4,6 +4,8 @@ import json
 import re
 import time
 import subprocess
+import asyncio
+import requests
 import urllib.request
 import urllib.error
 from collections import defaultdict
