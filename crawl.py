@@ -260,10 +260,13 @@ class TSStreamChecker:
         
 async def probe_url_async(url):
     """异步探测函数"""
+    headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+}
     # 必须确保 TSStreamChecker 内部的 requests.get 也替换为 session.get
     try:
         # 使用传入的 session，不要在函数内部重复创建
-        async with session.get(url, timeout=5) as resp:
+        async with session.get(url, headers=headers, timeout=5) as resp:
             if resp.status != 200: return False, 0, 999
             # ... 解析逻辑 ...
             return True, resolution, resp_time
