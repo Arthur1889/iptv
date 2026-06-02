@@ -629,6 +629,7 @@ async def main():
 
 if __name__ == "__main__":
     try:
-        main()
+        # 将原来的 main() 修改为下面这行
+        asyncio.run(main()) 
     except KeyboardInterrupt:
         print("\n[!] 任务被手动中断。")
