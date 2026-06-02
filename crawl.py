@@ -39,29 +39,29 @@ def is_cache_valid(cache_path, max_age_days=1):
 # 下载远程源列表
 # =====================================================================
 async def parse_m3u_content(content):
-    """从 M3U 文本内容中提取频道名称和 URL"""
+    """从 M3U 文本中提取频道名称、URL 和原始分组(group-title)"""
     items = []
-    # 正则提取：匹配 #EXTINF 行，并捕获名称和下一行的 URL
-    pattern = re.compile(r'#EXTINF:-1.*?,(.*?)\n(http.*?)\n', re.IGNORECASE)
-    matches = pattern.findall(content)
-    for name, url in matches:
-        items.append({"raw_name": name.strip(), "url": url.strip()})
+    lines = content.splitlines()
+    current_item = {}
+    
+    for line in lines:
+        line = line.strip()
+        if line.startswith("#EXTINF"):
+            # 🌟 核心修改：利用正则捕获 group-title
+            grp_match = re.search(r'group-title="(.*?)"', line)
+            grp = grp_match.group(1) if grp_match else ""
+            
+            # 捕获频道名称
+            name_match = re.search(r',(.*)$', line)
+            name = name_match.group(1) if name_match else ""
+            
+            current_item = {"raw_name": name.strip(), "group": grp.strip()}
+        elif line.startswith("http") and current_item:
+            current_item["url"] = line
+            items.append(current_item)
+            current_item = {}
+            
     return items
-
-async def fetch_and_parse_all(session, source_urls):
-    """异步下载 sources.json 中的所有链接并汇总"""
-    all_parsed_items = []
-    for url in source_urls:
-        try:
-            async with session.get(url, timeout=20) as resp:
-                if resp.status == 200:
-                    content = await resp.text()
-                    items = await parse_m3u_content(content)
-                    all_parsed_items.extend(items)
-                    logger.info(f"成功获取源 {url}, 解析到 {len(items)} 个频道")
-        except Exception as e:
-            logger.error(f"下载源 {url} 失败: {e}")
-    return all_parsed_items
 # =====================================================================
 # 0. 环境自检与依赖自动安装
 # =====================================================================
@@ -445,9 +445,13 @@ async def main():
     # 🌟 2. 核心缓存判断双轨制
     if is_cache_valid(CACHE_PATH):
         print(f"[*] 检测到有效缓存，直接读取本地缓存: {CACHE_PATH}")
-        # 如果缓存有效，下面不需要再用 session 重新下载了
+        # 🌟 核心修改：读取本地缓存文件，并复用解析器提取 group
+        with open(CACHE_PATH, 'r', encoding='utf-8') as f:
+            cache_content = f.read()
+        parsed_items = await parse_m3u_content(cache_content)
     else:
         print(f"[*] 缓存不存在或已过期，开始从网络更新...")
+        # ... 后续网络更新逻辑保持不变 ...
         if not source_urls:
             print("[-] 错误: sources.json 中未找到有效的 urls 列表！")
             return
@@ -462,7 +466,8 @@ async def main():
                     with open(CACHE_PATH, 'w', encoding='utf-8') as f:
                         f.write("#EXTM3U\n")
                         for item in parsed_items:
-                            f.write(f"#EXTINF:-1,{item['raw_name']}\n")
+                            # 🌟 核心修改：保存时带上原始分组信息
+                            f.write(f'#EXTINF:-1 group-title="{item.get("group", "")}",{item["raw_name"]}\n')
                             f.write(f"{item['url']}\n")
                     print(f"[+] 缓存已成功更新，共 {len(parsed_items)} 条频道。")
                 else:
