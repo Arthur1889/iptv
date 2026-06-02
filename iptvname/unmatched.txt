@@ -8577,9 +8577,6 @@
 源行: #EXTINF:-1 tvg-id="CCTV4Asia.cn@SD",CCTV-4 Asia (720p)
 提取 => id: [CCTV4Asia.cn@SD], name: [], display: [CCTV-4 Asia (720p)]
 ------------------------------------------------------------
-源行: #EXTINF:-1 tvg-id="CGTNDocumentary.cn@SD",CGTN Documentary (1080p)
-提取 => id: [CGTNDocumentary.cn@SD], name: [], display: [CGTN Documentary (1080p)]
-------------------------------------------------------------
 源行: #EXTINF:-1 tvg-id="ChannelLaw.cn@SD",Channel Law
 提取 => id: [ChannelLaw.cn@SD], name: [], display: [Channel Law]
 ------------------------------------------------------------

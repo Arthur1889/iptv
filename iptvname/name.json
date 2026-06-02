@@ -1170,6 +1170,8 @@
         "CGTN英语新闻"
     ],
     "CGTN俄语": [
+        "CGTNRussian",
+        "CGTNRussian.cn@SD",
         "CGTN俄罗斯语",
         "CGTN俄罗斯语频道",
         "CGTN俄语",
@@ -1181,6 +1183,8 @@
         "CGTN俄语HD"
     ],
     "CGTN阿语": [
+        "CGTNArabic",
+        "CGTNArabic.cn@SD",
         "CGTN阿拉伯语",
         "CGTN阿拉伯语频道",
         "CGTN阿语",
@@ -1192,6 +1196,8 @@
         "CGTN阿语HD"
     ],
     "CGTN西语": [
+        "CGTNSpanish",
+        "CGTNSpanish.cn@SD",
         "CGTN西班牙语",
         "CGTN西班牙语频道",
         "CGTN西语",
@@ -1203,6 +1209,8 @@
         "CGTN西语HD"
     ],
     "CGTN法语": [
+        "CGTNFrench",
+        "CGTNFrench.cn@SD",
         "CGTN法语",
         "CGTN法语 (1080p)",
         "CGTN法语 (2160p)",
@@ -1213,6 +1221,9 @@
         "CGTN法语频道"
     ],
     "CGTN纪录": [
+        "CGTN Documentary (1080p)",
+        "CGTNDocumentary",
+        "CGTNDocumentary.cn@SD",
         "CGTN外语纪录",
         "CGTN纪录",
         "CGTN纪录 (1080p)",

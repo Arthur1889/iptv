@@ -43,12 +43,12 @@ CETV2,CETV-2,CETV2中国教育,CETV2 中国教育,中国教育2,中国教育2HD,
 CETV3,CETV-3,CETV3中国教育,CETV3 中国教育,中国教育3,中国教育3HD,中国教育-3
 CETV4,CETV-4,CETV4中国教育,CETV4 中国教育,中国教育4,中国教育4HD,中国教育-4
 CETV早教,CETV早期教育,早期教育
-CGTN英语,CCTVNEWS,CGTN,CGTN英语新闻,CCTVNEWS新闻,CCTVNEWS新闻频道
-CGTN俄语,CGTN俄罗斯语,CGTN俄罗斯语频道
-CGTN阿语,CGTN阿拉伯语,CGTN阿拉伯语频道
-CGTN西语,CGTN西班牙语,CGTN西班牙语频道
-CGTN法语,CGTN法语频道
-CGTN纪录,CGTN记录频道,CGTN外语纪录
+CGTN英语,CCTVNEWS,CGTN,CGTN英语新闻,CCTVNEWS新闻,CCTVNEWS新闻频道,CGTN.cn@SD
+CGTN俄语,CGTN俄罗斯语,CGTN俄罗斯语频道,CGTNRussian,CGTNRussian.cn@SD
+CGTN阿语,CGTN阿拉伯语,CGTN阿拉伯语频道,CGTNArabic,CGTNArabic.cn@SD
+CGTN西语,CGTN西班牙语,CGTN西班牙语频道,CGTNSpanish,CGTNSpanish.cn@SD
+CGTN法语,CGTN法语频道,CGTNFrench,CGTNFrench.cn@SD
+CGTN纪录,CGTN记录频道,CGTN外语纪录,CGTNDocumentary,CGTNDocumentary.cn@SD
 
 广东珠江,GDTV-2,珠江,珠江频道,珠江台,广东珠江高清,珠江高清
 
