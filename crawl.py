@@ -565,27 +565,23 @@ async def main():
     passed_4k_sources = 0
 
     # ==========================================
-    # 3. 开启纯异步并发探测 (作用域完全修复版)
+    # 3. 开启纯异步并发探测 (高频刷新无盲区版)
     # ==========================================
-    # 显式在这里创建 ClientSession，确保它在整个循环期间都是存活的
     async with aiohttp.ClientSession() as my_session:
-        
-        # 设置并发信号量
-        semaphore = asyncio.Semaphore(30) 
+        # 降级并发到 20-30，防止 Linux 瞬间建立过多 Socket 导致网络层假死
+        semaphore = asyncio.Semaphore(25) 
 
-        # 内部定义的探测任务，显式将 my_session 传给 probe_url_async
         async def semaphore_task(task):
             async with semaphore:
                 try:
-                    # 使用 wait_for 防止单个垃圾源无限挂起
+                    # 严格限制超时，防止死源拖慢全局
                     return await asyncio.wait_for(
                         probe_url_async(my_session, task["url"]), 
-                        timeout=6.0
+                        timeout=5.0
                     )
                 except Exception:
                     return False, 0, 999
 
-        # 创建任务映射表
         task_futures = {asyncio.create_task(semaphore_task(t)): t for t in tasks}
         total_tasks = len(tasks)
         completed = 0
@@ -596,7 +592,6 @@ async def main():
 
         print("[+] 异步探测引擎已启动，正在激活连接池...")
 
-        # 迭代执行异步任务
         for future in asyncio.as_completed(task_futures.keys()):
             completed += 1
             try:
@@ -626,26 +621,31 @@ async def main():
                 except: fails = 0
                 blacklist[task["url"]] = fails + 1
 
-            # 实时刷新进度条
-            if completed % 5 == 0 or completed == total_tasks:
-                elapsed_loop = time.time() - loop_start_time
-                avg_time = elapsed_loop / completed if completed > 0 else 0
-                remaining_time = avg_time * (total_tasks - completed)
-                total_predict_time = elapsed_loop + remaining_time
+            # 🌟【优化点】：改为每 1 个任务都强制刷新输出，绝不留白
+            elapsed_loop = time.time() - loop_start_time
+            avg_time = elapsed_loop / completed if completed > 0 else 0
+            remaining_time = avg_time * (total_tasks - completed)
+            total_predict_time = elapsed_loop + remaining_time
 
-                def fmt_duration(seconds):
-                    m, s = divmod(int(seconds), 60)
-                    return f"{m:02d}:{s:02d}"
+            def fmt_duration(seconds):
+                m, s = divmod(int(seconds), 60)
+                return f"{m:02d}:{s:02d}"
 
-                bar = '█' * int(15 * completed / total_tasks) + '░' * (15 - int(15 * completed / total_tasks))
-                short_name = task['std_name'][:6]
-                print(
-                    f"\r进度:[{bar}] {completed}/{total_tasks} ({completed/total_tasks*100:.1f}%) | "
-                    f"⏱️ 剩:{fmt_duration(remaining_time)}/总:{fmt_duration(total_predict_time)} | "
-                    f"当前:{short_name:<6} | ✅通过:{passed_sources} | ✨4K+:{passed_4k_sources}   ", 
-                    end="", flush=True
-                )
-        print() # 整个大循环结束后换行
+            # 动态渲染进度条
+            bar_length = 15
+            percent = completed / total_tasks if total_tasks > 0 else 0
+            filled_length = int(round(bar_length * percent))
+            bar = '█' * filled_length + '░' * (bar_length - filled_length)
+
+            short_name = task['std_name'][:6]
+            # 用 \r 实时覆盖单行，清空残余字符
+            print(
+                f"\r进度:[{bar}] {completed}/{total_tasks} ({percent*100:.1f}%) | "
+                f"⏱️ 剩:{fmt_duration(remaining_time)}/总:{fmt_duration(total_predict_time)} | "
+                f"当前:{short_name:<6} | ✅通过:{passed_sources} | ✨4K+:{passed_4k_sources}   ", 
+                end="", flush=True
+            )
+        print() # 彻底结束后换行
         
     # 4. 后置聚合与生成
     final_list = process_and_deduplicate(valid_channels, GROUP_PRIORITY)
