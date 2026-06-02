@@ -309,25 +309,20 @@ class TSStreamChecker:
             return False, 999
         return False, 999
         
-async def probe_url_async(url):
+# 修改为接收 session 参数
+async def probe_url_async(session, url): 
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         "Accept": "*/*",
         "Connection": "keep-alive"
     }
     try:
-        # 使用 allow_redirects=True 让它自动跟随重定向
         async with session.get(url, headers=headers, timeout=5, allow_redirects=True) as resp:
-            # 这里的 resp.url 就是最终重定向后的地址
             if resp.status == 200:
                 return True, 1080, 50
             else:
-                # 打印最终到达的 URL 和状态码
-                print(f"[调试] 最终URL: {resp.url}, 状态码: {resp.status}")
                 return False, 0, 999
     except Exception as e:
-        # 记录报错原因
-        print(f"[调试] 探测异常: {url}, 错误: {e}")
         return False, 0, 999
 
 def process_and_deduplicate(channels, group_priority):
@@ -567,7 +562,7 @@ async def main():
     # 定义单个异步检测任务
     async def run_check(task):
         # probe_url 已经重构为异步逻辑，直接 await
-        is_valid, res, resp_time = await probe_url_async(task["url"])
+        is_valid, res, resp_time = await probe_url_async(session, task["url"])
         return task, is_valid, res, resp_time
 
     # 使用 Semaphore 控制并发量，避免瞬间请求过大被封
