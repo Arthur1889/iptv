@@ -564,42 +564,53 @@ async def main():
     passed_sources = 0
     passed_4k_sources = 0
 
-    # 3. 开启纯异步并发探测 (彻底移除 ThreadPoolExecutor)
-    
-    # 🌟【修复点】：为探测任务专门开启一个新的 session
-    async with aiohttp.ClientSession() as probe_session:
+    # ==========================================
+    # 3. 开启纯异步并发探测 (极速安全改良版)
+    # ==========================================
+    # 设置更低更安全的并发，防止本地端口瞬间耗尽导致 Linux 假死
+    semaphore = asyncio.Semaphore(30) 
 
-        # 定义单个异步检测任务 (注意缩进，要包含在 async with 里面)
-        async def run_check(task):
-            # 这里传入新的 probe_session
-            is_valid, res, resp_time = await probe_url_async(probe_session, task["url"])
-            return task, is_valid, res, resp_time
-
-        # 使用 Semaphore 控制并发量，避免瞬间请求过大被封
-        semaphore = asyncio.Semaphore(50) 
-        
-        async def semaphore_task(task):
-            async with semaphore:
-                return await run_check(task)
-
-        tasks_list = [semaphore_task(task) for task in tasks]
-        
-        # 动态显示进度 (这部分原封不动，但也要往右缩进 4 个空格，包在 probe_session 下)
-        for future in asyncio.as_completed(tasks_list):
-            completed += 1
-            task, is_valid, res, resp_time = await future
-            
-            # ... (下面的进度条和 if is_valid 逻辑原封不动，注意整体缩进)
-            if is_valid:
-                passed_sources += 1
-            
-            # 1. 强制转为整数防断言失败
+    async def semaphore_task(task):
+        async with semaphore:
             try:
-                current_res = int(res)
-            except (ValueError, TypeError):
-                current_res = 0
+                # 显式使用异步超时保护，防止单条连接挂起整个脚本
+                return await asyncio.wait_for(
+                    probe_url_async(session, task["url"]), 
+                    timeout=6.0
+                )
+            except asyncio.TimeoutError:
+                return False, 0, 999
+            except Exception:
+                return False, 0, 999
 
-            # 2. 智能 4K/8K 判定
+    # 创建任务映射表，以便在完成后找回 task 字典
+    task_futures = {asyncio.create_task(semaphore_task(t)): t for t in tasks}
+    total_tasks = len(tasks)
+    completed = 0
+    
+    loop_start_time = time.time()
+    passed_sources = 0
+    passed_4k_sources = 0
+
+    print("[+] 异步探测引擎已启动，正在激活连接池...")
+
+    # 使用 as_completed 迭代
+    for future in asyncio.as_completed(task_futures.keys()):
+        completed += 1
+        # 获取关联的原始 task
+        coro = future
+        # 此时可以用这种方式安全拿到任务结果
+        try:
+            is_valid, res, resp_time = await future
+            task = task_futures[coro]
+        except Exception:
+            continue
+
+        if is_valid:
+            passed_sources += 1
+            try: current_res = int(res)
+            except: current_res = 0
+
             if current_res >= 2160 or "4K" in task["std_name"].upper() or "8K" in task["std_name"].upper():
                 passed_4k_sources += 1
 
@@ -607,58 +618,35 @@ async def main():
                 del blacklist[task["url"]]
             
             valid_channels.append({
-                "std_name": task["std_name"],
-                "url": task["url"],
-                "logo": task["logo"],
-                "tvgid": task["std_name"],     
-                "tvgname": task["std_name"],   
-                "group": task["group"],
-                "resolution": res,
-                "avg_time": resp_time
+                "std_name": task["std_name"], "url": task["url"], "logo": task["logo"],
+                "tvgid": task["std_name"], "tvgname": task["std_name"], "group": task["group"],
+                "resolution": res, "avg_time": resp_time
             })
         else:
-            try: 
-                fails = int(blacklist.get(task["url"], 0))
-            except (ValueError, TypeError): 
-                fails = 0
+            try: fails = int(blacklist.get(task["url"], 0))
+            except: fails = 0
             blacklist[task["url"]] = fails + 1
 
-            # =====================================================================
-            # 🌟【核心新增】：动态进度条、预计时间与剩余时间数学计算
-            # =====================================================================
-            elapsed_loop = time.time() - loop_start_time  # 已耗时
-            
-            # 计算剩余时间和预计总时间 (避免刚开始completed为0时除以0)
-            if completed > 0:
-                avg_time_per_task = elapsed_loop / completed
-                total_predict_time = avg_time_per_task * total_tasks
-                remaining_time = max(0.0, total_predict_time - elapsed_loop)
-            else:
-                total_predict_time = 0.0
-                remaining_time = 0.0
+        # 实时同步刷新进度条，不打印多余换行
+        if completed % 5 == 0 or completed == total_tasks:
+            elapsed_loop = time.time() - loop_start_time
+            avg_time = elapsed_loop / completed if completed > 0 else 0
+            remaining_time = avg_time * (total_tasks - completed)
+            total_predict_time = elapsed_loop + remaining_time
 
-            # 格式化时间为 mm:ss
             def fmt_duration(seconds):
                 m, s = divmod(int(seconds), 60)
                 return f"{m:02d}:{s:02d}"
 
-            # 构建 15 格字符进度条 [████░░░说明░░░░░]
-            bar_length = 15
-            percent = completed / total_tasks if total_tasks > 0 else 0
-            filled_length = int(round(bar_length * percent))
-            bar = '█' * filled_length + '░' * (bar_length - filled_length)
-
-            # 限制频道名长度，防止控制台单行过长发生错位换行
+            bar = '█' * int(15 * completed / total_tasks) + '░' * (15 - int(15 * completed / total_tasks))
             short_name = task['std_name'][:6]
-
-            # 单行整齐打印刷新 (用 \r 回车不换行，末尾用空格清除旧残余)
             print(
-                f"\r进度:[{bar}] {completed}/{total_tasks} ({percent*100:.1f}%) | "
+                f"\r进度:[{bar}] {completed}/{total_tasks} ({completed/total_tasks*100:.1f}%) | "
                 f"⏱️ 剩:{fmt_duration(remaining_time)}/总:{fmt_duration(total_predict_time)} | "
                 f"当前:{short_name:<6} | ✅通过:{passed_sources} | ✨4K+:{passed_4k_sources}   ", 
-                end="", 
-                flush=True
+                end="", flush=True
             )
+    print() # 探测完成后换行
             # =====================================================================
     
     # 4. 后置聚合与生成
