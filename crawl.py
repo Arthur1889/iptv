@@ -6,7 +6,6 @@ import time
 import subprocess
 import urllib.request
 import urllib.error
-import concurrent.futures
 from collections import defaultdict
 from urllib.parse import urlparse
 
@@ -476,7 +475,8 @@ def main():
     passed_4k_sources = 0
 
     # 3. 开启多线程并发探测
-    with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
+    tasks = [check_channel(session, name, url, semaphore) for name, url in all_results]
+    await asyncio.gather(*tasks)
         future_to_url = {executor.submit(check_task, task): task for task in tasks}
         
         for future in concurrent.futures.as_completed(future_to_url):
