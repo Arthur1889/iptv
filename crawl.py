@@ -490,38 +490,38 @@ def main():
         task, is_valid, res, resp_time = await future
         
         # 逻辑处理区
-            # 🌟 新增：实时统计通过源与4K源数量
-            if is_valid:
-                passed_sources += 1
-                
-                # 1. 强制转为整数防断言失败，如果 res 拿不到数字则给 0
-                try:
-                    current_res = int(res)
-                except (ValueError, TypeError):
-                    current_res = 0
+        # --- 确保这下面的每一行都比上面的 for 缩进多 4 个空格 ---
+        if is_valid:
+            passed_sources += 1
+            # 1. 强制转为整数防断言失败
+            try:
+                current_res = int(res)
+            except (ValueError, TypeError):
+                current_res = 0
 
-                # 2. 智能 4K/8K 判定：
-                # 方案 A: 纵向 >= 2160 (标准4K) 
-                # 方案 B: 频道名字里本身明确带有 4K 或 8K 标签
-                if current_res >= 2160 or "4K" in task["std_name"].upper() or "8K" in task["std_name"].upper():
-                    passed_4k_sources += 1
+            # 2. 智能 4K/8K 判定
+            if current_res >= 2160 or "4K" in task["std_name"].upper() or "8K" in task["std_name"].upper():
+                passed_4k_sources += 1
 
-                if url in blacklist: 
-                    del blacklist[url]
-                valid_channels.append({
-                    "std_name": task["std_name"],
-                    "url": url,
-                    "logo": task["logo"],
-                    "tvgid": task["std_name"],     
-                    "tvgname": task["std_name"],   
-                    "group": task["group"],
-                    "resolution": res,
-                    "avg_time": resp_time
-                })
-            else:
-                try: fails = int(blacklist.get(url, 0))
-                except (ValueError, TypeError): fails = 0
-                blacklist[url] = fails + 1
+            if task["url"] in blacklist: 
+                del blacklist[task["url"]]
+            
+            valid_channels.append({
+                "std_name": task["std_name"],
+                "url": task["url"],
+                "logo": task["logo"],
+                "tvgid": task["std_name"],     
+                "tvgname": task["std_name"],   
+                "group": task["group"],
+                "resolution": res,
+                "avg_time": resp_time
+            })
+        else:
+            try: 
+                fails = int(blacklist.get(task["url"], 0))
+            except (ValueError, TypeError): 
+                fails = 0
+            blacklist[task["url"]] = fails + 1
 
             # =====================================================================
             # 🌟【核心新增】：动态进度条、预计时间与剩余时间数学计算
