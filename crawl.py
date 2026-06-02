@@ -62,6 +62,21 @@ async def parse_m3u_content(content):
             current_item = {}
             
     return items
+# 🌟 请把这个函数重新粘贴到 parse_m3u_content 函数的下方：
+async def fetch_and_parse_all(session, source_urls):
+    """异步下载 sources.json 中的所有链接并汇总"""
+    all_parsed_items = []
+    for url in source_urls:
+        try:
+            async with session.get(url, timeout=20) as resp:
+                if resp.status == 200:
+                    content = await resp.text()
+                    items = await parse_m3u_content(content)
+                    all_parsed_items.extend(items)
+                    logger.info(f"成功获取源 {url}, 解析到 {len(items)} 个频道")
+        except Exception as e:
+            logger.error(f"下载源 {url} 失败: {e}")
+    return all_parsed_items
 # =====================================================================
 # 0. 环境自检与依赖自动安装
 # =====================================================================
