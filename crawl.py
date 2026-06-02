@@ -449,27 +449,24 @@ async def main():
             data = json.load(f)
             source_urls = data.get("urls", [])  # <--- 这一行定义了 source_urls
 
-# 确保在 main() 中 session 在作用域内被正确处理
+    # 确保在 main() 中 session 在作用域内被正确处理
     async with aiohttp.ClientSession() as session:
-        # 这一步是为了防止某个源卡死整个程序
         try:
-            # 这一行必须比上面的 async with 多缩进 4 个空格！
+            # 这一行比上面的 async with 多缩进 4 个空格！
             parsed_items = await fetch_and_parse_all(session, source_urls)
             
             # 写入缓存前检查列表是否为空
-        # 修改后
-        if parsed_items:
-            with open(CACHE_PATH, 'w', encoding='utf-8') as f:
-                f.write("#EXTM3U\n")  # 必须包含 M3U 头部
-                for item in parsed_items:
-                    # 写入标准的 M3U 结构
-                    f.write(f"#EXTINF:-1,{item['raw_name']}\n")
-                    f.write(f"{item['url']}\n")
-            print(f"[+] 缓存已成功更新，共 {len(parsed_items)} 条频道。")
+            if parsed_items:
+                with open(CACHE_PATH, 'w', encoding='utf-8') as f:
+                    f.write("#EXTM3U\n")  # 新的 M3U 头部
+                    for item in parsed_items:
+                        f.write(f"#EXTINF:-1,{item['raw_name']}\n")
+                        f.write(f"{item['url']}\n")
+                print(f"[+] 缓存已成功更新，共 {len(parsed_items)} 条频道。")
             else:
                 print("[!] 解析结果为空，跳过缓存写入。")
         except Exception as e:
-            # 确保 logger 已经在文件顶部定义过
+            # 这里必须有这一段，否则 try 会报错
             logger.error(f"批量下载失败: {e}")
     
     # 1. 加载配置字典
