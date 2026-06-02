@@ -237,9 +237,14 @@ def determine_final_group(std_name, raw_group, is_4k_8k, group_repo):
 # =====================================================================
 def probe_url(url):
     """探测 URL，返回 (是否有效, 解析度高)"""
+    # 模拟上海机顶盒 UA，绕过针对普通爬虫的拦截
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Linux; Android 5.1; ZTE-B860A Build/LMY47V; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/43.0.2357.121 Mobile Safari/537.36",
+        "Accept": "*/*"
+    }
     try:
-        # 为了探测速度，设置 3 秒超时
-        resp = requests.get(url, timeout=3, stream=True)
+        # 延长超时到 8 秒，给专网 smil 解析留出时间
+        resp = requests.get(url, headers=headers, timeout=8, stream=True)
         if resp.status_code != 200:
             return False, 0
             
