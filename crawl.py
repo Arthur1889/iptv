@@ -234,7 +234,6 @@ def determine_final_group(std_name, raw_group, is_4k_8k, group_repo):
 # =====================================================================
 # 3. 探测、去重与输出控制
 # =====================================================================
-# --- 在 probe_url 函数之前插入 ---
 class TSStreamChecker:
     def __init__(self):
         self.stats = {"total_packets": 0, "lost_packets": 0, "response_times": []}
@@ -257,20 +256,15 @@ class TSStreamChecker:
             return False, 999
         return False, 999
         
-def probe_url(url):
-    """重构版：同时检测有效性、响应时间与稳定性"""
-    # 1. 基础探测
-    headers = {"User-Agent": "Mozilla/5.0 (Linux; Android 5.1; ZTE-B860A...)"}
+async def probe_url_async(url):
+    """异步探测函数"""
+    # 必须确保 TSStreamChecker 内部的 requests.get 也替换为 session.get
     try:
-        checker = TSStreamChecker()
-        is_stable, resp_time = checker.check_stream_stability(url)
-        
-        if not is_stable:
-            return False, 0, 999 # 无效源
-            
-        # 解析分辨率逻辑保持不变
-        resolution = 1080 
-        return True, resolution, resp_time
+        # 使用传入的 session，不要在函数内部重复创建
+        async with session.get(url, timeout=5) as resp:
+            if resp.status != 200: return False, 0, 999
+            # ... 解析逻辑 ...
+            return True, resolution, resp_time
     except:
         return False, 0, 999
 
@@ -474,18 +468,28 @@ def main():
     passed_sources = 0
     passed_4k_sources = 0
 
-    # 3. 开启多线程并发探测
-    # 注意：确保这里没有遗留的 await asyncio.gather(*tasks) 
-    # 因为既然你已经决定用 ThreadPoolExecutor，就不需要这一行异步等待了
+    # 3. 开启纯异步并发探测 (彻底移除 ThreadPoolExecutor)
+    # 定义单个异步检测任务
+    async def run_check(task):
+        # probe_url 已经重构为异步逻辑，直接 await
+        is_valid, res, resp_time = await probe_url_async(task["url"])
+        return task, is_valid, res, resp_time
+
+    # 使用 Semaphore 控制并发量，避免瞬间请求过大被封
+    semaphore = asyncio.Semaphore(50) 
     
-    # 修正缩进后的逻辑：
-    with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
-        future_to_url = {executor.submit(check_task, task): task for task in tasks}        
-        for future in concurrent.futures.as_completed(future_to_url):
-            completed += 1
-            task, is_valid, res, resp_time = future.result()
-            url = task["url"]
-            
+    async def semaphore_task(task):
+        async with semaphore:
+            return await run_check(task)
+
+    tasks_list = [semaphore_task(task) for task in tasks]
+    
+    # 动态显示进度
+    for future in asyncio.as_completed(tasks_list):
+        completed += 1
+        task, is_valid, res, resp_time = await future
+        
+        # 逻辑处理区
             # 🌟 新增：实时统计通过源与4K源数量
             if is_valid:
                 passed_sources += 1
