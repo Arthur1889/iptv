@@ -69,3 +69,20 @@
 [+] 最终保留优质源: 1418
 [+] 脚本整体总耗时: 255.93 秒
 ======================================================
+2026-06-02 22:24:53,353 [ERROR] 批量下载失败: name 'fetch_and_parse_all' is not defined
+2026-06-02 22:27:54,877 [INFO] 成功获取源 https://raw.githubusercontent.com/Guovin/TV/gd/output/result.m3u, 解析到 1787 个频道
+2026-06-02 22:27:54,960 [INFO] 成功获取源 https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cn.m3u, 解析到 567 个频道
+2026-06-02 22:27:55,374 [INFO] 成功获取源 https://raw.githubusercontent.com/xcc360/SHCU-TV/refs/heads/main/IPTV.m3u, 解析到 184 个频道
+2026-06-02 22:27:55,747 [INFO] 成功获取源 https://raw.githubusercontent.com/babylife/China-ShangHai-IPTV-list/master/IPTV_Enhanced_change.m3u, 解析到 95 个频道
+2026-06-02 22:27:55,870 [INFO] 成功获取源 https://raw.githubusercontent.com/Jsnzkpg/Jsnzkpg/Jsnzkpg/Jsnzkpg1.m3u, 解析到 2191 个频道
+2026-06-02 22:27:55,951 [INFO] 成功获取源 https://raw.githubusercontent.com/mzky/checklist/refs/heads/master/itvlist.m3u, 解析到 554 个频道
+2026-06-02 22:27:56,032 [INFO] 成功获取源 https://raw.githubusercontent.com/hujingguang/ChinaIPTV/main/cnTV_AutoUpdate.m3u8, 解析到 75 个频道
+
+================ 📊 IPTV 任务运行报告 ================
+[+] 运行时间: 2026-06-02 22:31:55
+[+] 初始读取源总数: 5154
+[+] 命中黑名单拦截: 12
+[+] 画质/垃圾源过滤: 1812
+[+] 最终保留优质源: 1253
+[+] 脚本整体总耗时: 240.92 秒
+======================================================
