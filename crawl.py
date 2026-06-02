@@ -559,30 +559,34 @@ async def main():
     passed_4k_sources = 0
 
     # 3. 开启纯异步并发探测 (彻底移除 ThreadPoolExecutor)
-    # 定义单个异步检测任务
-    async def run_check(task):
-        # probe_url 已经重构为异步逻辑，直接 await
-        is_valid, res, resp_time = await probe_url_async(session, task["url"])
-        return task, is_valid, res, resp_time
-
-    # 使用 Semaphore 控制并发量，避免瞬间请求过大被封
-    semaphore = asyncio.Semaphore(50) 
     
-    async def semaphore_task(task):
-        async with semaphore:
-            return await run_check(task)
+    # 🌟【修复点】：为探测任务专门开启一个新的 session
+    async with aiohttp.ClientSession() as probe_session:
 
-    tasks_list = [semaphore_task(task) for task in tasks]
-    
-    # 动态显示进度
-    for future in asyncio.as_completed(tasks_list):
-        completed += 1
-        task, is_valid, res, resp_time = await future
+        # 定义单个异步检测任务 (注意缩进，要包含在 async with 里面)
+        async def run_check(task):
+            # 这里传入新的 probe_session
+            is_valid, res, resp_time = await probe_url_async(probe_session, task["url"])
+            return task, is_valid, res, resp_time
+
+        # 使用 Semaphore 控制并发量，避免瞬间请求过大被封
+        semaphore = asyncio.Semaphore(50) 
         
-        # 逻辑处理区
-        # --- 确保这下面的每一行都比上面的 for 缩进多 4 个空格 ---
-        if is_valid:
-            passed_sources += 1
+        async def semaphore_task(task):
+            async with semaphore:
+                return await run_check(task)
+
+        tasks_list = [semaphore_task(task) for task in tasks]
+        
+        # 动态显示进度 (这部分原封不动，但也要往右缩进 4 个空格，包在 probe_session 下)
+        for future in asyncio.as_completed(tasks_list):
+            completed += 1
+            task, is_valid, res, resp_time = await future
+            
+            # ... (下面的进度条和 if is_valid 逻辑原封不动，注意整体缩进)
+            if is_valid:
+                passed_sources += 1
+            
             # 1. 强制转为整数防断言失败
             try:
                 current_res = int(res)
