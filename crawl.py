@@ -565,90 +565,88 @@ async def main():
     passed_4k_sources = 0
 
     # ==========================================
-    # 3. 开启纯异步并发探测 (极速安全改良版)
+    # 3. 开启纯异步并发探测 (作用域完全修复版)
     # ==========================================
-    # 设置更低更安全的并发，防止本地端口瞬间耗尽导致 Linux 假死
-    semaphore = asyncio.Semaphore(30) 
+    # 显式在这里创建 ClientSession，确保它在整个循环期间都是存活的
+    async with aiohttp.ClientSession() as my_session:
+        
+        # 设置并发信号量
+        semaphore = asyncio.Semaphore(30) 
 
-    async def semaphore_task(task):
-        async with semaphore:
+        # 内部定义的探测任务，显式将 my_session 传给 probe_url_async
+        async def semaphore_task(task):
+            async with semaphore:
+                try:
+                    # 使用 wait_for 防止单个垃圾源无限挂起
+                    return await asyncio.wait_for(
+                        probe_url_async(my_session, task["url"]), 
+                        timeout=6.0
+                    )
+                except Exception:
+                    return False, 0, 999
+
+        # 创建任务映射表
+        task_futures = {asyncio.create_task(semaphore_task(t)): t for t in tasks}
+        total_tasks = len(tasks)
+        completed = 0
+        
+        loop_start_time = time.time()
+        passed_sources = 0
+        passed_4k_sources = 0
+
+        print("[+] 异步探测引擎已启动，正在激活连接池...")
+
+        # 迭代执行异步任务
+        for future in asyncio.as_completed(task_futures.keys()):
+            completed += 1
             try:
-                # 显式使用异步超时保护，防止单条连接挂起整个脚本
-                return await asyncio.wait_for(
-                    probe_url_async(session, task["url"]), 
-                    timeout=6.0
-                )
-            except asyncio.TimeoutError:
-                return False, 0, 999
+                is_valid, res, resp_time = await future
+                task = task_futures[future]
             except Exception:
-                return False, 0, 999
+                continue
 
-    # 创建任务映射表，以便在完成后找回 task 字典
-    task_futures = {asyncio.create_task(semaphore_task(t)): t for t in tasks}
-    total_tasks = len(tasks)
-    completed = 0
-    
-    loop_start_time = time.time()
-    passed_sources = 0
-    passed_4k_sources = 0
+            if is_valid:
+                passed_sources += 1
+                try: current_res = int(res)
+                except: current_res = 0
 
-    print("[+] 异步探测引擎已启动，正在激活连接池...")
+                if current_res >= 2160 or "4K" in task["std_name"].upper() or "8K" in task["std_name"].upper():
+                    passed_4k_sources += 1
 
-    # 使用 as_completed 迭代
-    for future in asyncio.as_completed(task_futures.keys()):
-        completed += 1
-        # 获取关联的原始 task
-        coro = future
-        # 此时可以用这种方式安全拿到任务结果
-        try:
-            is_valid, res, resp_time = await future
-            task = task_futures[coro]
-        except Exception:
-            continue
+                if task["url"] in blacklist: 
+                    del blacklist[task["url"]]
+                
+                valid_channels.append({
+                    "std_name": task["std_name"], "url": task["url"], "logo": task["logo"],
+                    "tvgid": task["std_name"], "tvgname": task["std_name"], "group": task["group"],
+                    "resolution": res, "avg_time": resp_time
+                })
+            else:
+                try: fails = int(blacklist.get(task["url"], 0))
+                except: fails = 0
+                blacklist[task["url"]] = fails + 1
 
-        if is_valid:
-            passed_sources += 1
-            try: current_res = int(res)
-            except: current_res = 0
+            # 实时刷新进度条
+            if completed % 5 == 0 or completed == total_tasks:
+                elapsed_loop = time.time() - loop_start_time
+                avg_time = elapsed_loop / completed if completed > 0 else 0
+                remaining_time = avg_time * (total_tasks - completed)
+                total_predict_time = elapsed_loop + remaining_time
 
-            if current_res >= 2160 or "4K" in task["std_name"].upper() or "8K" in task["std_name"].upper():
-                passed_4k_sources += 1
+                def fmt_duration(seconds):
+                    m, s = divmod(int(seconds), 60)
+                    return f"{m:02d}:{s:02d}"
 
-            if task["url"] in blacklist: 
-                del blacklist[task["url"]]
-            
-            valid_channels.append({
-                "std_name": task["std_name"], "url": task["url"], "logo": task["logo"],
-                "tvgid": task["std_name"], "tvgname": task["std_name"], "group": task["group"],
-                "resolution": res, "avg_time": resp_time
-            })
-        else:
-            try: fails = int(blacklist.get(task["url"], 0))
-            except: fails = 0
-            blacklist[task["url"]] = fails + 1
-
-        # 实时同步刷新进度条，不打印多余换行
-        if completed % 5 == 0 or completed == total_tasks:
-            elapsed_loop = time.time() - loop_start_time
-            avg_time = elapsed_loop / completed if completed > 0 else 0
-            remaining_time = avg_time * (total_tasks - completed)
-            total_predict_time = elapsed_loop + remaining_time
-
-            def fmt_duration(seconds):
-                m, s = divmod(int(seconds), 60)
-                return f"{m:02d}:{s:02d}"
-
-            bar = '█' * int(15 * completed / total_tasks) + '░' * (15 - int(15 * completed / total_tasks))
-            short_name = task['std_name'][:6]
-            print(
-                f"\r进度:[{bar}] {completed}/{total_tasks} ({completed/total_tasks*100:.1f}%) | "
-                f"⏱️ 剩:{fmt_duration(remaining_time)}/总:{fmt_duration(total_predict_time)} | "
-                f"当前:{short_name:<6} | ✅通过:{passed_sources} | ✨4K+:{passed_4k_sources}   ", 
-                end="", flush=True
-            )
-    print() # 探测完成后换行
-            # =====================================================================
-    
+                bar = '█' * int(15 * completed / total_tasks) + '░' * (15 - int(15 * completed / total_tasks))
+                short_name = task['std_name'][:6]
+                print(
+                    f"\r进度:[{bar}] {completed}/{total_tasks} ({completed/total_tasks*100:.1f}%) | "
+                    f"⏱️ 剩:{fmt_duration(remaining_time)}/总:{fmt_duration(total_predict_time)} | "
+                    f"当前:{short_name:<6} | ✅通过:{passed_sources} | ✨4K+:{passed_4k_sources}   ", 
+                    end="", flush=True
+                )
+        print() # 整个大循环结束后换行
+        
     # 4. 后置聚合与生成
     final_list = process_and_deduplicate(valid_channels, GROUP_PRIORITY)
     stats["final_retained"] = len(final_list)
