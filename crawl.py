@@ -4,6 +4,7 @@ import json
 import re
 import time
 import subprocess
+import logging
 import aiohttp
 import asyncio
 import requests
@@ -12,6 +13,16 @@ import urllib.error
 from collections import defaultdict
 from urllib.parse import urlparse
 
+# 初始化日志配置
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s [%(levelname)s] %(message)s',
+    handlers=[
+        logging.FileHandler("crawl.log", encoding="utf-8"),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger(__name__)
 # =====================================================================
 # 检查源列表有效期
 # =====================================================================
@@ -42,7 +53,7 @@ async def fetch_and_parse_all(session, source_urls):
     all_parsed_items = []
     for url in source_urls:
         try:
-            async with session.get(url, timeout=10) as resp:
+            async with session.get(url, timeout=20) as resp:
                 if resp.status == 200:
                     content = await resp.text()
                     items = await parse_m3u_content(content)
@@ -438,15 +449,22 @@ async def main():
             data = json.load(f)
             source_urls = data.get("urls", [])  # <--- 这一行定义了 source_urls
 
-        async with aiohttp.ClientSession() as session:
-            # 2. 这里现在就可以安全使用 source_urls 了
-            parsed_items = await fetch_and_parse_all(session, source_urls)
-            
-            # 保存到缓存文件
+# 确保在 main() 中 session 在作用域内被正确处理
+async with aiohttp.ClientSession() as session:
+    # 这一步是为了防止某个源卡死整个程序
+    try:
+        parsed_items = await fetch_and_parse_all(session, source_urls)
+        
+        # 写入缓存前检查列表是否为空
+        if parsed_items:
             with open(CACHE_PATH, 'w', encoding='utf-8') as f:
                 for item in parsed_items:
                     f.write(f"{item['raw_name']},{item['url']}\n")
-        print(f"[+] 缓存已更新至: {CACHE_PATH}")
+            print(f"[+] 缓存已成功更新，共 {len(parsed_items)} 条频道。")
+        else:
+            print("[!] 解析结果为空，跳过缓存写入。")
+    except Exception as e:
+        logger.error(f"批量下载失败: {e}")
     
     # 1. 加载配置字典
     group_repo = load_json(GROUP_JSON_PATH, {})
