@@ -297,24 +297,23 @@ async def probe_url_async(session, url):
         "Connection": "keep-alive"
     }
     try:
-        # 设置 3 秒超时，防止死锁
-        async with session.get(url, headers=headers, timeout=3, allow_redirects=True) as resp:
-            if resp.status == 200:
-                # 🌟 核心：强制流验证，读取前 1KB 数据检查是否为有效视频流
-                data = await resp.content.read(1024)
-                # 包含 #EXTM3U (m3u8特征) 或 0x47 (TS流同步字节) 才算有效
-                if b'#EXTM3U' not in data and b'\x47' not in data:
-                    return False, 0, 999
-                
-                lower_url = url.lower()
-                detected_res = 1080 
-                if "720" in lower_url:
-                    detected_res = 720
-                elif "576" in lower_url or "480" in lower_url:
-                    detected_res = 480
-                
-                return True, detected_res, 60
+        async with session.get(url, headers=headers, timeout=5, allow_redirects=True) as resp:
+            if resp.status != 200:
+                return False, 0, 999
+            
+            # 读取前 2KB 数据进行深度分析
+            content = await resp.text() 
+            
+            # 1. 必须包含视频分片标记
+            has_ts_segments = "#EXTINF" in content
+            # 2. 必须不是仅仅包含一个无效的跳转或空头文件
+            is_valid_m3u8 = "#EXTM3U" in content
+            
+            if is_valid_m3u8 and has_ts_segments:
+                return True, 1080, 60
             else:
+                # 记录一下这些坑爹的源，便于你在 crawl.log 中查看
+                print(f"❌ 无效流，无分片信息: {url}")
                 return False, 0, 999
     except Exception:
         return False, 0, 999
