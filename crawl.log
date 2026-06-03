@@ -95,3 +95,1057 @@
 [+] 最终保留优质源: 1262
 [+] 脚本整体总耗时: 213.82 秒
 ======================================================
+2026-06-03 10:14:20,345 [ERROR] gaierror exception in shielded future
+future: <Task finished name='Task-4801' coro=<TCPConnector._resolve_host_with_throttle() done, defined at C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py:1181> exception=gaierror(11001, 'getaddrinfo failed')>
+Traceback (most recent call last):
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1202, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 936, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-03 10:14:44,631 [ERROR] gaierror exception in shielded future
+future: <Task finished name='Task-5044' coro=<TCPConnector._resolve_host_with_throttle() done, defined at C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py:1181> exception=gaierror(11001, 'getaddrinfo failed')>
+Traceback (most recent call last):
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1561, in _create_direct_connection
+    hosts = await self._resolve_host(host, port, traces=traces)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1146, in _resolve_host
+    await future
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1202, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 936, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-03 10:14:47,554 [ERROR] gaierror exception in shielded future
+future: <Task finished name='Task-5079' coro=<TCPConnector._resolve_host_with_throttle() done, defined at C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py:1181> exception=gaierror(11001, 'getaddrinfo failed')>
+Traceback (most recent call last):
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1202, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 936, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-03 10:14:51,893 [ERROR] gaierror exception in shielded future
+future: <Task finished name='Task-5102' coro=<TCPConnector._resolve_host_with_throttle() done, defined at C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py:1181> exception=gaierror(11001, 'getaddrinfo failed')>
+Traceback (most recent call last):
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1202, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 936, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-03 10:14:52,249 [ERROR] gaierror exception in shielded future
+future: <Task finished name='Task-5107' coro=<TCPConnector._resolve_host_with_throttle() done, defined at C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py:1181> exception=gaierror(11001, 'getaddrinfo failed')>
+Traceback (most recent call last):
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1202, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 936, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-03 10:14:55,696 [ERROR] gaierror exception in shielded future
+future: <Task finished name='Task-5136' coro=<TCPConnector._resolve_host_with_throttle() done, defined at C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py:1181> exception=gaierror(11001, 'getaddrinfo failed')>
+Traceback (most recent call last):
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1202, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 936, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-03 10:14:58,210 [ERROR] gaierror exception in shielded future
+future: <Task finished name='Task-5173' coro=<TCPConnector._resolve_host_with_throttle() done, defined at C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py:1181> exception=gaierror(11001, 'getaddrinfo failed')>
+Traceback (most recent call last):
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1202, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 936, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-03 10:15:10,104 [ERROR] gaierror exception in shielded future
+future: <Task finished name='Task-5317' coro=<TCPConnector._resolve_host_with_throttle() done, defined at C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py:1181> exception=gaierror(11001, 'getaddrinfo failed')>
+Traceback (most recent call last):
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1561, in _create_direct_connection
+    hosts = await self._resolve_host(host, port, traces=traces)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1146, in _resolve_host
+    await future
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1202, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 936, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-03 10:15:17,115 [ERROR] gaierror exception in shielded future
+future: <Task finished name='Task-5404' coro=<TCPConnector._resolve_host_with_throttle() done, defined at C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py:1181> exception=gaierror(11001, 'getaddrinfo failed')>
+Traceback (most recent call last):
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1202, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 936, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-03 10:15:19,159 [ERROR] gaierror exception in shielded future
+future: <Task finished name='Task-5420' coro=<TCPConnector._resolve_host_with_throttle() done, defined at C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py:1181> exception=gaierror(11001, 'getaddrinfo failed')>
+Traceback (most recent call last):
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1202, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 936, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-03 10:15:21,693 [ERROR] gaierror exception in shielded future
+future: <Task finished name='Task-5449' coro=<TCPConnector._resolve_host_with_throttle() done, defined at C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py:1181> exception=gaierror(11001, 'getaddrinfo failed')>
+Traceback (most recent call last):
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1561, in _create_direct_connection
+    hosts = await self._resolve_host(host, port, traces=traces)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1146, in _resolve_host
+    await future
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1202, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 936, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-03 10:15:24,755 [ERROR] gaierror exception in shielded future
+future: <Task finished name='Task-5489' coro=<TCPConnector._resolve_host_with_throttle() done, defined at C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py:1181> exception=gaierror(11001, 'getaddrinfo failed')>
+Traceback (most recent call last):
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1561, in _create_direct_connection
+    hosts = await self._resolve_host(host, port, traces=traces)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1146, in _resolve_host
+    await future
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1202, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 936, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-03 10:15:26,287 [ERROR] gaierror exception in shielded future
+future: <Task finished name='Task-5510' coro=<TCPConnector._resolve_host_with_throttle() done, defined at C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py:1181> exception=gaierror(11001, 'getaddrinfo failed')>
+Traceback (most recent call last):
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1202, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 936, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-03 10:15:31,382 [ERROR] gaierror exception in shielded future
+future: <Task finished name='Task-5591' coro=<TCPConnector._resolve_host_with_throttle() done, defined at C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py:1181> exception=gaierror(11001, 'getaddrinfo failed')>
+Traceback (most recent call last):
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1202, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 936, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-03 10:15:36,115 [ERROR] gaierror exception in shielded future
+future: <Task finished name='Task-5652' coro=<TCPConnector._resolve_host_with_throttle() done, defined at C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py:1181> exception=gaierror(11001, 'getaddrinfo failed')>
+Traceback (most recent call last):
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1561, in _create_direct_connection
+    hosts = await self._resolve_host(host, port, traces=traces)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1146, in _resolve_host
+    await future
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1202, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 936, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-03 10:15:37,307 [ERROR] gaierror exception in shielded future
+future: <Task finished name='Task-5668' coro=<TCPConnector._resolve_host_with_throttle() done, defined at C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py:1181> exception=gaierror(11001, 'getaddrinfo failed')>
+Traceback (most recent call last):
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1202, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 936, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-03 10:15:41,303 [ERROR] gaierror exception in shielded future
+future: <Task finished name='Task-5688' coro=<TCPConnector._resolve_host_with_throttle() done, defined at C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py:1181> exception=gaierror(11001, 'getaddrinfo failed')>
+Traceback (most recent call last):
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1202, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 936, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-03 10:15:47,162 [ERROR] gaierror exception in shielded future
+future: <Task finished name='Task-5745' coro=<TCPConnector._resolve_host_with_throttle() done, defined at C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py:1181> exception=gaierror(11001, 'getaddrinfo failed')>
+Traceback (most recent call last):
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1202, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 936, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-03 10:15:48,523 [ERROR] gaierror exception in shielded future
+future: <Task finished name='Task-5758' coro=<TCPConnector._resolve_host_with_throttle() done, defined at C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py:1181> exception=gaierror(11001, 'getaddrinfo failed')>
+Traceback (most recent call last):
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1561, in _create_direct_connection
+    hosts = await self._resolve_host(host, port, traces=traces)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1146, in _resolve_host
+    await future
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1202, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 936, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-03 10:15:51,786 [ERROR] gaierror exception in shielded future
+future: <Task finished name='Task-5782' coro=<TCPConnector._resolve_host_with_throttle() done, defined at C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py:1181> exception=gaierror(11001, 'getaddrinfo failed')>
+Traceback (most recent call last):
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1202, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 936, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-03 10:15:52,727 [ERROR] gaierror exception in shielded future
+future: <Task finished name='Task-5793' coro=<TCPConnector._resolve_host_with_throttle() done, defined at C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py:1181> exception=gaierror(11001, 'getaddrinfo failed')>
+Traceback (most recent call last):
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1202, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 936, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-03 10:15:52,929 [ERROR] gaierror exception in shielded future
+future: <Task finished name='Task-5795' coro=<TCPConnector._resolve_host_with_throttle() done, defined at C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py:1181> exception=gaierror(11001, 'getaddrinfo failed')>
+Traceback (most recent call last):
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1202, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 936, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-03 10:15:56,382 [ERROR] gaierror exception in shielded future
+future: <Task finished name='Task-5841' coro=<TCPConnector._resolve_host_with_throttle() done, defined at C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py:1181> exception=gaierror(11001, 'getaddrinfo failed')>
+Traceback (most recent call last):
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1202, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 936, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-03 10:16:00,102 [ERROR] gaierror exception in shielded future
+future: <Task finished name='Task-5887' coro=<TCPConnector._resolve_host_with_throttle() done, defined at C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py:1181> exception=gaierror(11001, 'getaddrinfo failed')>
+Traceback (most recent call last):
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1202, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 936, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-03 10:16:08,689 [ERROR] gaierror exception in shielded future
+future: <Task finished name='Task-5929' coro=<TCPConnector._resolve_host_with_throttle() done, defined at C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py:1181> exception=gaierror(11001, 'getaddrinfo failed')>
+Traceback (most recent call last):
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1561, in _create_direct_connection
+    hosts = await self._resolve_host(host, port, traces=traces)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1146, in _resolve_host
+    await future
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1202, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 936, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-03 10:16:08,735 [ERROR] gaierror exception in shielded future
+future: <Task finished name='Task-5930' coro=<TCPConnector._resolve_host_with_throttle() done, defined at C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py:1181> exception=gaierror(11001, 'getaddrinfo failed')>
+Traceback (most recent call last):
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1561, in _create_direct_connection
+    hosts = await self._resolve_host(host, port, traces=traces)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1146, in _resolve_host
+    await future
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1202, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 936, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-03 10:16:18,407 [ERROR] gaierror exception in shielded future
+future: <Task finished name='Task-5976' coro=<TCPConnector._resolve_host_with_throttle() done, defined at C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py:1181> exception=gaierror(11001, 'getaddrinfo failed')>
+Traceback (most recent call last):
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1202, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 936, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-03 10:16:20,225 [ERROR] gaierror exception in shielded future
+future: <Task finished name='Task-5997' coro=<TCPConnector._resolve_host_with_throttle() done, defined at C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py:1181> exception=gaierror(11001, 'getaddrinfo failed')>
+Traceback (most recent call last):
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1202, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 936, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-03 10:16:20,578 [ERROR] gaierror exception in shielded future
+future: <Task finished name='Task-6004' coro=<TCPConnector._resolve_host_with_throttle() done, defined at C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py:1181> exception=gaierror(11001, 'getaddrinfo failed')>
+Traceback (most recent call last):
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1202, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 936, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-03 10:16:20,824 [ERROR] gaierror exception in shielded future
+future: <Task finished name='Task-6010' coro=<TCPConnector._resolve_host_with_throttle() done, defined at C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py:1181> exception=gaierror(11001, 'getaddrinfo failed')>
+Traceback (most recent call last):
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1202, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 936, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-03 10:16:20,825 [ERROR] gaierror exception in shielded future
+future: <Task finished name='Task-6032' coro=<TCPConnector._resolve_host_with_throttle() done, defined at C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py:1181> exception=gaierror(11001, 'getaddrinfo failed')>
+Traceback (most recent call last):
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1202, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 936, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-03 10:16:31,761 [ERROR] gaierror exception in shielded future
+future: <Task finished name='Task-6100' coro=<TCPConnector._resolve_host_with_throttle() done, defined at C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py:1181> exception=gaierror(11001, 'getaddrinfo failed')>
+Traceback (most recent call last):
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1202, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 936, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-03 10:16:36,878 [ERROR] gaierror exception in shielded future
+future: <Task finished name='Task-6126' coro=<TCPConnector._resolve_host_with_throttle() done, defined at C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py:1181> exception=gaierror(11001, 'getaddrinfo failed')>
+Traceback (most recent call last):
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1561, in _create_direct_connection
+    hosts = await self._resolve_host(host, port, traces=traces)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1146, in _resolve_host
+    await future
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1202, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 936, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-03 10:16:45,898 [ERROR] gaierror exception in shielded future
+future: <Task finished name='Task-6191' coro=<TCPConnector._resolve_host_with_throttle() done, defined at C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py:1181> exception=gaierror(11001, 'getaddrinfo failed')>
+Traceback (most recent call last):
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1202, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 936, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-03 10:16:47,535 [ERROR] gaierror exception in shielded future
+future: <Task finished name='Task-6210' coro=<TCPConnector._resolve_host_with_throttle() done, defined at C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py:1181> exception=gaierror(11001, 'getaddrinfo failed')>
+Traceback (most recent call last):
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1202, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 936, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-03 10:16:49,991 [ERROR] gaierror exception in shielded future
+future: <Task finished name='Task-6234' coro=<TCPConnector._resolve_host_with_throttle() done, defined at C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py:1181> exception=gaierror(11001, 'getaddrinfo failed')>
+Traceback (most recent call last):
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1202, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 936, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-03 10:16:56,887 [ERROR] gaierror exception in shielded future
+future: <Task finished name='Task-6297' coro=<TCPConnector._resolve_host_with_throttle() done, defined at C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py:1181> exception=gaierror(11001, 'getaddrinfo failed')>
+Traceback (most recent call last):
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1202, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 936, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-03 10:17:25,956 [ERROR] gaierror exception in shielded future
+future: <Task finished name='Task-6485' coro=<TCPConnector._resolve_host_with_throttle() done, defined at C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py:1181> exception=gaierror(11001, 'getaddrinfo failed')>
+Traceback (most recent call last):
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1202, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 936, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-03 10:17:43,554 [ERROR] gaierror exception in shielded future
+future: <Task finished name='Task-6665' coro=<TCPConnector._resolve_host_with_throttle() done, defined at C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py:1181> exception=gaierror(11001, 'getaddrinfo failed')>
+Traceback (most recent call last):
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1202, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 936, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-03 10:17:51,817 [ERROR] gaierror exception in shielded future
+future: <Task finished name='Task-6712' coro=<TCPConnector._resolve_host_with_throttle() done, defined at C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py:1181> exception=gaierror(11001, 'getaddrinfo failed')>
+Traceback (most recent call last):
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\connector.py", line 1202, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 936, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "C:\Users\lizongyan\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+
+================ 📊 IPTV 任务运行报告 ================
+[+] 运行时间: 2026-06-03 10:18:00
+[+] 初始读取源总数: 5143
+[+] 命中黑名单拦截: 0
+[+] 画质/垃圾源过滤: 1097
+[+] 最终保留优质源: 1125
+[+] 脚本整体总耗时: 231.29 秒
+======================================================
