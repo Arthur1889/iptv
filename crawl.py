@@ -596,12 +596,28 @@ async def main():
         # --- C. 确定最终显示名称与中央台特正纠正 (要求 9) ---
         display_name = ch["matched_std"]
         norm_key = display_name.replace(" ", "").upper().replace("-", "")
+        
+        # 🌟 核心修复：优先完全匹配；若无，则通过前缀(如CCTV1)防漏截取匹配
+        matched_desc = None
         if norm_key in CCTV_DESC_MAP:
-            display_name = CCTV_DESC_MAP[norm_key]
+            matched_desc = CCTV_DESC_MAP[norm_key]
+        else:
+            # 针对 CCTV1综合/CCTV5+体育 等复合标准名进行前缀精准捕捉
+            for k, v in CCTV_DESC_MAP.items():
+                if norm_key.startswith(k) and len(k) >= 5: # 确保像CCTV13这种不被CCTV1误切
+                    matched_desc = v
+                    break
+                elif norm_key.startswith(k) and k in ["CCTV1", "CCTV2", "CCTV3", "CCTV4", "CCTV5", "CCTV6", "CCTV7", "CCTV8", "CCTV9"]:
+                    matched_desc = v
+                    break
+
+        if matched_desc:
+            display_name = matched_desc
         elif "CCTV4" in norm_key:
             if "欧洲" in raw_name: display_name = "CCTV-4 欧洲"
             elif "美洲" in raw_name: display_name = "CCTV-4 美洲"
             else: display_name = "CCTV-4 中文国际"
+            
         ch["display_name"] = display_name
 
         # --- D. 确定智能分组 group-title (要求 8 & 链接探测要求 6,7) ---
