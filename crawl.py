@@ -246,9 +246,8 @@ def determine_final_group(std_name, raw_group, is_4k_8k, group_repo):
             break
     target_prov = matched_province if matched_province else next((p for p in PROVINCES if p in std_name), None)
 
-    if "CCTV4K" in name_up or "CCTV8K" in name_up: 
-        return "4K频道"
-    if is_4k_8k and (is_cctv or is_ws or target_prov):
+    # 🌟【核心修复】：只要名称带有显式 4K/8K 标签，无条件直接归入“4K频道”，防止 CHC电影4K 等野生优质源漏网
+    if "CCTV4K" in name_up or "CCTV8K" in name_up or is_4k_8k: 
         return "4K频道"
 
     group_from_json = group_repo.get(std_name)
@@ -303,13 +302,8 @@ async def probe_url_async(session, url):
                 lower_url = url.lower()
                 detected_res = 1080  # 基础默认值
                 
-                # 🌟 核心修复：使用正则表达式边界匹配，或排除掉 "64k" 干扰
-                # 只有在纯粹出现 4k / uhd 且不被 64k 绑架时才认定为 4K 视频
-                if "64k" in lower_url or "128k" in lower_url:
-                    detected_res = 1080
-                elif "4k" in lower_url or "uhd" in lower_url:
-                    detected_res = 2160
-                elif "720" in lower_url:
+                # 🌟【核心修复】：完全取消从 URL 文本猜测 4K，只保留常规高清/标清的文本大致分流
+                if "720" in lower_url:
                     detected_res = 720
                 elif "576" in lower_url or "480" in lower_url:
                     detected_res = 480
@@ -583,9 +577,10 @@ async def main():
         if norm_key in CCTV_DESC_MAP:
             matched_desc = CCTV_DESC_MAP[norm_key]
         else:
-            for k, v in CCTV_DESC_MAP.items():
-                if norm_key.startswith(k) and len(k) >= 5: 
-                    matched_desc = v
+            # 🌟【核心修复】：按长度从长到短降序排列键名，彻底杜绝 CCTV4 误拦截 CCTV4K、CCTV5 误拦截 CCTV5+
+            for k in sorted(CCTV_DESC_MAP.keys(), key=len, reverse=True):
+                if norm_key.startswith(k):
+                    matched_desc = CCTV_DESC_MAP[k]
                     break
                 elif norm_key.startswith(k) and k in ["CCTV1", "CCTV2", "CCTV3", "CCTV4", "CCTV5", "CCTV6", "CCTV7", "CCTV8", "CCTV9"]:
                     matched_desc = v
