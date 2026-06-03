@@ -209,7 +209,7 @@ http://207.56.13.146:81/cdnlive/qhws.m3u8
 http://cctvtxyh5c.liveplay.myqcloud.com/cstv/xianggangweishi_2/index.m3u8
 #EXTINF:-1 tvg-id="黑龙江卫视" tvg-name="黑龙江卫视" tvg-logo="https://epg.112114.xyz/logo/黑龙江卫视.png" group-title="地方卫视",黑龙江卫视
 http://36.136.38.87:9901/tsfile/live/0143_1.m3u8?key=txiptv&playlive=1&authid=0
-#EXTINF:-1 tvg-id="齐鲁卫视" tvg-name="齐鲁卫视" tvg-logo="https://epg.112114.xyz/logo/齐鲁卫视.png" group-title="地方卫视",齐鲁卫视
+#EXTINF:-1 tvg-id="齐鲁卫视" tvg-name="齐鲁卫视" tvg-logo="https://epg.112114.xyz/logo/齐鲁卫视.png" group-title="山东频道",齐鲁卫视
 http://123.129.70.178:9901/tsfile/live/1000_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-id="东营公共" tvg-name="东营公共" tvg-logo="https://epg.112114.xyz/logo/东营公共.png" group-title="山东频道",东营公共
 http://123.129.70.178:9901/tsfile/live/1001_1.m3u8?key=txiptv&playlive=1&authid=0
