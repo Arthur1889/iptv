@@ -616,7 +616,8 @@ async def main():
         if best_4k: final_retained_list.append(best_4k)
         if best_normal: final_retained_list.append(best_normal)
 
-    # --- F. 定制权重与自然地理位置排序 (多维矩阵对齐版) ---
+    # --- F. 定制权重与自然地理位置排序 (严格对齐要求 2 & 要求 9) ---
+    # 完整劣后组权重序列
     POSTERIOR_GROUPS = ["少儿动漫", "港澳台", "影视频道", "歌曲及音乐MV", "纪录纪实", "娱乐频道", "电视剧直播", "海外频道", "体育赛事", "综合频道"]
 
     def natural_sort_transformer(ch):
@@ -624,13 +625,15 @@ async def main():
         disp_name = ch["display_name"]
         name_up = disp_name.upper().replace(" ", "")
 
+        # 1. 决定大组层面的全局权重
         if g in PRIORITY_GROUPS:
-            g_weight = PRIORITY_GROUPS.index(g)  
+            g_weight = PRIORITY_GROUPS.index(g)  # 优先组权重 0 到 4
         elif g in POSTERIOR_GROUPS:
-            g_weight = 5 + POSTERIOR_GROUPS.index(g)  
+            g_weight = 5 + POSTERIOR_GROUPS.index(g)  # 劣后组权重 5 到 14
         else:
-            g_weight = 99  
+            g_weight = 99  # 未知大组垫底
 
+        # 2. 决定 4K 组内部的次级排序 (4K频道按央、卫、地排序)
         sub_4k_weight = 99
         if g == "4K频道":
             if "CCTV" in name_up or "中央" in name_up or "CGTN" in name_up:
@@ -640,8 +643,43 @@ async def main():
             else:
                 sub_4k_weight = 2  
 
+        # 3. 🌟【新增】：决定央视频道内部的精细梯队排序
+        sub_cctv_tier = 99
+        sub_cctv_num = 99
+        
+        if g == "央视频道":
+            # 梯队 A：CCTV 1-17 核心数字台
+            cctv_match = re.search(r'CCTV[-_]*(\d+)', name_up)
+            if cctv_match:
+                num = int(cctv_match.group(1))
+                if 1 <= num <= 17:
+                    sub_cctv_tier = 0
+                    sub_cctv_num = num
+            
+            # 梯队 B：CGTN 系列国际台
+            if sub_cctv_tier == 99 and "CGTN" in name_up:
+                sub_cctv_tier = 1
+                sub_cctv_num = 0  # CGTN内部默认按字母自然排
+                
+            # 梯队 C：中国教育电视台系列 (CETV)
+            if sub_cctv_tier == 99 and any(x in name_up for x in ["中国教育", "CETV"]):
+                sub_cctv_tier = 2
+                cetv_match = re.search(r'(?:CETV|中国教育)[-_]*(\d+)', name_up)
+                sub_cctv_num = int(cetv_match.group(1)) if cetv_match else 99
+                
+            # 梯队 D：其他央视台 (5+, 4K, 8K, 兵器科技等付费数字台)
+            if sub_cctv_tier == 99 and "CCTV" in name_up:
+                sub_cctv_tier = 3
+                if "5+" in name_up or "5PLUS" in name_up:
+                    sub_cctv_num = 5.5  # 特殊照顾 5+，使其在“其他”里置顶靠前
+                else:
+                    sub_cctv_num = 99
+
+        # 4. 基础自然排序转换器（防 CCTV-10 跑到 CCTV-2 前面）
         split_segments = [int(text) if text.isdigit() else text.lower() for text in re.split(r'(\d+)', disp_name)]
-        return (g_weight, sub_4k_weight, split_segments)
+        
+        # 返回全新多维矩阵特征码：大组 ➡️ 4K组小排 ➡️ 央视小梯队 ➡️ 央视内编号 ➡️ 基础自然序列
+        return (g_weight, sub_4k_weight, sub_cctv_tier, sub_cctv_num, split_segments)
 
     final_retained_list.sort(key=natural_sort_transformer)
 
