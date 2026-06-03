@@ -7272,9 +7272,6 @@
 源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/湖南公共.png" tvg-id="" epg-url="",湖南公共
 提取 => id: [], name: [], display: [湖南公共]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/兵团卫.png" tvg-id="" epg-url="",兵团卫
-提取 => id: [], name: [], display: [兵团卫]
-------------------------------------------------------------
 源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/南方五.png" tvg-id="" epg-url="",南方五
 提取 => id: [], name: [], display: [南方五]
 ------------------------------------------------------------
