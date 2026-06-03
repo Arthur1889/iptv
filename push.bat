@@ -20,22 +20,22 @@ if exist ".venv\Scripts\python.exe" (
 )
 
 :: 3. 检查 iptvname/nameoriginal.txt 是否有变动
-:: 这里通过比对文件是否存在或时间戳简易判断，若有 Git 环境，用 git diff 更精准
 echo [2/6] Checking iptvname updates...
 if exist "iptvname\nameoriginal.txt" (
-    echo Checking iptvname updates...
-    :: 简单逻辑：如果修改时间在最近运行范围内，或者你可以直接运行它 (建议让 name.py 内部加判断)
+    echo Running name.py updates...
     cd /d "%~dp0\iptvname"
-    python name.py
+    :: 🌟【核心修复】：使用锁定的虚拟环境引擎运行，防止依赖丢失
+    "!PYTHON_CMD!" name.py
     cd /d "%~dp0"
 )
 
 :: 4. 检查 group/group.json 是否有变动
 echo [3/6] Checking group updates...
 if exist "group\group.json" (
-    echo Checking group updates...
+    echo Running convert.py updates...
     cd /d "%~dp0\group"
-    python convert.py
+    :: 🌟【核心修复】：同上，强制使用虚拟环境环境安全沙盒
+    "!PYTHON_CMD!" convert.py
     cd /d "%~dp0"
 )
 
@@ -43,7 +43,7 @@ if exist "group\group.json" (
 echo [4/6] Running crawl.py...
 "!PYTHON_CMD!" crawl.py
 if %errorlevel% neq 0 (
-    echo [ERROR] crawl.py failed. Please check dependencies.
+    echo [ERROR] crawl.py failed. Please check dependencies or network.
     pause
     exit /b 1
 )
@@ -51,6 +51,7 @@ if %errorlevel% neq 0 (
 :: 6. 检查文件变动 (等同于 push.sh 的 git status --porcelain)
 echo [5/6] Checking for changes...
 git add .
+set "CHANGES="
 for /f "tokens=*" %%i in ('git status --porcelain') do set "CHANGES=%%i"
 
 if "%CHANGES%"=="" (
