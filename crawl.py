@@ -10,7 +10,7 @@ import asyncio
 import requests
 from collections import defaultdict
 
-# 初始化日志配置
+# 初始化日志配置（你现有的代码）
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s [%(levelname)s] %(message)s',
@@ -20,8 +20,16 @@ logging.basicConfig(
     ]
 )
 logger = logging.getLogger(__name__)
-# 🌟【新增这一行】：把 aiohttp 底层的日志级别提高到 WARNING，不让它的内部 DNS 报错刷屏
-logging.getLogger("aiohttp").setLevel(logging.WARNING)
+
+# 🌟【第二道保险】：为全局根记录器注入动态过滤器，只要日志文本包含 shielded future 瞬间蒸发
+class SilenceShieldedFutureFilter(logging.Filter):
+    def filter(self, record):
+        log_msg = record.getMessage()
+        if "shielded future" in log_msg or "gaierror" in log_msg:
+            return False  # 返回 False 代表拒绝这条日志写入文件和终端
+        return True
+
+logging.getLogger().addFilter(SilenceShieldedFutureFilter())
 # =====================================================================
 # 检查源列表有效期
 # =====================================================================
@@ -312,6 +320,20 @@ async def probe_url_async(session, url):
 # =====================================================================
 async def main():
     start_time = time.time()
+    # 🌟【终极修复】：接管 asyncio 事件循环的全局异常处理器，彻底封杀 shielded future 刷屏
+    loop = asyncio.get_running_loop()
+    def custom_loop_exception_handler(loop, context):
+        msg = context.get("message", "")
+        exception = context.get("exception")
+        # 只要发现是 aiohttp 那个甩锅给事件循环的后台 DNS 报错，直接无视并丢弃
+        if "shielded future" in msg or "gaierror" in str(exception) or "11001" in str(exception):
+            return 
+        # 其他真正的核心系统崩溃错误，依然放行交给标准处理器打印
+        loop.default_exception_handler(context)
+        
+    loop.set_exception_handler(custom_loop_exception_handler)
+    
+    # 👇 下方继续保持你原有的逻辑：
     source_urls = []
     
     if os.path.exists(SOURCES_PATH):
