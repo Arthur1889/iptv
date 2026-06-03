@@ -145,7 +145,7 @@ CCTV_DESC_MAP = {
     
     "CCTV兵器科技": "CCTV 兵器科技", "CCTV风云足球": "CCTV 风云足球", "CCTV高尔夫网球": "CCTV 高尔夫网球",
     "CCTV风云音乐": "CCTV 风云音乐", "CCTV风云剧场": "CCTV 风云剧场", "CCTV第一剧场": "CCTV 第一剧场",
-    "CCTV怀旧剧场": "CCTV懷舊劇場", "CCTV大国健康": "CCTV 大国健康", "CCTV台球": "CCTV 台球",
+    "CCTV怀旧剧场": "CCTV 怀旧剧场", "CCTV大国健康": "CCTV 大国健康", "CCTV台球": "CCTV 台球",
     "CCTV女性时尚": "CCTV 女性时尚", "CCTV世界地理": "CCTV 世界地理", "CCTV央视文化精品": "CCTV 央视文化精品",
     "CCTV电视指南": "CCTV 电视指南", "CCTV发现之旅": "CCTV 发现之旅", "CCTV中学生": "CCTV 中学生",
     "CCTV老故事": "CCTV 老故事","CCTV4欧洲": "CCTV4 欧洲","CCTV4美洲": "CCTV4 美洲",
