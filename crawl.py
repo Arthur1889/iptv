@@ -8,10 +8,7 @@ import logging
 import aiohttp
 import asyncio
 import requests
-import urllib.request
-import urllib.error
 from collections import defaultdict
-from urllib.parse import urlparse
 
 # 初始化日志配置
 logging.basicConfig(
@@ -23,23 +20,23 @@ logging.basicConfig(
     ]
 )
 logger = logging.getLogger(__name__)
+
 # =====================================================================
 # 检查源列表有效期
 # =====================================================================
-def is_cache_valid(cache_path, max_age_days=1):
-    """检查缓存文件是否存在且是否在有效期内"""
+def is_cache_valid(cache_path, max_age_days=0.5):
+    """检查缓存文件是否存在且是否在有效期内(默认0.5天即12小时)"""
     if not os.path.exists(cache_path):
         return False
-    # 获取文件最后修改时间
     file_time = os.path.getmtime(cache_path)
-    # 计算当前时间与文件修改时间的差值
     delta_days = (time.time() - file_time) / (3600 * 24)
     return delta_days < max_age_days
+
 # =====================================================================
-# 下载远程源列表
+# 下载远程源列表与属性精确抓取
 # =====================================================================
 async def parse_m3u_content(content):
-    """从 M3U 文本中提取频道名称、URL、原始分组以及原厂的 logo 和 id"""
+    """从 M3U 文本中全面捕获频道名称、URL、原始分组以及原厂的 logo、id、epg-url"""
     items = []
     lines = content.splitlines()
     current_item = {}
@@ -47,19 +44,19 @@ async def parse_m3u_content(content):
     for line in lines:
         line = line.strip()
         if line.startswith("#EXTINF"):
-            # 1. 捕获原始分组
             grp_match = re.search(r'group-title="(.*?)"', line)
             grp = grp_match.group(1) if grp_match else ""
             
-            # 2. 🌟 新增：捕获原始 tvg-logo
             logo_match = re.search(r'tvg-logo="(.*?)"', line)
             raw_logo = logo_match.group(1) if logo_match else ""
             
-            # 3. 🌟 新增：捕获原始 tvg-id (即 epg-url 对应的台号)
             id_match = re.search(r'tvg-id="(.*?)"', line)
             raw_id = id_match.group(1) if id_match else ""
             
-            # 4. 捕获频道名称
+            # 🌟 核心修复：单独捕获原厂自带的特异性 epg-url
+            epg_match = re.search(r'epg-url="(.*?)"', line)
+            raw_epg = epg_match.group(1) if epg_match else ""
+            
             name_match = re.search(r',(.*)$', line)
             name = name_match.group(1) if name_match else ""
             
@@ -67,7 +64,8 @@ async def parse_m3u_content(content):
                 "raw_name": name.strip(), 
                 "group": grp.strip(),
                 "raw_logo": raw_logo.strip(),
-                "raw_id": raw_id.strip()
+                "raw_id": raw_id.strip(),
+                "raw_epg": raw_epg.strip()
             }
         elif line.startswith("http") and current_item:
             current_item["url"] = line
@@ -75,7 +73,7 @@ async def parse_m3u_content(content):
             current_item = {}
             
     return items
-# 🌟 请把这个函数重新粘贴到 parse_m3u_content 函数的下方：
+
 async def fetch_and_parse_all(session, source_urls):
     """异步下载 sources.json 中的所有链接并汇总"""
     all_parsed_items = []
@@ -90,6 +88,7 @@ async def fetch_and_parse_all(session, source_urls):
         except Exception as e:
             logger.error(f"下载源 {url} 失败: {e}")
     return all_parsed_items
+
 # =====================================================================
 # 0. 环境自检与依赖自动安装
 # =====================================================================
@@ -98,7 +97,7 @@ def auto_check_environment():
     print(f"[*] 启动 IPTV 聚合爬虫...")
     print(f"[*] 当前系统环境检测为: {sys_type}")
     
-    required_packages = ["requests", "aiohttp", "tqdm"]
+    required_packages = ["requests", "aiohttp"]
     for pkg in required_packages:
         try:
             __import__(pkg)
@@ -112,34 +111,29 @@ def auto_check_environment():
                 sys.exit(1)
 
 auto_check_environment()
-import requests
 
 # =====================================================================
 # 1. 全局配置与路径初始化
 # =====================================================================
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 SOURCES_PATH = os.path.join(BASE_DIR, "sources.json")
-CACHE_PATH = os.path.join(BASE_DIR, "sources_cache.txt") # 建议运行前删除旧缓存
+CACHE_PATH = os.path.join(BASE_DIR, "sources_cache.txt") 
 BLACKLIST_PATH = os.path.join(BASE_DIR, "blacklist.json")
 OUTPUT_PATH = os.path.join(BASE_DIR, "tv.m3u")
 LOG_PATH = os.path.join(BASE_DIR, "crawl.log")
 
-# 引入外部依赖配置
 GROUP_JSON_PATH = os.path.join(BASE_DIR, "group", "group_standard.json")
 NAME_JSON_PATH = os.path.join(BASE_DIR, "iptvname", "name.json")
 
-# 预设的央视映射与标准组序
 CCTV_DESC_MAP = {
-    # 核心央视频道标准映射与中文描述
     "CCTV1": "CCTV-1 综合", "CCTV2": "CCTV-2 财经", "CCTV3": "CCTV-3 综艺",
     "CCTV4": "CCTV-4 中文国际", "CCTV5": "CCTV-5 体育", "CCTV5+": "CCTV-5+ 体育赛事",
     "CCTV6": "CCTV-6 电影", "CCTV7": "CCTV-7 国防军事", "CCTV8": "CCTV-8 电视剧",
     "CCTV9": "CCTV-9 纪录", "CCTV10": "CCTV-10 科教", "CCTV11": "CCTV-11 戏曲",
     "CCTV12": "CCTV-12 社会与法", "CCTV13": "CCTV-13 新闻", "CCTV14": "CCTV-14 少儿",
-    "CCTV15": "CCTV-15 音乐", "CCTV16": "CCTV-16 奥林匹克", "CCTV17": "CCTV-17 农业农村",
+    "CCTV15": "CCTV-15 音乐", "CCTV16": "CCTV-16 奥林派克", "CCTV17": "CCTV-17 农业农村",
     "CCTV4K": "CCTV4K 超高清", "CCTV8K": "CCTV8K 超高清", "CCTV5PLUS": "CCTV-5+ 体育赛事",
     
-    # 常用央视数字付费频道（防止清洗后错分类到其他组）
     "CCTV兵器科技": "CCTV 兵器科技", "CCTV风云足球": "CCTV 风云足球", "CCTV高尔夫网球": "CCTV 高尔夫网球",
     "CCTV风云音乐": "CCTV 风云音乐", "CCTV风云剧场": "CCTV 风云剧场", "CCTV第一剧场": "CCTV 第一剧场",
     "CCTV怀旧剧场": "CCTV懷舊劇場", "CCTV大国健康": "CCTV 大国健康", "CCTV台球": "CCTV 台球",
@@ -147,20 +141,15 @@ CCTV_DESC_MAP = {
     "CCTV电视指南": "CCTV 电视指南", "CCTV发现之旅": "CCTV 发现之旅", "CCTV中学生": "CCTV 中学生",
     "CCTV老故事": "CCTV 老故事",
     
-    # 中国教育电视台系列
     "CETV1": "中国教育-1", "CETV2": "中国教育-2", "CETV3": "中国教育-3", "CETV4": "中国教育-4",
     
-    # 🌟 新增：CGTN 中国国际电视台全系列（支持无符号强匹配）
     "CGTN英语": "CGTN 英语", "CGTN纪录": "CGTN 纪录", 
     "CGTN法语": "CGTN 法语", "CGTN西语": "CGTN 西语", 
     "CGTN阿语": "CGTN 阿语", "CGTN俄语": "CGTN 俄语"
 }
 
-GROUP_PRIORITY = ["4K频道", "央视频道", "地方卫视", "山东频道", "地方频道", "影视频道", "歌曲及音乐MV", "纪录纪实", "娱乐频道", "电视剧直播", "少儿动漫", "港澳台", "海外频道", "体育赛事", "综合频道" ]
-
-# 地区标识用于 4K 归类兜底
+PRIORITY_GROUPS = ["4K频道", "央视频道", "地方卫视", "山东频道", "地方频道"]
 PROVINCES = ["北京", "天津", "河北", "山西", "内蒙古", "辽宁", "吉林", "黑龙江", "上海", "江苏", "浙江", "安徽", "福建", "江西", "山东", "河南", "湖北", "湖南", "广东", "广西", "海南", "重庆", "四川", "贵州", "云南", "西藏", "陕西", "甘肃", "青海", "宁夏", "新疆"]
-# 🌟【新增：补充缺失的城市映射字典】
 CITY_TO_PROVINCE = {
     "广州": "广东", "深圳": "广东", "珠海": "广东", "汕头": "广东", "佛山": "广东", "韶关": "广东", "湛江": "广东", "肇庆": "广东", "江门": "广东", "茂名": "广东", "惠州": "广东", "梅州": "广东", "汕尾": "广东", "河源": "广东", "阳江": "广东", "清远": "广东", "东莞": "广东", "中山": "广东", "潮州": "广东", "揭阳": "广东", "云浮": "广东",
     "济南": "山东", "青岛": "山东", "淄博": "山东", "枣庄": "山东", "东营": "山东", "烟台": "山东", "潍坊": "山东", "济宁": "山东", "泰安": "山东", "威海": "山东", "日照": "山东", "临沂": "山东", "德州": "山东", "聊城": "山东", "滨州": "山东", "菏泽": "山东",
@@ -183,6 +172,7 @@ CITY_TO_PROVINCE = {
     "银川": "宁夏", "石嘴山": "宁夏", "吴忠": "宁夏", "固原": "宁夏", "中卫": "宁夏",
     "西宁": "青海", "海东": "青海", "海北": "青海", "黄南": "青海", "海南州": "青海", "果洛": "青海", "玉树": "青海", "海西": "青海"
 }
+
 # =====================================================================
 # 2. 核心清洗与规则处理模块
 # =====================================================================
@@ -221,10 +211,8 @@ def clean_and_normalize_name(raw_name, name_lookup):
         cleaned = re.sub(pattern, '', cleaned)
     cleaned = cleaned.strip('- ').strip()
 
-    # 严格匹配你的 name.json 别名表，获取最干净的标准别名（如 CETV-1、CCTV-1）
     std_name = name_lookup.get(cleaned.upper(), cleaned)
     
-    # 恢复 4K/8K 标签
     if has_4k and "4K" not in std_name.upper(): std_name += " 4K"
     if has_8k and "8K" not in std_name.upper(): std_name += " 8K"
     
@@ -235,20 +223,13 @@ def determine_final_group(std_name, raw_group, is_4k_8k, group_repo):
     name_up = std_name.upper()
     rg = raw_group.strip() if raw_group else ""
     
-    # [要求 3 & 分组11] 强制垃圾分类抛弃逻辑（保持不变）
     drop_list = ["游戏直播", "听书直播", "老年直播", "解说直播", "监控直播", "蜘蛛直播", "zuqiu直播", "咪视界直播", "KK直播", "瑜伽裤直播", "Ai直播", "钓鱼直播", "API随机点播", "直播室", "测试"]
     if any(x in rg or x in name_up for x in drop_list):
         return None
 
-    # =====================================================================
-    # 核心阶段一：前 5 个核心基础分组的“绝对优先判定”
-    # =====================================================================
-    
-    # 基础属性识别
     is_cctv = "CCTV" in name_up or "中央台" in name_up or "CGTN" in name_up
     is_ws = "卫视" in name_up and "朝鲜语" not in name_up
     
-    # 智能地域识别 (地级市与省份映射)
     matched_province = None
     for city, province in CITY_TO_PROVINCE.items():
         if city in std_name:
@@ -256,40 +237,27 @@ def determine_final_group(std_name, raw_group, is_4k_8k, group_repo):
             break
     target_prov = matched_province if matched_province else next((p for p in PROVINCES if p in std_name), None)
 
-    # 1. 优先执行 4K 频道判定规则 [要求 7 & 8]
     if "CCTV4K" in name_up or "CCTV8K" in name_up: 
         return "4K频道"
     if is_4k_8k and (is_cctv or is_ws or target_prov):
         return "4K频道"
 
-    # 2. 匹配外部标准映射表 (group_standard.json 中的强制核心分类)
     group_from_json = group_repo.get(std_name)
     if group_from_json in ["4K频道", "央视频道", "地方卫视", "山东频道", "地方频道"]:
         return group_from_json
 
-    # 3. 强力判定：央视频道
     if is_cctv: 
         return "央视频道"
-        
-    # 4. 强力判定：地方卫视
     if is_ws: 
         return "地方卫视"
-        
-    # 5. 强力判定：山东频道与地方频道
     if target_prov == "山东": 
         return "山东频道"
     if target_prov: 
         return "地方频道"
 
-    # =====================================================================
-    # 核心阶段二：当无法满足前 5 个基础核心组时，走后续的 Fallback 规则
-    # =====================================================================
-    
-    # 走 group_standard.json 剩余的分组映射
     if group_from_json:
         return group_from_json
 
-    # 13条特定原始组别关键字 Fallback 兜底
     if "地方台直播" in rg: return "地方频道"
     if "港澳台直播" in rg: return "港澳台"
     if any(x in rg for x in ["延伸西亚", "马来西亚直播", "越南直播", "印度直播", "日本直播", "韩国直播", "美国直播", "英国直播", "爱尔兰直播", "全球直播"]): return "海外频道"
@@ -302,7 +270,6 @@ def determine_final_group(std_name, raw_group, is_4k_8k, group_repo):
     if any(x in rg for x in ["动漫直播", "沙雕动画直播"]): return "少儿动漫"
     if any(x in rg for x in ["音乐直播", "周杰伦歌曲", "歌手合集"]): return "歌曲及音乐MV"
 
-    # 根据台名关键字 Fallback 分流
     if any(x in name_up for x in ["港", "澳", "台", "HBO", "PHOENIX", "凤凰", "翡翠台", "明珠台", "TVB"]): return "港澳台"
     if any(x in name_up for x in ["电影", "影院", "剧场", "影视", "影片", "放映"]): return "影视频道"
     if any(x in name_up for x in ["纪录", "纪实", "探索"]): return "纪录纪实"
@@ -310,12 +277,11 @@ def determine_final_group(std_name, raw_group, is_4k_8k, group_repo):
     if any(x in name_up for x in ["体育", "赛事", "足球", "五星体育", "武搏"]): return "体育赛事"
     if any(x in name_up for x in ["音乐", "MV", "歌曲", "老歌"]): return "歌曲及音乐MV"
     
-    # 终极 Fallback
     return "综合频道"
+
 # =====================================================================
-# 3. 探测、去重与输出控制
+# 3. 异步轻量级多维测速探测引擎
 # =====================================================================
-# 修改为接收 session 参数
 async def probe_url_async(session, url): 
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
@@ -323,13 +289,10 @@ async def probe_url_async(session, url):
         "Connection": "keep-alive"
     }
     try:
-        # 先进行轻量级头部嗅探
         async with session.get(url, headers=headers, timeout=4, allow_redirects=True) as resp:
             if resp.status == 200:
-                # 🌟 核心修复：同步复用你的解析器执行 4 秒流稳定性及画质提取
-                # 很多 M3U8 的分辨率隐藏在视频流中，此处我们根据流媒体特征返回真实的分辨率
                 lower_url = url.lower()
-                detected_res = 1080 # 基础默认值
+                detected_res = 1080 
                 if "4k" in lower_url or "uhd" in lower_url:
                     detected_res = 2160
                 elif "720" in lower_url:
@@ -342,16 +305,14 @@ async def probe_url_async(session, url):
                 return False, 0, 999
     except Exception:
         return False, 0, 999
+
 # =====================================================================
 # 4. 主干运行流程
 # =====================================================================
 async def main():
     start_time = time.time()
-    
-    # 🌟 1. 优先初始化变量，防止未定义报错
     source_urls = []
     
-    # 先把 sources.json 的内容读出来，后面网络下载和黑名单过滤可能都要用
     if os.path.exists(SOURCES_PATH):
         with open(SOURCES_PATH, 'r', encoding='utf-8') as f:
             data = json.load(f)
@@ -375,12 +336,11 @@ async def main():
         async with aiohttp.ClientSession() as session:
             try:
                 parsed_items = await fetch_and_parse_all(session, source_urls)
-                # 写入新缓存
                 if parsed_items:
                     with open(CACHE_PATH, 'w', encoding='utf-8') as f:
                         f.write("#EXTM3U\n")
                         for item in parsed_items:
-                            f.write(f'#EXTINF:-1 group-title="{item.get("group", "")}" tvg-logo="{item.get("raw_logo", "")}" tvg-id="{item.get("raw_id", "")}" epg-url="{item.get("raw_id", "")}",{item["raw_name"]}\n')
+                            f.write(f'#EXTINF:-1 group-title="{item.get("group", "")}" tvg-logo="{item.get("raw_logo", "")}" tvg-id="{item.get("raw_id", "")}" epg-url="{item.get("raw_epg", "")}",{item["raw_name"]}\n')
                             f.write(f"{item['url']}\n")
                     print(f"[+] 缓存已成功更新，共 {len(parsed_items)} 条频道。")
                 else:
@@ -388,12 +348,11 @@ async def main():
             except Exception as e:
                 logger.error(f"批量下载失败: {e}")
 
-    # 兜底验证：如果网络下载失败且无缓存，则优雅退出
     if not parsed_items:
         print("[-] 错误: 未能获取到任何有效的频道源数据，程序退出。")
         return
 
-    # 🌟 满足要求 3 过滤：统一在这里对提取出的源进行 catvod.com 和 直播室 预清洗
+    # 🌟 满足要求 3 预洗过滤：统一拦截清洗
     cleaned_parsed_items = []
     for item in parsed_items:
         url = item.get("url", "")
@@ -412,11 +371,16 @@ async def main():
         "final_retained": 0
     }
     
+    # 🌟【核心修复】：将资源加载完全提至最前，杜绝下方循环读取时的 NameError 崩溃
+    group_repo = load_json(GROUP_JSON_PATH, {})
+    name_repo = load_json(NAME_JSON_PATH, {})
+    blacklist = load_json(BLACKLIST_PATH, {})
+    name_lookup = build_name_lookup(name_repo)
+
     valid_channels = []
-    
     print(f"\n[+] 准备探测 {total_sources} 个源 (已开启多线程加速)...")
     
-    # 1. 先把需要探测的有效任务筛选出来，避免在多线程里做无用功
+    # 筛选并填充有效任务
     tasks = []
     for item in parsed_items:
         std_name = clean_and_normalize_name(item["raw_name"], name_lookup)
@@ -430,40 +394,32 @@ async def main():
         try: fails = int(blacklist.get(url, 0))
         except: fails = 0
             
-        # 🌟 核心修复：严格执行 5 次连接失败才拉黑隔离
         if fails >= 5:
             stats["blacklist_filtered"] += 1
             continue
             
+        # 🌟【核心修复】：对齐 parse_m3u_content 产生的结构化键名，彻底打通数据管道
         tasks.append({
             "std_name": std_name, 
             "url": url, 
             "group": final_group,
-            "raw_logo": item.get("logo", ""),             
-            "raw_id": item.get("tvgid", ""),                  
-            "epgurl": item.get("epgurl", "")  # 🌟 往下游继续输送原始 epg-url
+            "raw_logo": item.get("raw_logo", ""),             
+            "raw_id": item.get("raw_id", ""),                  
+            "epgurl": item.get("raw_epg", "")  
         })
 
-    # 2. 定义单个探测任务的包装函数
-    def check_task(task):
-        is_valid, res, resp_time = probe_url(task["url"])
-        return task, is_valid, res, resp_time
     total_tasks = len(tasks)
     completed = 0
-    
-    # 🌟 新增：初始化用于计算时间的计时器与统计器
     loop_start_time = time.time()
     passed_sources = 0
     passed_4k_sources = 0
     
     # ==========================================
-    # 3. 开启纯异步并发探测 (彻底修复版 - 解决数据丢失暗坑)
+    # 3. 开启纯异步并发探测
     # ==========================================
     async with aiohttp.ClientSession() as my_session:
-        # 保持 30 并发，兼顾速度与 Linux 稳定性
         semaphore = asyncio.Semaphore(30) 
 
-        # 🌟 修改点 1：让辅助协程直接把 task 连同结果一起打包返回
         async def semaphore_task(task):
             async with semaphore:
                 try:
@@ -475,18 +431,9 @@ async def main():
                 except Exception:
                     return task, False, 0, 999
 
-        # 直接创建协程任务列表
         tasks_list = [semaphore_task(t) for t in tasks]
-        total_tasks = len(tasks)
-        completed = 0
-        
-        loop_start_time = time.time()
-        passed_sources = 0
-        passed_4k_sources = 0
-
         print("[+] 异步探测引擎已启动，正在激活连接池...")
 
-        # 🌟 修改点 2：直接解包拿数据，再也不会出现 KeyError
         for future in asyncio.as_completed(tasks_list):
             completed += 1
             try:
@@ -505,7 +452,6 @@ async def main():
                 if task["url"] in blacklist: 
                     del blacklist[task["url"]]
                 
-                # 🌟 核心修复：确保中间状态池不会把原厂属性和 epgurl 弄丢
                 valid_channels.append({
                     "std_name": task["std_name"], 
                     "url": task["url"], 
@@ -513,7 +459,7 @@ async def main():
                     "tvgid": task["raw_id"], 
                     "tvgname": task["raw_id"], 
                     "group": task["group"],
-                    "epgurl": task["epgurl"], # 🌟 流入最终过滤池
+                    "epgurl": task["epgurl"], 
                     "resolution": res, 
                     "avg_time": resp_time
                 })
@@ -522,7 +468,7 @@ async def main():
                 except: fails = 0
                 blacklist[task["url"]] = fails + 1
 
-            # 🌟 进度条刷新（再也不会被 continue 误伤跳过了）
+            # 进度条单行强力刷新
             elapsed_loop = time.time() - loop_start_time
             avg_time = elapsed_loop / completed if completed > 0 else 0
             remaining_time = avg_time * (total_tasks - completed)
@@ -544,36 +490,25 @@ async def main():
                 f"当前:{short_name:<6} | ✅通过:{passed_sources} | ✨4K+:{passed_4k_sources}   ", 
                 end="", flush=True
             )
-        print() # 探测完成后换行
+        print() 
         
     # ==========================================
     # 4. 标准化、清洗、画质过滤与双轨制去重核心引擎
     # ==========================================
     print("[*] 探测结束，开始执行标准化命名与智能去重...")
     
-    # 加载标准化名称库 (要求 6)
-    name_repo_path = "iptvname/name.json"
+    # 加载标准化别名查找表
     alias_to_std = {}
-    if os.path.exists(name_repo_path):
-        try:
-            with open(name_repo_path, "r", encoding="utf-8") as f:
-                name_data = json.load(f)
-                # 建立 别名(大写无空格) -> 标准名 的映射表
-                for std_name, aliases in name_data.items():
-                    for alias in aliases:
-                        alias_to_std[alias.replace(" ", "").upper()] = std_name
-                    alias_to_std[std_name.replace(" ", "").upper()] = std_name
-        except Exception as e:
-            logger.error(f"加载 {name_repo_path} 失败: {e}")
+    if name_repo:
+        for std_name, aliases in name_repo.items():
+            for alias in aliases:
+                alias_to_std[alias.replace(" ", "").upper()] = std_name
+            alias_to_std[std_name.replace(" ", "").upper()] = std_name
 
-    # 定义优先组与劣后组 (要求 2)
-    PRIORITY_GROUPS = ["4K频道", "央视频道", "地方卫视", "山东频道", "地方频道"]
-    
-    # 临时聚合容器，按标准化后的台名组织
     standardized_groups = defaultdict(list)
 
     for ch in valid_channels:
-        # --- A. 清洗名称杂质 (要求 5) ---
+        # --- A. 清洗名称杂质 ---
         raw_name = ch["std_name"]
         clean_name = re.sub(
             r'(360P|404P|480P|576P|606P|720P|1080P|HD|FHD|Not 24/7|Geo-blocked)', 
@@ -581,7 +516,7 @@ async def main():
         ).strip()
         clean_name = re.sub(r'[\s_]+', ' ', clean_name).strip()
         
-        # --- B. 匹配 name.json 确立 tvg-id/tvg-name (要求 6) ---
+        # --- B. 匹配 name.json 确立标准大名 ---
         lookup_key = clean_name.replace(" ", "").upper()
         if lookup_key in alias_to_std:
             std_mapped_name = alias_to_std[lookup_key]
@@ -593,18 +528,16 @@ async def main():
             ch["tvgname"] = clean_name
             ch["matched_std"] = clean_name
 
-        # --- C. 确定最终显示名称与中央台特正纠正 (要求 9) ---
+        # --- C. 确定最终显示名称与中央台特正纠正 (防漏增强前缀匹配版) ---
         display_name = ch["matched_std"]
         norm_key = display_name.replace(" ", "").upper().replace("-", "")
         
-        # 🌟 核心修复：优先完全匹配；若无，则通过前缀(如CCTV1)防漏截取匹配
         matched_desc = None
         if norm_key in CCTV_DESC_MAP:
             matched_desc = CCTV_DESC_MAP[norm_key]
         else:
-            # 针对 CCTV1综合/CCTV5+体育 等复合标准名进行前缀精准捕捉
             for k, v in CCTV_DESC_MAP.items():
-                if norm_key.startswith(k) and len(k) >= 5: # 确保像CCTV13这种不被CCTV1误切
+                if norm_key.startswith(k) and len(k) >= 5: 
                     matched_desc = v
                     break
                 elif norm_key.startswith(k) and k in ["CCTV1", "CCTV2", "CCTV3", "CCTV4", "CCTV5", "CCTV6", "CCTV7", "CCTV8", "CCTV9"]:
@@ -620,8 +553,7 @@ async def main():
             
         ch["display_name"] = display_name
 
-        # --- D. 确定智能分组 group-title (要求 8 & 链接探测要求 6,7) ---
-        # 优先使用现有逻辑分配好的基础分组，若是 CCTV4K/8K 或达标 4K 则强制修正
+        # --- D. 确定智能分组 group-title ---
         current_g = ch["group"]
         res_val = 0
         try: res_val = int(ch.get("resolution", 0))
@@ -632,31 +564,24 @@ async def main():
                 current_g = "4K频道"
         ch["group"] = current_g
 
-        # 将处理完的源，按照标准化大名分堆，准备进行画质和数量过滤
         standardized_groups[ch["matched_std"]].append(ch)
 
-    # --- E. 强力去重与画质保底策略 (链接探测要求 2 & 4) ---
+    # --- E. 强力去重与画质保底策略 ---
     final_retained_list = []
     
     for std_title, sources in standardized_groups.items():
-        # 按分辨率从高到低排序
         def get_res(x):
             try: return int(x.get("resolution", 0))
             except: return 0
         sources_sorted = sorted(sources, key=get_res, reverse=True)
 
-        # 区分 4K 梯队与普通梯队
         sources_4k = [s for s in sources_sorted if get_res(s) >= 2160]
         sources_normal = [s for s in sources_sorted if get_res(s) < 2160]
 
-        # 4K 及以上源最多保留一个最高分辨率的
         best_4k = sources_4k[0] if sources_4k else None
-
-        # 普通源筛选：要求 >= 720P
         eligible_normal = [s for s in sources_normal if get_res(s) >= 720]
         best_normal = eligible_normal[0] if eligible_normal else None
 
-        # 💡 画质保底分支：如果央视/地方卫视一个合格的普通源都没选出来 (全是低画质)，强行保底捞回一个最高的
         is_core_brand = "CCTV" in std_title or any(w in std_title for w in ["卫视", "教育", "CETV"])
         if not best_normal and is_core_brand and sources_normal:
             best_normal = sources_normal[0]
@@ -664,8 +589,7 @@ async def main():
         if best_4k: final_retained_list.append(best_4k)
         if best_normal: final_retained_list.append(best_normal)
 
-    # --- F. 定制权重与自然地理位置排序 (严格对齐要求 2 & 要求 9) ---
-    # 完整劣后组权重序列
+    # --- F. 定制权重与自然地理位置排序 (多维矩阵对齐版) ---
     POSTERIOR_GROUPS = ["少儿动漫", "港澳台", "影视频道", "歌曲及音乐MV", "纪录纪实", "娱乐频道", "电视剧直播", "海外频道", "体育赛事", "综合频道"]
 
     def natural_sort_transformer(ch):
@@ -673,28 +597,23 @@ async def main():
         disp_name = ch["display_name"]
         name_up = disp_name.upper().replace(" ", "")
 
-        # 1. 决定大组层面的全局权重
         if g in PRIORITY_GROUPS:
-            g_weight = PRIORITY_GROUPS.index(g)  # 优先组权重 0 到 4
+            g_weight = PRIORITY_GROUPS.index(g)  
         elif g in POSTERIOR_GROUPS:
-            g_weight = 5 + POSTERIOR_GROUPS.index(g)  # 劣后组权重 5 到 14
+            g_weight = 5 + POSTERIOR_GROUPS.index(g)  
         else:
-            g_weight = 99  # 未知大组垫底
+            g_weight = 99  
 
-        # 2. 🌟 核心修复：决定 4K 组内部的次级排序 (要求 9: 4K频道按央、卫、地排序)
         sub_4k_weight = 99
         if g == "4K频道":
             if "CCTV" in name_up or "中央" in name_up or "CGTN" in name_up:
-                sub_4k_weight = 0  # 央视 4K 最优先
+                sub_4k_weight = 0  
             elif "卫视" in name_up:
-                sub_4k_weight = 1  # 地方卫视 4K 次之
+                sub_4k_weight = 1  
             else:
-                sub_4k_weight = 2  # 地方频道 4K 垫底
+                sub_4k_weight = 2  
 
-        # 3. 自然排序转换器：将名字中的数字提取为整数（如将 "CCTV-10" 切出 10），确保升序不乱序
         split_segments = [int(text) if text.isdigit() else text.lower() for text in re.split(r'(\d+)', disp_name)]
-        
-        # 返回多维排序特征码：大组权重 -> 4K内部权重 -> 名字自然序列
         return (g_weight, sub_4k_weight, split_segments)
 
     final_retained_list.sort(key=natural_sort_transformer)
@@ -706,7 +625,6 @@ async def main():
     stats["quality_filtered"] = len(valid_channels) - len(final_retained_list)
 
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
-        # 写入默认全局双节目单头 (要求 11)
         f.write('#EXTM3U x-tvg-url="https://epg.112114.xyz/pp.xml.gz,https://epg.pw/xmltv/feed/chn.xml"\n')
         
         for ch in final_retained_list:
@@ -715,22 +633,18 @@ async def main():
             tvg_name = ch["tvgname"]
             display_name = ch["display_name"]
 
-            # --- G. 确定 tvg-logo 与 epg-url (要求 7 双轨制) ---
+            # --- G. 确定 tvg-logo 与 epg-url 双轨制分流 ---
             if final_group in PRIORITY_GROUPS:
-                # 优先组：强行转换并采用 112114 高清洗标，屏蔽原厂杂质
                 clean_logo_id = tvg_id.replace(" ", "")
                 logo_url = f"https://epg.112114.xyz/logo/{clean_logo_id}.png"
-                epg_param = "" # 依赖头部全局 EPG
+                epg_param = "" 
             else:
-                # 劣后组：严格保留原厂图标与特异性 epg-url
                 logo_url = ch["logo"] if ch["logo"] else ""
                 epg_param = f' epg-url="{ch.get("epgurl", "")}"' if ch.get("epgurl") else ""
 
-            # 严格按照规范写入包含全部 6 大核心属性的扩展行 (要求 10)
             f.write(f'#EXTINF:-1 tvg-id="{tvg_id}" tvg-name="{tvg_name}" tvg-logo="{logo_url}" group-title="{final_group}"{epg_param},{display_name}\n')
             f.write(f'{ch["url"]}\n')
 
-    # 保存熔断黑名单
     save_json(BLACKLIST_PATH, blacklist)
 
     # [要求 1] 打印并保存任务终期报告
@@ -751,7 +665,6 @@ async def main():
 
 if __name__ == "__main__":
     try:
-        # 将原来的 main() 修改为下面这行
         asyncio.run(main()) 
     except KeyboardInterrupt:
         print("\n[!] 任务被手动中断。")
