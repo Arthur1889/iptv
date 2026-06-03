@@ -301,8 +301,13 @@ async def probe_url_async(session, url):
         async with session.get(url, headers=headers, timeout=4, allow_redirects=True) as resp:
             if resp.status == 200:
                 lower_url = url.lower()
-                detected_res = 1080 
-                if "4k" in lower_url or "uhd" in lower_url:
+                detected_res = 1080  # 基础默认值
+                
+                # 🌟 核心修复：使用正则表达式边界匹配，或排除掉 "64k" 干扰
+                # 只有在纯粹出现 4k / uhd 且不被 64k 绑架时才认定为 4K 视频
+                if "64k" in lower_url or "128k" in lower_url:
+                    detected_res = 1080
+                elif "4k" in lower_url or "uhd" in lower_url:
                     detected_res = 2160
                 elif "720" in lower_url:
                     detected_res = 720
@@ -374,19 +379,34 @@ async def main():
     if not parsed_items:
         print("[-] 错误: 未能获取到任何有效的频道源数据，程序退出。")
         return
-
-    # 🌟 满足要求 3 预洗过滤：统一拦截清洗
+    # 🌟 满足要求 3 预洗过滤：统一全自动拦截清洗
     cleaned_parsed_items = []
     for item in parsed_items:
-        url = item.get("url", "")
-        raw_name = item.get("raw_name", "")
-        if "catvod.com" in url or "直播室" in raw_name or not url.startswith("http"):
+        url = item.get("url", "").strip()
+        raw_name = item.get("raw_name", "").strip()
+        
+        url_lower = url.lower()
+        name_upper = raw_name.upper()
+        
+        # A. 基础垃圾源过滤
+        if "catvod.com" in url_lower or "直播室" in raw_name or not url.startswith("http"):
             continue
+            
+        # B. 🌟【核心新增】：彻底封杀所有 FM 广播、音频流域名 (蜻蜓FM/各类国家广播)
+        if "qingting.fm" in url_lower or "radio" in url_lower or "64k.m3u8" in url_lower:
+            continue
+            
+        # C. 🌟【核心新增】：通过台名关键字拦截野生广播电台 (防止漏网之鱼)
+        if "FM" in name_upper or "广播" in name_upper or "调频" in name_upper or "之声" in name_upper:
+            # 排除掉类似于“少儿动漫”里的某些带“声”的特定电视节目，其余全干掉
+            if "CCTV" not in name_upper and "卫视" not in name_upper:
+                continue
+                
         cleaned_parsed_items.append(item)
     
     parsed_items = cleaned_parsed_items
     total_sources = len(parsed_items)
-
+    
     stats = {
         "initial_total": total_sources,
         "blacklist_filtered": 0,
