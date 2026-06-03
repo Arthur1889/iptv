@@ -275,7 +275,7 @@ def determine_final_group(std_name, raw_group, is_4k_8k, group_repo):
     if any(x in rg for x in ["综艺直播", "短剧直播", "小品直播", "相声直播", "抖音直播", "YY直播", "车模直播", "女团直播", "热舞直播", "乡野直播", "脱口秀直播", "综艺"]): return "娱乐频道"
     if any(x in rg for x in ["电视剧直播", "爱奇艺直播", "埋堆堆直播"]): return "电视剧直播"
     if "纪录片直播" in rg: return "纪录纪实"
-    if any(x in rg for x in ["动漫直播", "沙雕动画直播"]): return "少儿动漫"
+    if any(x in rg for x in ["动漫直播", "沙雕动画直播", "动画频道"]): return "少儿动漫"
     if any(x in rg for x in ["音乐直播", "周杰伦歌曲", "歌手合集"]): return "歌曲及音乐MV"
 
     if any(x in name_up for x in ["港", "澳", "台", "HBO", "PHOENIX", "凤凰", "翡翠台", "明珠台", "TVB"]): return "港澳台"
