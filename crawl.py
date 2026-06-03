@@ -315,28 +315,6 @@ def determine_final_group(std_name, raw_group, is_4k_8k, group_repo):
 # =====================================================================
 # 3. 探测、去重与输出控制
 # =====================================================================
-class TSStreamChecker:
-    def __init__(self):
-        self.stats = {"total_packets": 0, "lost_packets": 0, "response_times": []}
-
-    def check_stream_stability(self, url):
-        """检测 TS 流稳定性，返回是否稳定"""
-        try:
-            start = time.time()
-            resp = requests.get(url, timeout=5, stream=True)
-            if resp.status_code != 200: return False, 999
-            
-            # 记录响应时间
-            resp_time = (time.time() - start) * 1000
-            
-            # 读取前 10KB 检查同步字节
-            data = resp.raw.read(10240)
-            if b'\x47' in data:
-                return True, resp_time
-        except:
-            return False, 999
-        return False, 999
-        
 # 修改为接收 session 参数
 async def probe_url_async(session, url): 
     headers = {
@@ -364,109 +342,6 @@ async def probe_url_async(session, url):
                 return False, 0, 999
     except Exception:
         return False, 0, 999
-
-def process_and_deduplicate(channels, group_priority):
-    """[要求 2, 4, 5] 核心归类去重与排序管道"""
-    channel_groups = defaultdict(list)
-    for ch in channels:
-        channel_groups[ch["std_name"]].append(ch)
-        
-    final_retained = []
-    
-    for std_name, info_list in channel_groups.items():
-        # 按分辨率和探测顺位排序
-        info_list.sort(key=lambda x: x["resolution"], reverse=True)
-        
-        is_cctv_or_ws = "CCTV" in std_name or "卫视" in std_name
-        max_res = info_list[0]["resolution"]
-        
-        valid_items = []
-        for item in info_list:
-            if item["resolution"] >= 720:
-                valid_items.append(item)
-            elif is_cctv_or_ws and max_res < 720:
-                valid_items.append(item)
-                break # 央视/卫视低清兜底只留1个
-                
-        if not valid_items: continue
-            
-        # [要求 4] 画质分流双通道去重
-        high_4k = None
-        standard = None
-        for item in valid_items:
-            if item["resolution"] >= 2160:
-                if not high_4k: high_4k = item
-            else:
-                if not standard: standard = item
-                
-        if high_4k: final_retained.append(high_4k)
-        if standard: final_retained.append(standard)
-
-    # 局部重新定义内部排序，强制使用传入的参数防止 NameError
-    # 局部重新定义内部排序，强制使用传入的参数防止 NameError
-    def internal_sort_key(x):
-        # 1. 基础大组排序优先级
-        g_idx = group_priority.index(x["group"]) if x["group"] in group_priority else 999
-        
-        # 2. 针对 4K 频道的次级精细排序
-        sub_idx = 99
-        if x["group"] == "4K频道":
-            if "CCTV" in x["std_name"].upper(): sub_idx = 1
-            elif "卫视" in x["std_name"].upper(): sub_idx = 2
-            else: sub_idx = 3
-
-        # 3. 🌟【核心修复】：央视/教育/国际台精细升序权重
-        cctv_idx = 999
-        name_upper = x["std_name"].upper().replace(" ", "").replace("-", "")
-        
-        # A. 普通纯数字央视（CCTV1 - CCTV17）
-        num_match = re.search(r'CCTV(\d+)', name_upper)
-        if num_match:
-            cctv_idx = int(num_match.group(1))
-            # 解决 CCTV5+ 应该排在 CCTV5 后面的问题
-            if "5+" in name_upper or "5PLUS" in name_upper:
-                cctv_idx = 5.5
-        
-        # B. 央视付费数字/超高清频道特例按序分流 (紧跟在 CCTV17 后面)
-        elif "CCTV4K" in name_upper: cctv_idx = 18
-        elif "CCTV8K" in name_upper: cctv_idx = 19
-        elif "CCTV风云足球" in name_upper: cctv_idx = 20
-        elif "CCTV高尔夫网球" in name_upper: cctv_idx = 21
-        elif "CCTV台球" in name_upper: cctv_idx = 22
-        elif "CCTV兵器科技" in name_upper: cctv_idx = 23
-        elif "CCTV风云音乐" in name_upper: cctv_idx = 24
-        elif "CCTV风云剧场" in name_upper: cctv_idx = 25
-        elif "CCTV第一剧场" in name_upper: cctv_idx = 26
-        elif "CCTV怀旧剧场" in name_upper: cctv_idx = 27
-        elif "CCTV电视指南" in name_upper: cctv_idx = 28
-        elif "CCTV世界地理" in name_upper: cctv_idx = 29
-        elif "CCTV发现之旅" in name_upper: cctv_idx = 30
-        elif "CCTV文化精品" in name_upper: cctv_idx = 31
-        elif "CCTV中学生" in name_upper: cctv_idx = 32
-        elif "CCTV老故事" in name_upper: cctv_idx = 33
-        
-        # C. 中国教育电视台系列排在央视付费台后面
-        elif "CETV1" in name_upper: cctv_idx = 41
-        elif "CETV2" in name_upper: cctv_idx = 42
-        elif "CETV3" in name_upper: cctv_idx = 43
-        elif "CETV4" in name_upper: cctv_idx = 44
-        
-        # D. CGTN 系列国际台垫底
-        elif "CGTN" in name_upper:
-            cctv_idx = 50
-            if "英语" in name_upper: cctv_idx = 51
-            elif "纪录" in name_upper: cctv_idx = 52
-            elif "法语" in name_upper: cctv_idx = 53
-            elif "西语" in name_upper: cctv_idx = 54
-            elif "阿语" in name_upper: cctv_idx = 55
-            elif "俄语" in name_upper: cctv_idx = 56
-
-        # 4. 返回多维排序元组 (大组序号, 4K子序号, 央视内部序号, 分辨率降序)
-        return (g_idx, sub_idx, cctv_idx, -x["resolution"])
-
-    final_retained.sort(key=internal_sort_key)
-    return final_retained
-
 # =====================================================================
 # 4. 主干运行流程
 # =====================================================================
@@ -481,89 +356,55 @@ async def main():
         with open(SOURCES_PATH, 'r', encoding='utf-8') as f:
             data = json.load(f)
             source_urls = data.get("urls", [])
-    
-    # 🌟 2. 核心缓存判断双轨制
+            
+    # ==========================================
+    # 2. 核心缓存判断与结构化提取双轨制
+    # ==========================================
+    parsed_items = []
     if is_cache_valid(CACHE_PATH, max_age_days=0.5):
         print(f"[*] 检测到有效缓存(12H内)，直接读取本地缓存: {CACHE_PATH}")
-        # 🌟 核心修改：读取本地缓存文件，并复用解析器提取 group
         with open(CACHE_PATH, 'r', encoding='utf-8') as f:
             cache_content = f.read()
         parsed_items = await parse_m3u_content(cache_content)
     else:
         print(f"[*] 缓存不存在或已过期，开始从网络更新...")
-        # ... 后续网络更新逻辑保持不变 ...
         if not source_urls:
             print("[-] 错误: sources.json 中未找到有效的 urls 列表！")
             return
             
-        # 只有在缓存失效时，才开启异步会话去网络下载
         async with aiohttp.ClientSession() as session:
             try:
                 parsed_items = await fetch_and_parse_all(session, source_urls)
-                
                 # 写入新缓存
                 if parsed_items:
                     with open(CACHE_PATH, 'w', encoding='utf-8') as f:
                         f.write("#EXTM3U\n")
                         for item in parsed_items:
-                            # 🌟 修复点：保存时带上所有原厂标签，供下次读取
-                            f.write(f'#EXTINF:-1 group-title="{item.get("group", "")}" tvg-logo="{item.get("raw_logo", "")}" tvg-id="{item.get("raw_id", "")}",{item["raw_name"]}\n')
+                            f.write(f'#EXTINF:-1 group-title="{item.get("group", "")}" tvg-logo="{item.get("raw_logo", "")}" tvg-id="{item.get("raw_id", "")}" epg-url="{item.get("raw_id", "")}",{item["raw_name"]}\n')
                             f.write(f"{item['url']}\n")
                     print(f"[+] 缓存已成功更新，共 {len(parsed_items)} 条频道。")
                 else:
                     print("[!] 网络解析结果为空，跳过缓存写入。")
             except Exception as e:
                 logger.error(f"批量下载失败: {e}")
-    
-    # 1. 加载配置字典
-    group_repo = load_json(GROUP_JSON_PATH, {})
-    name_repo = load_json(NAME_JSON_PATH, {})
-    blacklist = load_json(BLACKLIST_PATH, {})
-    name_lookup = build_name_lookup(name_repo)
-    
-    # 模拟从缓存/源提取 (这里简化模拟已合并的原始行列表，实际根据你的 sources 提取机制对接)
-    raw_m3u_lines = []
-    if os.path.exists(CACHE_PATH):
-        with open(CACHE_PATH, 'r', encoding='utf-8') as f:
-            raw_m3u_lines = f.readlines()
-    else:
-        print("[-] 未找到源缓存文件 sources_cache.txt，请确保第一步成功运行！")
+
+    # 兜底验证：如果网络下载失败且无缓存，则优雅退出
+    if not parsed_items:
+        print("[-] 错误: 未能获取到任何有效的频道源数据，程序退出。")
         return
 
-    # 数据结构梳理
-    parsed_items = []
-    for i in range(len(raw_m3u_lines)):
-        line = raw_m3u_lines[i].strip()
-        if line.startswith("#EXTINF"):
-            name_match = re.search(r',(.*)$', line)
-            if not name_match: continue
-            raw_name = name_match.group(1).strip()
-            
-            url = raw_m3u_lines[i+1].strip() if i+1 < len(raw_m3u_lines) else ""
-            if not url.startswith("http"): continue
-            
-            # 🌟 满足要求 3：直接过滤含有 catvod.com 的源和包含直播室字样的频道
-            if "catvod.com" in url or "直播室" in raw_name: 
-                continue
-            
-            # 解析附加信息
-            logo = re.search(r'tvg-logo="(.*?)"', line)
-            logo = logo.group(1) if logo else ""
-            grp = re.search(r'group-title="(.*?)"', line)
-            grp = grp.group(1) if grp else ""
-            tvgid = re.search(r'tvg-id="(.*?)"', line)
-            tvgid = tvgid.group(1) if tvgid else ""
-            
-            # 🌟 核心修复：支持提取原厂自带的 epg-url 参数
-            epgurl = re.search(r'epg-url="(.*?)"', line)
-            epgurl = epgurl.group(1) if epgurl else ""
-            
-            parsed_items.append({
-                "raw_name": raw_name, "url": url, "logo": logo, 
-                "group": grp, "tvgid": tvgid, "epgurl": epgurl
-            })
-
+    # 🌟 满足要求 3 过滤：统一在这里对提取出的源进行 catvod.com 和 直播室 预清洗
+    cleaned_parsed_items = []
+    for item in parsed_items:
+        url = item.get("url", "")
+        raw_name = item.get("raw_name", "")
+        if "catvod.com" in url or "直播室" in raw_name or not url.startswith("http"):
+            continue
+        cleaned_parsed_items.append(item)
+    
+    parsed_items = cleaned_parsed_items
     total_sources = len(parsed_items)
+
     stats = {
         "initial_total": total_sources,
         "blacklist_filtered": 0,
