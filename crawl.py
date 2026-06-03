@@ -579,7 +579,10 @@ async def main():
             
         # 🌟 判断该频道的标准名是否显式存在于 group_standard.json 中
         is_matched_json = std_name in group_repo
-
+        # 🌟【满足链接探测要求3】：带有 catvod.com 的源、直播室字样的直接过滤掉
+        if "catvod.com" in url or "直播室" in std_name:
+            stats["quality_filtered"] += 1
+            continue
         tasks.append({
             "std_name": std_name, 
             "url": url, 
@@ -690,53 +693,157 @@ async def main():
             )
         print() # 探测完成后换行
         
-    # 4. 后置聚合与生成
-    final_list = process_and_deduplicate(valid_channels, GROUP_PRIORITY)
-    stats["final_retained"] = len(final_list)
-    stats["quality_filtered"] += (len(valid_channels) - len(final_list))
+    # ==========================================
+    # 4. 标准化、清洗、画质过滤与双轨制去重核心引擎
+    # ==========================================
+    print("[*] 探测结束，开始执行标准化命名与智能去重...")
+    
+    # 加载标准化名称库 (要求 6)
+    name_repo_path = "iptvname/name.json"
+    alias_to_std = {}
+    if os.path.exists(name_repo_path):
+        try:
+            with open(name_repo_path, "r", encoding="utf-8") as f:
+                name_data = json.load(f)
+                # 建立 别名(大写无空格) -> 标准名 的映射表
+                for std_name, aliases in name_data.items():
+                    for alias in aliases:
+                        alias_to_std[alias.replace(" ", "").upper()] = std_name
+                    alias_to_std[std_name.replace(" ", "").upper()] = std_name
+        except Exception as e:
+            logger.error(f"加载 {name_repo_path} 失败: {e}")
 
-    # [要求 10 & 13] 生成最终文件
+    # 定义优先组与劣后组 (要求 2)
+    PRIORITY_GROUPS = ["4K频道", "央视频道", "地方卫视", "山东频道", "地方频道"]
+    
+    # 临时聚合容器，按标准化后的台名组织
+    standardized_groups = defaultdict(list)
+
+    for ch in valid_channels:
+        # --- A. 清洗名称杂质 (要求 5) ---
+        raw_name = ch["std_name"]
+        clean_name = re.sub(
+            r'(360P|404P|480P|576P|606P|720P|1080P|HD|FHD|Not 24/7|Geo-blocked)', 
+            '', raw_name, flags=re.IGNORECASE
+        ).strip()
+        clean_name = re.sub(r'[\s_]+', ' ', clean_name).strip()
+        
+        # --- B. 匹配 name.json 确立 tvg-id/tvg-name (要求 6) ---
+        lookup_key = clean_name.replace(" ", "").upper()
+        if lookup_key in alias_to_std:
+            std_mapped_name = alias_to_std[lookup_key]
+            ch["tvgid"] = std_mapped_name
+            ch["tvgname"] = std_mapped_name
+            ch["matched_std"] = std_mapped_name
+        else:
+            ch["tvgid"] = clean_name
+            ch["tvgname"] = clean_name
+            ch["matched_std"] = clean_name
+
+        # --- C. 确定最终显示名称与中央台特正纠正 (要求 9) ---
+        display_name = ch["matched_std"]
+        norm_key = display_name.replace(" ", "").upper().replace("-", "")
+        if norm_key in CCTV_DESC_MAP:
+            display_name = CCTV_DESC_MAP[norm_key]
+        elif "CCTV4" in norm_key:
+            if "欧洲" in raw_name: display_name = "CCTV-4 欧洲"
+            elif "美洲" in raw_name: display_name = "CCTV-4 美洲"
+            else: display_name = "CCTV-4 中文国际"
+        ch["display_name"] = display_name
+
+        # --- D. 确定智能分组 group-title (要求 8 & 链接探测要求 6,7) ---
+        # 优先使用现有逻辑分配好的基础分组，若是 CCTV4K/8K 或达标 4K 则强制修正
+        current_g = ch["group"]
+        res_val = 0
+        try: res_val = int(ch.get("resolution", 0))
+        except: pass
+
+        if "CCTV4K" in norm_key or "CCTV8K" in norm_key or res_val >= 2160:
+            if "CCTV" in norm_key or "卫视" in current_g or current_g in ["地方卫视", "山东频道", "地方频道", "央视频道"]:
+                current_g = "4K频道"
+        ch["group"] = current_g
+
+        # 将处理完的源，按照标准化大名分堆，准备进行画质和数量过滤
+        standardized_groups[ch["matched_std"]].append(ch)
+
+    # --- E. 强力去重与画质保底策略 (链接探测要求 2 & 4) ---
+    final_retained_list = []
+    
+    for std_title, sources in standardized_groups.items():
+        # 按分辨率从高到低排序
+        def get_res(x):
+            try: return int(x.get("resolution", 0))
+            except: return 0
+        sources_sorted = sorted(sources, key=get_res, reverse=True)
+
+        # 区分 4K 梯队与普通梯队
+        sources_4k = [s for s in sources_sorted if get_res(s) >= 2160]
+        sources_normal = [s for s in sources_sorted if get_res(s) < 2160]
+
+        # 4K 及以上源最多保留一个最高分辨率的
+        best_4k = sources_4k[0] if sources_4k else None
+
+        # 普通源筛选：要求 >= 720P
+        eligible_normal = [s for s in sources_normal if get_res(s) >= 720]
+        best_normal = eligible_normal[0] if eligible_normal else None
+
+        # 💡 画质保底分支：如果央视/地方卫视一个合格的普通源都没选出来 (全是低画质)，强行保底捞回一个最高的
+        is_core_brand = "CCTV" in std_title or any(w in std_title for w in ["卫视", "教育", "CETV"])
+        if not best_normal and is_core_brand and sources_normal:
+            best_normal = sources_normal[0]
+
+        if best_4k: final_retained_list.append(best_4k)
+        if best_normal: final_retained_list.append(best_normal)
+
+    # --- F. 定制权重与自然地理位置排序 (要求 9 分组排序) ---
+    def natural_sort_transformer(ch):
+        g = ch["group"]
+        # 优先组排前面 (0-4)，劣后组紧随其后 (5+)
+        if g in PRIORITY_GROUPS:
+            g_weight = PRIORITY_GROUPS.index(g)
+        else:
+            g_weight = 5
+
+        # 针对央视频道进行 1-17 的自然数提取排序，确保同一系列不脱节
+        disp_name = ch["display_name"]
+        # 自然排序法：把字符串里的数字拆切成整数，实现 CCTV-2 排在 CCTV-10 前面
+        split_segments = [int(text) if text.isdigit() else text.lower() for text in re.split(r'(\d+)', disp_name)]
+        return (g_weight, split_segments)
+
+    final_retained_list.sort(key=natural_sort_transformer)
+
+    # ==========================================
+    # 5. 生成最终带有高聚合属性的 M3U 文件
+    # ==========================================
+    stats["final_retained"] = len(final_retained_list)
+    stats["quality_filtered"] = len(valid_channels) - len(final_retained_list)
+
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
+        # 写入默认全局双节目单头 (要求 11)
         f.write('#EXTM3U x-tvg-url="https://epg.112114.xyz/pp.xml.gz,https://epg.pw/xmltv/feed/chn.xml"\n')
         
-        for ch in final_list:
-            # 1. 提取无符号特征码用于中央台拦截
-            clean_std_name = ch["std_name"].replace(" ", "")
-            lookup_key = clean_std_name.upper().replace("-", "")
-            
-            # 默认继承多线程探测出的状态
-            display_name = ch["std_name"]
+        for ch in final_retained_list:
             final_group = ch["group"]
-            
-            # 2. 优先对央视/教育/CGTN进行最高级别纠正，确保它们100%归入“央视频道”
-            if lookup_key in CCTV_DESC_MAP:
-                display_name = CCTV_DESC_MAP[lookup_key]
-                if "4K" not in final_group and "8K" not in final_group:
-                    final_group = "央视频道"
-            elif "CCTV4" in lookup_key:
-                if "欧洲" in ch["std_name"]: display_name = "CCTV-4 欧洲"
-                if "美洲" in ch["std_name"]: display_name = "CCTV-4 美洲"
-                if "4K" not in final_group: final_group = "央视频道"
+            tvg_id = ch["tvgid"]
+            tvg_name = ch["tvgname"]
+            display_name = ch["display_name"]
 
-            # 3. 🌟【核心双轨制分流】：根据是否在 group_standard.json 或 5 大核心组中决定 logo 和 epg 策略
-            # 检查当前频道是否属于 5 大核心分组，或者显式存在于 group_standard.json 字典中
-            is_standard_managed = final_group in ["4K频道", "央视频道", "地方卫视", "山东频道", "地方频道"] or ch["std_name"] in group_repo
-            
-            if is_standard_managed:
-                # 方案 A：核心标准频道，tvg-logo 直接赋值为标准中文名（供播放器本地或动态匹配高清晰标），不带原厂杂质参数
-                logo_url = display_name
-                epg_param = "" 
+            # --- G. 确定 tvg-logo 与 epg-url (要求 7 双轨制) ---
+            if final_group in PRIORITY_GROUPS:
+                # 优先组：强行转换并采用 112114 高清洗标，屏蔽原厂杂质
+                clean_logo_id = tvg_id.replace(" ", "")
+                logo_url = f"https://epg.112114.xyz/logo/{clean_logo_id}.png"
+                epg_param = "" # 依赖头部全局 EPG
             else:
-                # 方案 B：野生频道（如野生少儿、歌曲、娱乐等），严格保留原始抓到的原厂 tvg-logo 和 epg-url
+                # 劣后组：严格保留原厂图标与特异性 epg-url
                 logo_url = ch["logo"] if ch["logo"] else ""
-                # 如果原始数据中含有独立的 epg-url 属性，单独为该行保留
                 epg_param = f' epg-url="{ch.get("epgurl", "")}"' if ch.get("epgurl") else ""
 
-            # 4. 严格写入：根据分流策略渲染标准的 #EXTINF 属性行
-            f.write(f'#EXTINF:-1 tvg-id="{ch["tvgid"]}" tvg-name="{ch["tvgname"]}" tvg-logo="{logo_url}" group-title="{final_group}"{epg_param},{display_name}\n')
+            # 严格按照规范写入包含全部 6 大核心属性的扩展行 (要求 10)
+            f.write(f'#EXTINF:-1 tvg-id="{tvg_id}" tvg-name="{tvg_name}" tvg-logo="{logo_url}" group-title="{final_group}"{epg_param},{display_name}\n')
             f.write(f'{ch["url"]}\n')
 
-    # 保存黑名单
+    # 保存熔断黑名单
     save_json(BLACKLIST_PATH, blacklist)
 
     # [要求 1] 打印并保存任务终期报告
