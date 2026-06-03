@@ -710,7 +710,7 @@ async def main():
     stats["quality_filtered"] = len(valid_channels) - len(final_retained_list)
 
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
-        f.write('#EXTM3U x-tvg-url="https://epg.112114.xyz/pp.xml.gz,https://epg.pw/xmltv/feed/chn.xml"\n')
+        f.write('#EXTM3U x-tvg-url="https://epg.112114.xyz/pp.xml.gz,https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz"\n')
         
         for ch in final_retained_list:
             final_group = ch["group"]
