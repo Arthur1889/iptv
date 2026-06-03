@@ -290,19 +290,24 @@ def determine_final_group(std_name, raw_group, is_4k_8k, group_repo):
 # =====================================================================
 # 3. 异步轻量级多维测速探测引擎
 # =====================================================================
-async def probe_url_async(session, url): 
+async def probe_url_async(session, url):
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         "Accept": "*/*",
         "Connection": "keep-alive"
     }
     try:
-        async with session.get(url, headers=headers, timeout=4, allow_redirects=True) as resp:
+        # 设置 3 秒超时，防止死锁
+        async with session.get(url, headers=headers, timeout=5, allow_redirects=True) as resp:
             if resp.status == 200:
-                lower_url = url.lower()
-                detected_res = 1080  # 基础默认值
+                # 🌟 核心：强制流验证，读取前 1KB 数据检查是否为有效视频流
+                data = await resp.content.read(1024)
+                # 包含 #EXTM3U (m3u8特征) 或 0x47 (TS流同步字节) 才算有效
+                if b'#EXTM3U' not in data and b'\x47' not in data:
+                    return False, 0, 999
                 
-                # 🌟【核心修复】：完全取消从 URL 文本猜测 4K，只保留常规高清/标清的文本大致分流
+                lower_url = url.lower()
+                detected_res = 1080 
                 if "720" in lower_url:
                     detected_res = 720
                 elif "576" in lower_url or "480" in lower_url:
