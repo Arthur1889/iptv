@@ -148,7 +148,7 @@ CCTV_DESC_MAP = {
     "CCTV怀旧剧场": "CCTV懷舊劇場", "CCTV大国健康": "CCTV 大国健康", "CCTV台球": "CCTV 台球",
     "CCTV女性时尚": "CCTV 女性时尚", "CCTV世界地理": "CCTV 世界地理", "CCTV央视文化精品": "CCTV 央视文化精品",
     "CCTV电视指南": "CCTV 电视指南", "CCTV发现之旅": "CCTV 发现之旅", "CCTV中学生": "CCTV 中学生",
-    "CCTV老故事": "CCTV 老故事",
+    "CCTV老故事": "CCTV 老故事","CCTV4欧洲": "CCTV4 欧洲","CCTV4美洲": "CCTV4 美洲",
     
     "CETV1": "中国教育-1", "CETV2": "中国教育-2", "CETV3": "中国教育-3", "CETV4": "中国教育-4",
     
