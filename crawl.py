@@ -232,7 +232,7 @@ def determine_final_group(std_name, raw_group, is_4k_8k, group_repo):
     name_up = std_name.upper()
     rg = raw_group.strip() if raw_group else ""
     
-    drop_list = ["游戏直播", "听书直播", "老年直播", "解说直播", "监控直播", "蜘蛛直播", "zuqiu直播", "咪视界直播", "KK直播", "瑜伽裤直播", "Ai直播", "钓鱼直播", "API随机点播", "直播室", "测试"]
+    drop_list = ["游戏直播", "👠九秀直播", "听书直播", "老年直播", "解说直播", "监控直播", "蜘蛛直播", "zuqiu直播", "咪视界直播", "KK直播", "瑜伽裤直播", "Ai直播", "钓鱼直播", "API随机点播", "直播室", "测试"]
     if any(x in rg or x in name_up for x in drop_list):
         return None
 
@@ -273,14 +273,14 @@ def determine_final_group(std_name, raw_group, is_4k_8k, group_repo):
     if "体育直播" in rg: return "体育赛事"
     if "电影直播" in rg: return "影视频道"
     if any(x in rg for x in ["综艺直播", "短剧直播", "小品直播", "相声直播", "抖音直播", "YY直播", "车模直播", "女团直播", "热舞直播", "乡野直播", "脱口秀直播", "综艺"]): return "娱乐频道"
-    if any(x in rg for x in ["电视剧直播", "爱奇艺直播", "埋堆堆直播"]): return "电视剧直播"
+    if any(x in rg for x in ["电视剧直播", "爱奇艺直播", "埋堆堆直播", "🏛经典剧场"]): return "电视剧直播"
     if "纪录片直播" in rg: return "纪录纪实"
     if any(x in rg for x in ["动漫直播", "沙雕动画直播", "动画频道"]): return "少儿动漫"
     if any(x in rg for x in ["音乐直播", "周杰伦歌曲", "歌手合集"]): return "歌曲及音乐MV"
 
     if any(x in name_up for x in ["港", "澳", "台", "HBO", "PHOENIX", "凤凰", "翡翠台", "明珠台", "TVB"]): return "港澳台"
     if any(x in name_up for x in ["电影", "影院", "剧场", "影视", "影片", "放映"]): return "影视频道"
-    if any(x in name_up for x in ["纪录", "纪实", "探索"]): return "纪录纪实"
+    if any(x in name_up for x in ["纪录", "纪实", "探索", "CEC"]): return "纪录纪实"
     if any(x in name_up for x in ["动漫", "少儿", "卡通", "儿童"]): return "少儿动漫"
     if any(x in name_up for x in ["体育", "赛事", "足球", "五星体育", "武搏"]): return "体育赛事"
     if any(x in name_up for x in ["音乐", "MV", "歌曲", "老歌"]): return "歌曲及音乐MV"
