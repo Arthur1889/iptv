@@ -362,8 +362,13 @@ async def main():
                     with open(CACHE_PATH, 'w', encoding='utf-8') as f:
                         f.write("#EXTM3U\n")
                         for item in parsed_items:
-                            f.write(f'#EXTINF:-1 group-title="{item.get("group", "")}" tvg-logo="{item.get("raw_logo", "")}" tvg-id="{item.get("raw_id", "")}" epg-url="{item.get("raw_epg", "")}",{item["raw_name"]}\n')
-                            f.write(f"{item['url']}\n")
+                            # 使用 f-string 拼接全量属性，确保所有数据都被固化到缓存中
+                            f.write(f'#EXTINF:-1 group-title="{item.get("group", "")}" '
+                                    f'tvg-logo="{item.get("raw_logo", "")}" '
+                                    f'tvg-id="{item.get("raw_id", "")}" '
+                                    f'epg-url="{item.get("raw_epg", "")}",'  # 🌟 修复：补齐了 epg-url
+                                    f'{item["raw_name"]}\n')
+                            f.write(f'{item["url"]}\n')
                     print(f"[+] 缓存已成功更新，共 {len(parsed_items)} 条频道。")
                 else:
                     print("[!] 网络解析结果为空，跳过缓存写入。")
