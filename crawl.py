@@ -298,7 +298,7 @@ async def probe_url_async(session, url):
     }
     try:
         # 设置 3 秒超时，防止死锁
-        async with session.get(url, headers=headers, timeout=5, allow_redirects=True) as resp:
+        async with session.get(url, headers=headers, timeout=3, allow_redirects=True) as resp:
             if resp.status == 200:
                 # 🌟 核心：强制流验证，读取前 1KB 数据检查是否为有效视频流
                 data = await resp.content.read(1024)
