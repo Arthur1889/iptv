@@ -483,8 +483,8 @@ async def main():
             source_urls = data.get("urls", [])
     
     # 🌟 2. 核心缓存判断双轨制
-    if is_cache_valid(CACHE_PATH):
-        print(f"[*] 检测到有效缓存，直接读取本地缓存: {CACHE_PATH}")
+    if is_cache_valid(CACHE_PATH, max_age_days=0.5):
+        print(f"[*] 检测到有效缓存(12H内)，直接读取本地缓存: {CACHE_PATH}")
         # 🌟 核心修改：读取本地缓存文件，并复用解析器提取 group
         with open(CACHE_PATH, 'r', encoding='utf-8') as f:
             cache_content = f.read()
@@ -807,20 +807,38 @@ async def main():
         if best_4k: final_retained_list.append(best_4k)
         if best_normal: final_retained_list.append(best_normal)
 
-    # --- F. 定制权重与自然地理位置排序 (要求 9 分组排序) ---
+    # --- F. 定制权重与自然地理位置排序 (严格对齐要求 2 & 要求 9) ---
+    # 完整劣后组权重序列
+    POSTERIOR_GROUPS = ["少儿动漫", "港澳台", "影视频道", "歌曲及音乐MV", "纪录纪实", "娱乐频道", "电视剧直播", "海外频道", "体育赛事", "综合频道"]
+
     def natural_sort_transformer(ch):
         g = ch["group"]
-        # 优先组排前面 (0-4)，劣后组紧随其后 (5+)
-        if g in PRIORITY_GROUPS:
-            g_weight = PRIORITY_GROUPS.index(g)
-        else:
-            g_weight = 5
-
-        # 针对央视频道进行 1-17 的自然数提取排序，确保同一系列不脱节
         disp_name = ch["display_name"]
-        # 自然排序法：把字符串里的数字拆切成整数，实现 CCTV-2 排在 CCTV-10 前面
+        name_up = disp_name.upper().replace(" ", "")
+
+        # 1. 决定大组层面的全局权重
+        if g in PRIORITY_GROUPS:
+            g_weight = PRIORITY_GROUPS.index(g)  # 优先组权重 0 到 4
+        elif g in POSTERIOR_GROUPS:
+            g_weight = 5 + POSTERIOR_GROUPS.index(g)  # 劣后组权重 5 到 14
+        else:
+            g_weight = 99  # 未知大组垫底
+
+        # 2. 🌟 核心修复：决定 4K 组内部的次级排序 (要求 9: 4K频道按央、卫、地排序)
+        sub_4k_weight = 99
+        if g == "4K频道":
+            if "CCTV" in name_up or "中央" in name_up or "CGTN" in name_up:
+                sub_4k_weight = 0  # 央视 4K 最优先
+            elif "卫视" in name_up:
+                sub_4k_weight = 1  # 地方卫视 4K 次之
+            else:
+                sub_4k_weight = 2  # 地方频道 4K 垫底
+
+        # 3. 自然排序转换器：将名字中的数字提取为整数（如将 "CCTV-10" 切出 10），确保升序不乱序
         split_segments = [int(text) if text.isdigit() else text.lower() for text in re.split(r'(\d+)', disp_name)]
-        return (g_weight, split_segments)
+        
+        # 返回多维排序特征码：大组权重 -> 4K内部权重 -> 名字自然序列
+        return (g_weight, sub_4k_weight, split_segments)
 
     final_retained_list.sort(key=natural_sort_transformer)
 
