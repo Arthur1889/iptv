@@ -397,7 +397,7 @@ async def main():
             continue
             
         # B. 🌟【核心新增】：彻底封杀所有 FM 广播、音频流域名 (蜻蜓FM/各类国家广播)
-        if "qingting.fm" in url_lower or "radio" in url_lower or "64k.m3u8" in url_lower:
+        if "qingting.fm" in url_lower or "radio" in url_lower or "64k.m3u8" in url_lower or "/drm/" in url_lower or "raw.githubusercontent.com" in url_lower:
             continue
             
         # C. 🌟【核心新增】：通过台名关键字拦截野生广播电台 (防止漏网之鱼)
