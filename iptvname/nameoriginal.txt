@@ -55,7 +55,7 @@ CGTN纪录,CGTN记录频道,CGTN外语纪录,CGTNDocumentary,CGTNDocumentary.cn@
 东方卫视,DragonTV.cn,Dragon TV,Shanghai Dragon TV,上海卫视
 浙江卫视,ZhejiangTV.cn,Zhejiang TV
 江苏卫视,JiangsuTV.cn,Jiangsu TV
-北京卫视,BeijingTV.cn,Beijing TV
+北京卫视,BeijingTV.cn,BRTV 北京卫视,Beijing TV
 广东卫视,GuangdongTV.cn,Guangdong TV
 深圳卫视,ShenzhenTV.cn,Shenzhen TV
 安徽卫视,AnhuiTV.cn,Anhui TV
