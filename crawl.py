@@ -20,7 +20,8 @@ logging.basicConfig(
     ]
 )
 logger = logging.getLogger(__name__)
-
+# 🌟【新增这一行】：把 aiohttp 底层的日志级别提高到 WARNING，不让它的内部 DNS 报错刷屏
+logging.getLogger("aiohttp").setLevel(logging.WARNING)
 # =====================================================================
 # 检查源列表有效期
 # =====================================================================
@@ -417,9 +418,13 @@ async def main():
     # ==========================================
     # 3. 开启纯异步并发探测
     # ==========================================
-    async with aiohttp.ClientSession() as my_session:
+    # 🌟 缝合点：创建带 12H 内 DNS 内存缓存的连接池
+    my_connector = aiohttp.TCPConnector(use_dns_cache=True, ttl_dns_cache=300, limit=30)
+
+    async with aiohttp.ClientSession(connector=my_connector) as my_session:
         semaphore = asyncio.Semaphore(30) 
 
+        # 🌟 完美的嵌套：让任务内部探针直接共享这个带缓存的 my_session
         async def semaphore_task(task):
             async with semaphore:
                 try:
@@ -430,7 +435,7 @@ async def main():
                     return task, is_valid, res, resp_time
                 except Exception:
                     return task, False, 0, 999
-
+                    
         tasks_list = [semaphore_task(t) for t in tasks]
         print("[+] 异步探测引擎已启动，正在激活连接池...")
 
