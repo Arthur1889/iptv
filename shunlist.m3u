@@ -1,0 +1,11 @@
+#EXTM3U
+#EXTINF:-1 tvg-name="联通专享" tvg-logo="https://raw.githubusercontent.com/Arthur1889/iptv/main/dog_icons/Unicom.png" group-title="说明",🥇双模闪电雷达·上海联通专享黄金源
+http://127.0.0.1/readme.mp4
+
+# ====== 央视频道 ====== 
+
+# ====== 上海本地 ====== 
+
+# ====== 卫视频道 ====== 
+#EXTINF:-1 tvg-name="更新时间" tvg-logo="https://raw.githubusercontent.com/Arthur1889/iptv/main/dog_icons/Update.png" group-title="更新时间",⏱️整理完成时间：2026-06-04_15:11:32
+http://127.0.0.1/time.mp4
