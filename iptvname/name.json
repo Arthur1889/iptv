@@ -346,7 +346,7 @@
         "CCTV-05高清",
         "CCTV-05高码",
         "CCTV-5",
-        "CCTV-5 (720p)",
+        "CCTV-5 (1080p)",
         "CCTV-5 体育",
         "CCTV-5-高清",
         "CCTV-5HD",
@@ -802,7 +802,6 @@
         "CCTV-15",
         "CCTV-15 (1080p)",
         "CCTV-15 (720p)",
-        "CCTV-15 音乐",
         "CCTV-15(音乐)",
         "CCTV-15HD",
         "CCTV-15_ITV",
@@ -13251,7 +13250,8 @@
         "MYCINEMAEUROPE (720p)",
         "MYCINEMAEUROPE.cn@HD",
         "MYCINEMAEUROPE.cn@SD",
-        "MYCINEMAEUROPEHD"
+        "MYCINEMAEUROPEHD",
+        "My Cinema Europe"
     ],
     "NBTV1": [
         "NBTV1",
@@ -19439,6 +19439,7 @@
         "湖南电影HD"
     ],
     "湖南电视剧": [
+        "dianshiju.hunan",
         "湖南电视剧",
         "湖南电视剧 (1080p)",
         "湖南电视剧 (2160p)",
