@@ -2319,3 +2319,19 @@ socket.gaierror: [Errno 11001] getaddrinfo failed
 [+] 最终保留优质源: 934
 [+] 脚本整体总耗时: 65.87 秒
 ======================================================
+2026-06-08 19:46:09,666 [INFO] 成功获取源 https://raw.githubusercontent.com/Guovin/TV/gd/output/result.m3u, 解析到 1787 个频道
+2026-06-08 19:46:09,749 [INFO] 成功获取源 https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cn.m3u, 解析到 529 个频道
+2026-06-08 19:46:10,310 [INFO] 成功获取源 https://raw.githubusercontent.com/xcc360/SHCU-TV/refs/heads/main/IPTV.m3u, 解析到 184 个频道
+2026-06-08 19:46:10,638 [INFO] 成功获取源 https://raw.githubusercontent.com/babylife/China-ShangHai-IPTV-list/master/IPTV_Enhanced_change.m3u, 解析到 95 个频道
+2026-06-08 19:46:10,769 [INFO] 成功获取源 https://raw.githubusercontent.com/Jsnzkpg/Jsnzkpg/Jsnzkpg/Jsnzkpg1.m3u, 解析到 2142 个频道
+2026-06-08 19:46:11,119 [INFO] 成功获取源 https://raw.githubusercontent.com/mzky/checklist/refs/heads/master/itvlist.m3u, 解析到 605 个频道
+2026-06-08 19:46:11,200 [INFO] 成功获取源 https://raw.githubusercontent.com/hujingguang/ChinaIPTV/main/cnTV_AutoUpdate.m3u8, 解析到 64 个频道
+
+================ 📊 IPTV 任务运行报告 ================
+[+] 运行时间: 2026-06-08 19:47:27
+[+] 初始读取源总数: 5025
+[+] 命中黑名单拦截: 2022
+[+] 画质/垃圾源过滤: 1296
+[+] 最终保留优质源: 872
+[+] 脚本整体总耗时: 78.78 秒
+======================================================

@@ -491,7 +491,7 @@ async def main():
         
         channel_tasks = []
         for result in all_results:
-            channel_name, channel_url = result.split(',')
+            channel_name, channel_url = result.split(',',1)
             task = asyncio.create_task(check_channel(session, channel_name, channel_url, channel_semaphore))
             channel_tasks.append(task)
         
