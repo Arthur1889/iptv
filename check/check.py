@@ -316,7 +316,7 @@ async def is_url_accessible(session, url, semaphore):
             return None
 
 async def check_urls(session, urls, semaphore):
-    """🌟 [优化] 使用 as_completed 展示网关探测进度"""
+    """🌟 [超级优化] 发现活网关立刻保存至 valid_gateways.json，支持中断恢复"""
     tasks = []
     for url in urls:
         url = url.strip()
@@ -327,15 +327,48 @@ async def check_urls(session, urls, semaphore):
             
     valid_urls = []
     total = len(tasks)
+    
+    # 🌟 定义活网关本地保存文件
+    gateway_log_file = os.path.join(current_dir, 'valid_gateways.json')
+    
+    # 🌟 检查之前有没有跑出来过的历史网关，如果有，直接提前加载进来！
+    if os.path.exists(gateway_log_file):
+        try:
+            with open(gateway_log_file, 'r', encoding='utf-8') as gf:
+                valid_urls = json.load(gf)
+            if valid_urls:
+                print(f"📦 [断点恢复] 检出本地已存在 {len(valid_urls)} 个历史活网关，将直接合并体检！")
+        except Exception:
+            valid_urls = []
+
     print(f"\n📡 开始网关探测，共生成 {total} 个地址，包含 ZHGXTV 特征...")
     
-    # 原地刷新打印进度
+    # 开始异步并发检测
     for i, coro in enumerate(asyncio.as_completed(tasks), 1):
         result = await coro
         if result:
-            valid_urls.append(result)
+            # 🌟 [关键点 1] 只要探测到了网址，立刻塞进内存列表
+            if result not in valid_urls:
+                valid_urls.append(result)
+            
+            # 🌟 [关键点 2] 探测到网址立刻实打实写进硬盘文件，绝不放手！
+            async with file_lock:
+                try:
+                    current_gateways = []
+                    if os.path.exists(gateway_log_file):
+                        with open(gateway_log_file, 'r', encoding='utf-8') as gf:
+                            try: current_gateways = json.load(gf)
+                            except: current_gateways = []
+                    
+                    if result not in current_gateways:
+                        current_gateways.append(result)
+                        with open(gateway_log_file, 'w', encoding='utf-8') as gf:
+                            json.dump(current_gateways, gf, ensure_ascii=False, indent=4)
+                except Exception:
+                    pass # 忽略极个别的写盘冲突，确保主扫描别卡住
+                    
         if i % 10 == 0 or i == total:
-            print(f"\r🔍 网关探测进度: {i}/{total} ({(i/total*100):.1f}%) | 发现活网关: {len(valid_urls)}", end="", flush=True)
+            print(f"\r🔍 网关探测进度: {i}/{total} ({(i/total*100):.1f}%) | 发现活网关: {len(valid_urls)} (已实时落盘安全锁)", end="", flush=True)
             
     print("\n✅ 网关探测完成！")
     return valid_urls
