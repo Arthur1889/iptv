@@ -491,9 +491,15 @@ async def main():
         
         channel_tasks = []
         for result in all_results:
-            channel_name, channel_url = result.split(',',1)
-            task = asyncio.create_task(check_channel(session, channel_name, channel_url, channel_semaphore))
-            channel_tasks.append(task)
+            try:
+                # 🌟 1. 限制切分次数
+                channel_name, channel_url = result.split(',', 1)
+                task = asyncio.create_task(check_channel(session, channel_name, channel_url, channel_semaphore))
+                channel_tasks.append(task)
+            except Exception as e:
+                # 🌟 2. 即使这行数据格式坏了，也只是跳过它，绝不让整个程序闪退！
+                logger.error(f"解析频道数据行失败: {result}, 错误: {e}")
+                continue
         
         await asyncio.gather(*channel_tasks)
 
