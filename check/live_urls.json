@@ -1,100 +1,5 @@
 [
     {
-        "name": "CONTENT=\"WIDTH=DEVICEWIDTH",
-        "url": "http://47.100.188.78:80/initial-scale=1.0,maximum-scale=1.0,user-scalable=0\"",
-        "response_time_ms": 29.23
-    },
-    {
-        "name": "TRANSFORM:TRANSLATE3D50%",
-        "url": "http://47.100.188.251:80/-50%, 0)",
-        "response_time_ms": 39.43
-    },
-    {
-        "name": "ANIMATION:LOADEROUTTER1SCUBICBEZIER0.42",
-        "url": "http://47.100.188.251:80/0.61, 0.58, 0.41) infinite",
-        "response_time_ms": 44.34
-    },
-    {
-        "name": "<METANAME=\"VIEWPORT\"CONTENT=\"WIDTH=DEVICEWIDTH",
-        "url": "http://47.100.188.251:80/initial-scale=1.0\" />",
-        "response_time_ms": 34.08
-    },
-    {
-        "name": "<!DOCTYPEHTML><HTMLLANG=\"EN\"CLASS=\"SOURCEDOC\"><HEAD><METACHARSET=\"UTF8\"><METAHTTPEQUIV=\"XUACOMPATIBLE\"CONTENT=\"IE=EDGE\"><METANAME=\"VIEWPORT\"CONTENT=\"WIDTH=DEVICEWIDTH",
-        "url": "http://47.100.188.192:80/initial-scale=1\"><link rel=\"icon\" href=\"/favicon.ico\"><link rel=\"stylesheet\" href=\"/iconfont/font_2552670_xq0ayxa1nvn.css\"><title>admin</title><script src=\"/iconfont/font_2552670_5o31ygiyrkr.js\"></script><script src=\"js/font_2552670_018h7prlevq8.js\"></script><script src=\"ezuiKit/ezuikit.js\"></script><script src=\"/js/mapvgl.min.js\"></script><script src=\"/globalConfig.js\"></script><link href=\"/static/css/chunk-vendors~253ae210.d6a25f26.css\" rel=\"stylesheet\"><link href=\"/static/css/chunk-vendors~9c5b28f6.28f979b6.css\" rel=\"stylesheet\"><link href=\"/static/css/app~748942c6.ef5fba7e.css\" rel=\"stylesheet\"></head><body><noscript><strong>We're sorry but admin doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id=\"app\"></div><script src=\"/static/js/chunk-vendors~253ae210.28fc7085.js\"></script><script src=\"/static/js/chunk-vendors~9c5b28f6.0775a180.js\"></script><script src=\"/static/js/app~748942c6.2e8418dc.js\"></script></body></html>",
-        "response_time_ms": 19.34
-    },
-    {
-        "name": "FONTFAMILY:ARIAL",
-        "url": "http://159.75.75.187:8888/sans-serif",
-        "response_time_ms": 52.75
-    },
-    {
-        "name": "<METANAME=\"VIEWPORT\"CONTENT=\"WIDTH=DEVICEWIDTH",
-        "url": "http://47.100.188.136:80/initial-scale=1.0\"  >",
-        "response_time_ms": 108.03
-    },
-    {
-        "name": "BOXSHADOW:0010PXRGBA0",
-        "url": "http://159.75.75.187:8888/0, 0, 0.1)",
-        "response_time_ms": 68.99
-    },
-    {
-        "name": "\"URLS\":[\"/\"",
-        "url": "http://47.100.188.78:80/\"/category-list\", \"/login\", \"/register\", \"/cart\"]",
-        "response_time_ms": 40.18
-    },
-    {
-        "name": "<METANAME=\"VIEWPORT\"CONTENT=\"WIDTH=DEVICEWIDTH",
-        "url": "http://47.100.188.221:80/initial-scale=1.0\" />",
-        "response_time_ms": 37.81
-    },
-    {
-        "name": "<METANAME=\"VIEWPORT\"CONTENT=\"WIDTH=DEVICEWIDTH",
-        "url": "http://47.100.188.165:80/initial-scale=1.0, maximum-scale=1.0, user-scalable=no\">",
-        "response_time_ms": 51.76
-    },
-    {
-        "name": "<METANAME=\"VIEWPORT\"CONTENT=\"WIDTH=DEVICEWIDTH",
-        "url": "http://159.75.75.187:8888/initial-scale=1.0\">",
-        "response_time_ms": 63.33
-    },
-    {
-        "name": "<METANAME=\"KEYWORDS\"CONTENT=\"阿里云万网",
-        "url": "http://47.100.188.162:80/虚机IP访问,报错提示\">",
-        "response_time_ms": 88.63
-    },
-    {
-        "name": "<LINKREL=\"STYLESHEET\"HREF=\"HTTPS://G.ALICDN.COM/??HMOD/ACE2021YUNXIAOBAOGUIDE/0.0.10/INDEX.CSS",
-        "url": "http://47.100.188.162:80/hmod/ace-bizstart-homepage-2022-topbar/0.0.37/index.css,hmod/ace-public-style/0.0.2/index.css,hmod/ace-homepage-2020-hmod-footer/0.1.10/index.css\">",
-        "response_time_ms": 93.89
-    },
-    {
-        "name": "<LINKREL=\"STYLESHEET\"HREF=\"HTTPS://G.ALICDN.COM/??ALIYUN/DBLOFFICIALUI/2.0.1/CSS/INDEX.CSS",
-        "url": "http://47.100.188.162:80/dawn/ace-element/0.0.60/index.css,hmod/ace-grid-layout-2023/0.0.2/index.css\">",
-        "response_time_ms": 98.04
-    },
-    {
-        "name": "FONTFAMILY:ARIAL",
-        "url": "http://124.70.215.36:8888/sans-serif",
-        "response_time_ms": 10.48
-    },
-    {
-        "name": "{\"SUCCESS\":FALSE",
-        "url": "http://124.70.150.250:9006/\"code\": 404,\"msg\": \"请求失败，接口不存在或请求方式错误\",\"data\": []}",
-        "response_time_ms": 8.1
-    },
-    {
-        "name": "BOXSHADOW:0010PXRGBA0",
-        "url": "http://124.70.215.36:8888/0, 0, 0.1)",
-        "response_time_ms": 10.62
-    },
-    {
-        "name": "<METANAME=\"VIEWPORT\"CONTENT=\"WIDTH=DEVICEWIDTH",
-        "url": "http://124.70.215.36:8888/initial-scale=1.0\">",
-        "response_time_ms": 11.45
-    },
-    {
         "name": "陕西卫视",
         "url": "http://101.66.199.12:9901/tsfile/live/0136_1.m3u8?key=txiptv&playlive=0&authid=0",
         "response_time_ms": 90.9
@@ -330,21 +235,6 @@
         "response_time_ms": 113.55
     },
     {
-        "name": "HTMLROOT.SETATTRIBUTE'DATATHEME'",
-        "url": "http://124.71.149.170:18081/theme)",
-        "response_time_ms": 15.62
-    },
-    {
-        "name": "<!DOCTYPEHTML><HTMLLANG=\"ZHCN\"ID=\"HTMLROOT\"><HEAD><SCRIPTSRC=\"/_APP.CONFIG.JS?V=2.8.01774440119997\"></SCRIPT><METACHARSET=\"UTF8\"/><METAHTTPEQUIV=\"XUACOMPATIBLE\"CONTENT=\"IE=EDGE",
-        "url": "http://124.71.149.170:18081/chrome=1\"/><meta name=\"renderer\" content=\"webkit\"/><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=0\"/><title>青蜂云回收</title><link rel=\"icon\" href=\"/favicon.ico\"/><script type=\"module\" crossorigin src=\"/assets/index.b6a2e6f0.js\"></script><link rel=\"stylesheet\" href=\"/assets/index.ce85e3d1.css\"><link disabled=\"disabled\" id=\"__VITE_PLUGIN_THEME-ANTD_DARK_THEME_LINK__\" rel=\"alternate stylesheet\" href=\"/assets/app-antd-dark-theme-style.e3b0c442.css\"></head><body><script>;(() => {",
-        "response_time_ms": 19.99
-    },
-    {
-        "name": "}</SCRIPT><DIVID=\"APP\"><STYLE>HTML[DATATHEME=DARK].APPLOADING{BACKGROUNDCOLOR:#2C344A}HTML[DATATHEME=DARK].APPLOADING.APPLOADINGTITLE{COLOR:RGB255255255/85%}.APPLOADING{DISPLAY:FLEX;WIDTH:100%;HEIGHT:100%;JUSTIFYCONTENT:CENTER;ALIGNITEMS:CENTER;FLEXDIRECTION:COLUMN;BACKGROUNDCOLOR:#F4F7F9}.APPLOADING.APPLOADINGWRAP{POSITION:ABSOLUTE;TOP:50%;LEFT:50%;DISPLAY:FLEX;TRANSFORM:TRANSLATE3D50%",
-        "url": "http://124.71.149.170:18081/-50%,0);justify-content:center;align-items:center}.app-loading .dots{display:flex;padding:98px;justify-content:center;align-items:center}.app-loading .app-loading-title{display:flex;font-size:30px;color:rgb(0 0 0 / 85%);justify-content:center;align-items:center;margin:auto 1vw}.app-loading .app-loading-logo{display:block;width:90px;margin:0 auto}.dot{position:relative;display:inline-block;width:48px;height:48px;font-size:32px;transform:rotate(45deg);box-sizing:border-box;-webkit-animation:antRotate 1.2s infinite linear;animation:antRotate 1.2s infinite linear}.dot i{position:absolute;display:block;width:20px;height:20px;background-color:#0065cc;border-radius:100%;opacity:30%;transform:scale(.75);-webkit-animation:antSpinMove 1s infinite linear alternate;animation:antSpinMove 1s infinite linear alternate;transform-origin:50% 50%}.dot i:first-child{top:0;left:0}.dot i:nth-child(2){top:0;right:0;-webkit-animation-delay:.4s;animation-delay:.4s}.dot i:nth-child(3){right:0;bottom:0;-webkit-animation-delay:.8s;animation-delay:.8s}.dot i:nth-child(4){bottom:0;left:0;-webkit-animation-delay:1.2s;animation-delay:1.2s}@-webkit-keyframes antRotate{to{transform:rotate(405deg)}}@keyframes antRotate{to{transform:rotate(405deg)}}@-webkit-keyframes antSpinMove{to{opacity:100%}}@keyframes antSpinMove{to{opacity:100%}}</style><div class=\"app-loading\"><div class=\"app-loading-wrap\" style=\"flex-direction:row\"><img src=\"/resource/img/logo-without-text.png\" class=\"app-loading-logo\" alt=\"Logo\"/><div class=\"app-loading-title\">加载中</div><div class=\"app-loading-dots\"><span class=\"dot dot-spin\"><i></i><i></i><i></i><i></i></span></div></div></div></div></body></html>",
-        "response_time_ms": 15.71
-    },
-    {
         "name": "广西卫视",
         "url": "http://101.66.199.189:9901/tsfile/live/0113_1.m3u8?key=txiptv&playlive=0&authid=0",
         "response_time_ms": 111.88
@@ -360,39 +250,9 @@
         "response_time_ms": 115.52
     },
     {
-        "name": "WEBKITTRANSITION:ALL0.7S0.3SCUBICBEZIER0.645",
-        "url": "http://124.71.195.116/0.045, 0.355, 1.000)",
-        "response_time_ms": 13.17
-    },
-    {
-        "name": "<METANAME=\"VIEWPORT\"CONTENT=\"WIDTH=DEVICEWIDTH",
-        "url": "http://124.71.195.116/initial-scale=1, maximum-scale=1, user-scalable=no\">",
-        "response_time_ms": 11.25
-    },
-    {
-        "name": "<METAHTTPEQUIV=\"XUACOMPATIBLE\"CONTENT=\"IE=EDGE",
-        "url": "http://124.71.195.116/chrome=1\">",
-        "response_time_ms": 15.56
-    },
-    {
-        "name": "{\"MSG\":\"请求访问：/ZHGXTV/PUBLIC/JSON/LIVE_INTERFACE.TXT，认证失败，无法访问系统资源\"",
-        "url": "http://124.70.215.65:8080/\"code\":401}",
-        "response_time_ms": 17.04
-    },
-    {
         "name": "杭州影视",
         "url": "http://101.66.199.189:9901/tsfile/live/1011_1.m3u8?key=txiptv&playlive=0&authid=0",
         "response_time_ms": 105.12
-    },
-    {
-        "name": "SRC=\"HTTPS://WEBAPI.AMAP.COM/MAPS?V=1.4.15&KEY=8799EA91CF020FAEF54754FCA59A2552&PLUGIN=AMAP.GEOCODER",
-        "url": "http://124.71.195.116/AMap.RangingTool,AMap.Heatmap,AMap.PlaceSearch,AMap.DistrictSearch,AMap.Driving\"",
-        "response_time_ms": 10.89
-    },
-    {
-        "name": "<!DOCTYPEHTML><HTML><HEAD><METACHARSET=UTF8><METANAME=VIEWPORTCONTENT=\"WIDTH=DEVICEWIDTH",
-        "url": "http://124.71.195.143/user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1\"><meta http-equiv=X-UA-Compatible content=\"ie=edge\"><meta name=format-detection content=\"telephone=yes\"><link rel=\"shortcut icon\" type=image/x-icon href=./static/favicon.ico><title>数园区·政务通</title><link href=./static/css/app.0ad5b24a22b83ea0b9298d2ea417ffdc.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=./static/js/manifest.effe5190e1b10eafdf6c.js></script><script type=text/javascript src=./static/js/vendor.18715f01e9d4109ae8dd.js></script><script type=text/javascript src=./static/js/app.ea9cf97cb2c53ebb7f7b.js></script></body></html>",
-        "response_time_ms": 16.16
     },
     {
         "name": "CCTV5",
@@ -748,16 +608,6 @@
         "name": "浙江卫视",
         "url": "http://101.66.194.170:9901/tsfile/live/0124_1.m3u8?key=txiptv&playlive=0&authid=0",
         "response_time_ms": 78.66
-    },
-    {
-        "name": "<!DOCTYPEHTML><HTMLLANG=EN><HEAD><METACHARSET=UTF8><METANAME=VIEWPORTCONTENT=\"WIDTH=DEVICEWIDTH",
-        "url": "http://124.70.144.111:7777/initial-scale=1\"><meta http-equiv=X-UA-Compatible content=\"ie=edge\"><title>天使智慧医疗云平台</title><script>document.write('<script src=\"./config/index.js?t=' + new Date().getTime() + '\"><\\/script>')</script></head><body><div id=app></div></body></html>",
-        "response_time_ms": 12.49
-    },
-    {
-        "name": "{\"MSG\":\"请求访问：/ZHGXTV/PUBLIC/JSON/LIVE_INTERFACE.TXT，认证失败，无法访问系统资源\"",
-        "url": "http://124.70.213.107:8080/\"code\":401}",
-        "response_time_ms": 10.08
     },
     {
         "name": "杭州影视",
@@ -1363,21 +1213,6 @@
         "name": "CETV2",
         "url": "http://121.19.134.56:808/tsfile/live/1038_1.m3u8?key=txiptv&playlive=1&authid=0",
         "response_time_ms": 34.65
-    },
-    {
-        "name": "<BODY><FONTFACE=\"ARIAL",
-        "url": "http://124.70.213.2:7070/Helvetica\"><b>Message HTTP Binding Service</b></font></body>",
-        "response_time_ms": 17.71
-    },
-    {
-        "name": "~TOYOUUNDERTHEAPACHELICENSE",
-        "url": "http://124.70.135.196:14534/Version 2.0 (the",
-        "response_time_ms": 105.25
-    },
-    {
-        "name": "<BODY><FONTFACE=\"ARIAL",
-        "url": "http://124.71.140.85:7070/Helvetica\"><b>Message HTTP Binding Service</b></font></body>",
-        "response_time_ms": 21.55
     },
     {
         "name": "CCTV1",
