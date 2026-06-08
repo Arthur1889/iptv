@@ -36,7 +36,7 @@ CCTV世界地理,世界地理,CCTV-世界地理,CCTV世界地理HD
 CCTV央视文化精品,文化精品,CCTV-文化精品,CCTV央视文化精品,CCTV-央视文化精品,CCTV央视文化精品HD
 CCTV卫生健康,百姓健康,CCTV-卫生健康,CCTV卫生与健康
 CCTV中学生,中学生,CCTV中学甿,CCTV-中学生,中央新影-中学甿,中央新影-中学生
-CCTV电视指南,电视指南
+CCTV电视指南,电视指南,CCTV电视购物指南
 CETV1,CETV-1,CETV1中国教育,CETV1 中国教育,中国教育1,中国教育1HD,中国教育-1
 CETV2,CETV-2,CETV2中国教育,CETV2 中国教育,中国教育2,中国教育2HD,中国教育-2
 CETV3,CETV-3,CETV3中国教育,CETV3 中国教育,中国教育3,中国教育3HD,中国教育-3
