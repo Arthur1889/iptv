@@ -19,11 +19,17 @@ logger = logging.getLogger(__name__)
 current_dir = os.path.dirname(os.path.abspath(__file__))
 urls_file_path = os.path.join(current_dir, 'urls.json')
 
-# 🌟 [新增] 初始化 live_urls.json 和 异步文件锁，确保边测边存不会冲突
+# 🌟 [新增] 初始化 live_urls.json 和 dead_urls.json(死链库)，确保断点续传
 live_urls_file = os.path.join(current_dir, 'live_urls.json')
+dead_urls_file = os.path.join(current_dir, 'dead_urls.json')
+
 if not os.path.exists(live_urls_file):
     with open(live_urls_file, 'w', encoding='utf-8') as f:
         json.dump([], f)
+if not os.path.exists(dead_urls_file):
+    with open(dead_urls_file, 'w', encoding='utf-8') as f:
+        json.dump([], f)
+
 file_lock = asyncio.Lock()
 
 urls = []
@@ -250,7 +256,14 @@ class TSStreamChecker:
 
 def clean_channel_name(name):
     """清理频道名称，统一格式"""
-    name = name.upper()
+    if not name: return ""
+    name = name.upper().strip()
+    
+    # 🌟 [修改] 强力过滤：网页代码、CSS乱码直接扔掉
+    bad_keywords = ["<", ">", "DOCTYPE", "HTML", "SCRIPT", "DIV", "STYLE", "JSON", "CODE", "AMAP", "TRANSITION", "TRANSFORM", "WEBKIT", "{", "}"]
+    if any(keyword in name for keyword in bad_keywords): return ""
+    if len(re.findall(r'[A-Z0-9_/\.:-]{12,}', name)) > 0: return ""
+        
     replacement_rules = {
         "basic": {
             "cctv": "CCTV", "中央": "CCTV", "央视": "CCTV", "高清": "", "超高": "", "HD": "", "标清": "",
@@ -278,7 +291,6 @@ def clean_channel_name(name):
     return name
 
 async def modify_urls(url):
-    """🌟 [修改] 增加 ZHGXTV 探测特征"""
     modified_urls = []
     parsed_url = urlparse(url)
     if not parsed_url.hostname:
@@ -291,7 +303,6 @@ async def modify_urls(url):
     base_ip = '.'.join(ip_parts[:3])
     port_str = f":{parsed_url.port}" if parsed_url.port else ""
     
-    # 包含了原本的 IPTV 接口和新增的 ZHGXTV txt 接口
     endpoints = [
         "/iptv/live/1000.json?key=txiptv",
         "/ZHGXTV/Public/json/live_interface.txt"
@@ -316,7 +327,6 @@ async def is_url_accessible(session, url, semaphore):
             return None
 
 async def check_urls(session, urls, semaphore):
-    """🌟 [超级优化] 发现活网关立刻保存至 valid_gateways.json，支持中断恢复"""
     tasks = []
     for url in urls:
         url = url.strip()
@@ -328,10 +338,8 @@ async def check_urls(session, urls, semaphore):
     valid_urls = []
     total = len(tasks)
     
-    # 🌟 定义活网关本地保存文件
     gateway_log_file = os.path.join(current_dir, 'valid_gateways.json')
     
-    # 🌟 检查之前有没有跑出来过的历史网关，如果有，直接提前加载进来！
     if os.path.exists(gateway_log_file):
         try:
             with open(gateway_log_file, 'r', encoding='utf-8') as gf:
@@ -343,15 +351,12 @@ async def check_urls(session, urls, semaphore):
 
     print(f"\n📡 开始网关探测，共生成 {total} 个地址，包含 ZHGXTV 特征...")
     
-    # 开始异步并发检测
     for i, coro in enumerate(asyncio.as_completed(tasks), 1):
         result = await coro
         if result:
-            # 🌟 [关键点 1] 只要探测到了网址，立刻塞进内存列表
             if result not in valid_urls:
                 valid_urls.append(result)
             
-            # 🌟 [关键点 2] 探测到网址立刻实打实写进硬盘文件，绝不放手！
             async with file_lock:
                 try:
                     current_gateways = []
@@ -365,7 +370,7 @@ async def check_urls(session, urls, semaphore):
                         with open(gateway_log_file, 'w', encoding='utf-8') as gf:
                             json.dump(current_gateways, gf, ensure_ascii=False, indent=4)
                 except Exception:
-                    pass # 忽略极个别的写盘冲突，确保主扫描别卡住
+                    pass 
                     
         if i % 10 == 0 or i == total:
             print(f"\r🔍 网关探测进度: {i}/{total} ({(i/total*100):.1f}%) | 发现活网关: {len(valid_urls)} (已实时落盘安全锁)", end="", flush=True)
@@ -374,7 +379,6 @@ async def check_urls(session, urls, semaphore):
     return valid_urls
 
 async def fetch_json(session, url, semaphore):
-    """🌟 [修改] 增加兼容 ZHGXTV 的纯文本返回格式解析"""
     async with semaphore:
         try:
             parsed_url = urlparse(url)
@@ -385,21 +389,25 @@ async def fetch_json(session, url, semaphore):
 
             timeout = aiohttp.ClientTimeout(total=5)
             async with session.get(url, timeout=timeout) as response:
+                
+                # 🌟 [修改] 安全检查：如果返回的是网页大文件，直接拒绝
+                content_type = response.headers.get('Content-Type', '').lower()
+                if 'html' in content_type:
+                    return []
+                
                 results = []
                 
-                # 如果是 ZHGXTV 特征
                 if "live_interface.txt" in url:
                     text_data = await response.text()
                     for line in text_data.splitlines():
                         line = line.strip()
                         if line and "," in line:
                             name, urlx = line.split(',', 1)
+                            name = clean_channel_name(name)
                             if not name or not urlx: continue
                             urld = urlx if urlx.startswith(('http://', 'https://')) else urljoin(url_x, urlx)
-                            name = clean_channel_name(name)
                             results.append(f"{name},{urld}")
                 else:
-                    # 原有 json 逻辑
                     json_data = await response.json(content_type=None)
                     for item in json_data.get('data', []):
                         if isinstance(item, dict):
@@ -407,11 +415,13 @@ async def fetch_json(session, url, semaphore):
                             urlx = item.get('url')
                             if not name or not urlx or ',' in urlx:
                                 continue
+                            name = clean_channel_name(name)
+                            if not name: continue
+                            
                             if urlx.startswith(('http://', 'https://')):
                                 urld = urlx
                             else:
                                 urld = f"{url_x}{urlx}"
-                            name = clean_channel_name(name)
                             results.append(f"{name},{urld}")
                 return results
         except Exception:
@@ -463,39 +473,45 @@ async def main():
                     results.append(result)
                     print_progress("稳定", channel_name, channel_url)
                     
-                    # 🌟 [新增] 监测到可用节点，立刻追加保存至 live_urls.json
                     async with file_lock:
                         try:
-                            # 读出数据
                             with open(live_urls_file, 'r', encoding='utf-8') as f:
-                                try:
-                                    current_data = json.load(f)
-                                except json.JSONDecodeError:
-                                    current_data = []
-                            # 确保不会写入重复 url
+                                try: current_data = json.load(f)
+                                except json.JSONDecodeError: current_data = []
                             if not any(item.get('url') == channel_url for item in current_data):
                                 current_data.append({
                                     "name": channel_name,
                                     "url": channel_url,
                                     "response_time_ms": round(avg_response_time, 2)
                                 })
-                                # 写回数据
                                 with open(live_urls_file, 'w', encoding='utf-8') as f:
                                     json.dump(current_data, f, ensure_ascii=False, indent=4)
-                        except Exception as e:
-                            pass # 忽略偶发的读写文件错误，保证流检测顺利运行
+                        except Exception:
+                            pass
                 else:
                     error_channels.append((channel_name, channel_url))
                     print_progress("不稳定", channel_name, channel_url)
+                    
+                    # 🌟 [新增] 如果不可用，写入死链记录
+                    async with file_lock:
+                        try:
+                            with open(dead_urls_file, 'r', encoding='utf-8') as f:
+                                try: current_dead = json.load(f)
+                                except json.JSONDecodeError: current_dead = []
+                            if channel_url not in current_dead:
+                                current_dead.append(channel_url)
+                                with open(dead_urls_file, 'w', encoding='utf-8') as f:
+                                    json.dump(current_dead, f, ensure_ascii=False, indent=4)
+                        except Exception:
+                            pass
         except Exception as e:
             error_channels.append((channel_name, channel_url))
             print_progress("异常", channel_name, error_msg=str(e))
         finally:
             processed_count += 1
-            print_progress("更新", "", "") # 刷新进度条
+            print_progress("更新", "", "") 
     
     def print_progress(status, channel_name, channel_url=None, error_msg=None):
-        """🌟 [优化] 打印检测进度信息（改为 \r 单行刷新，防刷屏）"""
         numberx = processed_count / total_count * 100 if total_count > 0 else 0
         print(f"\r⏱️ 频道体检: {processed_count}/{total_count} ({numberx:.2f}%) | 稳定可用: {len(results)} | 不可用: {len(error_channels)}", end="", flush=True)
     
@@ -518,23 +534,51 @@ async def main():
         json_results = await asyncio.gather(*tasks)
         for sublist in json_results:
             all_results.extend(sublist)
+            
+        # 🌟 [新增] 断点续传：加载历史数据，用于直接合并和跳过测速
+        history_live_urls = set()
+        history_dead_urls = set()
+        
+        if os.path.exists(live_urls_file):
+            try:
+                with open(live_urls_file, 'r', encoding='utf-8') as f:
+                    cached_live = json.load(f)
+                    for item in cached_live:
+                        history_live_urls.add(item['url'])
+                        # 把之前成功的记录直接加回 results，不再重新测
+                        results.append((item['name'], item['url'], "稳定", item.get('response_time_ms', 999)))
+            except Exception: pass
+            
+        if os.path.exists(dead_urls_file):
+            try:
+                with open(dead_urls_file, 'r', encoding='utf-8') as f:
+                    history_dead_urls = set(json.load(f))
+                    for url in history_dead_urls:
+                        error_channels.append(("历史死链", url))
+            except Exception: pass
         
         total_count = len(all_results)
-        print(f"\n📋 频道解析完毕！即将开始 {total_count} 个流的稳定体检 (合格节点将实时保存)...\n")
+        processed_count = len(history_live_urls) + len(history_dead_urls) # 进度条初始值
+        print(f"\n📋 频道解析完毕！共计 {total_count} 个流。")
+        print(f"📦 已检出历史存活 {len(history_live_urls)} 个，历史阵亡 {len(history_dead_urls)} 个。")
         
         channel_tasks = []
         for result in all_results:
             try:
-                # 🌟 1. 限制切分次数
                 channel_name, channel_url = result.split(',', 1)
+                
+                # 🌟 [新增] 如果在历史活链或死链中出现过，直接跳过不发请求！
+                if channel_url in history_live_urls or channel_url in history_dead_urls:
+                    continue
+                    
                 task = asyncio.create_task(check_channel(session, channel_name, channel_url, channel_semaphore))
                 channel_tasks.append(task)
             except Exception as e:
-                # 🌟 2. 即使这行数据格式坏了，也只是跳过它，绝不让整个程序闪退！
                 logger.error(f"解析频道数据行失败: {result}, 错误: {e}")
                 continue
         
-        await asyncio.gather(*channel_tasks)
+        if channel_tasks:
+            await asyncio.gather(*channel_tasks)
 
     print("\n")
     results.sort(key=lambda x: (channel_key(x[0]), x[3] if len(x) > 3 else float('inf')))
