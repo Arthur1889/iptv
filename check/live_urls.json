@@ -1368,5 +1368,880 @@
         "name": "贵州卫视",
         "url": "http://61.136.172.236:9901/tsfile/live/0120_1.m3u8?key=txiptv&playlive=1&authid=0",
         "response_time_ms": 49.57
+    },
+    {
+        "name": "<BODY><FONTFACE=\"ARIAL",
+        "url": "http://123.60.96.209:7070/Helvetica\"><b>Message HTTP Binding Service</b></font></body>",
+        "response_time_ms": 19.44
+    },
+    {
+        "name": "<!DOCTYPEHTML><HTML><HEAD><METACHARSET=UTF8><METANAME=VIEWPORTCONTENT=\"WIDTH=DEVICEWIDTH",
+        "url": "http://47.100.188.22:80/initial-scale=1\"><title>HelloSmartCity</title><script type=text/javascript src=/static/imouplayer/imouplayer.js></script><script type=text/javascript src=/static/tcplayerlite/TcPlayer-2.3.2.js charset=utf-8></script><script type=text/javascript src=/static/dhWebSdk/wfs.js charset=utf-8></script><script type=text/javascript src=/static/dhWebSdk/dhsdk.min.js charset=utf-8></script><script type=text/javascript src=/static/fabric/fabric.min-5.1.0.js></script><link rel=\"shortcut icon\" href=/favicon.ico><link href=/static/css/app.4c3609b9b160aee2cf83f288d8e58e27.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=/static/js/manifest.c7a33c44bb2abfe88bc7.js></script><script type=text/javascript src=/static/js/vendor.30d6d8f80594ab89d687.js></script><script type=text/javascript src=/static/js/app.f984877a8354048f43bd.js></script></body></html>",
+        "response_time_ms": 15.39
+    },
+    {
+        "name": "<METANAME=\"VIEWPORT\"CONTENT=\"WIDTH=DEVICEWIDTH",
+        "url": "http://47.100.188.165:80/initial-scale=1.0, maximum-scale=1.0, user-scalable=no\">",
+        "response_time_ms": 24.39
+    },
+    {
+        "name": "<METANAME=\"KEYWORDS\"CONTENT=\"阿里云万网",
+        "url": "http://47.100.188.162:80/虚机IP访问,报错提示\">",
+        "response_time_ms": 98.8
+    },
+    {
+        "name": "<METAHTTPEQUIV=\"XUACOMPATIBLE\"CONTENT=\"IE=EDGE",
+        "url": "http://47.100.188.162:80/chrome=1\" />",
+        "response_time_ms": 75.68
+    },
+    {
+        "name": "<!DOCTYPEHTML><HTMLLANG=\"EN\"CLASS=\"SOURCEDOC\"><HEAD><METACHARSET=\"UTF8\"><METAHTTPEQUIV=\"XUACOMPATIBLE\"CONTENT=\"IE=EDGE\"><METANAME=\"VIEWPORT\"CONTENT=\"WIDTH=DEVICEWIDTH",
+        "url": "http://47.100.188.192:80/initial-scale=1\"><link rel=\"icon\" href=\"/favicon.ico\"><link rel=\"stylesheet\" href=\"/iconfont/font_2552670_xq0ayxa1nvn.css\"><title>admin</title><script src=\"/iconfont/font_2552670_5o31ygiyrkr.js\"></script><script src=\"js/font_2552670_018h7prlevq8.js\"></script><script src=\"ezuiKit/ezuikit.js\"></script><script src=\"/js/mapvgl.min.js\"></script><script src=\"/globalConfig.js\"></script><link href=\"/static/css/chunk-vendors~253ae210.d6a25f26.css\" rel=\"stylesheet\"><link href=\"/static/css/chunk-vendors~9c5b28f6.28f979b6.css\" rel=\"stylesheet\"><link href=\"/static/css/app~748942c6.ef5fba7e.css\" rel=\"stylesheet\"></head><body><noscript><strong>We're sorry but admin doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id=\"app\"></div><script src=\"/static/js/chunk-vendors~253ae210.28fc7085.js\"></script><script src=\"/static/js/chunk-vendors~9c5b28f6.0775a180.js\"></script><script src=\"/static/js/app~748942c6.2e8418dc.js\"></script></body></html>",
+        "response_time_ms": 19.84
+    },
+    {
+        "name": "<METANAME=\"APPLICABLEDEVICE\"CONTENT=\"PC",
+        "url": "http://47.100.188.162:80/mobile\"  >",
+        "response_time_ms": 64.79
+    },
+    {
+        "name": "<METANAME=\"VIEWPORT\"CONTENT=\"WIDTH=DEVICEWIDTH",
+        "url": "http://47.100.188.162:80/initial-scale=1.0\"  >",
+        "response_time_ms": 64.18
+    },
+    {
+        "name": "<DIVCLASS=\"COMPONENETWRAPACERENDER2\"DATAKEY=\"4509758900\"DATACOMPONENTNAME=\"@ALI/HMODACEDPLZSHAPEPICTEXT2\"STYLE=\"POSITION:RELATIVE;BACKGROUNDCOLOR:RGB255",
+        "url": "http://47.100.188.162:80/255, 255); padding: 20px 0px 50px;\"><div class=\"\" style=\"max-width: 1180px; margin: 0px auto;\"><div class=\"ace-dpl-zshape-pic-text-2 \"><div class=\"list\"><div class=\"list-item clearfix left\"><div class=\"imgarea\"><img src=\"https:/img.alicdn.com/tfs/TB1i3Hdjkcx_u4jSZFlXXXnUFXa-944-649.png\" class=\"img\"></div><div class=\"textarea\"><div class=\"title\">抱歉！该网站可能由于以下原因无法访问！</div><div class=\"desc\"><div class=\"desc-first\"></div><ul class=\"desc-list\"><li class=\"desc-item\">您访问的域名未绑定至主机<br>解决方法：需要网站管理员登录万网主机控制面板绑定域名，阿里云账号请登录阿里云虚拟主机控制台绑定。<br></li><li class=\"desc-item\">您正在使用IP访问<br>解决方法：请尝试使用域名进行访问。<br></li><li class=\"desc-item\">该站点已被网站管理员停止<br>解决方法：需要网站管理员登录万网主机控制面板开启站点，阿里云账号请登录阿里云虚拟主机控制台进行开通。</li></ul></div><div class=\"hard-info\"><a class=\"ace-link ace-link-primary action-btn\" href=\"https:/cp.aliyun.com/login?spm=5176.20260640.J_4466400630.1.73ca55ceu2HFHL\" target=\"_blank\"><button type=\"button\" class=\"ace-btn ace-medium ace-btn-primary\"><span class=\"ace-btn-helper\">万网主机控制面板</span></button></a><a class=\"ace-link ace-link-primary action-btn\" href=\"https://netcn.console.aliyun.com/core/host/list2\" target=\"_blank\"><button type=\"button\" class=\"ace-btn ace-medium ace-btn-secondary\"><span class=\"ace-btn-helper\">阿里云虚拟主机控制台</span></button></a></div></div></div></div></div></div></div>",
+        "response_time_ms": 72.57
+    },
+    {
+        "name": "<LINKREL=\"STYLESHEET\"HREF=\"HTTPS://G.ALICDN.COM/??HMOD/ACE2021YUNXIAOBAOGUIDE/0.0.10/INDEX.CSS",
+        "url": "http://47.100.188.162:80/hmod/ace-bizstart-homepage-2022-topbar/0.0.37/index.css,hmod/ace-public-style/0.0.2/index.css,hmod/ace-homepage-2020-hmod-footer/0.1.10/index.css\">",
+        "response_time_ms": 106.84
+    },
+    {
+        "name": "<SCRIPTSRC=\"//G.ALICDN.COM/AES/??TRACKER/3.3.3/INDEX.JS",
+        "url": "http://47.100.188.162:80/tracker-plugin-pv/3.0.6/index.js,tracker-plugin-event/3.0.0/index.js,tracker-plugin-jserror/3.0.3/index.js,tracker-plugin-api/3.1.3/index.js,tracker-plugin-resourceError/3.0.4/index.js,tracker-plugin-perf/3.1.0/index.js,tracker-plugin-eventTiming/3.0.0/index.js,tracker-plugin-autolog/3.0.3/index.js\"></script>",
+        "response_time_ms": 94.96
+    },
+    {
+        "name": "<METANAME=\"VIEWPORT\"CONTENT=\"WIDTH=DEVICEWIDTH",
+        "url": "http://47.100.188.221:80/initial-scale=1.0\" />",
+        "response_time_ms": 15.43
+    },
+    {
+        "name": "<METANAME=\"VIEWPORT\"CONTENT=\"WIDTH=DEVICEWIDTH",
+        "url": "http://47.100.188.251:80/initial-scale=1.0\" />",
+        "response_time_ms": 13.43
+    },
+    {
+        "name": "ANIMATION:LOADERINNER1SCUBICBEZIER0.42",
+        "url": "http://47.100.188.251:80/0.61, 0.58, 0.41) infinite",
+        "response_time_ms": 11.19
+    },
+    {
+        "name": "TRANSFORM:TRANSLATE3D50%",
+        "url": "http://47.100.188.251:80/-50%, 0)",
+        "response_time_ms": 12.35
+    },
+    {
+        "name": "<!DOCTYPEHTML><HTMLLANG=\"ZH\"><HEAD><SCRIPTSRC=\"/_APP.CONFIG.JS?V=5.5.9A363DAE2\"></SCRIPT><METACHARSET=\"UTF8\"/><METAHTTPEQUIV=\"XUACOMPATIBLE\"CONTENT=\"IE=EDGE",
+        "url": "http://81.70.92.76/chrome=1\"/><meta name=\"renderer\" content=\"webkit\"/><meta name=\"description\" content=\"A Modern Back-end Management System\"/><meta name=\"keywords\" content=\"Vben Admin Vue3 Vite\"/><meta name=\"author\" content=\"Vben\"/><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=0\"/><title>智愿君</title><link rel=\"icon\" href=\"/favicon.ico\"/><link rel=\"stylesheet\" href=\"https:/cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\"/><script>var HM_ID = 'b79d8f49e2d38b26503b92810b740f45'",
+        "response_time_ms": 31.44
+    },
+    {
+        "name": "<METANAME=\"DESCRIPTION\"CONTENT=\"ALIGHTWEIGHT",
+        "url": "http://81.70.92.54/rollbackable, visual AI external MCP memory bank based on URI routing rather than Vector RAG. Give your AI persistent structured memory across models, sessions, and tools.\" />",
+        "response_time_ms": 31.35
+    },
+    {
+        "name": "S.PARENTNODE.INSERTBEFOREHM",
+        "url": "http://81.70.92.76/s)",
+        "response_time_ms": 32.29
+    },
+    {
+        "name": "<METANAME=\"VIEWPORT\"CONTENT=\"WIDTH=DEVICEWIDTH",
+        "url": "http://81.70.92.54/initial-scale=1.0\" />",
+        "response_time_ms": 31.59
+    },
+    {
+        "name": "DOCUMENT.DOCUMENTELEMENT.CLASSLIST.TOGGLE'DARK'",
+        "url": "http://81.70.92.76/dark/.test(theme));</script><style data-app-loading=\"inject-css\">html{line-height:1.15}.loading{align-items:center;background-color:#f4f7f9;display:flex;flex-direction:column;height:100%;justify-content:center;left:0;overflow:hidden;position:fixed;top:0;width:100%;z-index:9999}.loading.hidden{opacity:0;pointer-events:none;transition:all .8s ease-out;visibility:hidden}.dark .loading{background:#0d0d10}.title{color:rgba(0,0,0,.85);font-size:28px;font-weight:600;margin-top:66px}.dark .title{color:#fff}.loader{height:48px;position:relative;width:48px}.loader:before{animation:shadow-ani .5s linear infinite;background:rgba(0,128,255,.5);background:hsl(var(--primary,210 100% 50%)/50%);border-radius:50%;height:5px;top:60px;width:48px}.loader:after,.loader:before{content:\"\";left:0;position:absolute}.loader:after{animation:jump-ani .5s linear infinite;background:#0080ff;background:hsl(var(--primary,210 100% 50%));border-radius:4px;height:100%;top:0;width:100%}@keyframes jump-ani{15%{border-bottom-right-radius:3px}25%{transform:translateY(9px) rotate(22.5deg)}50%{border-bottom-right-radius:40px;transform:translateY(18px) scaleY(.9) rotate(45deg)}75%{transform:translateY(9px) rotate(67.5deg)}to{transform:translateY(0) rotate(90deg)}}@keyframes shadow-ani{0%,to{transform:scale(1)}50%{transform:scaleX(1.2)}}</style><div class=\"loading\" id=\"__app-loading__\"><div class=\"loader\"></div><div class=\"title\">智愿君</div></div><div id=\"app\"></div></body></html>",
+        "response_time_ms": 29.82
+    },
+    {
+        "name": "{\"CODE\":1",
+        "url": "http://81.70.92.36/\"message\":\"请求路径不存在\"}",
+        "response_time_ms": 35.19
+    },
+    {
+        "name": "{\"MSG\":\"请求访问：/ZHGXTV/PUBLIC/JSON/LIVE_INTERFACE.TXT，认证失败，无法访问系统资源\"",
+        "url": "http://8.142.37.15:8080/\"code\":401}",
+        "response_time_ms": 81.12
+    },
+    {
+        "name": "YES",
+        "url": "http://123.60.2.41:11371/you can change it. You can write any HTML element you need to wrap your content in the wrapper attribute of your hovering popup.",
+        "response_time_ms": 103.3
+    },
+    {
+        "name": "BACKGROUND:#FFFURL\"DATA:IMAGE/PNG;BASE64",
+        "url": "http://124.70.135.147:8080/iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA3hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NTc3MiwgMjAxNC8wMS8xMy0xOTo0NDowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo0ZDhlNWY5My05NmI0LTRlNWQtOGFjYi03ZTY4OGYyMTU2ZTYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NTEyNTVEMURGMkVFMTFFNEI5NDBCMjQ2M0ExMDQ1OUYiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NTEyNTVEMUNGMkVFMTFFNEI5NDBCMjQ2M0ExMDQ1OUYiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKE1hY2ludG9zaCkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2MTc5NzNmZS02OTQxLTQyOTYtYTIwNi02NDI2YTNkOWU5YmUiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NGQ4ZTVmOTMtOTZiNC00ZTVkLThhY2ItN2U2ODhmMjE1NmU2Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+YiRG4AAAALFJREFUeNpi/P/PwMlgImBQkA9A+bOnfsIiBOxKcInh+yCaCDuByoswaIOpxwjciACFegBqZ1AvBSIS5OTk/8TkmNEjwWgQiUgtQuIjwAxUF3yX3xyGIEIFLwHpKyAWB+I1xGSwxULIGf9A7mQkBwTlhBXAFLHgPgqEAcTkmNCU6AL9d8WII4HOvk3ITkWJAXWUMlOoGQHmsE45ViQ2KuBuASoYC4Wf+OUYxz6mQkgwAAN9mIrUReCXgAAAABJRU5ErkJggg==\") no-repeat center",
+        "response_time_ms": 103.57
+    },
+    {
+        "name": "BACKGROUND:#FFFURL\"DATA:IMAGE/PNG;BASE64",
+        "url": "http://124.70.135.147:8080/iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA3hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NTc3MiwgMjAxNC8wMS8xMy0xOTo0NDowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo0ZDhlNWY5My05NmI0LTRlNWQtOGFjYi03ZTY4OGYyMTU2ZTYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NDlBRDI3NjVGMkQ2MTFFNEI5NDBCMjQ2M0ExMDQ1OUYiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NDlBRDI3NjRGMkQ2MTFFNEI5NDBCMjQ2M0ExMDQ1OUYiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKE1hY2ludG9zaCkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDphNWEzMWNhMC1hYmViLTQxNWEtYTEwZS04Y2U5NzRlN2Q4YTEiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NGQ4ZTVmOTMtOTZiNC00ZTVkLThhY2ItN2U2ODhmMjE1NmU2Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+k+sHwwAAASZJREFUeNpi/P/PwMyKD8uZw+kUoDYEYgloMIvgHg/EM/ptHx0EFk9I8wAoEZ+IDUPiIMY8IN1QJwENOgj3ACo5gNAbMBAHLgAxA4gQ5igAnNJ0MwAVTsX7IKyY7L2UNuJAf+AmAmJ78AEDTBiwGYg5gbifCSxFCZoaBMCy4A4GOjnH0D6DpK4IxNSVIHAfSDOAeLraJrjgJp/AwPbHMhejiQnwYRmUzNQ4VQgDQqXK0ia/0I17wJiPmQNTNBEAgMlQIWiQA2vgWw7QppBekGxsAjIiEUSBNnsBDWEAY9mEFgMMgBk00E0iZtA7AHEctDQ58MRuA6wlLgGFMoMpIG1QFeGwAIxGZo8GUhIysmwQGSAZgwHaEZhICIzOaBkJkqyM0CAAQDGx279Jf50AAAAAABJRU5ErkJggg==\") no-repeat center",
+        "response_time_ms": 103.61
+    },
+    {
+        "name": "//先查询存放在PRESENTCONTENT中的老数据",
+        "url": "http://124.70.135.165:8080/如果老数据没有,再去单独开的栏位multiTitle中捞数据",
+        "response_time_ms": 65.31
+    },
+    {
+        "name": "$'#CALENDAR_CALENDARSET_LAN_SET_TAB_CLONE'.FIND'#SCHEDULE_SETLANGUAGE_COMPLETE'.OFF.ON\"CLICK\"",
+        "url": "http://124.70.135.165:8080/{",
+        "response_time_ms": 34.47
+    },
+    {
+        "name": "VAROUT",
+        "url": "http://124.70.135.165:8080/i, len, c",
+        "response_time_ms": 68.91
+    },
+    {
+        "name": "PROCESSRESULT_ISFAIL",
+        "url": "http://124.70.135.165:8080/_radom)",
+        "response_time_ms": 92.96
+    },
+    {
+        "name": "IFC.INDEXOFNAME==0RETURNC.SUBSTRINGNAME.LENGTH",
+        "url": "http://124.70.135.165:8080/c.length)",
+        "response_time_ms": 107.55
+    },
+    {
+        "name": "<METANAME=\"VIEWPORT\"CONTENT=\"WIDTH=DEVICEWIDTH",
+        "url": "http://124.70.135.181:8080/initial-scale=1\" />",
+        "response_time_ms": 40.11
+    },
+    {
+        "name": "RADIALGRADIENTCIRCLEATTOPLEFT",
+        "url": "http://101.43.70.110:5004/rgba(96, 165, 250, 0.18), transparent 30%),",
+        "response_time_ms": 24.88
+    },
+    {
+        "name": "SHADOW:020PX60PXRGBA15",
+        "url": "http://101.43.70.110:5004/23, 42, 0.14)",
+        "response_time_ms": 26.58
+    },
+    {
+        "name": "BOXSHADOW:0004PXRGBA96",
+        "url": "http://101.43.70.110:5004/165, 250, 0.16)",
+        "response_time_ms": 27.29
+    },
+    {
+        "name": "BORDER:1PXSOLIDRGBA255",
+        "url": "http://101.43.70.110:5004/255,255,0.08)",
+        "response_time_ms": 28.11
+    },
+    {
+        "name": "BACKGROUND:LINEARGRADIENT180DEG",
+        "url": "http://101.43.70.110:5004/rgba(255,255,255,0.10), rgba(255,255,255,0.06))",
+        "response_time_ms": 23.5
+    },
+    {
+        "name": "COLOR:RGBA255",
+        "url": "http://101.43.70.110:5004/255,255,0.42)",
+        "response_time_ms": 31.6
+    },
+    {
+        "name": "COLOR:RGBA255",
+        "url": "http://101.43.70.110:5004/255,255,0.82)",
+        "response_time_ms": 32.92
+    },
+    {
+        "name": ".BTNSUCCESS{BACKGROUND:#DCFCE7;COLOR:#166534;BORDER:1PXSOLIDRGBA22",
+        "url": "http://101.43.70.110:5004/101, 52, 0.18); }",
+        "response_time_ms": 24.18
+    },
+    {
+        "name": "BOXSHADOW:012PX24PXRGBA15",
+        "url": "http://101.43.70.110:5004/23, 42, 0.1)",
+        "response_time_ms": 26.29
+    },
+    {
+        "name": "BORDER:1PXDASHEDRGBA37",
+        "url": "http://101.43.70.110:5004/99,235,0.28); border-radius: 18px; padding: 16px;",
+        "response_time_ms": 29.2
+    },
+    {
+        "name": "WIDTH:MIN360PX",
+        "url": "http://101.43.70.110:5004/100%)",
+        "response_time_ms": 25.46
+    },
+    {
+        "name": "BACKGROUND:RGBA255",
+        "url": "http://101.43.70.110:5004/255, 255, 0.18)",
+        "response_time_ms": 35.04
+    },
+    {
+        "name": "BOXSHADOW:06PX18PXRGBA15",
+        "url": "http://101.43.70.110:5004/23, 42, 0.05)",
+        "response_time_ms": 26.99
+    },
+    {
+        "name": "BACKGROUND:RGBA255",
+        "url": "http://101.43.70.110:5004/255,255,0.88)",
+        "response_time_ms": 26.12
+    },
+    {
+        "name": "WIDTH:MIN1120PX",
+        "url": "http://101.43.70.110:5004/100%); max-height: calc(100vh - 36px); overflow: auto;",
+        "response_time_ms": 113.79
+    },
+    {
+        "name": "BOXSHADOW:012PX26PXRGBA37",
+        "url": "http://101.43.70.110:5004/99, 235, 0.16)",
+        "response_time_ms": 25.22
+    },
+    {
+        "name": "BORDER:1PXSOLIDRGBA239",
+        "url": "http://101.43.70.110:5004/68, 68, 0.18)",
+        "response_time_ms": 24.74
+    },
+    {
+        "name": "GRIDTEMPLATECOLUMNS:MINMAX0",
+        "url": "http://101.43.70.110:5004/1fr) auto",
+        "response_time_ms": 37.27
+    },
+    {
+        "name": "BACKGROUND:RGBA255",
+        "url": "http://101.43.70.110:5004/255, 255, 0.72)",
+        "response_time_ms": 26.5
+    },
+    {
+        "name": "GRIDTEMPLATECOLUMNS:AUTOMINMAX0",
+        "url": "http://101.43.70.110:5004/1fr)",
+        "response_time_ms": 35.4
+    },
+    {
+        "name": "BOXSHADOW:014PX30PXRGBA15",
+        "url": "http://101.43.70.110:5004/23, 42, 0.08)",
+        "response_time_ms": 104.17
+    },
+    {
+        "name": ".DEPTSUMMARYCARD.DEV{BACKGROUND:LINEARGRADIENT180DEG",
+        "url": "http://101.43.70.110:5004#fff, #eef2ff); }",
+        "response_time_ms": 27.02
+    },
+    {
+        "name": ".DEPTSUMMARYCARD.VIS{BACKGROUND:LINEARGRADIENT180DEG",
+        "url": "http://101.43.70.110:5004#fff, #fff1f2); }",
+        "response_time_ms": 25.63
+    },
+    {
+        "name": "BACKGROUND:#FFFFFF;BORDERCOLOR:RGBA37",
+        "url": "http://101.43.70.110:5004/99,235,0.45)",
+        "response_time_ms": 28.28
+    },
+    {
+        "name": "BORDER:1PXSOLIDRGBA201",
+        "url": "http://101.43.70.110:5004/157, 24, 0.26)",
+        "response_time_ms": 23.52
+    },
+    {
+        "name": "TRANSITION:BACKGROUND0.16SEASE",
+        "url": "http://101.43.70.110:5004/border-color 0.16s ease, transform 0.16s ease",
+        "response_time_ms": 24.3
+    },
+    {
+        "name": "BACKGROUND:LINEARGRADIENT90DEG",
+        "url": "http://101.43.70.110:5004/rgba(254, 226, 226, 0.94), rgba(255, 255, 255, 0.94))",
+        "response_time_ms": 34.03
+    },
+    {
+        "name": "BOXSHADOW:013PX22PXRGBA15",
+        "url": "http://101.43.70.110:5004/23, 42, 0.13)",
+        "response_time_ms": 26.84
+    },
+    {
+        "name": "BOXSHADOW:0004PXRGBA37",
+        "url": "http://101.43.70.110:5004/99, 235, 0.08), 0 14px 28px rgba(15, 23, 42, 0.12)",
+        "response_time_ms": 106.29
+    },
+    {
+        "name": "BACKGROUND:RGBA239",
+        "url": "http://101.43.70.110:5004/246, 255, 0.82)",
+        "response_time_ms": 34.85
+    },
+    {
+        "name": ".PROJECTACTIONPANELCARD{WIDTH:MIN640PX",
+        "url": "http://101.43.70.110:5004/100%); }",
+        "response_time_ms": 24.64
+    },
+    {
+        "name": "BOXSHADOW:010PX18PXRGBA37",
+        "url": "http://101.43.70.110:5004/99, 235, 0.12)",
+        "response_time_ms": 26.37
+    },
+    {
+        "name": "BORDERCOLOR:RGBA185",
+        "url": "http://101.43.70.110:5004/28, 28, 0.12)",
+        "response_time_ms": 25.94
+    },
+    {
+        "name": "BORDERCOLOR:RGBA37",
+        "url": "http://101.43.70.110:5004/99, 235, 0.28)",
+        "response_time_ms": 33.75
+    },
+    {
+        "name": "BACKGROUND:RGBA255",
+        "url": "http://101.43.70.110:5004/255,255,0.92)",
+        "response_time_ms": 36.02
+    },
+    {
+        "name": "BORDERCOLOR:RGBA37",
+        "url": "http://101.43.70.110:5004/99,235,0.72)",
+        "response_time_ms": 36.29
+    },
+    {
+        "name": "BACKGROUND:LINEARGRADIENT180DEG",
+        "url": "http://101.43.70.110:5004#fff, #fffbeb);",
+        "response_time_ms": 24.26
+    },
+    {
+        "name": "BOXSHADOW:010PX24PXRGBA99",
+        "url": "http://101.43.70.110:5004/102,241,0.08)",
+        "response_time_ms": 101.53
+    },
+    {
+        "name": "BORDERCOLOR:RGBA245",
+        "url": "http://101.43.70.110:5004/158,11,0.20)",
+        "response_time_ms": 25.02
+    },
+    {
+        "name": "MAXHEIGHT:MIN520PX",
+        "url": "http://101.43.70.110:5004/calc(100vh - 24px))",
+        "response_time_ms": 29.53
+    },
+    {
+        "name": "BORDERCOLOR:RGBA4",
+        "url": "http://101.43.70.110:5004/120, 87, 0.14)",
+        "response_time_ms": 26.47
+    },
+    {
+        "name": "TRANSITION:OPACITY0.18SEASE",
+        "url": "http://101.43.70.110:5004/transform 0.18s ease",
+        "response_time_ms": 110.4
+    },
+    {
+        "name": "BORDER:1PXSOLIDRGBA37",
+        "url": "http://101.43.70.110:5004/99, 235, 0.18)",
+        "response_time_ms": 25.87
+    },
+    {
+        "name": "GRIDTEMPLATECOLUMNS:REPEAT3",
+        "url": "http://101.43.70.110:5004/minmax(0, 1fr))",
+        "response_time_ms": 25.27
+    },
+    {
+        "name": "BOXSHADOW:022PX48PXRGBA15",
+        "url": "http://101.43.70.110:5004/23, 42, 0.18)",
+        "response_time_ms": 34.58
+    },
+    {
+        "name": "<INPUTTYPE=\"FILE\"ID=\"TASKFILEINPUT\"MULTIPLEHIDDENACCEPT=\".DOC",
+        "url": "http://101.43.70.110:5004/.docx,.xls,.xlsx,.ppt,.pptx,.pdf,.png,.jpg,.jpeg,.webp,.gif,.zip,.rar,.txt,.csv\" />",
+        "response_time_ms": 22.31
+    },
+    {
+        "name": "CONSTTIMEOUTID=CONTROLLER?SETTIMEOUT=>CONTROLLER.ABORT",
+        "url": "http://101.43.70.110:5004/CLOUD_FETCH_TIMEOUT_MS) : null",
+        "response_time_ms": 113.01
+    },
+    {
+        "name": "<DIVCLASS=\"MODALCARD\"STYLE=\"WIDTH:MIN760PX",
+        "url": "http://101.43.70.110:5004/100%);\">",
+        "response_time_ms": 31.67
+    },
+    {
+        "name": "}",
+        "url": "http://101.43.70.110:5004/550)",
+        "response_time_ms": 37.16
+    },
+    {
+        "name": "CONSTM=STRINGD.GETMONTH+1.PADSTART2",
+        "url": "http://101.43.70.110:5004/\"0\")",
+        "response_time_ms": 26.99
+    },
+    {
+        "name": "FUNCTIONSETDATEFIELDVALUEFIELDID",
+        "url": "http://101.43.70.110:5004/rawValue, mode = \"datetime\") {",
+        "response_time_ms": 27.71
+    },
+    {
+        "name": "RETURNNORMALIZESTOREDDATEVALUECURRENT",
+        "url": "http://101.43.70.110:5004/mode)",
+        "response_time_ms": 25.41
+    },
+    {
+        "name": "RETURN`${DATEONLY}T${GETTIMEONLYRAW",
+        "url": "http://101.43.70.110:5004/mode === \"datetime\" ? \"18:00\" : \"00:00\")}`;",
+        "response_time_ms": 26.17
+    },
+    {
+        "name": "FUNCTIONPARSEDATEPARTSVALUE",
+        "url": "http://101.43.70.110:5004/fallbackTime = \"18:00\") {",
+        "response_time_ms": 40.24
+    },
+    {
+        "name": "CONSTNORMALIZED=NORMALIZESTOREDDATEVALUEVALUE||`${TODAYISO}T${FALLBACKTIME}`",
+        "url": "http://101.43.70.110:5004/\"datetime\")",
+        "response_time_ms": 24.74
+    },
+    {
+        "name": "CONST[HOUR",
+        "url": "http://101.43.70.110:5004/minute] = (timePart || fallbackTime).split(\":\").map(Number)",
+        "response_time_ms": 30.02
+    },
+    {
+        "name": "RETURN`${NEWDATEONLY}T${GETTIMEONLYVALUE",
+        "url": "http://101.43.70.110:5004/fallbackTime)}`",
+        "response_time_ms": 34.7
+    },
+    {
+        "name": "FUNCTIONUPDATEDATEKEEPTIMEVALUE",
+        "url": "http://101.43.70.110:5004/newDateOnly, fallbackTime = \"18:00\") {",
+        "response_time_ms": 27.37
+    },
+    {
+        "name": "FUNCTIONDAYSINMONTHYEAR",
+        "url": "http://101.43.70.110:5004/month) {",
+        "response_time_ms": 34.82
+    },
+    {
+        "name": "CONSTDATE=NEWDATEPICKERSTATE.YEAR",
+        "url": "http://101.43.70.110:5004/pickerState.month - 1 + Number(offset || 0), 1)",
+        "response_time_ms": 29.94
+    },
+    {
+        "name": "FUNCTIONUPDATEPICKERTIMEINPUTPART",
+        "url": "http://101.43.70.110:5004/value) {",
+        "response_time_ms": 37.82
+    },
+    {
+        "name": "SETDATEFIELDVALUEPICKERSTATE.FIELDID",
+        "url": "http://101.43.70.110:5004/value, pickerState.mode)",
+        "response_time_ms": 32.96
+    },
+    {
+        "name": "OBJECT.ASSIGNPICKERSTATE",
+        "url": "http://101.43.70.110:5004/parseDateParts(`${todayISO()}T18:00`, '18:00'))",
+        "response_time_ms": 26.92
+    },
+    {
+        "name": "CONSTNEXTDAY=NEWDATE`${PARTS.YEAR}${STRINGPARTS.MONTH.PADSTART2",
+        "url": "http://101.43.70.110:5004/\"0\")}-${String(parts.day).padStart(2,\"0\")}T00:00`)",
+        "response_time_ms": 29.8
+    },
+    {
+        "name": "INPROGRESS:TASKS.FILTERT=>[\"未开始\"",
+        "url": "http://101.43.70.110:5004/\"进行中\", \"待回收\"].includes(t.status)).length,",
+        "response_time_ms": 28.7
+    },
+    {
+        "name": "FUNCTIONADDRESOURCEITEMITEMS",
+        "url": "http://101.43.70.110:5004/seen, item) {",
+        "response_time_ms": 25.74
+    },
+    {
+        "name": "RESOURCES.LINKS.FOREACHLINK=>ADDRESOURCEITEMITEMS",
+        "url": "http://101.43.70.110:5004/seen, {",
+        "response_time_ms": 23.4
+    },
+    {
+        "name": "SETTEXT\"RESOURCETOTALCOUNT\"",
+        "url": "http://101.43.70.110:5004/items.length)",
+        "response_time_ms": 101.54
+    },
+    {
+        "name": "RETURNDATEBDATEA||STRINGA.NAME||\"\".LOCALECOMPARESTRINGB.NAME||\"\"",
+        "url": "http://101.43.70.110:5004/\"zh\")",
+        "response_time_ms": 27.61
+    },
+    {
+        "name": "IF[\"PNG\"",
+        "url": "http://101.43.70.110:5004/\"jpg\", \"jpeg\", \"webp\", \"gif\"].includes(ext)) {",
+        "response_time_ms": 25.42
+    },
+    {
+        "name": "DOCUMENT.GETELEMENTBYID\"TASKFILEMODALICON\".CLASSLIST.TOGGLE\"LINK\"",
+        "url": "http://101.43.70.110:5004/!isFile)",
+        "response_time_ms": 23.16
+    },
+    {
+        "name": "<DIVCLASS=\"TASKRESOURCEMETA\">${ESCAPEHTMLGETATTACHMENTKINDFILE}·${ESCAPEHTMLFORMATFILESIZEFILE.SIZE}${FILE.UPLOADEDAT?`·${ESCAPEHTMLFORMATDATESTRINGFILE.UPLOADEDAT.SLICE0",
+        "url": "http://101.43.70.110:5004/16)))}` : \"\"}</div>",
+        "response_time_ms": 27.79
+    },
+    {
+        "name": ".SORTA",
+        "url": "http://101.43.70.110:5004/b) => {",
+        "response_time_ms": 35.38
+    },
+    {
+        "name": "${CREATECHIPTASK.PRIORITY||\"—\"",
+        "url": "http://101.43.70.110:5004/`prio-${task.priority || \"P3\"}`)}",
+        "response_time_ms": 22.2
+    },
+    {
+        "name": "SELECTEDCALENDARDATE=`${MONTHSTART.GETFULLYEAR}${STRINGMONTHSTART.GETMONTH+1.PADSTART2",
+        "url": "http://101.43.70.110:5004/\"0\")}-01`",
+        "response_time_ms": 104.29
+    },
+    {
+        "name": "BTN.CLASSLIST.TOGGLE\"ISACTIVE\"",
+        "url": "http://101.43.70.110:5004/isActive)",
+        "response_time_ms": 27.92
+    },
+    {
+        "name": "CONSTMAXINDEX=GETSTRATEGICPOINTSDATA.REDUCEMAX",
+        "url": "http://101.43.70.110:5004/item) => {",
+        "response_time_ms": 33.51
+    },
+    {
+        "name": "STATE.PROJECTCATEGORIES=[...CATEGORIES",
+        "url": "http://101.43.70.110:5004/{ key, label }]",
+        "response_time_ms": 31.15
+    },
+    {
+        "name": "CONSTDATE=TODAYISO.REPLACE//G",
+        "url": "http://101.43.70.110:5004/\"\").slice(2)",
+        "response_time_ms": 26.25
+    },
+    {
+        "name": "FUNCTIONPOPULATEPROJECTSELECTSELECTID",
+        "url": "http://101.43.70.110:5004/strategyPointId, selectedValue = \"\", includeEmpty = true, emptyLabel = \"\") {",
+        "response_time_ms": 34.19
+    },
+    {
+        "name": "}",
+        "url": "http://101.43.70.110:5004/0)",
+        "response_time_ms": 30.88
+    },
+    {
+        "name": "FUNCTIONCREATEDEPTTAGNAME",
+        "url": "http://101.43.70.110:5004/key) {",
+        "response_time_ms": 52.4
+    },
+    {
+        "name": "POPOVER.ADDEVENTLISTENER\"CLICK\"",
+        "url": "http://101.43.70.110:5004/(event) => event.stopPropagation())",
+        "response_time_ms": 26.53
+    },
+    {
+        "name": "CONSTOWNERS=[...NEWSETALLROWS.MAPITEM=>ITEM.OWNER.FILTERBOOLEAN].SORTA",
+        "url": "http://101.43.70.110:5004/b) => a.localeCompare(b, \"zh\"))",
+        "response_time_ms": 27.31
+    },
+    {
+        "name": "FUNCTIONOPENQUICKASSIGNPOPOVEREVENT",
+        "url": "http://101.43.70.110:5004/taskId) {",
+        "response_time_ms": 27.15
+    },
+    {
+        "name": "<TD>${CREATECHIPTASK.STATUS",
+        "url": "http://101.43.70.110:5004/`status-${task.status}`)}</td>",
+        "response_time_ms": 101.78
+    },
+    {
+        "name": "TOP=MATH.MINMATH.MAXMARGIN",
+        "url": "http://101.43.70.110:5004/top), Math.max(margin, window.innerHeight - height - margin))",
+        "response_time_ms": 27.74
+    },
+    {
+        "name": "POPOVER.ADDEVENTLISTENER\"TOUCHSTART\"",
+        "url": "http://101.43.70.110:5004/rememberQuickAssignTouch, { passive: true })",
+        "response_time_ms": 105.91
+    },
+    {
+        "name": "LETLEFT=MATH.MINMATH.MAXMARGIN",
+        "url": "http://101.43.70.110:5004/rect.right - width), window.innerWidth - width - margin)",
+        "response_time_ms": 36.09
+    },
+    {
+        "name": "MODALOPENORDER.FOREACHID",
+        "url": "http://101.43.70.110:5004/index) => {",
+        "response_time_ms": 104.53
+    },
+    {
+        "name": "CONSTLATESTRECORD=[...RECORDS].SORTA",
+        "url": "http://101.43.70.110:5004/b) => String(b.createdAt || \"\").localeCompare(String(a.createdAt || \"\")))[0]",
+        "response_time_ms": 28.31
+    },
+    {
+        "name": "MODALOPENORDER.SPLICEEXISTINGINDEX",
+        "url": "http://101.43.70.110:5004/1)",
+        "response_time_ms": 25.81
+    },
+    {
+        "name": "CONSTDUEA=NORMALIZESTOREDDATEVALUEA.DUEDATE",
+        "url": "http://101.43.70.110:5004/\"datetime\") || \"9999-12-31T23:59\"",
+        "response_time_ms": 27.54
+    },
+    {
+        "name": "ITEM.CLASSLIST.TOGGLE\"ISCENTER\"",
+        "url": "http://101.43.70.110:5004/shouldCenter)",
+        "response_time_ms": 25.21
+    },
+    {
+        "name": "FUNCTIONBUILDCARRYOVERPLANTASKS",
+        "url": "http://101.43.70.110:5004/targetMonthStart) {",
+        "response_time_ms": 28.03
+    },
+    {
+        "name": "FUNCTIONOPENTASKMODALTASKID=NULL",
+        "url": "http://101.43.70.110:5004/options = {}) {",
+        "response_time_ms": 27.35
+    },
+    {
+        "name": "SETDATEFIELDVALUE\"DUEDATE\"",
+        "url": "http://101.43.70.110:5004/normalizeStoredDateValue(task.dueDate, \"datetime\"), \"datetime\")",
+        "response_time_ms": 31.18
+    },
+    {
+        "name": "CONSTNOW+24=ADDHOURSTODATETIMENOWLOCALDATETIMEISO",
+        "url": "http://101.43.70.110:5004/24, `${todayISO()}T18:00`)",
+        "response_time_ms": 27.37
+    },
+    {
+        "name": ".SORTA",
+        "url": "http://101.43.70.110:5004/b) => (b._deletedAt || \"\").localeCompare(a._deletedAt || \"\"))",
+        "response_time_ms": 29.45
+    },
+    {
+        "name": "CONSTBLOB=NEWBLOB[JSON.STRINGIFYSTATE",
+        "url": "http://101.43.70.110:5004/null, 2)], { type: \"application/json;charset=utf-8\" });",
+        "response_time_ms": 28.39
+    },
+    {
+        "name": "PROGRESS:MATH.MIN100",
+        "url": "http://101.43.70.110:5004/Math.max(0, Number(document.getElementById(\"strategyProjectProgress\").value || 0))),",
+        "response_time_ms": 84.56
+    },
+    {
+        "name": "CANDIDATE=`T${DATE}${STRINGIDX.PADSTART2",
+        "url": "http://101.43.70.110:5004/\"0\")}`",
+        "response_time_ms": 25.99
+    },
+    {
+        "name": "DOCUMENT.GETELEMENTBYID\"MOBILECARRYOVERPREVMONTHBTN\"?.ADDEVENTLISTENER\"CLICK\"",
+        "url": "http://101.43.70.110:5004/carryOverPreviousMonthTasks)",
+        "response_time_ms": 33.72
+    },
+    {
+        "name": "DOCUMENT.GETELEMENTBYID\"OPENSTRATEGICPOINTMODALBTN\"?.ADDEVENTLISTENER\"CLICK\"",
+        "url": "http://101.43.70.110:5004/() => openStrategicPointModal())",
+        "response_time_ms": 24.95
+    },
+    {
+        "name": "SETDATEFIELDVALUE\"DISPATCATE\"",
+        "url": "http://101.43.70.110:5004/nowLocalDateTimeISO(), \"datetime\")",
+        "response_time_ms": 34.66
+    },
+    {
+        "name": "DOCUMENT.GETELEMENTBYID\"DUE+2BTN\"?.ADDEVENTLISTENER\"CLICK\"",
+        "url": "http://101.43.70.110:5004/() => {",
+        "response_time_ms": 24.67
+    },
+    {
+        "name": "DOCUMENT.GETELEMENTBYID\"DATEPICKERQUICKTODAY1800BTN\"?.ADDEVENTLISTENER\"CLICK\"",
+        "url": "http://101.43.70.110:5004/setPickerQuickToday1800)",
+        "response_time_ms": 27.08
+    },
+    {
+        "name": "DOCUMENT.GETELEMENTBYID\"TASKFORM\"?.ADDEVENTLISTENER\"SUBMIT\"",
+        "url": "http://101.43.70.110:5004/handleTaskSubmit)",
+        "response_time_ms": 28.4
+    },
+    {
+        "name": "STRATEGICBODY.ADDEVENTLISTENER\"FOCUSOUT\"",
+        "url": "http://101.43.70.110:5004/(e) => handleStrategicEdit(e.target))",
+        "response_time_ms": 39.63
+    },
+    {
+        "name": "{\"SUCCESS\":FALSE",
+        "url": "http://124.70.150.250:9006/\"code\": 404,\"msg\": \"请求失败，接口不存在或请求方式错误\",\"data\": []}",
+        "response_time_ms": 26.3
+    },
+    {
+        "name": "<!DOCTYPEHTML><HTMLLANG=EN><HEAD><METACHARSET=UTF8><METANAME=VIEWPORTCONTENT=\"WIDTH=DEVICEWIDTH",
+        "url": "http://124.70.144.111:7777/initial-scale=1\"><meta http-equiv=X-UA-Compatible content=\"ie=edge\"><title>天使智慧医疗云平台</title><script>document.write('<script src=\"./config/index.js?t=' + new Date().getTime() + '\"><\\/script>')</script></head><body><div id=app></div></body></html>",
+        "response_time_ms": 21.74
+    },
+    {
+        "name": "<METANAME=\"VIEWPORT\"CONTENT=\"WIDTH=DEVICEWIDTH",
+        "url": "http://106.14.143.222/initial-scale=1.0\">",
+        "response_time_ms": 14.89
+    },
+    {
+        "name": "BORDER:3PXSOLIDRGBA255",
+        "url": "http://60.25.161.151:8888/255, 255, 0.2)",
+        "response_time_ms": 51.65
+    },
+    {
+        "name": "}</SCRIPT><DIVID=\"APP\"><STYLE>HTML[DATATHEME=DARK].APPLOADING{BACKGROUNDCOLOR:#2C344A}HTML[DATATHEME=DARK].APPLOADING.APPLOADINGTITLE{COLOR:RGB255255255/85%}.APPLOADING{DISPLAY:FLEX;WIDTH:100%;HEIGHT:100%;JUSTIFYCONTENT:CENTER;ALIGNITEMS:CENTER;FLEXDIRECTION:COLUMN;BACKGROUNDCOLOR:#F4F7F9}.APPLOADING.APPLOADINGWRAP{POSITION:ABSOLUTE;TOP:50%;LEFT:50%;DISPLAY:FLEX;TRANSFORM:TRANSLATE3D50%",
+        "url": "http://124.71.149.170:18081/-50%,0);justify-content:center;align-items:center}.app-loading .dots{display:flex;padding:98px;justify-content:center;align-items:center}.app-loading .app-loading-title{display:flex;font-size:30px;color:rgb(0 0 0 / 85%);justify-content:center;align-items:center;margin:auto 1vw}.app-loading .app-loading-logo{display:block;width:90px;margin:0 auto}.dot{position:relative;display:inline-block;width:48px;height:48px;font-size:32px;transform:rotate(45deg);box-sizing:border-box;-webkit-animation:antRotate 1.2s infinite linear;animation:antRotate 1.2s infinite linear}.dot i{position:absolute;display:block;width:20px;height:20px;background-color:#0065cc;border-radius:100%;opacity:30%;transform:scale(.75);-webkit-animation:antSpinMove 1s infinite linear alternate;animation:antSpinMove 1s infinite linear alternate;transform-origin:50% 50%}.dot i:first-child{top:0;left:0}.dot i:nth-child(2){top:0;right:0;-webkit-animation-delay:.4s;animation-delay:.4s}.dot i:nth-child(3){right:0;bottom:0;-webkit-animation-delay:.8s;animation-delay:.8s}.dot i:nth-child(4){bottom:0;left:0;-webkit-animation-delay:1.2s;animation-delay:1.2s}@-webkit-keyframes antRotate{to{transform:rotate(405deg)}}@keyframes antRotate{to{transform:rotate(405deg)}}@-webkit-keyframes antSpinMove{to{opacity:100%}}@keyframes antSpinMove{to{opacity:100%}}</style><div class=\"app-loading\"><div class=\"app-loading-wrap\" style=\"flex-direction:row\"><img src=\"/resource/img/logo-without-text.png\" class=\"app-loading-logo\" alt=\"Logo\"/><div class=\"app-loading-title\">加载中</div><div class=\"app-loading-dots\"><span class=\"dot dot-spin\"><i></i><i></i><i></i><i></i></span></div></div></div></div></body></html>",
+        "response_time_ms": 20.32
+    },
+    {
+        "name": "<DIVCLASS=\"STATNUMBER\">10",
+        "url": "http://106.14.143.222/000+</div>",
+        "response_time_ms": 49.51
+    },
+    {
+        "name": "广东卫视",
+        "url": "http://61.136.172.236:9901/tsfile/live/0125_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 93.09
+    },
+    {
+        "name": "<METANAME=\"KEYWORDS\"CONTENT=\"宠物纪念",
+        "url": "http://106.14.143.222/宠物墓园,宠物纪念碑,宠物追思,宠物纪念园,宠物殡葬,宠物悼念,数字纪念碑,宠物纪念平台\">",
+        "response_time_ms": 27.87
+    },
+    {
+        "name": "<METANAME=\"GOOGLEBOT\"CONTENT=\"INDEX",
+        "url": "http://106.14.143.222/follow\">",
+        "response_time_ms": 51.66
+    },
+    {
+        "name": "深圳卫视",
+        "url": "http://61.136.172.236:9901/tsfile/live/0126_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 99.51
+    },
+    {
+        "name": "$'#SEARCHFORM",
+        "url": "http://106.14.143.187#toggle-search').toggleClass('open');",
+        "response_time_ms": 97.86
+    },
+    {
+        "name": "<!DOCTYPEHTML><HTMLLANG=\"ZHCN\"ID=\"HTMLROOT\"><HEAD><SCRIPTSRC=\"/_APP.CONFIG.JS?V=2.8.01774440119997\"></SCRIPT><METACHARSET=\"UTF8\"/><METAHTTPEQUIV=\"XUACOMPATIBLE\"CONTENT=\"IE=EDGE",
+        "url": "http://124.71.149.170:18081/chrome=1\"/><meta name=\"renderer\" content=\"webkit\"/><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=0\"/><title>青蜂云回收</title><link rel=\"icon\" href=\"/favicon.ico\"/><script type=\"module\" crossorigin src=\"/assets/index.b6a2e6f0.js\"></script><link rel=\"stylesheet\" href=\"/assets/index.ce85e3d1.css\"><link disabled=\"disabled\" id=\"__VITE_PLUGIN_THEME-ANTD_DARK_THEME_LINK__\" rel=\"alternate stylesheet\" href=\"/assets/app-antd-dark-theme-style.e3b0c442.css\"></head><body><script>;(() => {",
+        "response_time_ms": 22.24
+    },
+    {
+        "name": "<METANAME=\"VIEWPORT\"CONTENT=\"WIDTH=DEVICEWIDTH",
+        "url": "http://106.14.143.83/initial-scale=1.0\" />",
+        "response_time_ms": 22.29
+    },
+    {
+        "name": "<!DOCTYPEHTML><HTML><HEAD><METACHARSET=UTF8><LINKREL=ICONHREF=\"HTTPS://TH.BING.COM/TH/ID/OIP.Z_J3MLC6YASVBGOA7NA_AAAAA?PID=IMGDET&RS=1\"TYPE=IMAGE/PNG><TITLE>中国近代工业设计博物馆管理系统</TITLE><LINKHREF=/STATIC/CSS/APP.D670EA0E25DEC4458221DC1D4B13AF43.CSSREL=STYLESHEET></HEAD><BODY><DIVID=APP></DIV><SCRIPTTYPE=TEXT/JAVASCRIPTSRC=/STATIC/JS/MANIFEST.2AE2E69A05C33DFC65F8.JS></SCRIPT><SCRIPTTYPE=TEXT/JAVASCRIPTSRC=/STATIC/JS/VENDOR.DD5C7B98C31D85AEE2E6.JS></SCRIPT><SCRIPTTYPE=TEXT/JAVASCRIPTSRC=/STATIC/JS/APP.32EF3E8E4E3B5D5263D6.JS></SCRIPT></BODY></HTML><STYLE>HTML",
+        "url": "http://106.14.143.46/body {",
+        "response_time_ms": 26.22
+    },
+    {
+        "name": "{\"CODE\":404",
+        "url": "http://124.71.194.194/\"data\":null,\"msg\":\"No static resource ZHGXTV/Public/json/live_interface.txt.\"}",
+        "response_time_ms": 29.09
+    },
+    {
+        "name": "HTMLROOT.SETATTRIBUTE'DATATHEME'",
+        "url": "http://124.71.149.170:18081/theme)",
+        "response_time_ms": 22.31
+    },
+    {
+        "name": "<METANAME=\"VIEWPORT\"CONTENT=\"WIDTH=DEVICEWIDTH",
+        "url": "http://106.14.143.82/initial-scale=1.0\" />",
+        "response_time_ms": 29.11
+    },
+    {
+        "name": "<METANAME=\"KEYWORDS\"CONTENT=\"荣事盛",
+        "url": "http://106.14.143.187/橡塑,宁波,宁海,橡胶,汽车配件,塑料,官网\">",
+        "response_time_ms": 93.31
+    },
+    {
+        "name": "BACKGROUND:RGBA0",
+        "url": "http://60.25.161.151:8888/0, 0, 0.7)",
+        "response_time_ms": 40.83
+    },
+    {
+        "name": "<METANAME=\"VIEWPORT\"CONTENT=\"WIDTH=DEVICEWIDTH",
+        "url": "http://60.25.161.151:8888/initial-scale=1.0\" />",
+        "response_time_ms": 49.05
+    },
+    {
+        "name": "浙江卫视",
+        "url": "http://61.136.172.236:9901/tsfile/live/0124_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 63.55
+    },
+    {
+        "name": "<!DOCTYPEHTML><HTMLLANG=\"ZH\"><HEAD><METACHARSET=\"UTF8\"><METANAME=\"RENDERER\"CONTENT=\"WEBKIT\"><METANAME=\"FORCERENDERING\"CONTENT=\"WEBKIT\"><METAHTTPEQUIV=\"XUACOMPATIBLE\"CONTENT=\"IE=EDGE",
+        "url": "http://106.14.143.77/chrome=1\"><meta http-equiv=\"X-XSS-Protection\" content=\"1; mode=block\"><meta http-equiv=\"Expires\" content=\"0\"><meta http-equiv=\"Pragma\" content=\"no-cache\"><meta http-equiv=\"Cache-control\" content=\"no-cache\"><meta http-equiv=\"Cache\" content=\"no-cache\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,minimum-scale=0.5,maximum-scale=2,user-scalable=no\"><meta id=\"keywords\" name=\"keywords\" content=\"光伏 电站 监控\"><meta id=\"description\" name=\"description\" content=\"专业的光伏电站监控平台，协助安装商(经销商)与终端业主监控管理太阳能光伏电站。随时随地了解电站发电和设备的运行状况，电站数据全局掌控。\"><title>锦浪云监控</title><link rel=\"stylesheet\" href=\"./static/iconfont/default/iconfont.css?450\"><script src=\"./static/html/js/browser.js\"></script><link href=\"./static/css/app.9f7fecb8.css\" rel=\"preload\" as=\"style\"><link href=\"./static/js/app.bbad67cd.js\" rel=\"preload\" as=\"script\"><link href=\"./static/js/chunk-vendors.3e5af213.js\" rel=\"preload\" as=\"script\"><link href=\"./static/css/app.9f7fecb8.css\" rel=\"stylesheet\"></head><body><div id=\"app\"></div><script src=\"./static/js/chunk-vendors.3e5af213.js\"></script><script src=\"./static/js/app.bbad67cd.js\"></script></body><script src=\"./static/iconfont/symbol/iconfont.js?450\"></script><script>var qimoClientId = {}</script></html>",
+        "response_time_ms": 23.01
+    },
+    {
+        "name": "东方卫视",
+        "url": "http://61.136.172.236:9901/tsfile/live/0107_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 99.29
+    },
+    {
+        "name": "广西卫视",
+        "url": "http://61.136.172.236:9901/tsfile/live/0113_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 37.34
+    },
+    {
+        "name": "<METAHTTPEQUIV=\"XUACOMPATIBLE\"CONTENT=\"IE=EDGE",
+        "url": "http://124.71.195.116/chrome=1\">",
+        "response_time_ms": 8.0
+    },
+    {
+        "name": "TRANSITION:ALL0.7S0.3SCUBICBEZIER0.645",
+        "url": "http://124.71.195.116/0.045, 0.355, 1.000)",
+        "response_time_ms": 8.15
+    },
+    {
+        "name": "CONTENT=\"WIDTH=DEVICEWIDTH",
+        "url": "http://124.71.195.109/user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">",
+        "response_time_ms": 22.62
+    },
+    {
+        "name": "<METANAME=\"VIEWPORT\"CONTENT=\"WIDTH=DEVICEWIDTH",
+        "url": "http://124.71.195.116/initial-scale=1, maximum-scale=1, user-scalable=no\">",
+        "response_time_ms": 7.65
+    },
+    {
+        "name": "SRC=\"HTTPS://WEBAPI.AMAP.COM/MAPS?V=1.4.15&KEY=8799EA91CF020FAEF54754FCA59A2552&PLUGIN=AMAP.GEOCODER",
+        "url": "http://124.71.195.116/AMap.RangingTool,AMap.Heatmap,AMap.PlaceSearch,AMap.DistrictSearch,AMap.Driving\"",
+        "response_time_ms": 7.68
+    },
+    {
+        "name": "<PATHD=\"M78.5",
+        "url": "http://124.71.195.109/529 L147,569.186414 L147,648.311216 L78.5,687 L10,648.311216 L10,569.186414 L78.5,529 Z\"",
+        "response_time_ms": 16.27
+    },
+    {
+        "name": "<PATHD=\"M639",
+        "url": "http://124.71.195.109/529 L773,607.846761 L773,763.091627 L639,839 L505,763.091627 L505,607.846761 L639,529 Z\"",
+        "response_time_ms": 72.54
+    },
+    {
+        "name": "<PATHD=\"M353",
+        "url": "http://124.71.195.109/9 L626.664028,170 L626.664028,487 L353,642 L79.3359724,487 L79.3359724,170 L353,9 Z\"",
+        "response_time_ms": 46.93
+    },
+    {
+        "name": "<BUTTONCLASS=\"FILTERLDAP\"TITLE=\"WHENCLICKED",
+        "url": "http://124.70.135.196:25000/a server-side matching is performed agains *all* bundle manifest headers. The expression is expected to be a valid OSGi Filter\">Filter All</button>",
+        "response_time_ms": 105.34
+    },
+    {
+        "name": "INSTAGRAMSTORIES",
+        "url": "http://123.60.75.150:3780/LinkedIn Video Upload for profiles",
+        "response_time_ms": 53.11
+    },
+    {
+        "name": "USABILITYOPTIMIZATION",
+        "url": "http://123.60.75.150:3780/Pinterest Title, AI Social Media Post Generator, Today's Content Calendar Tips",
+        "response_time_ms": 98.97
     }
 ]
