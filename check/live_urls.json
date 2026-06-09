@@ -1,0 +1,1162 @@
+[
+    {
+        "name": "云南红河",
+        "url": "http://society.yunnan.cn/video/003/009/150/00300915043_vw00000000000001_f37c7c89.mp4",
+        "response_time_ms": 53.28
+    },
+    {
+        "name": "云南怒江",
+        "url": "http://yn.yunnan.cn/video/003/009/013/00300901317_vw00000000000001_890ab3b4.mp4",
+        "response_time_ms": 74.33
+    },
+    {
+        "name": "云南西双版纳",
+        "url": "http://society.yunnan.cn/video/003/008/799/00300879937_vw00000000000001_73af9e72.mp4",
+        "response_time_ms": 73.29
+    },
+    {
+        "name": "云南昭通",
+        "url": "http://yn.yunnan.cn/video/003/008/986/00300898616_vw00000000000001_68e466b8.mp4",
+        "response_time_ms": 76.28
+    },
+    {
+        "name": "云南文山",
+        "url": "http://society.yunnan.cn/video/003/009/093/00300909370_vw00000000000001_9e6d398a.mp4",
+        "response_time_ms": 73.17
+    },
+    {
+        "name": "云南临沧",
+        "url": "http://society.yunnan.cn/video/003/008/825/00300882503_vw00000000000001_0e3674f6.mp4",
+        "response_time_ms": 79.02
+    },
+    {
+        "name": "云南普洱",
+        "url": "http://society.yunnan.cn/video/003/009/120/00300912046_vw00000000000001_265f9392.mp4",
+        "response_time_ms": 74.89
+    },
+    {
+        "name": "<METACONTENT=\"WIDTH=DEVICEWIDTH",
+        "url": "http://124.70.135.147:8080/initial-scale=1, maximum-scale=1, user-scalable=no\" name=\"viewport\">",
+        "response_time_ms": 74.16
+    },
+    {
+        "name": "<METANAME=\"VIEWPORT\"CONTENT=\"WIDTH=DEVICEWIDTH",
+        "url": "http://124.70.135.181:8080/initial-scale=1\" />",
+        "response_time_ms": 55.5
+    },
+    {
+        "name": "CCTV1",
+        "url": "http://61.136.172.236:9901/tsfile/live/0001_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 44.05
+    },
+    {
+        "name": "CCTV2",
+        "url": "http://61.136.172.236:9901/tsfile/live/0002_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 54.94
+    },
+    {
+        "name": "CCTV11",
+        "url": "http://61.136.172.236:9901/tsfile/live/0011_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 44.43
+    },
+    {
+        "name": "CCTV6",
+        "url": "http://61.136.172.236:9901/tsfile/live/0006_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 44.72
+    },
+    {
+        "name": "CCTV14",
+        "url": "http://61.136.172.236:9901/tsfile/live/0014_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 46.56
+    },
+    {
+        "name": "湖南卫视",
+        "url": "http://61.136.172.236:9901/tsfile/live/0128_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 45.63
+    },
+    {
+        "name": "CCTV8",
+        "url": "http://61.136.172.236:9901/tsfile/live/0008_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 44.31
+    },
+    {
+        "name": "CCTV5",
+        "url": "http://61.136.172.236:9901/tsfile/live/0005_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 45.42
+    },
+    {
+        "name": "CCTV9",
+        "url": "http://61.136.172.236:9901/tsfile/live/0009_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 50.04
+    },
+    {
+        "name": "湖北卫视",
+        "url": "http://61.136.172.236:9901/tsfile/live/0132_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 53.92
+    },
+    {
+        "name": "CCTV12",
+        "url": "http://61.136.172.236:9901/tsfile/live/0012_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 50.71
+    },
+    {
+        "name": "CCTV13",
+        "url": "http://61.136.172.236:9901/tsfile/live/0013_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 54.7
+    },
+    {
+        "name": "CCTV10",
+        "url": "http://61.136.172.236:9901/tsfile/live/0010_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 52.89
+    },
+    {
+        "name": "CCTV5+",
+        "url": "http://61.136.172.236:9901/tsfile/live/0016_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 58.36
+    },
+    {
+        "name": "CCTV15",
+        "url": "http://61.136.172.236:9901/tsfile/live/0015_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 57.48
+    },
+    {
+        "name": "CCTV3",
+        "url": "http://61.136.172.236:9901/tsfile/live/0003_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 50.04
+    },
+    {
+        "name": "河南电视剧",
+        "url": "http://182.114.48.136:9901/tsfile/live/1003_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 39.52
+    },
+    {
+        "name": "CCTV3",
+        "url": "http://182.114.48.136:9901/tsfile/live/0003_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 39.8
+    },
+    {
+        "name": "CCTV9",
+        "url": "http://182.114.48.136:9901/tsfile/live/0009_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 42.99
+    },
+    {
+        "name": "CCTV12",
+        "url": "http://182.114.48.136:9901/tsfile/live/0012_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 39.58
+    },
+    {
+        "name": "安徽卫视",
+        "url": "http://182.114.48.136:9901/tsfile/live/0130_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 39.73
+    },
+    {
+        "name": "CCTV13",
+        "url": "http://182.114.48.136:9901/tsfile/live/0013_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 40.07
+    },
+    {
+        "name": "CCTV8",
+        "url": "http://182.114.48.136:9901/tsfile/live/0008_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 49.09
+    },
+    {
+        "name": "CCTV5",
+        "url": "http://182.114.48.136:9901/tsfile/live/0005_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 45.68
+    },
+    {
+        "name": "CCTV2",
+        "url": "http://182.114.48.136:9901/tsfile/live/0002_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 42.47
+    },
+    {
+        "name": "河南法制报道",
+        "url": "http://182.114.48.136:9901/tsfile/live/1002_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 42.26
+    },
+    {
+        "name": "CCTV10",
+        "url": "http://182.114.48.136:9901/tsfile/live/0010_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 46.52
+    },
+    {
+        "name": "浙江卫视",
+        "url": "http://182.114.48.136:9901/tsfile/live/0124_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 45.5
+    },
+    {
+        "name": "山东卫视",
+        "url": "http://182.114.48.136:9901/tsfile/live/0131_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 46.51
+    },
+    {
+        "name": "河南卫视",
+        "url": "http://182.114.48.136:9901/tsfile/live/0139_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 45.44
+    },
+    {
+        "name": "河南新闻",
+        "url": "http://182.114.48.136:9901/tsfile/live/1004_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 48.34
+    },
+    {
+        "name": "CCTV7",
+        "url": "http://182.114.48.136:9901/tsfile/live/0007_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 49.21
+    },
+    {
+        "name": "CCTV6",
+        "url": "http://182.114.48.136:9901/tsfile/live/0006_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 46.36
+    },
+    {
+        "name": "CCTV4",
+        "url": "http://182.114.48.136:9901/tsfile/live/0004_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 49.03
+    },
+    {
+        "name": "河南民生",
+        "url": "http://182.114.48.136:9901/tsfile/live/1001_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 50.04
+    },
+    {
+        "name": "CCTV1",
+        "url": "http://182.114.48.136:9901/tsfile/live/0001_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 46.88
+    },
+    {
+        "name": "河南都市报道",
+        "url": "http://182.114.48.136:9901/tsfile/live/1000_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 51.14
+    },
+    {
+        "name": "CCTV11",
+        "url": "http://182.114.48.136:9901/tsfile/live/0011_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 49.33
+    },
+    {
+        "name": "CCTV14",
+        "url": "http://182.114.48.136:9901/tsfile/live/0014_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 49.56
+    },
+    {
+        "name": "东方卫视",
+        "url": "http://182.114.48.136:9901/tsfile/live/0107_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 55.66
+    },
+    {
+        "name": "深圳卫视",
+        "url": "http://182.114.48.136:9901/tsfile/live/0126_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 52.6
+    },
+    {
+        "name": "湖北卫视",
+        "url": "http://182.114.48.136:9901/tsfile/live/0132_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 53.15
+    },
+    {
+        "name": "北京卫视",
+        "url": "http://182.114.48.136:9901/tsfile/live/0122_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 47.68
+    },
+    {
+        "name": "陕西卫视",
+        "url": "http://182.114.48.136:9901/tsfile/live/0136_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 50.02
+    },
+    {
+        "name": "江苏卫视",
+        "url": "http://182.114.48.136:9901/tsfile/live/0127_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 46.98
+    },
+    {
+        "name": "辽宁卫视",
+        "url": "http://182.114.48.136:9901/tsfile/live/0121_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 49.53
+    },
+    {
+        "name": "湖南卫视",
+        "url": "http://182.114.48.136:9901/tsfile/live/0128_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 49.59
+    },
+    {
+        "name": "山西卫视",
+        "url": "http://182.114.48.136:9901/tsfile/live/0118_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 50.99
+    },
+    {
+        "name": "CCTV1",
+        "url": "http://121.19.134.56:808/tsfile/live/0001_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 49.6
+    },
+    {
+        "name": "东南卫视",
+        "url": "http://121.19.134.56:808/tsfile/live/1014_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 43.77
+    },
+    {
+        "name": "CCTV2",
+        "url": "http://121.19.134.56:808/tsfile/live/0002_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 46.26
+    },
+    {
+        "name": "山东卫视",
+        "url": "http://121.19.134.56:808/tsfile/live/1018_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 59.71
+    },
+    {
+        "name": "东方卫视",
+        "url": "http://121.19.134.56:808/tsfile/live/1026_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 63.6
+    },
+    {
+        "name": "河北都市",
+        "url": "http://121.19.134.56:808/tsfile/live/1001_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 49.56
+    },
+    {
+        "name": "保定新闻综合",
+        "url": "http://121.19.134.56:808/tsfile/live/1007_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 52.87
+    },
+    {
+        "name": "深圳卫视",
+        "url": "http://121.19.134.56:808/tsfile/live/1024_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 51.27
+    },
+    {
+        "name": "河北经济生活",
+        "url": "http://121.19.134.56:808/tsfile/live/1000_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 49.05
+    },
+    {
+        "name": "CCTV12",
+        "url": "http://121.19.134.56:808/tsfile/live/0012_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 58.61
+    },
+    {
+        "name": "河北卫视",
+        "url": "http://121.19.134.56:808/tsfile/live/1006_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 60.89
+    },
+    {
+        "name": "CCTV13",
+        "url": "http://121.19.134.56:808/tsfile/live/0013_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 62.05
+    },
+    {
+        "name": "河北三农",
+        "url": "http://121.19.134.56:808/tsfile/live/1004_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 60.49
+    },
+    {
+        "name": "河南卫视",
+        "url": "http://121.19.134.56:808/tsfile/live/1019_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 74.9
+    },
+    {
+        "name": "CCTV15",
+        "url": "http://121.19.134.56:808/tsfile/live/0015_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 60.09
+    },
+    {
+        "name": "CCTV7",
+        "url": "http://121.19.134.56:808/tsfile/live/0007_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 56.05
+    },
+    {
+        "name": "重庆卫视",
+        "url": "http://121.19.134.56:808/tsfile/live/1027_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 55.05
+    },
+    {
+        "name": "河北少儿科教",
+        "url": "http://121.19.134.56:808/tsfile/live/1003_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 74.08
+    },
+    {
+        "name": "四川卫视",
+        "url": "http://121.19.134.56:808/tsfile/live/1021_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 83.68
+    },
+    {
+        "name": "CGTN",
+        "url": "http://121.19.134.56:808/tsfile/live/1005_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 52.27
+    },
+    {
+        "name": "CCTV10",
+        "url": "http://121.19.134.56:808/tsfile/live/0010_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 74.44
+    },
+    {
+        "name": "CCTV9",
+        "url": "http://121.19.134.56:808/tsfile/live/0009_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 56.33
+    },
+    {
+        "name": "CCTV17",
+        "url": "http://121.19.134.56:808/tsfile/live/0017_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 63.02
+    },
+    {
+        "name": "江苏卫视",
+        "url": "http://121.19.134.56:808/tsfile/live/1012_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 60.86
+    },
+    {
+        "name": "安徽卫视",
+        "url": "http://121.19.134.56:808/tsfile/live/1013_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 66.42
+    },
+    {
+        "name": "黑龙江卫视",
+        "url": "http://121.19.134.56:808/tsfile/live/1020_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 70.52
+    },
+    {
+        "name": "CCTV6",
+        "url": "http://121.19.134.56:808/tsfile/live/0006_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 76.32
+    },
+    {
+        "name": "贵州卫视",
+        "url": "http://121.19.134.56:808/tsfile/live/1023_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 64.21
+    },
+    {
+        "name": "北京卫视",
+        "url": "http://121.19.134.56:808/tsfile/live/1015_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 115.34
+    },
+    {
+        "name": "CCTV4",
+        "url": "http://121.19.134.56:808/tsfile/live/0004_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 111.45
+    },
+    {
+        "name": "辽宁卫视",
+        "url": "http://121.19.134.56:808/tsfile/live/1017_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 118.48
+    },
+    {
+        "name": "CCTV5",
+        "url": "http://121.19.134.56:808/tsfile/live/0005_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 90.96
+    },
+    {
+        "name": "浙江卫视",
+        "url": "http://121.19.134.56:808/tsfile/live/1011_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 108.14
+    },
+    {
+        "name": "湖北卫视",
+        "url": "http://121.19.134.56:808/tsfile/live/1025_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 113.75
+    },
+    {
+        "name": "江西卫视",
+        "url": "http://121.19.134.56:808/tsfile/live/1022_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 108.87
+    },
+    {
+        "name": "CCTV14",
+        "url": "http://121.19.134.56:808/tsfile/live/0014_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 106.35
+    },
+    {
+        "name": "CCTV16",
+        "url": "http://121.19.134.56:808/tsfile/live/0016_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 93.09
+    },
+    {
+        "name": "广东卫视",
+        "url": "http://121.19.134.56:808/tsfile/live/1028_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 49.34
+    },
+    {
+        "name": "兵团卫视",
+        "url": "http://121.19.134.141:808/tsfile/live/0115_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 109.59
+    },
+    {
+        "name": "CCTV11",
+        "url": "http://218.13.170.98:9901/tsfile/live/0011_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 58.1
+    },
+    {
+        "name": "CCTV9",
+        "url": "http://218.13.170.98:9901/tsfile/live/0009_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 52.0
+    },
+    {
+        "name": "CCTV7",
+        "url": "http://218.13.170.98:9901/tsfile/live/0007_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 75.12
+    },
+    {
+        "name": "CCTV15",
+        "url": "http://218.13.170.98:9901/tsfile/live/0015_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 66.5
+    },
+    {
+        "name": "广东卫视",
+        "url": "http://218.13.170.98:9901/tsfile/live/0017_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 62.38
+    },
+    {
+        "name": "CCTV17",
+        "url": "http://218.13.170.98:9901/tsfile/live/0016_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 60.41
+    },
+    {
+        "name": "广东体育",
+        "url": "http://218.13.170.98:9901/tsfile/live/0019_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 66.21
+    },
+    {
+        "name": "CCTV10",
+        "url": "http://218.13.170.98:9901/tsfile/live/0010_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 79.77
+    },
+    {
+        "name": "广东珠江",
+        "url": "http://218.13.170.98:9901/tsfile/live/1000_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 57.96
+    },
+    {
+        "name": "经济科教",
+        "url": "http://218.13.170.98:9901/tsfile/live/0018_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 65.24
+    },
+    {
+        "name": "北京卫视",
+        "url": "http://218.13.170.98:9901/tsfile/live/1004_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 66.79
+    },
+    {
+        "name": "湖南卫视",
+        "url": "http://218.13.170.98:9901/tsfile/live/1001_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 73.25
+    },
+    {
+        "name": "四川卫视",
+        "url": "http://218.13.170.98:9901/tsfile/live/1011_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 70.72
+    },
+    {
+        "name": "山东卫视",
+        "url": "http://218.13.170.98:9901/tsfile/live/1009_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 98.71
+    },
+    {
+        "name": "辽宁卫视",
+        "url": "http://218.13.170.98:9901/tsfile/live/0121_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 71.85
+    },
+    {
+        "name": "安徽卫视",
+        "url": "http://218.13.170.98:9901/tsfile/live/1013_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 76.61
+    },
+    {
+        "name": "重庆卫视",
+        "url": "http://218.13.170.98:9901/tsfile/live/1012_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 67.41
+    },
+    {
+        "name": "贵州卫视",
+        "url": "http://218.13.170.98:9901/tsfile/live/1014_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 79.35
+    },
+    {
+        "name": "河北卫视",
+        "url": "http://218.13.170.98:9901/tsfile/live/1016_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 88.53
+    },
+    {
+        "name": "江西卫视",
+        "url": "http://218.13.170.98:9901/tsfile/live/1017_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 97.94
+    },
+    {
+        "name": "山西卫视",
+        "url": "http://218.13.170.98:9901/tsfile/live/0118_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 86.22
+    },
+    {
+        "name": "兵团卫视",
+        "url": "http://218.13.170.98:9901/tsfile/live/0115_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 76.34
+    },
+    {
+        "name": "海南卫视",
+        "url": "http://218.13.170.98:9901/tsfile/live/1020_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 84.74
+    },
+    {
+        "name": "内蒙古卫视",
+        "url": "http://218.13.170.98:9901/tsfile/live/0109_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 94.87
+    },
+    {
+        "name": "西藏卫视",
+        "url": "http://218.13.170.98:9901/tsfile/live/0111_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 117.14
+    },
+    {
+        "name": "甘肃卫视",
+        "url": "http://218.13.170.98:9901/tsfile/live/0141_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 92.64
+    },
+    {
+        "name": "卡酷动画",
+        "url": "http://218.13.170.98:9901/tsfile/live/1021_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 96.81
+    },
+    {
+        "name": "宁夏卫视",
+        "url": "http://218.13.170.98:9901/tsfile/live/0112_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 87.85
+    },
+    {
+        "name": "新疆卫视",
+        "url": "http://218.13.170.98:9901/tsfile/live/0110_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 112.94
+    },
+    {
+        "name": "CCTV5",
+        "url": "http://125.43.244.34:9901/tsfile/live/1010_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 50.99
+    },
+    {
+        "name": "魅力音乐",
+        "url": "http://125.43.244.34:9901/tsfile/live/1000_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 54.08
+    },
+    {
+        "name": "CCTV6",
+        "url": "http://125.43.244.34:9901/tsfile/live/1011_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 51.31
+    },
+    {
+        "name": "东南卫视",
+        "url": "http://125.43.244.34:9901/tsfile/live/1028_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 53.27
+    },
+    {
+        "name": "江苏卫视",
+        "url": "http://125.43.244.34:9901/tsfile/live/1030_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 60.64
+    },
+    {
+        "name": "安徽卫视",
+        "url": "http://125.43.244.34:9901/tsfile/live/1037_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 56.31
+    },
+    {
+        "name": "CCTV15",
+        "url": "http://125.43.244.34:9901/tsfile/live/1018_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 60.01
+    },
+    {
+        "name": "CCTV11",
+        "url": "http://125.43.244.34:9901/tsfile/live/1014_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 52.6
+    },
+    {
+        "name": "CCTV10",
+        "url": "http://125.43.244.34:9901/tsfile/live/1013_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 67.08
+    },
+    {
+        "name": "山东卫视",
+        "url": "http://125.43.244.34:9901/tsfile/live/1023_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 59.21
+    },
+    {
+        "name": "河南都市",
+        "url": "http://125.43.244.34:9901/tsfile/live/1001_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 60.35
+    },
+    {
+        "name": "CCTV7",
+        "url": "http://125.43.244.34:9901/tsfile/live/1006_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 60.1
+    },
+    {
+        "name": "广东卫视",
+        "url": "http://125.43.244.34:9901/tsfile/live/1026_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 55.52
+    },
+    {
+        "name": "河南卫视",
+        "url": "http://125.43.244.34:9901/tsfile/live/1019_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 55.38
+    },
+    {
+        "name": "CCTV8",
+        "url": "http://125.43.244.34:9901/tsfile/live/1007_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 57.54
+    },
+    {
+        "name": "浙江卫视",
+        "url": "http://125.43.244.34:9901/tsfile/live/1031_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 63.08
+    },
+    {
+        "name": "CCTV3",
+        "url": "http://125.43.244.34:9901/tsfile/live/1009_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 56.2
+    },
+    {
+        "name": "湖北卫视",
+        "url": "http://125.43.244.34:9901/tsfile/live/1033_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 58.58
+    },
+    {
+        "name": "山西卫视",
+        "url": "http://125.43.244.34:9901/tsfile/live/1035_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 65.13
+    },
+    {
+        "name": "黑龙江卫视",
+        "url": "http://125.43.244.34:9901/tsfile/live/1024_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 58.76
+    },
+    {
+        "name": "金鹰卡通",
+        "url": "http://125.43.244.34:9901/tsfile/live/1040_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 62.26
+    },
+    {
+        "name": "重庆卫视",
+        "url": "http://125.43.244.34:9901/tsfile/live/1025_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 61.46
+    },
+    {
+        "name": "湖南卫视",
+        "url": "http://125.43.244.34:9901/tsfile/live/1021_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 63.88
+    },
+    {
+        "name": "北京卫视",
+        "url": "http://125.43.244.34:9901/tsfile/live/1020_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 59.63
+    },
+    {
+        "name": "河北卫视",
+        "url": "http://125.43.244.34:9901/tsfile/live/1032_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 64.62
+    },
+    {
+        "name": "CCTV14",
+        "url": "http://125.43.244.34:9901/tsfile/live/1017_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 63.04
+    },
+    {
+        "name": "辽宁卫视",
+        "url": "http://125.43.244.34:9901/tsfile/live/1022_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 72.54
+    },
+    {
+        "name": "CCTV4",
+        "url": "http://125.43.244.34:9901/tsfile/live/1004_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 68.93
+    },
+    {
+        "name": "四川卫视",
+        "url": "http://125.43.244.34:9901/tsfile/live/1039_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 71.67
+    },
+    {
+        "name": "CCTV9",
+        "url": "http://125.43.244.34:9901/tsfile/live/1012_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 69.7
+    },
+    {
+        "name": "河南民生",
+        "url": "http://125.43.244.34:9901/tsfile/live/1002_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 74.38
+    },
+    {
+        "name": "云南卫视",
+        "url": "http://125.43.244.34:9901/tsfile/live/1029_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 64.58
+    },
+    {
+        "name": "CCTV12",
+        "url": "http://125.43.244.34:9901/tsfile/live/1015_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 66.54
+    },
+    {
+        "name": "上海卫视",
+        "url": "http://125.43.244.34:9901/tsfile/live/1036_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 68.39
+    },
+    {
+        "name": "广西卫视",
+        "url": "http://125.43.244.34:9901/tsfile/live/1027_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 82.6
+    },
+    {
+        "name": "CCTV1",
+        "url": "http://125.43.244.34:9901/tsfile/live/1005_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 73.8
+    },
+    {
+        "name": "CCTV2",
+        "url": "http://125.43.244.34:9901/tsfile/live/1008_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 72.53
+    },
+    {
+        "name": "CCTV13",
+        "url": "http://125.43.244.34:9901/tsfile/live/1016_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 79.23
+    },
+    {
+        "name": "江西卫视",
+        "url": "http://125.43.244.34:9901/tsfile/live/1034_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 78.67
+    },
+    {
+        "name": "贵州卫视",
+        "url": "http://125.43.244.34:9901/tsfile/live/1038_1.m3u8?key=txiptv&playlive=1&authid=0",
+        "response_time_ms": 79.11
+    },
+    {
+        "name": "CCTV2",
+        "url": "http://101.66.194.12:9901/tsfile/live/0002_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 62.47
+    },
+    {
+        "name": "CCTV1",
+        "url": "http://101.66.194.12:9901/tsfile/live/0001_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 63.05
+    },
+    {
+        "name": "CCTV5",
+        "url": "http://101.66.194.12:9901/tsfile/live/0005_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 57.68
+    },
+    {
+        "name": "安徽卫视",
+        "url": "http://101.66.194.12:9901/tsfile/live/0130_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 65.4
+    },
+    {
+        "name": "CCTV9",
+        "url": "http://101.66.194.12:9901/tsfile/live/0009_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 60.44
+    },
+    {
+        "name": "CCTV11",
+        "url": "http://101.66.194.12:9901/tsfile/live/0011_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 61.54
+    },
+    {
+        "name": "CCTV15",
+        "url": "http://101.66.194.12:9901/tsfile/live/0015_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 62.61
+    },
+    {
+        "name": "CCTV8",
+        "url": "http://101.66.194.12:9901/tsfile/live/0008_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 59.55
+    },
+    {
+        "name": "CCTV12",
+        "url": "http://101.66.194.12:9901/tsfile/live/0012_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 63.54
+    },
+    {
+        "name": "CCTV6",
+        "url": "http://101.66.194.12:9901/tsfile/live/0006_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 60.36
+    },
+    {
+        "name": "湖南卫视",
+        "url": "http://101.66.194.12:9901/tsfile/live/0019_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 64.29
+    },
+    {
+        "name": "江苏卫视",
+        "url": "http://101.66.194.12:9901/tsfile/live/0017_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 64.06
+    },
+    {
+        "name": "北京卫视",
+        "url": "http://101.66.194.12:9901/tsfile/live/0016_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 57.05
+    },
+    {
+        "name": "CCTV10",
+        "url": "http://101.66.194.12:9901/tsfile/live/0010_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 62.85
+    },
+    {
+        "name": "CCTV3",
+        "url": "http://101.66.194.12:9901/tsfile/live/0003_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 59.24
+    },
+    {
+        "name": "东方卫视",
+        "url": "http://101.66.194.12:9901/tsfile/live/0018_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 71.94
+    },
+    {
+        "name": "CCTV13",
+        "url": "http://101.66.194.12:9901/tsfile/live/0013_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 65.7
+    },
+    {
+        "name": "CCTV14",
+        "url": "http://101.66.194.12:9901/tsfile/live/0014_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 66.85
+    },
+    {
+        "name": "CCTV7",
+        "url": "http://101.66.194.12:9901/tsfile/live/0007_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 69.02
+    },
+    {
+        "name": "重庆卫视",
+        "url": "http://101.66.194.12:9901/tsfile/live/0142_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 40.29
+    },
+    {
+        "name": "江西卫视",
+        "url": "http://101.66.194.12:9901/tsfile/live/0138_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 41.43
+    },
+    {
+        "name": "四川卫视",
+        "url": "http://101.66.194.12:9901/tsfile/live/0123_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 38.07
+    },
+    {
+        "name": "广东卫视",
+        "url": "http://101.66.194.12:9901/tsfile/live/0125_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 40.86
+    },
+    {
+        "name": "河北卫视",
+        "url": "http://101.66.194.12:9901/tsfile/live/0117_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 36.46
+    },
+    {
+        "name": "山东卫视",
+        "url": "http://101.66.194.12:9901/tsfile/live/0131_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 37.07
+    },
+    {
+        "name": "山西卫视",
+        "url": "http://101.66.194.12:9901/tsfile/live/0118_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 35.05
+    },
+    {
+        "name": "黑龙江卫视",
+        "url": "http://101.66.194.12:9901/tsfile/live/0143_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 37.66
+    },
+    {
+        "name": "辽宁卫视",
+        "url": "http://101.66.194.12:9901/tsfile/live/0121_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 40.3
+    },
+    {
+        "name": "金鹰卡通",
+        "url": "http://101.66.194.12:9901/tsfile/live/1000_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 37.67
+    },
+    {
+        "name": "云南卫视",
+        "url": "http://101.66.194.12:9901/tsfile/live/0119_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 44.33
+    },
+    {
+        "name": "广西卫视",
+        "url": "http://101.66.194.12:9901/tsfile/live/0113_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 35.16
+    },
+    {
+        "name": "浙江卫视",
+        "url": "http://101.66.194.12:9901/tsfile/live/0124_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 42.14
+    },
+    {
+        "name": "浙江新闻",
+        "url": "http://101.66.194.12:9901/tsfile/live/1005_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 43.49
+    },
+    {
+        "name": "贵州卫视",
+        "url": "http://101.66.194.12:9901/tsfile/live/0120_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 36.64
+    },
+    {
+        "name": "湖北卫视",
+        "url": "http://101.66.194.12:9901/tsfile/live/0132_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 40.14
+    },
+    {
+        "name": "河南卫视",
+        "url": "http://101.66.194.12:9901/tsfile/live/0139_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 41.92
+    },
+    {
+        "name": "东南卫视",
+        "url": "http://101.66.194.12:9901/tsfile/live/0137_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 37.36
+    },
+    {
+        "name": "CCTV3",
+        "url": "http://101.66.194.47:9901/tsfile/live/0003_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 43.2
+    },
+    {
+        "name": "CCTV2",
+        "url": "http://101.66.194.47:9901/tsfile/live/0002_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 45.75
+    },
+    {
+        "name": "湖南卫视",
+        "url": "http://101.66.194.47:9901/tsfile/live/0019_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 38.8
+    },
+    {
+        "name": "吉林卫视",
+        "url": "http://101.66.194.12:9901/tsfile/live/0116_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 39.47
+    },
+    {
+        "name": "CCTV6",
+        "url": "http://101.66.194.47:9901/tsfile/live/0006_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 82.21
+    },
+    {
+        "name": "重庆卫视",
+        "url": "http://101.66.194.47:9901/tsfile/live/0142_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 81.26
+    },
+    {
+        "name": "CCTV1",
+        "url": "http://101.66.194.47:9901/tsfile/live/0001_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 84.2
+    },
+    {
+        "name": "陕西卫视",
+        "url": "http://101.66.194.12:9901/tsfile/live/0136_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 66.95
+    },
+    {
+        "name": "杭州影视",
+        "url": "http://101.66.194.12:9901/tsfile/live/1011_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 76.81
+    },
+    {
+        "name": "辽宁卫视",
+        "url": "http://101.66.194.47:9901/tsfile/live/0121_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 78.18
+    },
+    {
+        "name": "吉林卫视",
+        "url": "http://101.66.194.47:9901/tsfile/live/0116_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 83.96
+    },
+    {
+        "name": "安徽卫视",
+        "url": "http://101.66.194.47:9901/tsfile/live/0130_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 76.51
+    },
+    {
+        "name": "CCTV7",
+        "url": "http://101.66.194.47:9901/tsfile/live/0007_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 70.33
+    },
+    {
+        "name": "CCTV12",
+        "url": "http://101.66.194.47:9901/tsfile/live/0012_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 74.45
+    },
+    {
+        "name": "CCTV8",
+        "url": "http://101.66.194.47:9901/tsfile/live/0008_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 73.26
+    },
+    {
+        "name": "CCTV13",
+        "url": "http://101.66.194.47:9901/tsfile/live/0013_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 77.15
+    },
+    {
+        "name": "CCTV5",
+        "url": "http://101.66.194.47:9901/tsfile/live/0005_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 75.32
+    },
+    {
+        "name": "北京卫视",
+        "url": "http://101.66.194.47:9901/tsfile/live/0016_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 95.12
+    },
+    {
+        "name": "CCTV10",
+        "url": "http://101.66.194.47:9901/tsfile/live/0010_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 78.49
+    },
+    {
+        "name": "CCTV9",
+        "url": "http://101.66.194.47:9901/tsfile/live/0009_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 73.08
+    },
+    {
+        "name": "江苏卫视",
+        "url": "http://101.66.194.47:9901/tsfile/live/0017_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 85.08
+    },
+    {
+        "name": "CCTV15",
+        "url": "http://101.66.194.47:9901/tsfile/live/0015_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 99.0
+    },
+    {
+        "name": "贵州卫视",
+        "url": "http://101.66.194.47:9901/tsfile/live/0120_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 83.72
+    },
+    {
+        "name": "东方卫视",
+        "url": "http://101.66.194.47:9901/tsfile/live/0018_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 88.64
+    },
+    {
+        "name": "CCTV11",
+        "url": "http://101.66.194.47:9901/tsfile/live/0011_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 76.86
+    },
+    {
+        "name": "广东卫视",
+        "url": "http://101.66.194.47:9901/tsfile/live/0125_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 87.85
+    },
+    {
+        "name": "山东卫视",
+        "url": "http://101.66.194.47:9901/tsfile/live/0131_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 88.79
+    },
+    {
+        "name": "CCTV14",
+        "url": "http://101.66.194.47:9901/tsfile/live/0014_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 76.56
+    },
+    {
+        "name": "四川卫视",
+        "url": "http://101.66.194.47:9901/tsfile/live/0123_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 80.58
+    },
+    {
+        "name": "江西卫视",
+        "url": "http://101.66.194.47:9901/tsfile/live/0138_1.m3u8?key=txiptv&playlive=0&authid=0",
+        "response_time_ms": 82.63
+    }
+]
