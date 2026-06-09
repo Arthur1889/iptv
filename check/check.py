@@ -305,7 +305,17 @@ async def modify_urls(url):
     
     endpoints = [
         "/iptv/live/1000.json?key=txiptv",
-        "/ZHGXTV/Public/json/live_interface.txt"
+        "/ZHGXTV/Public/json/live_interface.txt",
+        # --- 👇 以下是你可以扩充的高频探测路径 👇 ---
+        "/standard/live.txt",
+        "/live/live.txt",
+        "/playlist.m3u",
+        "/live.m3u",
+        "/Public/json/live_interface.txt",
+        "/live/iptv.json",
+        "/iptv/json/channels.json",
+        "/iptv.m3u",
+        "/iptv/live/2000.json?key=txiptv"
     ]
     
     for i in range(1, 254):
