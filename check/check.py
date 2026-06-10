@@ -334,31 +334,17 @@ async def is_url_accessible(session, url, semaphore):
             return url, False
 
 async def check_urls(session, urls, semaphore):
-    # 🌟 [新增] 读取已存的死网关列表，直接转换为 set 提高查找效率
-    history_dead_gateways = set()
+    # 🌟 读取历史死网关 IP 集合（纯 IP 匹配）
+    history_dead_ips = set()
     if os.path.exists(dead_gateways_file):
         try:
             with open(dead_gateways_file, 'r', encoding='utf-8') as gf:
-                history_dead_gateways = set(json.load(gf))
+                for line in gf:
+                    line = line.strip()
+                    if line: history_dead_ips.add(line)
         except Exception: pass
 
-    tasks = []
-    skipped_count = 0  # 🌟 统计因黑名单跳过的任务数
-    
-    for url in urls:
-        url = url.strip()
-        modified_urls = await modify_urls(url)
-        for modified_url in modified_urls:
-            # 🌟 [新增] 断点续传拦截：如果该网址已经在死网关黑名单里，直接略过
-            if modified_url in history_dead_gateways:
-                skipped_count += 1
-                continue
-            task = asyncio.create_task(is_url_accessible(session, modified_url, semaphore))
-            tasks.append(task)
-            
     valid_urls = []
-    total = len(tasks)
-    
     gateway_log_file = os.path.join(current_dir, 'valid_gateways.json')
     
     if os.path.exists(gateway_log_file):
@@ -370,50 +356,76 @@ async def check_urls(session, urls, semaphore):
         except Exception:
             valid_urls = []
 
-    print(f"\n📡 开始网关探测，共生成 {total + skipped_count} 个地址（黑名单已跳过 {skipped_count} 个），剩余待探测 {total} 个...")
+    total_base_urls = len(urls)
+    print(f"\n📡 开始网关探测，共加载 {total_base_urls} 个基础目标，将启动【分批测活】以防止内存溢出...")
     
-    if total == 0:
-        print("✅ 没有需要探测的新网关。")
-        return valid_urls
+    # 🌟 【关键修改】分批处理：每次只处理 20 个基础 IP（约生成 50000 个任务）
+    chunk_size = 20 
+    skipped_count = 0
 
-    for i, coro in enumerate(asyncio.as_completed(tasks), 1):
-        url, is_ok = await coro
-        if is_ok:
-            if url not in valid_urls:
-                valid_urls.append(url)
-            
-            async with file_lock:
-                try:
-                    current_gateways = []
-                    if os.path.exists(gateway_log_file):
-                        with open(gateway_log_file, 'r', encoding='utf-8') as gf:
-                            try: current_gateways = json.load(gf)
-                            except: current_gateways = []
+    for i in range(0, total_base_urls, chunk_size):
+        chunk_urls = urls[i:i+chunk_size]
+        tasks = []
+        
+        # 1. 生成当前批次的测活任务
+        for url in chunk_urls:
+            url = url.strip()
+            modified_urls = await modify_urls(url)
+            for modified_url in modified_urls:
+                parsed_mod = urlparse(modified_url)
+                current_host = parsed_mod.netloc
+                
+                # 黑名单拦截
+                if current_host in history_dead_ips:
+                    skipped_count += 1
+                    continue
                     
-                    if url not in current_gateways:
-                        current_gateways.append(url)
-                        with open(gateway_log_file, 'w', encoding='utf-8') as gf:
-                            json.dump(current_gateways, gf, ensure_ascii=False, indent=4)
-                except Exception: pass 
-        else:
-            # 🌟 [新增] 探测到不合格的网关，立刻实时写入 dead_gateways.json
-            async with file_lock:
-                try:
-                    current_dead_g = []
-                    if os.path.exists(dead_gateways_file):
-                        with open(dead_gateways_file, 'r', encoding='utf-8') as gf:
-                            try: current_dead_g = json.load(gf)
-                            except: current_dead_g = []
+                task = asyncio.create_task(is_url_accessible(session, modified_url, semaphore))
+                tasks.append(task)
+        
+        batch_total = len(tasks)
+        if batch_total == 0:
+            continue # 如果这一批全是黑名单，直接下一批
+
+        # 2. 执行当前批次（执行完后，tasks 列表会被自动销毁，释放内存）
+        batch_done = 0
+        for coro in asyncio.as_completed(tasks):
+            url, is_ok = await coro
+            batch_done += 1
+            parsed_url = urlparse(url)
+            current_host = parsed_url.netloc
+
+            if is_ok:
+                if url not in valid_urls:
+                    valid_urls.append(url)
+                
+                async with file_lock:
+                    try:
+                        current_gateways = []
+                        if os.path.exists(gateway_log_file):
+                            with open(gateway_log_file, 'r', encoding='utf-8') as gf:
+                                try: current_gateways = json.load(gf)
+                                except: current_gateways = []
+                        
+                        if url not in current_gateways:
+                            current_gateways.append(url)
+                            with open(gateway_log_file, 'w', encoding='utf-8') as gf:
+                                json.dump(current_gateways, gf, ensure_ascii=False, indent=4)
+                    except Exception: pass 
+            else:
+                # 记录死链 IP 到 txt
+                async with file_lock:
+                    try:
+                        with open(dead_gateways_file, 'a', encoding='utf-8') as gf:
+                            gf.write(f"{current_host}\n")
+                    except Exception: pass
                     
-                    if url not in current_dead_g:
-                        current_dead_g.append(url)
-                        with open(dead_gateways_file, 'w', encoding='utf-8') as gf:
-                            json.dump(current_dead_g, gf, ensure_ascii=False, indent=4)
-                except Exception: pass
-                    
-        if i % 10 == 0 or i == total:
-            print(f"\r🔍 网关探测进度: {i}/{total} ({(i/total*100):.1f}%) | 发现活网关: {len(valid_urls)} (死活网关已实时落盘安全锁)", end="", flush=True)
-            
+            # 3. 动态打印进度条
+            if batch_done % 100 == 0 or batch_done == batch_total:
+                # 计算总体百分比进度
+                current_progress = min(100.0, (i + chunk_size) / total_base_urls * 100)
+                print(f"\r🔍 总进度: {current_progress:.1f}% (正在处理基础IP批次 {i//chunk_size + 1}/{(total_base_urls + chunk_size - 1)//chunk_size}) | 累计黑名单跳过: {skipped_count} | 发现活网关: {len(valid_urls)}", end="", flush=True)
+
     print("\n✅ 网关探测完成！")
     return valid_urls
 
