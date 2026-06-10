@@ -335,6 +335,7 @@ async def is_url_accessible(session, url, semaphore):
 
 async def check_urls(session, urls, semaphore):
     # 🌟 读取历史死网关 IP 集合（纯 IP 匹配）
+    urls = list(urls)
     history_dead_ips = set()
     if os.path.exists(dead_gateways_file):
         try:
