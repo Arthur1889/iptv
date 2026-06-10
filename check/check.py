@@ -369,7 +369,6 @@ async def check_urls(session, urls, semaphore):
     total_base_urls = len(urls)
     print(f"\n📡 开始网关探测，共加载 {total_base_urls} 个基础目标，将启动【分批测活】以防止内存溢出...")
     
-    # 🌟 【关键修改】分批处理：每次只处理 20 个基础 IP（约生成 50000 个任务）
     chunk_size = 20 
     skipped_count = 0
 
@@ -395,12 +394,11 @@ async def check_urls(session, urls, semaphore):
         
         batch_total = len(tasks)
         if batch_total == 0:
-            continue # 如果这一批全是黑名单，直接下一批
+            continue 
 
-        # 2. 执行当前批次（执行完后，tasks 列表会被自动销毁，释放内存）
+        # 2. 执行当前批次
         batch_done = 0
         for coro in asyncio.as_completed(tasks):
-            # 🌟 接收三个参数
             url, is_ok, is_host_dead = await coro
             batch_done += 1
             parsed_url = urlparse(url)
@@ -424,21 +422,23 @@ async def check_urls(session, urls, semaphore):
                                 json.dump(current_gateways, gf, ensure_ascii=False, indent=4)
                     except Exception: pass 
             else:
-                # 🌟 【核心修改】：只有当主机彻底无响应时，才记录为死链
-                # 并且利用 history_dead_ips 拦截，防止同一个 IP 重复写入硬盘 10 次
+                # 🌟【优化点 1】只更新内存中的集合，不在这里频繁读写硬盘，彻底解决多线程并发冲突
                 if is_host_dead and current_host not in history_dead_ips:
-                    history_dead_ips.add(current_host) # 加入内存，防止同批次重复记录
-                    async with file_lock:
-                        try:
-                            with open(dead_gateways_file, 'a', encoding='utf-8') as gf:
-                                gf.write(f"{current_host}\n")
-                        except Exception: pass
+                    history_dead_ips.add(current_host) 
                     
             # 3. 动态打印进度条
             if batch_done % 100 == 0 or batch_done == batch_total:
-                # 计算总体百分比进度
                 current_progress = min(100.0, (i + chunk_size) / total_base_urls * 100)
                 print(f"\r🔍 总进度: {current_progress:.1f}% (正在处理基础IP批次 {i//chunk_size + 1}/{(total_base_urls + chunk_size - 1)//chunk_size}) | 累计黑名单跳过: {skipped_count} | 发现活网关: {len(valid_urls)}", end="", flush=True)
+
+        # 🌟【优化点 2】当前批次结束，把内存里绝对唯一的黑名单集合，用 'w' 模式一次性全量、有序覆写回文件
+        # 这样既能防止中途断电丢失数据，又能保证文件内绝对没有重复行，顺便还能自动帮 IP 排序！
+        async with file_lock:
+            try:
+                with open(dead_gateways_file, 'w', encoding='utf-8') as gf:
+                    for ip in sorted(history_dead_ips):
+                        gf.write(f"{ip}\n")
+            except Exception: pass
 
     print("\n✅ 网关探测完成！")
     return valid_urls
