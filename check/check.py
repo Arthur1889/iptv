@@ -22,12 +22,18 @@ urls_file_path = os.path.join(current_dir, 'urls.json')
 # 🌟 初始化相关存储文件（保持原有 live_urls.json 和 dead_urls.json 的同时，加入黑名单网关）
 live_urls_file = os.path.join(current_dir, 'live_urls.json')
 dead_urls_file = os.path.join(current_dir, 'dead_urls.json')
-dead_gateways_file = os.path.join(current_dir, 'dead_gateways.json') # 🌟 [新增] 死网关黑名单文件
+dead_gateways_file = os.path.join(current_dir, 'dead_gateways.txt') # 🌟 [修复] 改为txt，因为后续是按行读写
 
-for f_path in [live_urls_file, dead_urls_file, dead_gateways_file]:
+# 初始化 JSON 格式存储文件
+for f_path in [live_urls_file, dead_urls_file]:
     if not os.path.exists(f_path):
         with open(f_path, 'w', encoding='utf-8') as f:
             json.dump([], f)
+
+# 初始化纯文本格式的黑名单文件
+if not os.path.exists(dead_gateways_file):
+    with open(dead_gateways_file, 'w', encoding='utf-8') as f:
+        pass # 创建空文件即可
 
 file_lock = asyncio.Lock()
 
@@ -327,11 +333,14 @@ async def is_url_accessible(session, url, semaphore):
             timeout = aiohttp.ClientTimeout(total=5)
             async with session.get(url, timeout=timeout) as response:
                 if response.status == 200:
-                    return url, True
+                    # 状态码 200: 完全成功
+                    return url, True, False
                 else:
-                    return url, False
+                    # 状态码 404/403: 服务器活着，只是当前路径不存在，不能拉黑 IP！
+                    return url, False, False
         except Exception:
-            return url, False
+            # 异常抛出: 服务器彻底无响应/超时，确认网关已死！
+            return url, False, True
 
 async def check_urls(session, urls, semaphore):
     # 🌟 读取历史死网关 IP 集合（纯 IP 匹配）
@@ -391,7 +400,8 @@ async def check_urls(session, urls, semaphore):
         # 2. 执行当前批次（执行完后，tasks 列表会被自动销毁，释放内存）
         batch_done = 0
         for coro in asyncio.as_completed(tasks):
-            url, is_ok = await coro
+            # 🌟 接收三个参数
+            url, is_ok, is_host_dead = await coro
             batch_done += 1
             parsed_url = urlparse(url)
             current_host = parsed_url.netloc
@@ -414,12 +424,15 @@ async def check_urls(session, urls, semaphore):
                                 json.dump(current_gateways, gf, ensure_ascii=False, indent=4)
                     except Exception: pass 
             else:
-                # 记录死链 IP 到 txt
-                async with file_lock:
-                    try:
-                        with open(dead_gateways_file, 'a', encoding='utf-8') as gf:
-                            gf.write(f"{current_host}\n")
-                    except Exception: pass
+                # 🌟 【核心修改】：只有当主机彻底无响应时，才记录为死链
+                # 并且利用 history_dead_ips 拦截，防止同一个 IP 重复写入硬盘 10 次
+                if is_host_dead and current_host not in history_dead_ips:
+                    history_dead_ips.add(current_host) # 加入内存，防止同批次重复记录
+                    async with file_lock:
+                        try:
+                            with open(dead_gateways_file, 'a', encoding='utf-8') as gf:
+                                gf.write(f"{current_host}\n")
+                        except Exception: pass
                     
             # 3. 动态打印进度条
             if batch_done % 100 == 0 or batch_done == batch_total:
