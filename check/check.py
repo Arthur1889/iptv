@@ -22,12 +22,18 @@ urls_file_path = os.path.join(current_dir, 'urls.json')
 # 🌟 初始化相关存储文件（保持原有 live_urls.json 和 dead_urls.json 的同时，加入黑名单网关）
 live_urls_file = os.path.join(current_dir, 'live_urls.json')
 dead_urls_file = os.path.join(current_dir, 'dead_urls.json')
-dead_gateways_file = os.path.join(current_dir, 'dead_gateways.json') # 🌟 [新增] 死网关黑名单文件
+dead_gateways_file = os.path.join(current_dir, 'dead_gateways.txt') # 🌟 [修复] 改为txt，因为后续是按行读写
 
-for f_path in [live_urls_file, dead_urls_file, dead_gateways_file]:
+# 初始化 JSON 格式存储文件
+for f_path in [live_urls_file, dead_urls_file]:
     if not os.path.exists(f_path):
         with open(f_path, 'w', encoding='utf-8') as f:
             json.dump([], f)
+
+# 初始化纯文本格式的黑名单文件
+if not os.path.exists(dead_gateways_file):
+    with open(dead_gateways_file, 'w', encoding='utf-8') as f:
+        pass # 创建空文件即可
 
 file_lock = asyncio.Lock()
 
@@ -327,38 +333,28 @@ async def is_url_accessible(session, url, semaphore):
             timeout = aiohttp.ClientTimeout(total=5)
             async with session.get(url, timeout=timeout) as response:
                 if response.status == 200:
-                    return url, True
+                    # 状态码 200: 完全成功
+                    return url, True, False
                 else:
-                    return url, False
+                    # 状态码 404/403: 服务器活着，只是当前路径不存在，不能拉黑 IP！
+                    return url, False, False
         except Exception:
-            return url, False
+            # 异常抛出: 服务器彻底无响应/超时，确认网关已死！
+            return url, False, True
 
 async def check_urls(session, urls, semaphore):
-    # 🌟 [新增] 读取已存的死网关列表，直接转换为 set 提高查找效率
-    history_dead_gateways = set()
+    # 🌟 读取历史死网关 IP 集合（纯 IP 匹配）
+    urls = list(urls)
+    history_dead_ips = set()
     if os.path.exists(dead_gateways_file):
         try:
             with open(dead_gateways_file, 'r', encoding='utf-8') as gf:
-                history_dead_gateways = set(json.load(gf))
+                for line in gf:
+                    line = line.strip()
+                    if line: history_dead_ips.add(line)
         except Exception: pass
 
-    tasks = []
-    skipped_count = 0  # 🌟 统计因黑名单跳过的任务数
-    
-    for url in urls:
-        url = url.strip()
-        modified_urls = await modify_urls(url)
-        for modified_url in modified_urls:
-            # 🌟 [新增] 断点续传拦截：如果该网址已经在死网关黑名单里，直接略过
-            if modified_url in history_dead_gateways:
-                skipped_count += 1
-                continue
-            task = asyncio.create_task(is_url_accessible(session, modified_url, semaphore))
-            tasks.append(task)
-            
     valid_urls = []
-    total = len(tasks)
-    
     gateway_log_file = os.path.join(current_dir, 'valid_gateways.json')
     
     if os.path.exists(gateway_log_file):
@@ -366,55 +362,85 @@ async def check_urls(session, urls, semaphore):
             with open(gateway_log_file, 'r', encoding='utf-8') as gf:
                 valid_urls = json.load(gf)
             if valid_urls:
-                print(f"📦 [断点恢复] 检出本地已存在 {len(valid_urls)} 个历史活节点，将直接合并体检！")
+                print(f"📦 [断点恢复] 检出本地已存在 {len(valid_urls)} 个历史活网关，将直接合并体检！")
         except Exception:
             valid_urls = []
 
-    print(f"\n📡 开始节点探测，共生成 {total + skipped_count} 个地址（黑名单已跳过 {skipped_count} 个），剩余待探测 {total} 个...")
+    total_base_urls = len(urls)
+    print(f"\n📡 开始网关探测，共加载 {total_base_urls} 个基础目标，将启动【分批测活】以防止内存溢出...")
     
-    if total == 0:
-        print("✅ 没有需要探测的新节点。")
-        return valid_urls
+    chunk_size = 20 
+    skipped_count = 0
 
-    for i, coro in enumerate(asyncio.as_completed(tasks), 1):
-        url, is_ok = await coro
-        if is_ok:
-            if url not in valid_urls:
-                valid_urls.append(url)
-            
-            async with file_lock:
-                try:
-                    current_gateways = []
-                    if os.path.exists(gateway_log_file):
-                        with open(gateway_log_file, 'r', encoding='utf-8') as gf:
-                            try: current_gateways = json.load(gf)
-                            except: current_gateways = []
+    for i in range(0, total_base_urls, chunk_size):
+        chunk_urls = urls[i:i+chunk_size]
+        tasks = []
+        
+        # 1. 生成当前批次的测活任务
+        for url in chunk_urls:
+            url = url.strip()
+            modified_urls = await modify_urls(url)
+            for modified_url in modified_urls:
+                parsed_mod = urlparse(modified_url)
+                current_host = parsed_mod.netloc
+                
+                # 黑名单拦截
+                if current_host in history_dead_ips:
+                    skipped_count += 1
+                    continue
                     
-                    if url not in current_gateways:
-                        current_gateways.append(url)
-                        with open(gateway_log_file, 'w', encoding='utf-8') as gf:
-                            json.dump(current_gateways, gf, ensure_ascii=False, indent=4)
-                except Exception: pass 
-        else:
-            # 🌟 [新增] 探测到不合格的网关，立刻实时写入 dead_gateways.json
-            async with file_lock:
-                try:
-                    current_dead_g = []
-                    if os.path.exists(dead_gateways_file):
-                        with open(dead_gateways_file, 'r', encoding='utf-8') as gf:
-                            try: current_dead_g = json.load(gf)
-                            except: current_dead_g = []
+                task = asyncio.create_task(is_url_accessible(session, modified_url, semaphore))
+                tasks.append(task)
+        
+        batch_total = len(tasks)
+        if batch_total == 0:
+            continue 
+
+        # 2. 执行当前批次
+        batch_done = 0
+        for coro in asyncio.as_completed(tasks):
+            url, is_ok, is_host_dead = await coro
+            batch_done += 1
+            parsed_url = urlparse(url)
+            current_host = parsed_url.netloc
+
+            if is_ok:
+                if url not in valid_urls:
+                    valid_urls.append(url)
+                
+                async with file_lock:
+                    try:
+                        current_gateways = []
+                        if os.path.exists(gateway_log_file):
+                            with open(gateway_log_file, 'r', encoding='utf-8') as gf:
+                                try: current_gateways = json.load(gf)
+                                except: current_gateways = []
+                        
+                        if url not in current_gateways:
+                            current_gateways.append(url)
+                            with open(gateway_log_file, 'w', encoding='utf-8') as gf:
+                                json.dump(current_gateways, gf, ensure_ascii=False, indent=4)
+                    except Exception: pass 
+            else:
+                # 🌟【优化点 1】只更新内存中的集合，不在这里频繁读写硬盘，彻底解决多线程并发冲突
+                if is_host_dead and current_host not in history_dead_ips:
+                    history_dead_ips.add(current_host) 
                     
-                    if url not in current_dead_g:
-                        current_dead_g.append(url)
-                        with open(dead_gateways_file, 'w', encoding='utf-8') as gf:
-                            json.dump(current_dead_g, gf, ensure_ascii=False, indent=4)
-                except Exception: pass
-                    
-        if i % 10 == 0 or i == total:
-            print(f"\r🔍 节点探测进度: {i}/{total} ({(i/total*100):.1f}%) | 发现节点: {len(valid_urls)}", end="", flush=True)
-            
-    print("\n✅ 节点探测完成！")
+            # 3. 动态打印进度条
+            if batch_done % 100 == 0 or batch_done == batch_total:
+                current_progress = min(100.0, (i + chunk_size) / total_base_urls * 100)
+                print(f"\r🔍 总进度: {current_progress:.1f}% (正在处理基础IP批次 {i//chunk_size + 1}/{(total_base_urls + chunk_size - 1)//chunk_size}) | 累计黑名单跳过: {skipped_count} | 发现活网关: {len(valid_urls)}", end="", flush=True)
+
+        # 🌟【优化点 2】当前批次结束，把内存里绝对唯一的黑名单集合，用 'w' 模式一次性全量、有序覆写回文件
+        # 这样既能防止中途断电丢失数据，又能保证文件内绝对没有重复行，顺便还能自动帮 IP 排序！
+        async with file_lock:
+            try:
+                with open(dead_gateways_file, 'w', encoding='utf-8') as gf:
+                    for ip in sorted(history_dead_ips):
+                        gf.write(f"{ip}\n")
+            except Exception: pass
+
+    print("\n✅ 网关探测完成！")
     return valid_urls
 
 async def fetch_json(session, url, semaphore):
