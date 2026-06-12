@@ -744,5 +744,9 @@
     "http://123.60.75.150:16922/playlist.m3u",
     "http://123.60.75.150:16922/iptv.m3u",
     "http://123.60.75.150:16922/live/live.txt",
-    "http://123.60.75.150:16922/iptv/json/channels.json"
+    "http://123.60.75.150:16922/iptv/json/channels.json",
+    "http://124.70.135.196:4155/Public/json/live_interface.txt",
+    "http://101.66.195.40:9901/iptv/live/1000.json?key=txiptv",
+    "http://101.66.195.174:9901/iptv/live/1000.json?key=txiptv",
+    "http://123.60.2.41:32770/iptv/json/channels.json"
 ]
