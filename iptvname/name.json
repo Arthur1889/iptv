@@ -16,6 +16,7 @@
         "CCTV4K.cn@SD",
         "CCTV4KHD",
         "CCTV4K超高清",
+        "cctv4k",
         "cctv4k_10m"
     ],
     "CCTV8K": [
@@ -33,6 +34,7 @@
         "CCTV8K.cn@SD",
         "CCTV8KHD",
         "CCTV8K超高清",
+        "cctv8k",
         "cctv8k_120m",
         "cctv8k_36m"
     ],
@@ -81,7 +83,8 @@
         "东方卫视4K.cn@SD",
         "东方卫视4KHD",
         "东方超高清",
-        "东方高清"
+        "东方高清",
+        "看东方4K"
     ],
     "江苏卫视4K": [
         "江苏卫视4K",
@@ -346,7 +349,6 @@
         "CCTV-05高清",
         "CCTV-05高码",
         "CCTV-5",
-        "CCTV-5 (720p)",
         "CCTV-5 体育",
         "CCTV-5-高清",
         "CCTV-5HD",
@@ -366,11 +368,11 @@
         "CCTV5HD",
         "CCTV5[1920*1080]",
         "CCTV5「IPV6」",
-        "CCTV5体育"
+        "CCTV5体育",
+        "cctv5"
     ],
     "CCTV5+": [
         "CCTV-5+",
-        "CCTV-5+ (720p)",
         "CCTV-5+HD",
         "CCTV-5+_ITV",
         "CCTV-5+体育赛事",
@@ -403,7 +405,6 @@
         "CCTV5+体育",
         "CCTV5+体育赛事",
         "CCTV5+斯特",
-        "CCTV5Plus.cn@SD",
         "CCTV5＋",
         "CCTV赛事"
     ],
@@ -802,7 +803,6 @@
         "CCTV-15",
         "CCTV-15 (1080p)",
         "CCTV-15 (720p)",
-        "CCTV-15 音乐",
         "CCTV-15(音乐)",
         "CCTV-15HD",
         "CCTV-15_ITV",
@@ -884,7 +884,8 @@
         "CCTV16[1920*1080]",
         "CCTV16「IPV6」",
         "CCTV16体育赛事",
-        "CCTV16奥林匹克4K"
+        "CCTV16奥林匹克4K",
+        "cctv16"
     ],
     "CCTV17": [
         "CCTV-17",
@@ -1169,7 +1170,6 @@
         "CGTN",
         "CGTN (1080p)",
         "CGTN 英語頻道",
-        "CGTN-News",
         "CGTN.cn@SD",
         "CGTN英语",
         "CGTN英语 (1080p)",
@@ -13251,7 +13251,8 @@
         "MYCINEMAEUROPE (720p)",
         "MYCINEMAEUROPE.cn@HD",
         "MYCINEMAEUROPE.cn@SD",
-        "MYCINEMAEUROPEHD"
+        "MYCINEMAEUROPEHD",
+        "My Cinema Europe"
     ],
     "NBTV1": [
         "NBTV1",
@@ -19439,6 +19440,7 @@
         "湖南电影HD"
     ],
     "湖南电视剧": [
+        "dianshiju.hunan",
         "湖南电视剧",
         "湖南电视剧 (1080p)",
         "湖南电视剧 (2160p)",
