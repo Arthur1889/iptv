@@ -5,7 +5,6 @@
         "CCTV-4K 高清",
         "CCTV-4K广西",
         "CCTV-4K超高清",
-        "CCTV-4k",
         "CCTV-4k浙江",
         "CCTV-4k高码",
         "CCTV4K",
@@ -16,7 +15,6 @@
         "CCTV4K.cn@SD",
         "CCTV4KHD",
         "CCTV4K超高清",
-        "cctv4k",
         "cctv4k_10m"
     ],
     "CCTV8K": [
@@ -34,7 +32,6 @@
         "CCTV8K.cn@SD",
         "CCTV8KHD",
         "CCTV8K超高清",
-        "cctv8k",
         "cctv8k_120m",
         "cctv8k_36m"
     ],
@@ -368,8 +365,7 @@
         "CCTV5HD",
         "CCTV5[1920*1080]",
         "CCTV5「IPV6」",
-        "CCTV5体育",
-        "cctv5"
+        "CCTV5体育"
     ],
     "CCTV5+": [
         "CCTV-5+",
@@ -566,7 +562,6 @@
         "CCTV-09高码",
         "CCTV-9",
         "CCTV-9 (576i)",
-        "CCTV-9 纪录",
         "CCTV-9HD",
         "CCTV-9纪录",
         "CCTV-9纪录ᴴᴰ",
@@ -884,8 +879,7 @@
         "CCTV16[1920*1080]",
         "CCTV16「IPV6」",
         "CCTV16体育赛事",
-        "CCTV16奥林匹克4K",
-        "cctv16"
+        "CCTV16奥林匹克4K"
     ],
     "CCTV17": [
         "CCTV-17",
@@ -1169,6 +1163,7 @@
         "CGNT 新闻频道",
         "CGTN",
         "CGTN (1080p)",
+        "CGTN (720p)",
         "CGTN 英語頻道",
         "CGTN.cn@SD",
         "CGTN英语",
@@ -1210,6 +1205,7 @@
         "CGTN阿语HD"
     ],
     "CGTN西语": [
+        "CGTN Spanish (720p)",
         "CGTNSpanish",
         "CGTNSpanish.cn@SD",
         "CGTN西班牙语",
@@ -1436,12 +1432,10 @@
     ],
     "安徽卫视": [
         "Anhui TV",
-        "AnhuiSatelliteTV.cn@SD",
         "AnhuiTV.cn",
         "安徽卫视",
         "安徽卫视 (1080p)",
         "安徽卫视 (2160p)",
-        "安徽卫视 (576p)",
         "安徽卫视 (720p)",
         "安徽卫视.cn@HD",
         "安徽卫视.cn@SD",
@@ -12449,7 +12443,8 @@
         "FRANCE24 (720p)",
         "FRANCE24.cn@HD",
         "FRANCE24.cn@SD",
-        "FRANCE24HD"
+        "FRANCE24HD",
+        "France 24"
     ],
     "GOODTV": [
         "GOODTV",
@@ -12534,6 +12529,7 @@
         "HBOHD"
     ],
     "HBOFAMILY": [
+        "HBO FAMILY HD",
         "HBOFAMILY",
         "HBOFAMILY (1080p)",
         "HBOFAMILY (2160p)",
