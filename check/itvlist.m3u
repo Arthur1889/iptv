@@ -1149,5 +1149,5 @@ http://101.43.70.110:5004/rememberQuickAssignTouch, { passive: true })
 http://121.19.134.119:808/tsfile/live/1010_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-name="CONSTTIMEOUTID=CONTROLLER?SETTIMEOUT=>CONTROLLER.ABORT" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/CONSTTIMEOUTID=CONTROLLER?SETTIMEOUT=>CONTROLLER.ABORT.png" group-title="其他频道" response-time="113ms",CONSTTIMEOUTID=CONTROLLER?SETTIMEOUT=>CONTROLLER.ABORT
 http://101.43.70.110:5004/CLOUD_FETCH_TIMEOUT_MS) : null
-#EXTINF:-1 tvg-name="2026-06-18_10:32:02" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/Dog狗频道.png" group-title="更新时间",2026-06-18_10:32:02
+#EXTINF:-1 tvg-name="2026-06-28_20:50:12" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/Dog狗频道.png" group-title="更新时间",2026-06-28_20:50:12
 http://example.com/update_time.mp4

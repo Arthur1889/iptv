@@ -1483,5 +1483,7 @@
     "http://81.70.92.116/iptv/json/channels.json",
     "http://81.70.92.116/Public/json/live_interface.txt",
     "http://81.70.92.120/standard/live.txt",
-    "http://124.70.135.196:6998/playlist.m3u"
+    "http://124.70.135.196:6998/playlist.m3u",
+    "http://123.60.2.41:7080/playlist.m3u",
+    "http://123.60.2.41:2406/live/live.txt"
 ]
