@@ -5,7 +5,6 @@
         "CCTV-4K 高清",
         "CCTV-4K广西",
         "CCTV-4K超高清",
-        "CCTV-4k",
         "CCTV-4k浙江",
         "CCTV-4k高码",
         "CCTV4K",
@@ -564,7 +563,6 @@
         "CCTV-09高码",
         "CCTV-9",
         "CCTV-9 (576i)",
-        "CCTV-9 纪录",
         "CCTV-9HD",
         "CCTV-9纪录",
         "CCTV-9纪录ᴴᴰ",
@@ -801,6 +799,7 @@
         "CCTV-15",
         "CCTV-15 (1080p)",
         "CCTV-15 (720p)",
+        "CCTV-15 音乐",
         "CCTV-15(音乐)",
         "CCTV-15HD",
         "CCTV-15_ITV",
@@ -1165,9 +1164,11 @@
         "CCTVNEWS新闻",
         "CCTVNEWS新闻频道",
         "CGNT 新闻频道",
+        "CGNT 记录频道",
         "CGTN",
         "CGTN (1080p)",
         "CGTN 英語頻道",
+        "CGTN-News",
         "CGTN.cn@SD",
         "CGTN英语",
         "CGTN英语 (1080p)",
@@ -19441,6 +19442,7 @@
         "湖南电影HD"
     ],
     "湖南电视剧": [
+        "dianshiju.hunan",
         "湖南电视剧",
         "湖南电视剧 (1080p)",
         "湖南电视剧 (2160p)",
@@ -19450,6 +19452,7 @@
         "湖南电视剧HD"
     ],
     "湖南经视": [
+        "eco.hunan",
         "湖南经视",
         "湖南经视 (1080p)",
         "湖南经视 (2160p)",
