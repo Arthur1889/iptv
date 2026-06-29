@@ -1565,5 +1565,6 @@
     "http://124.71.194.194/live/iptv.json",
     "http://124.71.194.194/iptv.m3u",
     "http://124.71.194.194/iptv/json/channels.json",
-    "http://124.71.194.194/live/live.txt"
+    "http://124.71.194.194/live/live.txt",
+    "http://124.70.135.196:449/playlist.m3u"
 ]
