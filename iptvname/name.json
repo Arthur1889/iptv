@@ -152,7 +152,7 @@
         "广东影视高清"
     ],
     "CCTV1": [
-        "2026-05-16 11:37:47",
+        "2026-07-07 18:30:07",
         "CCTV-01",
         "CCTV-01_ITV",
         "CCTV-01上海",
@@ -562,6 +562,7 @@
         "CCTV-09高码",
         "CCTV-9",
         "CCTV-9 (576i)",
+        "CCTV-9 纪录",
         "CCTV-9HD",
         "CCTV-9纪录",
         "CCTV-9纪录ᴴᴰ",
@@ -586,7 +587,6 @@
         "CCTV-10",
         "CCTV-10 (576i)",
         "CCTV-10 (720p)",
-        "CCTV-10 科教",
         "CCTV-10HD",
         "CCTV-10_ITV",
         "CCTV-10上海",
@@ -1173,7 +1173,6 @@
         "CCTVNEWS新闻",
         "CCTVNEWS新闻频道",
         "CGNT 新闻频道",
-        "CGNT 记录频道",
         "CGTN",
         "CGTN (1080p)",
         "CGTN (720p)",
@@ -1218,6 +1217,7 @@
         "CGTN阿语HD"
     ],
     "CGTN西语": [
+        "CGTN Spanish (1080p)",
         "CGTN Spanish (720p)",
         "CGTNSpanish",
         "CGTNSpanish.cn@SD",
@@ -12087,8 +12087,7 @@
         "ANIMAX (720p)",
         "ANIMAX.cn@HD",
         "ANIMAX.cn@SD",
-        "ANIMAXHD",
-        "Animax"
+        "ANIMAXHD"
     ],
     "ARIRANGTV": [
         "ARIRANGTV",
@@ -12759,8 +12758,7 @@
         "HISTORY (720p)",
         "HISTORY.cn@HD",
         "HISTORY.cn@SD",
-        "HISTORYHD",
-        "History"
+        "HISTORYHD"
     ],
     "HITS": [
         "HITS",
