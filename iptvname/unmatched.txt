@@ -2892,32 +2892,20 @@
 源行: #EXTINF:-1 group-title="" tvg-logo="" tvg-id="" epg-url="",早期教育HD
 提取 => id: [], name: [], display: [早期教育HD]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="✈️TG频道@stymei" tvg-logo="https://epg.112114.xyz/logo/更新时间2026.6.20.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",更新时间2026.6.20
-提取 => id: [], name: [], display: [更新时间2026.6.20]
+源行: #EXTINF:-1 group-title="✈️TG频道@stymei" tvg-logo="https://epg.112114.xyz/logo/更新时间2026.6.27.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",更新时间2026.6.27
+提取 => id: [], name: [], display: [更新时间2026.6.27]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="✈️TG频道@stymei" tvg-logo="https://epg.112114.xyz/logo/永久官网https://jsnzkpg.com.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",永久官网https://jsnzkpg.com
 提取 => id: [], name: [], display: [永久官网https://jsnzkpg.com]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="⚽世界杯专场" tvg-logo="https://epg.112114.xyz/logo/爱尔达体育.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",爱尔达体育
-提取 => id: [], name: [], display: [爱尔达体育]
+源行: #EXTINF:-1 group-title="✈️TG频道@stymei" tvg-logo="https://epg.112114.xyz/logo/世界杯[直接复制] https://jsnzkpg.us.ci/live.m3u.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",世界杯[直接复制] https://jsnzkpg.us.ci/live.m3u
+提取 => id: [], name: [], display: [世界杯[直接复制] https://jsnzkpg.us.ci/live.m3u]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="⚽世界杯专场" tvg-logo="https://epg.112114.xyz/logo/爱尔达体育.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",爱尔达体育
-提取 => id: [], name: [], display: [爱尔达体育]
+源行: #EXTINF:-1 group-title="🔥[三网1]央卫视直播" tvg-logo="https://epg.112114.xyz/logo/CGTN财经.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",CGTN财经
+提取 => id: [], name: [], display: [CGTN财经]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="⚽世界杯专场" tvg-logo="https://epg.112114.xyz/logo/澳门体育.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",澳门体育
-提取 => id: [], name: [], display: [澳门体育]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="⚽世界杯专场" tvg-logo="https://epg.112114.xyz/logo/澳门体育.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",澳门体育
-提取 => id: [], name: [], display: [澳门体育]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="⚽世界杯专场" tvg-logo="https://epg.112114.xyz/logo/FIFA+.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",FIFA+
-提取 => id: [], name: [], display: [FIFA+]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="⚽世界杯专场" tvg-logo="https://epg.112114.xyz/logo/FIFA+.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",FIFA+
-提取 => id: [], name: [], display: [FIFA+]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="⚽世界杯专场" tvg-logo="https://epg.112114.xyz/logo/FIFA+.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",FIFA+
-提取 => id: [], name: [], display: [FIFA+]
+源行: #EXTINF:-1 group-title="🔥[三网1]央卫视直播" tvg-logo="https://epg.112114.xyz/logo/汽摩频道-.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",汽摩频道-
+提取 => id: [], name: [], display: [汽摩频道-]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="🔥[三网2]央卫视直播" tvg-logo="https://epg.112114.xyz/logo/CCTV-16奥林匹克.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",CCTV-16奥林匹克
 提取 => id: [], name: [], display: [CCTV-16奥林匹克]
@@ -3096,12 +3084,6 @@
 源行: #EXTINF:-1 group-title="🔮港澳台直播" tvg-logo="https://epg.112114.xyz/logo/Channel U.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Channel U
 提取 => id: [], name: [], display: [Channel U]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🔮港澳台直播" tvg-logo="https://epg.112114.xyz/logo/GOOD2.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",GOOD2
-提取 => id: [], name: [], display: [GOOD2]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🔮港澳台直播" tvg-logo="https://epg.112114.xyz/logo/GOODTV好消息.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",GOODTV好消息
-提取 => id: [], name: [], display: [GOODTV好消息]
-------------------------------------------------------------
 源行: #EXTINF:-1 group-title="🔮港澳台直播" tvg-logo="https://epg.112114.xyz/logo/HOYTV.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",HOYTV
 提取 => id: [], name: [], display: [HOYTV]
 ------------------------------------------------------------
@@ -3122,9 +3104,6 @@
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="🔮港澳台直播" tvg-logo="https://epg.112114.xyz/logo/TVB功夫台.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",TVB功夫台
 提取 => id: [], name: [], display: [TVB功夫台]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🔮港澳台直播" tvg-logo="https://epg.112114.xyz/logo/TVB明珠.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",TVB明珠
-提取 => id: [], name: [], display: [TVB明珠]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="🔮港澳台直播" tvg-logo="https://epg.112114.xyz/logo/TVBJ.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",TVBJ
 提取 => id: [], name: [], display: [TVBJ]
@@ -3174,35 +3153,11 @@
 源行: #EXTINF:-1 group-title="🔮港澳台直播" tvg-logo="https://epg.112114.xyz/logo/翡翠一台(TVB1).png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",翡翠一台(TVB1)
 提取 => id: [], name: [], display: [翡翠一台(TVB1)]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🔮港澳台直播" tvg-logo="https://epg.112114.xyz/logo/公视台语台.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",公视台语台
-提取 => id: [], name: [], display: [公视台语台]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🔮港澳台直播" tvg-logo="https://epg.112114.xyz/logo/公视戏剧.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",公视戏剧
-提取 => id: [], name: [], display: [公视戏剧]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🔮港澳台直播" tvg-logo="https://epg.112114.xyz/logo/采昌影剧台.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",采昌影剧台
-提取 => id: [], name: [], display: [采昌影剧台]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🔮港澳台直播" tvg-logo="https://epg.112114.xyz/logo/华视教育体育文化.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",华视教育体育文化
-提取 => id: [], name: [], display: [华视教育体育文化]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🔮港澳台直播" tvg-logo="https://epg.112114.xyz/logo/华视新闻.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",华视新闻
-提取 => id: [], name: [], display: [华视新闻]
-------------------------------------------------------------
 源行: #EXTINF:-1 group-title="🔮港澳台直播" tvg-logo="https://epg.112114.xyz/logo/环球电视台.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",环球电视台
 提取 => id: [], name: [], display: [环球电视台]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🔮港澳台直播" tvg-logo="https://epg.112114.xyz/logo/靖天电影.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",靖天电影
-提取 => id: [], name: [], display: [靖天电影]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🔮港澳台直播" tvg-logo="https://epg.112114.xyz/logo/靖天戏剧.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",靖天戏剧
-提取 => id: [], name: [], display: [靖天戏剧]
-------------------------------------------------------------
 源行: #EXTINF:-1 group-title="🔮港澳台直播" tvg-logo="https://epg.112114.xyz/logo/金光布袋戏.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",金光布袋戏
 提取 => id: [], name: [], display: [金光布袋戏]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🔮港澳台直播" tvg-logo="https://epg.112114.xyz/logo/明珠.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",明珠
-提取 => id: [], name: [], display: [明珠]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="🔮港澳台直播" tvg-logo="https://epg.112114.xyz/logo/明珠.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",明珠
 提取 => id: [], name: [], display: [明珠]
@@ -3234,47 +3189,17 @@
 源行: #EXTINF:-1 group-title="🔮港澳台直播" tvg-logo="https://epg.112114.xyz/logo/娱乐新闻.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",娱乐新闻
 提取 => id: [], name: [], display: [娱乐新闻]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🔮港澳台直播" tvg-logo="https://epg.112114.xyz/logo/AMC电影台.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",AMC电影台
-提取 => id: [], name: [], display: [AMC电影台]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🔮港澳台直播" tvg-logo="https://epg.112114.xyz/logo/影迷数位电影台.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",影迷数位电影台
-提取 => id: [], name: [], display: [影迷数位电影台]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🔮港澳台直播" tvg-logo="https://epg.112114.xyz/logo/经典电影.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",经典电影
-提取 => id: [], name: [], display: [经典电影]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🔮港澳台直播" tvg-logo="https://epg.112114.xyz/logo/CMusic.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",CMusic
-提取 => id: [], name: [], display: [CMusic]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🔮港澳台直播" tvg-logo="https://epg.112114.xyz/logo/DreamWorks梦工厂动画.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",DreamWorks梦工厂动画
-提取 => id: [], name: [], display: [DreamWorks梦工厂动画]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🔮港澳台直播" tvg-logo="https://epg.112114.xyz/logo/精选动漫台.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",精选动漫台
-提取 => id: [], name: [], display: [精选动漫台]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🔮港澳台直播" tvg-logo="https://epg.112114.xyz/logo/金光布袋戏.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",金光布袋戏
-提取 => id: [], name: [], display: [金光布袋戏]
-------------------------------------------------------------
 源行: #EXTINF:-1 group-title="🔮港澳台直播" tvg-logo="https://epg.112114.xyz/logo/美亚C+.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",美亚C+
 提取 => id: [], name: [], display: [美亚C+]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🔮港澳台直播" tvg-logo="https://epg.112114.xyz/logo/纬来体育.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",纬来体育
-提取 => id: [], name: [], display: [纬来体育]
-------------------------------------------------------------
 源行: #EXTINF:-1 group-title="🔮港澳台直播" tvg-logo="https://epg.112114.xyz/logo/寰宇台湾.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",寰宇台湾
 提取 => id: [], name: [], display: [寰宇台湾]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🔮港澳台直播" tvg-logo="https://epg.112114.xyz/logo/三立新闻.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",三立新闻
-提取 => id: [], name: [], display: [三立新闻]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="🔮港澳台直播" tvg-logo="https://epg.112114.xyz/logo/民视新闻.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",民视新闻
 提取 => id: [], name: [], display: [民视新闻]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="🔮港澳台直播" tvg-logo="https://epg.112114.xyz/logo/台湾生活.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",台湾生活
 提取 => id: [], name: [], display: [台湾生活]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🔮港澳台直播" tvg-logo="https://epg.112114.xyz/logo/民视台湾.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",民视台湾
-提取 => id: [], name: [], display: [民视台湾]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="🔮港澳台直播" tvg-logo="https://epg.112114.xyz/logo/TITV.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",TITV
 提取 => id: [], name: [], display: [TITV]
@@ -3441,9 +3366,6 @@
 源行: #EXTINF:-1 group-title="🇮🇳印度直播" tvg-logo="https://epg.112114.xyz/logo/ZB Cinema.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",ZB Cinema
 提取 => id: [], name: [], display: [ZB Cinema]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🇮🇳印度直播" tvg-logo="https://epg.112114.xyz/logo/Zee Classic.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Zee Classic
-提取 => id: [], name: [], display: [Zee Classic]
-------------------------------------------------------------
 源行: #EXTINF:-1 group-title="🇮🇳印度直播" tvg-logo="https://epg.112114.xyz/logo/Sanskar TV.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Sanskar TV
 提取 => id: [], name: [], display: [Sanskar TV]
 ------------------------------------------------------------
@@ -3452,9 +3374,6 @@
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="🇮🇳印度直播" tvg-logo="https://epg.112114.xyz/logo/Sansad TV 2.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Sansad TV 2
 提取 => id: [], name: [], display: [Sansad TV 2]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🇮🇳印度直播" tvg-logo="https://epg.112114.xyz/logo/Food Food.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Food Food
-提取 => id: [], name: [], display: [Food Food]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="🇮🇳印度直播" tvg-logo="https://epg.112114.xyz/logo/DD Sports SD.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",DD Sports SD
 提取 => id: [], name: [], display: [DD Sports SD]
@@ -3477,23 +3396,479 @@
 源行: #EXTINF:-1 group-title="🇮🇳印度直播" tvg-logo="https://epg.112114.xyz/logo/Chithiram.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Chithiram
 提取 => id: [], name: [], display: [Chithiram]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🇮🇳印度直播" tvg-logo="https://epg.112114.xyz/logo/Sonic.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Sonic
-提取 => id: [], name: [], display: [Sonic]
-------------------------------------------------------------
 源行: #EXTINF:-1 group-title="🇮🇳印度直播" tvg-logo="https://epg.112114.xyz/logo/ZB Cartoon.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",ZB Cartoon
 提取 => id: [], name: [], display: [ZB Cartoon]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/NHK G.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",NHK G
+提取 => id: [], name: [], display: [NHK G]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/NHK E.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",NHK E
+提取 => id: [], name: [], display: [NHK E]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/NTV.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",NTV
+提取 => id: [], name: [], display: [NTV]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/TV Asahi.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",TV Asahi
+提取 => id: [], name: [], display: [TV Asahi]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/TBS.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",TBS
+提取 => id: [], name: [], display: [TBS]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/TV Tokyo.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",TV Tokyo
+提取 => id: [], name: [], display: [TV Tokyo]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Fuji TV.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Fuji TV
+提取 => id: [], name: [], display: [Fuji TV]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/TOKYO MX1.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",TOKYO MX1
+提取 => id: [], name: [], display: [TOKYO MX1]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/NHK G (Sub Ch.).png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",NHK G (Sub Ch.)
+提取 => id: [], name: [], display: [NHK G (Sub Ch.)]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/TOKYO MX2.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",TOKYO MX2
+提取 => id: [], name: [], display: [TOKYO MX2]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/NHK G Osaka.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",NHK G Osaka
+提取 => id: [], name: [], display: [NHK G Osaka]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/MBS.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",MBS
+提取 => id: [], name: [], display: [MBS]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/ABC.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",ABC
+提取 => id: [], name: [], display: [ABC]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Kansai TV.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Kansai TV
+提取 => id: [], name: [], display: [Kansai TV]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/ytv.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",ytv
+提取 => id: [], name: [], display: [ytv]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/TV Osaka.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",TV Osaka
+提取 => id: [], name: [], display: [TV Osaka]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/SUN.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",SUN
+提取 => id: [], name: [], display: [SUN]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/KBS.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",KBS
+提取 => id: [], name: [], display: [KBS]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/日テレNEWS.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",日テレNEWS
+提取 => id: [], name: [], display: [日テレNEWS]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/FNNプライムオンライン.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",FNNプライムオンライン
+提取 => id: [], name: [], display: [FNNプライムオンライン]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/MBSニュース.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",MBSニュース
+提取 => id: [], name: [], display: [MBSニュース]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/NTV News24.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",NTV News24
+提取 => id: [], name: [], display: [NTV News24]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/TBS News.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",TBS News
+提取 => id: [], name: [], display: [TBS News]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/日テレNEWSセレクト.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",日テレNEWSセレクト
+提取 => id: [], name: [], display: [日テレNEWSセレクト]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/共同通信News.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",共同通信News
+提取 => id: [], name: [], display: [共同通信News]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/NewsWorld.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",NewsWorld
+提取 => id: [], name: [], display: [NewsWorld]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/オリコンニュース.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",オリコンニュース
+提取 => id: [], name: [], display: [オリコンニュース]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/STOCK VOICE.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",STOCK VOICE
+提取 => id: [], name: [], display: [STOCK VOICE]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Bloomberg TV+.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Bloomberg TV+
+提取 => id: [], name: [], display: [Bloomberg TV+]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/CNNj.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",CNNj
+提取 => id: [], name: [], display: [CNNj]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/BBC News.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",BBC News
+提取 => id: [], name: [], display: [BBC News]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Reuters 60.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Reuters 60
+提取 => id: [], name: [], display: [Reuters 60]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/ビジネス・プレミアム (FAST).png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",ビジネス・プレミアム (FAST)
+提取 => id: [], name: [], display: [ビジネス・プレミアム (FAST)]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/エンタメニュース (FAST).png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",エンタメニュース (FAST)
+提取 => id: [], name: [], display: [エンタメニュース (FAST)]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/NHK World-Japan.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",NHK World-Japan
+提取 => id: [], name: [], display: [NHK World-Japan]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/NHK BS.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",NHK BS
+提取 => id: [], name: [], display: [NHK BS]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/NHK BS (Sub Ch.).png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",NHK BS (Sub Ch.)
+提取 => id: [], name: [], display: [NHK BS (Sub Ch.)]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/BS NTV.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",BS NTV
+提取 => id: [], name: [], display: [BS NTV]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/BS Asahi.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",BS Asahi
+提取 => id: [], name: [], display: [BS Asahi]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/BS TBS.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",BS TBS
+提取 => id: [], name: [], display: [BS TBS]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/BS TV Tokyo.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",BS TV Tokyo
+提取 => id: [], name: [], display: [BS TV Tokyo]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/BS Fuji.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",BS Fuji
+提取 => id: [], name: [], display: [BS Fuji]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/BS11.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",BS11
+提取 => id: [], name: [], display: [BS11]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/BS 12.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",BS 12
+提取 => id: [], name: [], display: [BS 12]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/BS 10.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",BS 10
+提取 => id: [], name: [], display: [BS 10]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/JCOM BS.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",JCOM BS
+提取 => id: [], name: [], display: [JCOM BS]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/BS Yoshimoto.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",BS Yoshimoto
+提取 => id: [], name: [], display: [BS Yoshimoto]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/NHK BS4K.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",NHK BS4K
+提取 => id: [], name: [], display: [NHK BS4K]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/WOWOW Prime.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",WOWOW Prime
+提取 => id: [], name: [], display: [WOWOW Prime]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/WOWOW Live.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",WOWOW Live
+提取 => id: [], name: [], display: [WOWOW Live]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/WOWOW Cinema.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",WOWOW Cinema
+提取 => id: [], name: [], display: [WOWOW Cinema]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/WOWOW Plus.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",WOWOW Plus
+提取 => id: [], name: [], display: [WOWOW Plus]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/BS 10 Premium.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",BS 10 Premium
+提取 => id: [], name: [], display: [BS 10 Premium]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/JSport 1.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",JSport 1
+提取 => id: [], name: [], display: [JSport 1]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/JSport 2.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",JSport 2
+提取 => id: [], name: [], display: [JSport 2]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/JSport 3.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",JSport 3
+提取 => id: [], name: [], display: [JSport 3]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/JSport 4.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",JSport 4
+提取 => id: [], name: [], display: [JSport 4]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Sky A.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Sky A
+提取 => id: [], name: [], display: [Sky A]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Gaora Sports.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Gaora Sports
+提取 => id: [], name: [], display: [Gaora Sports]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Nittele G+.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Nittele G+
+提取 => id: [], name: [], display: [Nittele G+]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Space Shower TV (HD).png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Space Shower TV (HD)
+提取 => id: [], name: [], display: [Space Shower TV (HD)]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Sport Live Plus.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Sport Live Plus
+提取 => id: [], name: [], display: [Sport Live Plus]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Golf Network.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Golf Network
+提取 => id: [], name: [], display: [Golf Network]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Fighting TV Samurai.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Fighting TV Samurai
+提取 => id: [], name: [], display: [Fighting TV Samurai]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Green Channel.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Green Channel
+提取 => id: [], name: [], display: [Green Channel]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/TOP BARÇA.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",TOP BARÇA
+提取 => id: [], name: [], display: [TOP BARÇA]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/NTV Pro Wrestling.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",NTV Pro Wrestling
+提取 => id: [], name: [], display: [NTV Pro Wrestling]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/刺激ストロングSPORTS.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",刺激ストロングSPORTS
+提取 => id: [], name: [], display: [刺激ストロングSPORTS]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/FUEL TV.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",FUEL TV
+提取 => id: [], name: [], display: [FUEL TV]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/GOLF LIFE (FAST).png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",GOLF LIFE (FAST)
+提取 => id: [], name: [], display: [GOLF LIFE (FAST)]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Toei Channel.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Toei Channel
+提取 => id: [], name: [], display: [Toei Channel]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Nihon Eiga Senmon.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Nihon Eiga Senmon
+提取 => id: [], name: [], display: [Nihon Eiga Senmon]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/The Cinema.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",The Cinema
+提取 => id: [], name: [], display: [The Cinema]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Movie Plus.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Movie Plus
+提取 => id: [], name: [], display: [Movie Plus]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Eisei Gekijo.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Eisei Gekijo
+提取 => id: [], name: [], display: [Eisei Gekijo]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Neco Channel.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Neco Channel
+提取 => id: [], name: [], display: [Neco Channel]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Jidaigeki Senmon.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Jidaigeki Senmon
+提取 => id: [], name: [], display: [Jidaigeki Senmon]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Home Drama Channel.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Home Drama Channel
+提取 => id: [], name: [], display: [Home Drama Channel]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Channel Ginga.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Channel Ginga
+提取 => id: [], name: [], display: [Channel Ginga]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/LaLa TV.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",LaLa TV
+提取 => id: [], name: [], display: [LaLa TV]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Family Gekijyo.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Family Gekijyo
+提取 => id: [], name: [], display: [Family Gekijyo]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Super Drama TV.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Super Drama TV
+提取 => id: [], name: [], display: [Super Drama TV]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Mystery Channel.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Mystery Channel
+提取 => id: [], name: [], display: [Mystery Channel]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Action Channel (AXN).png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Action Channel (AXN)
+提取 => id: [], name: [], display: [Action Channel (AXN)]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/TBS Channel 1.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",TBS Channel 1
+提取 => id: [], name: [], display: [TBS Channel 1]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/TBS Channel 2.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",TBS Channel 2
+提取 => id: [], name: [], display: [TBS Channel 2]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/TV Asahi Channel 1.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",TV Asahi Channel 1
+提取 => id: [], name: [], display: [TV Asahi Channel 1]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/TV Asahi Channel 2.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",TV Asahi Channel 2
+提取 => id: [], name: [], display: [TV Asahi Channel 2]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Fuji TV ONE.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Fuji TV ONE
+提取 => id: [], name: [], display: [Fuji TV ONE]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Fuji TV TWO.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Fuji TV TWO
+提取 => id: [], name: [], display: [Fuji TV TWO]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Fuji TV NEXT.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Fuji TV NEXT
+提取 => id: [], name: [], display: [Fuji TV NEXT]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Nittele Plus.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Nittele Plus
+提取 => id: [], name: [], display: [Nittele Plus]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/NEW KPOP.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",NEW KPOP
+提取 => id: [], name: [], display: [NEW KPOP]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/ムビドラTV.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",ムビドラTV
+提取 => id: [], name: [], display: [ムビドラTV]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/時代劇TV (FAST).png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",時代劇TV (FAST)
+提取 => id: [], name: [], display: [時代劇TV (FAST)]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/LeminoTV (FAST).png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",LeminoTV (FAST)
+提取 => id: [], name: [], display: [LeminoTV (FAST)]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/エンタメ・アジア (FAST).png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",エンタメ・アジア (FAST)
+提取 => id: [], name: [], display: [エンタメ・アジア (FAST)]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Dlife.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Dlife
+提取 => id: [], name: [], display: [Dlife]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/AT-X.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",AT-X
+提取 => id: [], name: [], display: [AT-X]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Cartoon Network.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Cartoon Network
+提取 => id: [], name: [], display: [Cartoon Network]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Kids Staton.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Kids Staton
+提取 => id: [], name: [], display: [Kids Staton]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Disney Channel.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Disney Channel
+提取 => id: [], name: [], display: [Disney Channel]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Disney Junior.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Disney Junior
+提取 => id: [], name: [], display: [Disney Junior]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/手塚プロダクションTV.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",手塚プロダクションTV
+提取 => id: [], name: [], display: [手塚プロダクションTV]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/しまじろうチャンネル.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",しまじろうチャンネル
+提取 => id: [], name: [], display: [しまじろうチャンネル]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/キッズ.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",キッズ
+提取 => id: [], name: [], display: [キッズ]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/アニマックス FREE (FAST).png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",アニマックス FREE (FAST)
+提取 => id: [], name: [], display: [アニマックス FREE (FAST)]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Music ON TV.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Music ON TV
+提取 => id: [], name: [], display: [Music ON TV]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Music Japan TV.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Music Japan TV
+提取 => id: [], name: [], display: [Music Japan TV]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Kayo Pops.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Kayo Pops
+提取 => id: [], name: [], display: [Kayo Pops]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Takarazuka Sky Stage.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Takarazuka Sky Stage
+提取 => id: [], name: [], display: [Takarazuka Sky Stage]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/that’s 70s.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",that’s 70s
+提取 => id: [], name: [], display: [that’s 70s]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/that’s 80s.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",that’s 80s
+提取 => id: [], name: [], display: [that’s 80s]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/that’s 90s00s.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",that’s 90s00s
+提取 => id: [], name: [], display: [that’s 90s00s]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/that’s Rock.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",that’s Rock
+提取 => id: [], name: [], display: [that’s Rock]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Music Air.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Music Air
+提取 => id: [], name: [], display: [Music Air]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/National Geographic Japan.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",National Geographic Japan
+提取 => id: [], name: [], display: [National Geographic Japan]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Discovery Channel.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Discovery Channel
+提取 => id: [], name: [], display: [Discovery Channel]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Animal Planet.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Animal Planet
+提取 => id: [], name: [], display: [Animal Planet]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Tabi Channel.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Tabi Channel
+提取 => id: [], name: [], display: [Tabi Channel]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Tetsudo Channel.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Tetsudo Channel
+提取 => id: [], name: [], display: [Tetsudo Channel]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Fishing Vision.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Fishing Vision
+提取 => id: [], name: [], display: [Fishing Vision]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/ペットTV (FAST).png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",ペットTV (FAST)
+提取 => id: [], name: [], display: [ペットTV (FAST)]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/キャンプ・アウトドア (FAST).png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",キャンプ・アウトドア (FAST)
+提取 => id: [], name: [], display: [キャンプ・アウトドア (FAST)]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/今日のごはんなに? (FAST).png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",今日のごはんなに? (FAST)
+提取 => id: [], name: [], display: [今日のごはんなに? (FAST)]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/観るたび (FAST).png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",観るたび (FAST)
+提取 => id: [], name: [], display: [観るたび (FAST)]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Shogi Channel.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Shogi Channel
+提取 => id: [], name: [], display: [Shogi Channel]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/囲碁・将棋ライト.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",囲碁・将棋ライト
+提取 => id: [], name: [], display: [囲碁・将棋ライト]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Mondo TV.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Mondo TV
+提取 => id: [], name: [], display: [Mondo TV]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/麻雀.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",麻雀
+提取 => id: [], name: [], display: [麻雀]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/パチンコ・パチスロ.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",パチンコ・パチスロ
+提取 => id: [], name: [], display: [パチンコ・パチスロ]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/ぷれいば！.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",ぷれいば！
+提取 => id: [], name: [], display: [ぷれいば！]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/ワンニャンチャンネル.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",ワンニャンチャンネル
+提取 => id: [], name: [], display: [ワンニャンチャンネル]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/九州・沖縄　街ネタ.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",九州・沖縄　街ネタ
+提取 => id: [], name: [], display: [九州・沖縄　街ネタ]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/丸ごと九州 (FAST).png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",丸ごと九州 (FAST)
+提取 => id: [], name: [], display: [丸ごと九州 (FAST)]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/ぴあ落語ざんまい (FAST).png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",ぴあ落語ざんまい (FAST)
+提取 => id: [], name: [], display: [ぴあ落語ざんまい (FAST)]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/FASHIONPLUS (FAST).png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",FASHIONPLUS (FAST)
+提取 => id: [], name: [], display: [FASHIONPLUS (FAST)]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/囲碁・将棋ライト (FAST).png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",囲碁・将棋ライト (FAST)
+提取 => id: [], name: [], display: [囲碁・将棋ライト (FAST)]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/丸ごと北海道 (FAST).png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",丸ごと北海道 (FAST)
+提取 => id: [], name: [], display: [丸ごと北海道 (FAST)]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/東海ロキポ (FAST).png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",東海ロキポ (FAST)
+提取 => id: [], name: [], display: [東海ロキポ (FAST)]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Me-Tele Next.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Me-Tele Next
+提取 => id: [], name: [], display: [Me-Tele Next]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/エンタメ～テレDEEP.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",エンタメ～テレDEEP
+提取 => id: [], name: [], display: [エンタメ～テレDEEP]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/KBS World.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",KBS World
+提取 => id: [], name: [], display: [KBS World]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/KNTV.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",KNTV
+提取 => id: [], name: [], display: [KNTV]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Mnet.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Mnet
+提取 => id: [], name: [], display: [Mnet]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/韓流チャンネル (FAST).png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",韓流チャンネル (FAST)
+提取 => id: [], name: [], display: [韓流チャンネル (FAST)]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/ショップチャンネル.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",ショップチャンネル
+提取 => id: [], name: [], display: [ショップチャンネル]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/QVC.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",QVC
+提取 => id: [], name: [], display: [QVC]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/GSTV.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",GSTV
+提取 => id: [], name: [], display: [GSTV]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Weather News.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Weather News
+提取 => id: [], name: [], display: [Weather News]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/V Paradise.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",V Paradise
+提取 => id: [], name: [], display: [V Paradise]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/Pigoo.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Pigoo
+提取 => id: [], name: [], display: [Pigoo]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/セクシーエンタメチャンネル.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",セクシーエンタメチャンネル
+提取 => id: [], name: [], display: [セクシーエンタメチャンネル]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/刺激ストロング.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",刺激ストロング
+提取 => id: [], name: [], display: [刺激ストロング]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🇯🇵日本直播" tvg-logo="https://epg.112114.xyz/logo/映画（年齢制限あり）.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",映画（年齢制限あり）
+提取 => id: [], name: [], display: [映画（年齢制限あり）]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="🇰🇷韩国直播" tvg-logo="https://epg.112114.xyz/logo/GCN24 Korean (720p).png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",GCN24 Korean (720p)
 提取 => id: [], name: [], display: [GCN24 Korean (720p)]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🇰🇷韩国直播" tvg-logo="https://epg.112114.xyz/logo/Gugbang TV (1080p) [Not 24/7].png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Gugbang TV (1080p) [Not 24/7]
-提取 => id: [], name: [], display: [Gugbang TV (1080p) [Not 24/7]]
-------------------------------------------------------------
 源行: #EXTINF:-1 group-title="🇰🇷韩国直播" tvg-logo="https://epg.112114.xyz/logo/MBC Chuncheon (춘천 MBC) (480p) [Not 24/7].png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",MBC Chuncheon (춘천 MBC) (480p) [Not 24/7]
 提取 => id: [], name: [], display: [MBC Chuncheon (춘천 MBC) (480p) [Not 24/7]]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🇰🇷韩国直播" tvg-logo="https://epg.112114.xyz/logo/MBC Mokpo (목포 MBC) (720p) [Not 24/7].png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",MBC Mokpo (목포 MBC) (720p) [Not 24/7]
-提取 => id: [], name: [], display: [MBC Mokpo (목포 MBC) (720p) [Not 24/7]]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="🇰🇷韩国直播" tvg-logo="https://epg.112114.xyz/logo/MBC Yeosu (여수 MBC)[Not 24/7].png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",MBC Yeosu (여수 MBC)[Not 24/7]
 提取 => id: [], name: [], display: [MBC Yeosu (여수 MBC)[Not 24/7]]
@@ -3503,9 +3878,6 @@
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="🇰🇷韩国直播" tvg-logo="https://epg.112114.xyz/logo/tvchosun2.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",tvchosun2
 提取 => id: [], name: [], display: [tvchosun2]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🇰🇷韩国直播" tvg-logo="https://epg.112114.xyz/logo/tvchosun.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",tvchosun
-提取 => id: [], name: [], display: [tvchosun]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="🇰🇷韩国直播" tvg-logo="https://epg.112114.xyz/logo/EBS1.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",EBS1
 提取 => id: [], name: [], display: [EBS1]
@@ -3533,9 +3905,6 @@
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="🇺🇸美国直播" tvg-logo="https://epg.112114.xyz/logo/ABC 7 New York.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",ABC 7 New York
 提取 => id: [], name: [], display: [ABC 7 New York]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🇺🇸美国直播" tvg-logo="https://epg.112114.xyz/logo/ABC 7 Los Angeles.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",ABC 7 Los Angeles
-提取 => id: [], name: [], display: [ABC 7 Los Angeles]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="🇺🇸美国直播" tvg-logo="https://epg.112114.xyz/logo/FOX 5 New York.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",FOX 5 New York
 提取 => id: [], name: [], display: [FOX 5 New York]
@@ -3876,9 +4245,6 @@
 源行: #EXTINF:-1 group-title="🇷🇺俄罗斯直播" tvg-logo="https://epg.112114.xyz/logo/尼克少儿.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",尼克少儿
 提取 => id: [], name: [], display: [尼克少儿]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🇷🇺俄罗斯直播" tvg-logo="https://epg.112114.xyz/logo/尼克少儿 俄罗斯.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",尼克少儿 俄罗斯
-提取 => id: [], name: [], display: [尼克少儿 俄罗斯]
-------------------------------------------------------------
 源行: #EXTINF:-1 group-title="🇷🇺俄罗斯直播" tvg-logo="https://epg.112114.xyz/logo/俄罗斯GITV.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",俄罗斯GITV
 提取 => id: [], name: [], display: [俄罗斯GITV]
 ------------------------------------------------------------
@@ -4095,9 +4461,6 @@
 源行: #EXTINF:-1 group-title="🌏全球直播" tvg-logo="https://epg.112114.xyz/logo/🇮🇳印度NDTV 24x7.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",🇮🇳印度NDTV 24x7
 提取 => id: [], name: [], display: [🇮🇳印度NDTV 24x7]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="👶🏻少儿直播" tvg-logo="https://epg.112114.xyz/logo/猫和老鼠.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",猫和老鼠
-提取 => id: [], name: [], display: [猫和老鼠]
-------------------------------------------------------------
 源行: #EXTINF:-1 group-title="👶🏻少儿直播" tvg-logo="https://epg.112114.xyz/logo/喜羊羊与灰太狼.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",喜羊羊与灰太狼
 提取 => id: [], name: [], display: [喜羊羊与灰太狼]
 ------------------------------------------------------------
@@ -4248,17 +4611,14 @@
 源行: #EXTINF:-1 group-title="🏀[海外]体育直播" tvg-logo="https://epg.112114.xyz/logo/Red Bull TV.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",Red Bull TV
 提取 => id: [], name: [], display: [Red Bull TV]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🎞️电影直播" tvg-logo="https://epg.112114.xyz/logo/邵氏电影.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",邵氏电影
-提取 => id: [], name: [], display: [邵氏电影]
+源行: #EXTINF:-1 group-title="🏀[海外]体育直播" tvg-logo="https://epg.112114.xyz/logo/FIFA+.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",FIFA+
+提取 => id: [], name: [], display: [FIFA+]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🎞️电影直播" tvg-logo="https://epg.112114.xyz/logo/邵氏武侠.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",邵氏武侠
-提取 => id: [], name: [], display: [邵氏武侠]
+源行: #EXTINF:-1 group-title="🏀[海外]体育直播" tvg-logo="https://epg.112114.xyz/logo/FIFA+.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",FIFA+
+提取 => id: [], name: [], display: [FIFA+]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🎞️电影直播" tvg-logo="https://epg.112114.xyz/logo/邵氏动作.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",邵氏动作
-提取 => id: [], name: [], display: [邵氏动作]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🎞️电影直播" tvg-logo="https://epg.112114.xyz/logo/邵氏喜剧.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",邵氏喜剧
-提取 => id: [], name: [], display: [邵氏喜剧]
+源行: #EXTINF:-1 group-title="🏀[海外]体育直播" tvg-logo="https://epg.112114.xyz/logo/FIFA+.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",FIFA+
+提取 => id: [], name: [], display: [FIFA+]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="🎞️电影直播" tvg-logo="https://epg.112114.xyz/logo/华数电影.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",华数电影
 提取 => id: [], name: [], display: [华数电影]
@@ -4268,12 +4628,6 @@
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="🎞️电影直播" tvg-logo="https://epg.112114.xyz/logo/推流影院.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",推流影院
 提取 => id: [], name: [], display: [推流影院]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🎞️电影直播" tvg-logo="https://epg.112114.xyz/logo/1905电影网环球经典.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",1905电影网环球经典
-提取 => id: [], name: [], display: [1905电影网环球经典]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="🎞️电影直播" tvg-logo="https://epg.112114.xyz/logo/1905电影网流金岁月.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",1905电影网流金岁月
-提取 => id: [], name: [], display: [1905电影网流金岁月]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="🎞️电影直播" tvg-logo="https://epg.112114.xyz/logo/周星驰专场.png" tvg-id="" epg-url="https://gitee.com/gsls200808/xmltvepg/raw/master/e9.xml.gz",周星驰专场
 提取 => id: [], name: [], display: [周星驰专场]
@@ -7236,14 +7590,11 @@
 源行: #EXTINF:-1 group-title="央视频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/CCTV9测试.png" tvg-id="" epg-url="",CCTV9测试
 提取 => id: [], name: [], display: [CCTV9测试]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="影视频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/经典电影.png" tvg-id="" epg-url="",经典电影
-提取 => id: [], name: [], display: [经典电影]
+源行: #EXTINF:-1 group-title="卫视频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/齐鲁卫视.png" tvg-id="" epg-url="",齐鲁卫视
+提取 => id: [], name: [], display: [齐鲁卫视]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="影视频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/动作影院.png" tvg-id="" epg-url="",动作影院
-提取 => id: [], name: [], display: [动作影院]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="影视频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/电视剧.png" tvg-id="" epg-url="",电视剧
-提取 => id: [], name: [], display: [电视剧]
+源行: #EXTINF:-1 group-title="影视频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/唐山影视.png" tvg-id="" epg-url="",唐山影视
+提取 => id: [], name: [], display: [唐山影视]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="影视频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/电视剧.png" tvg-id="" epg-url="",电视剧
 提取 => id: [], name: [], display: [电视剧]
@@ -7254,11 +7605,11 @@
 源行: #EXTINF:-1 group-title="影视频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/谍战剧场.png" tvg-id="" epg-url="",谍战剧场
 提取 => id: [], name: [], display: [谍战剧场]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="科教频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/中国教育.png" tvg-id="" epg-url="",中国教育
-提取 => id: [], name: [], display: [中国教育]
-------------------------------------------------------------
 源行: #EXTINF:-1 group-title="娱乐综艺" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/河南戏曲.png" tvg-id="" epg-url="",河南戏曲
 提取 => id: [], name: [], display: [河南戏曲]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="娱乐综艺" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/海看大片.png" tvg-id="" epg-url="",海看大片
+提取 => id: [], name: [], display: [海看大片]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="娱乐综艺" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/河南戏曲.png" tvg-id="" epg-url="",河南戏曲
 提取 => id: [], name: [], display: [河南戏曲]
@@ -7269,6 +7620,9 @@
 源行: #EXTINF:-1 group-title="体育频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/CCTV5测试.png" tvg-id="" epg-url="",CCTV5测试
 提取 => id: [], name: [], display: [CCTV5测试]
 ------------------------------------------------------------
+源行: #EXTINF:-1 group-title="体育频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/四海垂钓.png" tvg-id="" epg-url="",四海垂钓
+提取 => id: [], name: [], display: [四海垂钓]
+------------------------------------------------------------
 源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/惠州1.png" tvg-id="" epg-url="",惠州1
 提取 => id: [], name: [], display: [惠州1]
 ------------------------------------------------------------
@@ -7278,98 +7632,101 @@
 源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/梅州2.png" tvg-id="" epg-url="",梅州2
 提取 => id: [], name: [], display: [梅州2]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/BTV卡酷.png" tvg-id="" epg-url="",BTV卡酷
-提取 => id: [], name: [], display: [BTV卡酷]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/秦皇岛.png" tvg-id="" epg-url="",秦皇岛
-提取 => id: [], name: [], display: [秦皇岛]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/保定文化娱乐.png" tvg-id="" epg-url="",保定文化娱乐
-提取 => id: [], name: [], display: [保定文化娱乐]
-------------------------------------------------------------
 源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/保定新闻综合.png" tvg-id="" epg-url="",保定新闻综合
 提取 => id: [], name: [], display: [保定新闻综合]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/三门峡新闻综合.png" tvg-id="" epg-url="",三门峡新闻综合
-提取 => id: [], name: [], display: [三门峡新闻综合]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/新农村.png" tvg-id="" epg-url="",新农村
-提取 => id: [], name: [], display: [新农村]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/浙江.png" tvg-id="" epg-url="",浙江
-提取 => id: [], name: [], display: [浙江]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/民生.png" tvg-id="" epg-url="",民生
-提取 => id: [], name: [], display: [民生]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/法制.png" tvg-id="" epg-url="",法制
-提取 => id: [], name: [], display: [法制]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/公共.png" tvg-id="" epg-url="",公共
-提取 => id: [], name: [], display: [公共]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/民生.png" tvg-id="" epg-url="",民生
-提取 => id: [], name: [], display: [民生]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/都市.png" tvg-id="" epg-url="",都市
-提取 => id: [], name: [], display: [都市]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/新闻.png" tvg-id="" epg-url="",新闻
-提取 => id: [], name: [], display: [新闻]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/都市.png" tvg-id="" epg-url="",都市
-提取 => id: [], name: [], display: [都市]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/廊坊新闻.png" tvg-id="" epg-url="",廊坊新闻
 提取 => id: [], name: [], display: [廊坊新闻]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/民生.png" tvg-id="" epg-url="",民生
-提取 => id: [], name: [], display: [民生]
+源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/保定新闻综合.png" tvg-id="" epg-url="",保定新闻综合
+提取 => id: [], name: [], display: [保定新闻综合]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/新闻.png" tvg-id="" epg-url="",新闻
-提取 => id: [], name: [], display: [新闻]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/公共.png" tvg-id="" epg-url="",公共
-提取 => id: [], name: [], display: [公共]
+源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/河南法制报道.png" tvg-id="" epg-url="",河南法制报道
+提取 => id: [], name: [], display: [河南法制报道]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/保定生活健康.png" tvg-id="" epg-url="",保定生活健康
 提取 => id: [], name: [], display: [保定生活健康]
 ------------------------------------------------------------
+源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/陕西银铃.png" tvg-id="" epg-url="",陕西银铃
+提取 => id: [], name: [], display: [陕西银铃]
+------------------------------------------------------------
 源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/都市.png" tvg-id="" epg-url="",都市
 提取 => id: [], name: [], display: [都市]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/民生.png" tvg-id="" epg-url="",民生
+提取 => id: [], name: [], display: [民生]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/东营公共.png" tvg-id="" epg-url="",东营公共
+提取 => id: [], name: [], display: [东营公共]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/公共.png" tvg-id="" epg-url="",公共
 提取 => id: [], name: [], display: [公共]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/保定新闻综合.png" tvg-id="" epg-url="",保定新闻综合
-提取 => id: [], name: [], display: [保定新闻综合]
+源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/民生.png" tvg-id="" epg-url="",民生
+提取 => id: [], name: [], display: [民生]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/涿州新闻.png" tvg-id="" epg-url="",涿州新闻
+提取 => id: [], name: [], display: [涿州新闻]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/新闻.png" tvg-id="" epg-url="",新闻
 提取 => id: [], name: [], display: [新闻]
 ------------------------------------------------------------
+源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/靓彩河北.png" tvg-id="" epg-url="",靓彩河北
+提取 => id: [], name: [], display: [靓彩河北]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/公共.png" tvg-id="" epg-url="",公共
+提取 => id: [], name: [], display: [公共]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/河南法制报道.png" tvg-id="" epg-url="",河南法制报道
+提取 => id: [], name: [], display: [河南法制报道]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/都市.png" tvg-id="" epg-url="",都市
+提取 => id: [], name: [], display: [都市]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/保定文化娱乐.png" tvg-id="" epg-url="",保定文化娱乐
+提取 => id: [], name: [], display: [保定文化娱乐]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/新闻.png" tvg-id="" epg-url="",新闻
+提取 => id: [], name: [], display: [新闻]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/河南都市报道.png" tvg-id="" epg-url="",河南都市报道
+提取 => id: [], name: [], display: [河南都市报道]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/河南都市报道.png" tvg-id="" epg-url="",河南都市报道
+提取 => id: [], name: [], display: [河南都市报道]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/河南法制.png" tvg-id="" epg-url="",河南法制
+提取 => id: [], name: [], display: [河南法制]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/福建东南.png" tvg-id="" epg-url="",福建东南
+提取 => id: [], name: [], display: [福建东南]
+------------------------------------------------------------
 源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/湖南公共.png" tvg-id="" epg-url="",湖南公共
 提取 => id: [], name: [], display: [湖南公共]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/南方五.png" tvg-id="" epg-url="",南方五
-提取 => id: [], name: [], display: [南方五]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/深圳宝安.png" tvg-id="" epg-url="",深圳宝安
-提取 => id: [], name: [], display: [深圳宝安]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/天映.png" tvg-id="" epg-url="",天映
 提取 => id: [], name: [], display: [天映]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/移动.png" tvg-id="" epg-url="",移动
-提取 => id: [], name: [], display: [移动]
+源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/深圳宝安.png" tvg-id="" epg-url="",深圳宝安
+提取 => id: [], name: [], display: [深圳宝安]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/山歌.png" tvg-id="" epg-url="",山歌
 提取 => id: [], name: [], display: [山歌]
 ------------------------------------------------------------
+源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/百姓调解.png" tvg-id="" epg-url="",百姓调解
+提取 => id: [], name: [], display: [百姓调解]
+------------------------------------------------------------
 源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/五华台.png" tvg-id="" epg-url="",五华台
 提取 => id: [], name: [], display: [五华台]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="更新时间" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/Dog狗频道.png" tvg-id="" epg-url="",2026-06-23_05:32:45
-提取 => id: [], name: [], display: [2026-06-23_05:32:45]
+源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/五华台.png" tvg-id="" epg-url="",五华台
+提取 => id: [], name: [], display: [五华台]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/南方五.png" tvg-id="" epg-url="",南方五
+提取 => id: [], name: [], display: [南方五]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="更新时间" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/Dog狗频道.png" tvg-id="" epg-url="",2026-06-29_05:33:04
+提取 => id: [], name: [], display: [2026-06-29_05:33:04]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="港澳台" tvg-logo="https://i.imgur.com/qDI3aMp.png" tvg-id="澳门卫视" epg-url="",澳门卫视
 提取 => id: [澳门卫视], name: [], display: [澳门卫视]
