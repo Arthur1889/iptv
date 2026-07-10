@@ -84,6 +84,12 @@
 源行: #EXTINF:-1 group-title="☘️浙江频道" tvg-logo="https://www.xn--rgv465a.top/tvlogo/龙游生活娱乐.png" tvg-id="龙游生活娱乐" epg-url="",龙游生活娱乐
 提取 => id: [龙游生活娱乐], name: [], display: [龙游生活娱乐]
 ------------------------------------------------------------
+源行: #EXTINF:-1 group-title="☘️浙江频道" tvg-logo="https://www.xn--rgv465a.top/tvlogo/龙游生活娱乐.png" tvg-id="龙游生活娱乐" epg-url="",龙游生活娱乐
+提取 => id: [龙游生活娱乐], name: [], display: [龙游生活娱乐]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="☘️浙江频道" tvg-logo="https://www.xn--rgv465a.top/tvlogo/龙游新闻综合.png" tvg-id="龙游新闻综合" epg-url="",龙游新闻综合
+提取 => id: [龙游新闻综合], name: [], display: [龙游新闻综合]
+------------------------------------------------------------
 源行: #EXTINF:-1 group-title="☘️浙江频道" tvg-logo="https://www.xn--rgv465a.top/tvlogo/龙游新闻综合.png" tvg-id="龙游新闻综合" epg-url="",龙游新闻综合
 提取 => id: [龙游新闻综合], name: [], display: [龙游新闻综合]
 ------------------------------------------------------------
@@ -483,9 +489,6 @@
 源行: #EXTINF:-1 group-title="☘️江苏频道" tvg-logo="https://www.xn--rgv465a.top/tvlogo/宜兴新闻.png" tvg-id="宜兴新闻" epg-url="",宜兴新闻
 提取 => id: [宜兴新闻], name: [], display: [宜兴新闻]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="☘️江苏频道" tvg-logo="https://www.xn--rgv465a.top/tvlogo/宜兴新闻.png" tvg-id="宜兴新闻" epg-url="",宜兴新闻
-提取 => id: [宜兴新闻], name: [], display: [宜兴新闻]
-------------------------------------------------------------
 源行: #EXTINF:-1 group-title="☘️江苏频道" tvg-logo="https://www.xn--rgv465a.top/tvlogo/宿迁公共.png" tvg-id="宿迁公共" epg-url="",宿迁公共
 提取 => id: [宿迁公共], name: [], display: [宿迁公共]
 ------------------------------------------------------------
@@ -801,6 +804,9 @@
 源行: #EXTINF:-1 group-title="☘️四川频道" tvg-logo="https://www.xn--rgv465a.top/tvlogo/绵阳科技.png" tvg-id="绵阳科技" epg-url="",绵阳科技
 提取 => id: [绵阳科技], name: [], display: [绵阳科技]
 ------------------------------------------------------------
+源行: #EXTINF:-1 group-title="☘️四川频道" tvg-logo="https://live.fanmingming.cn/tv/荥经综合.png" tvg-id="荥经综合" epg-url="",荥经综合
+提取 => id: [荥经综合], name: [], display: [荥经综合]
+------------------------------------------------------------
 源行: #EXTINF:-1 group-title="☘️四川频道" tvg-logo="https://www.xn--rgv465a.top/tvlogo/荥经综合.png" tvg-id="荥经综合" epg-url="",荥经综合
 提取 => id: [荥经综合], name: [], display: [荥经综合]
 ------------------------------------------------------------
@@ -1110,6 +1116,12 @@
 源行: #EXTINF:-1 group-title="☘️河南频道" tvg-logo="https://www.xn--rgv465a.top/tvlogo/洛阳科教.png" tvg-id="洛阳科教" epg-url="",洛阳科教
 提取 => id: [洛阳科教], name: [], display: [洛阳科教]
 ------------------------------------------------------------
+源行: #EXTINF:-1 group-title="☘️河南频道" tvg-logo="https://www.xn--rgv465a.top/tvlogo/洛阳科教.png" tvg-id="洛阳科教" epg-url="",洛阳科教
+提取 => id: [洛阳科教], name: [], display: [洛阳科教]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="☘️河南频道" tvg-logo="https://www.xn--rgv465a.top/tvlogo/洛阳文旅.png" tvg-id="洛阳文旅" epg-url="",洛阳文旅
+提取 => id: [洛阳文旅], name: [], display: [洛阳文旅]
+------------------------------------------------------------
 源行: #EXTINF:-1 group-title="☘️河南频道" tvg-logo="https://www.xn--rgv465a.top/tvlogo/洛阳文旅.png" tvg-id="洛阳文旅" epg-url="",洛阳文旅
 提取 => id: [洛阳文旅], name: [], display: [洛阳文旅]
 ------------------------------------------------------------
@@ -1380,9 +1392,6 @@
 源行: #EXTINF:-1 group-title="☘️山西频道" tvg-logo="https://www.xn--rgv465a.top/tvlogo/黎城综合.png" tvg-id="黎城综合" epg-url="",黎城综合
 提取 => id: [黎城综合], name: [], display: [黎城综合]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="☘️山西频道" tvg-logo="https://www.xn--rgv465a.top/tvlogo/黎城综合.png" tvg-id="黎城综合" epg-url="",黎城综合
-提取 => id: [黎城综合], name: [], display: [黎城综合]
-------------------------------------------------------------
 源行: #EXTINF:-1 group-title="☘️安徽频道" tvg-logo="https://www.xn--rgv465a.top/tvlogo/安徽导视.png" tvg-id="安徽导视" epg-url="",安徽导视
 提取 => id: [安徽导视], name: [], display: [安徽导视]
 ------------------------------------------------------------
@@ -1511,6 +1520,12 @@
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="🌊港·澳·台" tvg-logo="https://www.xn--rgv465a.top/tvlogo/凤凰卫视.png" tvg-id="凤凰卫视" epg-url="",凤凰卫视
 提取 => id: [凤凰卫视], name: [], display: [凤凰卫视]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🌊港·澳·台" tvg-logo="https://www.xn--rgv465a.top/tvlogo/凤凰卫视.png" tvg-id="凤凰卫视" epg-url="",凤凰卫视
+提取 => id: [凤凰卫视], name: [], display: [凤凰卫视]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🌊港·澳·台" tvg-logo="https://www.xn--rgv465a.top/tvlogo/TVBS亚洲.png" tvg-id="TVBS亚洲" epg-url="",TVBS亚洲
+提取 => id: [TVBS亚洲], name: [], display: [TVBS亚洲]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="🌊港·澳·台" tvg-logo="https://www.xn--rgv465a.top/tvlogo/TVBS亚洲.png" tvg-id="TVBS亚洲" epg-url="",TVBS亚洲
 提取 => id: [TVBS亚洲], name: [], display: [TVBS亚洲]
@@ -1880,6 +1895,12 @@
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="🏛经典剧场" tvg-logo="https://www.xn--rgv465a.top/tvlogo/三国演义.png" tvg-id="三国演义" epg-url="",三国演义
 提取 => id: [三国演义], name: [], display: [三国演义]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🏛经典剧场" tvg-logo="https://www.xn--rgv465a.top/tvlogo/水浒传.png" tvg-id="水浒传" epg-url="",水浒传
+提取 => id: [水浒传], name: [], display: [水浒传]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="🏛经典剧场" tvg-logo="https://www.xn--rgv465a.top/tvlogo/水浒传.png" tvg-id="水浒传" epg-url="",水浒传
+提取 => id: [水浒传], name: [], display: [水浒传]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="🏛经典剧场" tvg-logo="https://www.xn--rgv465a.top/tvlogo/水浒传.png" tvg-id="水浒传" epg-url="",水浒传
 提取 => id: [水浒传], name: [], display: [水浒传]
@@ -2750,6 +2771,12 @@
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="" tvg-logo="" tvg-id="" epg-url="",黑龙江卫 (1080p)
 提取 => id: [], name: [], display: [黑龙江卫 (1080p)]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="" tvg-logo="" tvg-id="CNDFilmMiddleSchoolChannel.cn@SD" epg-url="",CND Film Middle School Channel
+提取 => id: [CNDFilmMiddleSchoolChannel.cn@SD], name: [], display: [CND Film Middle School Channel]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="" tvg-logo="" tvg-id="NeiMonggolTV.cn@SD" epg-url="",Nei Monggol TV (1080i) [Not 24/7]
+提取 => id: [NeiMonggolTV.cn@SD], name: [], display: [Nei Monggol TV (1080i) [Not 24/7]]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="" tvg-logo="" tvg-id="" epg-url="",新闻综合HD
 提取 => id: [], name: [], display: [新闻综合HD]
@@ -7074,21 +7101,6 @@
 源行: #EXTINF:-1 group-title="央视频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/CCTV9测试.png" tvg-id="" epg-url="",CCTV9测试
 提取 => id: [], name: [], display: [CCTV9测试]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="央视频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/CCTV台球.png" tvg-id="" epg-url="",CCTV台球
-提取 => id: [], name: [], display: [CCTV台球]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="央视频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/CCTV台球.png" tvg-id="" epg-url="",CCTV台球
-提取 => id: [], name: [], display: [CCTV台球]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="央视频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/CCTV台球.png" tvg-id="" epg-url="",CCTV台球
-提取 => id: [], name: [], display: [CCTV台球]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="央视频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/CCTV台球.png" tvg-id="" epg-url="",CCTV台球
-提取 => id: [], name: [], display: [CCTV台球]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="影视频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/唐山影视.png" tvg-id="" epg-url="",唐山影视
-提取 => id: [], name: [], display: [唐山影视]
-------------------------------------------------------------
 源行: #EXTINF:-1 group-title="影视频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/电视剧.png" tvg-id="" epg-url="",电视剧
 提取 => id: [], name: [], display: [电视剧]
 ------------------------------------------------------------
@@ -7097,72 +7109,18 @@
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="影视频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/电视剧.png" tvg-id="" epg-url="",电视剧
 提取 => id: [], name: [], display: [电视剧]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="影视频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/热搏剧场.png" tvg-id="" epg-url="",热搏剧场
-提取 => id: [], name: [], display: [热搏剧场]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="影视频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/经典电影.png" tvg-id="" epg-url="",经典电影
-提取 => id: [], name: [], display: [经典电影]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="影视频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/经典电影.png" tvg-id="" epg-url="",经典电影
-提取 => id: [], name: [], display: [经典电影]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="影视频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/经典电影.png" tvg-id="" epg-url="",经典电影
-提取 => id: [], name: [], display: [经典电影]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="影视频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/IPTV谍战电影.png" tvg-id="" epg-url="",IPTV谍战电影
-提取 => id: [], name: [], display: [IPTV谍战电影]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="影视频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/IPTV谍战电影.png" tvg-id="" epg-url="",IPTV谍战电影
-提取 => id: [], name: [], display: [IPTV谍战电影]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="影视频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/IPTV谍战电影.png" tvg-id="" epg-url="",IPTV谍战电影
-提取 => id: [], name: [], display: [IPTV谍战电影]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="影视频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/热搏剧场.png" tvg-id="" epg-url="",热搏剧场
-提取 => id: [], name: [], display: [热搏剧场]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="影视频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/IPTV谍战电影.png" tvg-id="" epg-url="",IPTV谍战电影
-提取 => id: [], name: [], display: [IPTV谍战电影]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="影视频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/经典电影.png" tvg-id="" epg-url="",经典电影
-提取 => id: [], name: [], display: [经典电影]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="影视频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/热搏剧场.png" tvg-id="" epg-url="",热搏剧场
-提取 => id: [], name: [], display: [热搏剧场]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="影视频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/热搏剧场.png" tvg-id="" epg-url="",热搏剧场
-提取 => id: [], name: [], display: [热搏剧场]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="影视频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/谍战剧场.png" tvg-id="" epg-url="",谍战剧场
 提取 => id: [], name: [], display: [谍战剧场]
 ------------------------------------------------------------
+源行: #EXTINF:-1 group-title="影视频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/经典电影.png" tvg-id="" epg-url="",经典电影
+提取 => id: [], name: [], display: [经典电影]
+------------------------------------------------------------
 源行: #EXTINF:-1 group-title="影视频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/动作影院.png" tvg-id="" epg-url="",动作影院
 提取 => id: [], name: [], display: [动作影院]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="科教频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/广东经济教育.png" tvg-id="" epg-url="",广东经济教育
-提取 => id: [], name: [], display: [广东经济教育]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="科教频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/广东经济教育.png" tvg-id="" epg-url="",广东经济教育
-提取 => id: [], name: [], display: [广东经济教育]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="科教频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/广东经济教育.png" tvg-id="" epg-url="",广东经济教育
-提取 => id: [], name: [], display: [广东经济教育]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="科教频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/广东经济教育.png" tvg-id="" epg-url="",广东经济教育
-提取 => id: [], name: [], display: [广东经济教育]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="卡通频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/少儿动画.png" tvg-id="" epg-url="",少儿动画
-提取 => id: [], name: [], display: [少儿动画]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="卡通频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/少儿动画.png" tvg-id="" epg-url="",少儿动画
-提取 => id: [], name: [], display: [少儿动画]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="卡通频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/少儿动画.png" tvg-id="" epg-url="",少儿动画
-提取 => id: [], name: [], display: [少儿动画]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="卡通频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/少儿动画.png" tvg-id="" epg-url="",少儿动画
-提取 => id: [], name: [], display: [少儿动画]
+源行: #EXTINF:-1 group-title="影视频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/爱电影.png" tvg-id="" epg-url="",爱电影
+提取 => id: [], name: [], display: [爱电影]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="娱乐综艺" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/河南戏曲.png" tvg-id="" epg-url="",河南戏曲
 提取 => id: [], name: [], display: [河南戏曲]
@@ -7179,35 +7137,11 @@
 源行: #EXTINF:-1 group-title="体育频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/CCTV5测试.png" tvg-id="" epg-url="",CCTV5测试
 提取 => id: [], name: [], display: [CCTV5测试]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="体育频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/四海垂钓.png" tvg-id="" epg-url="",四海垂钓
-提取 => id: [], name: [], display: [四海垂钓]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="体育频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/CCTV台球.png" tvg-id="" epg-url="",CCTV台球
-提取 => id: [], name: [], display: [CCTV台球]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="体育频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/CCTV台球.png" tvg-id="" epg-url="",CCTV台球
-提取 => id: [], name: [], display: [CCTV台球]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="体育频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/CCTV台球.png" tvg-id="" epg-url="",CCTV台球
-提取 => id: [], name: [], display: [CCTV台球]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="体育频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/CCTV台球.png" tvg-id="" epg-url="",CCTV台球
-提取 => id: [], name: [], display: [CCTV台球]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/凤凰中文1.png" tvg-id="" epg-url="",凤凰中文1
-提取 => id: [], name: [], display: [凤凰中文1]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/凤凰中文1.png" tvg-id="" epg-url="",凤凰中文1
-提取 => id: [], name: [], display: [凤凰中文1]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/凤凰中文1.png" tvg-id="" epg-url="",凤凰中文1
-提取 => id: [], name: [], display: [凤凰中文1]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/凤凰中文1.png" tvg-id="" epg-url="",凤凰中文1
-提取 => id: [], name: [], display: [凤凰中文1]
-------------------------------------------------------------
 源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/惠州1.png" tvg-id="" epg-url="",惠州1
 提取 => id: [], name: [], display: [惠州1]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/梅州1.png" tvg-id="" epg-url="",梅州1
+提取 => id: [], name: [], display: [梅州1]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/梅州1.png" tvg-id="" epg-url="",梅州1
 提取 => id: [], name: [], display: [梅州1]
@@ -7215,26 +7149,17 @@
 源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/梅州2.png" tvg-id="" epg-url="",梅州2
 提取 => id: [], name: [], display: [梅州2]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/广东4K.png" tvg-id="" epg-url="",广东4K
-提取 => id: [], name: [], display: [广东4K]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/广东4K.png" tvg-id="" epg-url="",广东4K
-提取 => id: [], name: [], display: [广东4K]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/广东4K.png" tvg-id="" epg-url="",广东4K
-提取 => id: [], name: [], display: [广东4K]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/广东4K.png" tvg-id="" epg-url="",广东4K
-提取 => id: [], name: [], display: [广东4K]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/靓彩河北.png" tvg-id="" epg-url="",靓彩河北
-提取 => id: [], name: [], display: [靓彩河北]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/涿州新闻.png" tvg-id="" epg-url="",涿州新闻
-提取 => id: [], name: [], display: [涿州新闻]
+源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/梅州2.png" tvg-id="" epg-url="",梅州2
+提取 => id: [], name: [], display: [梅州2]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/保定文化娱乐.png" tvg-id="" epg-url="",保定文化娱乐
 提取 => id: [], name: [], display: [保定文化娱乐]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/秦皇岛.png" tvg-id="" epg-url="",秦皇岛
+提取 => id: [], name: [], display: [秦皇岛]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/保定新闻综合.png" tvg-id="" epg-url="",保定新闻综合
+提取 => id: [], name: [], display: [保定新闻综合]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/保定新闻综合.png" tvg-id="" epg-url="",保定新闻综合
 提取 => id: [], name: [], display: [保定新闻综合]
@@ -7242,35 +7167,23 @@
 源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/廊坊新闻.png" tvg-id="" epg-url="",廊坊新闻
 提取 => id: [], name: [], display: [廊坊新闻]
 ------------------------------------------------------------
+源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/靓彩河北.png" tvg-id="" epg-url="",靓彩河北
+提取 => id: [], name: [], display: [靓彩河北]
+------------------------------------------------------------
 源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/保定生活健康.png" tvg-id="" epg-url="",保定生活健康
 提取 => id: [], name: [], display: [保定生活健康]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/保定新闻综合.png" tvg-id="" epg-url="",保定新闻综合
-提取 => id: [], name: [], display: [保定新闻综合]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/新闻.png" tvg-id="" epg-url="",新闻
-提取 => id: [], name: [], display: [新闻]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/河南都市报道.png" tvg-id="" epg-url="",河南都市报道
-提取 => id: [], name: [], display: [河南都市报道]
-------------------------------------------------------------
 源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/都市.png" tvg-id="" epg-url="",都市
 提取 => id: [], name: [], display: [都市]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/公共.png" tvg-id="" epg-url="",公共
-提取 => id: [], name: [], display: [公共]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/新闻.png" tvg-id="" epg-url="",新闻
-提取 => id: [], name: [], display: [新闻]
-------------------------------------------------------------
 源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/都市.png" tvg-id="" epg-url="",都市
 提取 => id: [], name: [], display: [都市]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/公共.png" tvg-id="" epg-url="",公共
-提取 => id: [], name: [], display: [公共]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/民生.png" tvg-id="" epg-url="",民生
 提取 => id: [], name: [], display: [民生]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/新闻.png" tvg-id="" epg-url="",新闻
+提取 => id: [], name: [], display: [新闻]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/民生.png" tvg-id="" epg-url="",民生
 提取 => id: [], name: [], display: [民生]
@@ -7278,8 +7191,23 @@
 源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/公共.png" tvg-id="" epg-url="",公共
 提取 => id: [], name: [], display: [公共]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/河南法制报道.png" tvg-id="" epg-url="",河南法制报道
-提取 => id: [], name: [], display: [河南法制报道]
+源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/民生.png" tvg-id="" epg-url="",民生
+提取 => id: [], name: [], display: [民生]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/新闻.png" tvg-id="" epg-url="",新闻
+提取 => id: [], name: [], display: [新闻]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/公共.png" tvg-id="" epg-url="",公共
+提取 => id: [], name: [], display: [公共]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/公共.png" tvg-id="" epg-url="",公共
+提取 => id: [], name: [], display: [公共]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/新闻.png" tvg-id="" epg-url="",新闻
+提取 => id: [], name: [], display: [新闻]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/涿州新闻.png" tvg-id="" epg-url="",涿州新闻
+提取 => id: [], name: [], display: [涿州新闻]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/湖南公共.png" tvg-id="" epg-url="",湖南公共
 提取 => id: [], name: [], display: [湖南公共]
@@ -7287,119 +7215,38 @@
 源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/都市.png" tvg-id="" epg-url="",都市
 提取 => id: [], name: [], display: [都市]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/潮汕文化.png" tvg-id="" epg-url="",潮汕文化
-提取 => id: [], name: [], display: [潮汕文化]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/饶平台.png" tvg-id="" epg-url="",饶平台
-提取 => id: [], name: [], display: [饶平台]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/饶平台.png" tvg-id="" epg-url="",饶平台
-提取 => id: [], name: [], display: [饶平台]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/汕尾文旅.png" tvg-id="" epg-url="",汕尾文旅
-提取 => id: [], name: [], display: [汕尾文旅]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/梅州客家生活.png" tvg-id="" epg-url="",梅州客家生活
-提取 => id: [], name: [], display: [梅州客家生活]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/民生.png" tvg-id="" epg-url="",民生
-提取 => id: [], name: [], display: [民生]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/潮汕文化.png" tvg-id="" epg-url="",潮汕文化
-提取 => id: [], name: [], display: [潮汕文化]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/潮汕文化.png" tvg-id="" epg-url="",潮汕文化
-提取 => id: [], name: [], display: [潮汕文化]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/汕尾文旅.png" tvg-id="" epg-url="",汕尾文旅
-提取 => id: [], name: [], display: [汕尾文旅]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/梅州客家生活.png" tvg-id="" epg-url="",梅州客家生活
-提取 => id: [], name: [], display: [梅州客家生活]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/饶平台.png" tvg-id="" epg-url="",饶平台
-提取 => id: [], name: [], display: [饶平台]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/梅州综合.png" tvg-id="" epg-url="",梅州综合
-提取 => id: [], name: [], display: [梅州综合]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/汕头经济.png" tvg-id="" epg-url="",汕头经济
-提取 => id: [], name: [], display: [汕头经济]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/梅州客家生活.png" tvg-id="" epg-url="",梅州客家生活
-提取 => id: [], name: [], display: [梅州客家生活]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/梅州综合.png" tvg-id="" epg-url="",梅州综合
-提取 => id: [], name: [], display: [梅州综合]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/汕尾文旅.png" tvg-id="" epg-url="",汕尾文旅
-提取 => id: [], name: [], display: [汕尾文旅]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/梅州综合.png" tvg-id="" epg-url="",梅州综合
-提取 => id: [], name: [], display: [梅州综合]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/汕尾文旅.png" tvg-id="" epg-url="",汕尾文旅
-提取 => id: [], name: [], display: [汕尾文旅]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/梅州综合.png" tvg-id="" epg-url="",梅州综合
-提取 => id: [], name: [], display: [梅州综合]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/梅州客家生活.png" tvg-id="" epg-url="",梅州客家生活
-提取 => id: [], name: [], display: [梅州客家生活]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/新闻.png" tvg-id="" epg-url="",新闻
-提取 => id: [], name: [], display: [新闻]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/潮汕文化.png" tvg-id="" epg-url="",潮汕文化
-提取 => id: [], name: [], display: [潮汕文化]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/饶平台.png" tvg-id="" epg-url="",饶平台
-提取 => id: [], name: [], display: [饶平台]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/深圳宝安.png" tvg-id="" epg-url="",深圳宝安
-提取 => id: [], name: [], display: [深圳宝安]
-------------------------------------------------------------
 源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/天映.png" tvg-id="" epg-url="",天映
 提取 => id: [], name: [], display: [天映]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/南方五.png" tvg-id="" epg-url="",南方五
 提取 => id: [], name: [], display: [南方五]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/移动.png" tvg-id="" epg-url="",移动
-提取 => id: [], name: [], display: [移动]
+源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/河南法制.png" tvg-id="" epg-url="",河南法制
+提取 => id: [], name: [], display: [河南法制]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/中国气象.png" tvg-id="" epg-url="",中国气象
-提取 => id: [], name: [], display: [中国气象]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/中国气象.png" tvg-id="" epg-url="",中国气象
-提取 => id: [], name: [], display: [中国气象]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/汕头经济.png" tvg-id="" epg-url="",汕头经济
-提取 => id: [], name: [], display: [汕头经济]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/五华台.png" tvg-id="" epg-url="",五华台
-提取 => id: [], name: [], display: [五华台]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/汕头经济.png" tvg-id="" epg-url="",汕头经济
-提取 => id: [], name: [], display: [汕头经济]
-------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/中国气象.png" tvg-id="" epg-url="",中国气象
-提取 => id: [], name: [], display: [中国气象]
+源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/深圳宝安.png" tvg-id="" epg-url="",深圳宝安
+提取 => id: [], name: [], display: [深圳宝安]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/BTV卡酷.png" tvg-id="" epg-url="",BTV卡酷
 提取 => id: [], name: [], display: [BTV卡酷]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/汕头经济.png" tvg-id="" epg-url="",汕头经济
-提取 => id: [], name: [], display: [汕头经济]
+源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/梅州.png" tvg-id="" epg-url="",梅州
+提取 => id: [], name: [], display: [梅州]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/山歌.png" tvg-id="" epg-url="",山歌
 提取 => id: [], name: [], display: [山歌]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/中国气象.png" tvg-id="" epg-url="",中国气象
-提取 => id: [], name: [], display: [中国气象]
+源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/福建东南.png" tvg-id="" epg-url="",福建东南
+提取 => id: [], name: [], display: [福建东南]
 ------------------------------------------------------------
-源行: #EXTINF:-1 group-title="更新时间" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/Dog狗频道.png" tvg-id="" epg-url="",2026-07-04_05:33:57
-提取 => id: [], name: [], display: [2026-07-04_05:33:57]
+源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/五华台.png" tvg-id="" epg-url="",五华台
+提取 => id: [], name: [], display: [五华台]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="其他频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/五华台.png" tvg-id="" epg-url="",五华台
+提取 => id: [], name: [], display: [五华台]
+------------------------------------------------------------
+源行: #EXTINF:-1 group-title="更新时间" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/Dog狗频道.png" tvg-id="" epg-url="",2026-07-09_05:32:48
+提取 => id: [], name: [], display: [2026-07-09_05:32:48]
 ------------------------------------------------------------
 源行: #EXTINF:-1 group-title="卫视频道" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/齐鲁卫视.png" tvg-id="" epg-url="",齐鲁卫视
 提取 => id: [], name: [], display: [齐鲁卫视]
