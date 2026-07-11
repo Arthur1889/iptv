@@ -2543,3 +2543,20 @@ socket.gaierror: [Errno 11001] getaddrinfo failed
 [+] 最终保留优质源: 975
 [+] 脚本整体总耗时: 56.77 秒
 ======================================================
+2026-07-11 17:03:15,198 [INFO] 成功获取源 https://raw.githubusercontent.com/Guovin/TV/gd/output/result.m3u, 解析到 1794 个频道
+2026-07-11 17:03:15,966 [INFO] 成功获取源 https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cn.m3u, 解析到 535 个频道
+2026-07-11 17:03:16,814 [INFO] 成功获取源 https://raw.githubusercontent.com/xcc360/SHCU-TV/refs/heads/main/IPTV.m3u, 解析到 184 个频道
+2026-07-11 17:03:17,659 [INFO] 成功获取源 https://raw.githubusercontent.com/babylife/China-ShangHai-IPTV-list/master/IPTV_Enhanced_change.m3u, 解析到 95 个频道
+2026-07-11 17:03:20,586 [INFO] 成功获取源 https://raw.githubusercontent.com/Jsnzkpg/Jsnzkpg/Jsnzkpg/Jsnzkpg1.m3u, 解析到 2224 个频道
+2026-07-11 17:03:21,190 [INFO] 成功获取源 https://raw.githubusercontent.com/mzky/checklist/refs/heads/master/itvlist.m3u, 解析到 596 个频道
+2026-07-11 17:03:22,405 [INFO] 成功获取源 https://raw.githubusercontent.com/Arthur1889/iptv/refs/heads/main/check/itvlist.m3u, 解析到 576 个频道
+2026-07-11 17:03:23,024 [INFO] 成功获取源 https://raw.githubusercontent.com/hujingguang/ChinaIPTV/main/cnTV_AutoUpdate.m3u8, 解析到 67 个频道
+
+================ 📊 IPTV 任务运行报告 ================
+[+] 运行时间: 2026-07-11 17:05:01
+[+] 初始读取源总数: 5925
+[+] 命中黑名单拦截: 2633
+[+] 画质/垃圾源过滤: 1520
+[+] 最终保留优质源: 929
+[+] 脚本整体总耗时: 108.67 秒
+======================================================
