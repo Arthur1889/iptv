@@ -5,12 +5,14 @@
         "CCTV-4K 高清",
         "CCTV-4K广西",
         "CCTV-4K超高清",
+        "CCTV-4k",
         "CCTV-4k浙江",
         "CCTV-4k高码",
         "CCTV4K",
         "CCTV4K (1080p)",
         "CCTV4K (2160p)",
         "CCTV4K (720p)",
+        "CCTV4K 超高清",
         "CCTV4K.cn@HD",
         "CCTV4K.cn@SD",
         "CCTV4KHD",
@@ -152,7 +154,7 @@
         "广东影视高清"
     ],
     "CCTV1": [
-        "2026-07-07 18:30:07",
+        "2026-07-10 17:56:40",
         "CCTV-01",
         "CCTV-01_ITV",
         "CCTV-01上海",
@@ -176,6 +178,7 @@
         "CCTV-1",
         "CCTV-1 (1080p)",
         "CCTV-1 (720p)",
+        "CCTV-1 综合",
         "CCTV-1HD",
         "CCTV-1綜合",
         "CCTV-1综合",
@@ -221,6 +224,7 @@
         "CCTV-02高码",
         "CCTV-2",
         "CCTV-2 (720p)",
+        "CCTV-2 财经",
         "CCTV-2HD",
         "CCTV-2财经",
         "CCTV-2财经ᴴᴰ",
@@ -264,6 +268,7 @@
         "CCTV-03高码",
         "CCTV-3",
         "CCTV-3 (720p)",
+        "CCTV-3 综艺",
         "CCTV-3-高清",
         "CCTV-3HD",
         "CCTV-3综艺",
@@ -369,6 +374,7 @@
     ],
     "CCTV5+": [
         "CCTV-5+",
+        "CCTV-5+ 体育赛事",
         "CCTV-5+HD",
         "CCTV-5+_ITV",
         "CCTV-5+体育赛事",
@@ -427,6 +433,7 @@
         "CCTV-06高码",
         "CCTV-6",
         "CCTV-6 (1080p)",
+        "CCTV-6 电影",
         "CCTV-6 电影频道",
         "CCTV-6-高清",
         "CCTV-6HD",
@@ -471,6 +478,7 @@
         "CCTV-07高码",
         "CCTV-7",
         "CCTV-7 (720p)",
+        "CCTV-7 国防军事",
         "CCTV-7HD",
         "CCTV-7国防军事",
         "CCTV-7国防军事ᴴᴰ",
@@ -587,6 +595,7 @@
         "CCTV-10",
         "CCTV-10 (576i)",
         "CCTV-10 (720p)",
+        "CCTV-10 科教",
         "CCTV-10HD",
         "CCTV-10_ITV",
         "CCTV-10上海",
@@ -715,6 +724,7 @@
         "CCTV-13",
         "CCTV-13 (1080p)",
         "CCTV-13 (720p)",
+        "CCTV-13 新闻",
         "CCTV-13HD",
         "CCTV-13上海",
         "CCTV-13东联",
@@ -756,6 +766,7 @@
     "CCTV14": [
         "CCTV-14",
         "CCTV-14 (1080p)",
+        "CCTV-14 少儿",
         "CCTV-14HD",
         "CCTV-14_ITV",
         "CCTV-14上海",
@@ -799,6 +810,7 @@
         "CCTV-15",
         "CCTV-15 (1080p)",
         "CCTV-15 (720p)",
+        "CCTV-15 音乐",
         "CCTV-15(音乐)",
         "CCTV-15HD",
         "CCTV-15_ITV",
@@ -846,6 +858,7 @@
         "CCTV-16 (1080p)",
         "CCTV-16 4K",
         "CCTV-16 奥林匹克",
+        "CCTV-16 奥林派克",
         "CCTV-16-4K",
         "CCTV-16HD",
         "CCTV-16_ITV",
@@ -931,6 +944,7 @@
         "CCTV书画频道HD"
     ],
     "CCTV高尔夫网球": [
+        "CCTV 高尔夫网球",
         "CCTV-央视高网",
         "CCTV-高尔夫网球",
         "CCTV-高尔夫网琿",
@@ -946,6 +960,7 @@
         "高尔夫网球"
     ],
     "CCTV风云音乐": [
+        "CCTV 风云音乐",
         "CCTV-风云音乐",
         "CCTV风云音乐",
         "CCTV风云音乐 (1080p)",
@@ -958,6 +973,7 @@
         "风云音乐"
     ],
     "CCTV怀旧剧场": [
+        "CCTV 怀旧剧场",
         "CCTV-怀旧剧场",
         "CCTV-怀旧剧圿",
         "CCTV怀旧剧场",
@@ -972,6 +988,7 @@
         "怀旧剧场"
     ],
     "CCTV风云足球": [
+        "CCTV 风云足球",
         "CCTV-风云足球",
         "CCTV风云足球",
         "CCTV风云足球 (1080p)",
@@ -1025,6 +1042,7 @@
         "CCTV证券资讯HD"
     ],
     "CCTV世界地理": [
+        "CCTV 世界地理",
         "CCTV-世界地理",
         "CCTV世界地理",
         "CCTV世界地理 (1080p)",
@@ -1037,6 +1055,7 @@
         "世界地理"
     ],
     "CCTV风云剧场": [
+        "CCTV 风云剧场",
         "CCTV-风云剧场",
         "CCTV风云剧场",
         "CCTV风云剧场 (1080p)",
@@ -1049,6 +1068,7 @@
         "风云剧场"
     ],
     "CCTV第一剧场": [
+        "CCTV 第一剧场",
         "CCTV-第一剧场",
         "CCTV电影轮播",
         "CCTV第一剧场",
@@ -1064,6 +1084,7 @@
         "风云剧场"
     ],
     "CCTV发现之旅": [
+        "CCTV 发现之旅",
         "CCTV-发现之旅",
         "CCTV发现之旅",
         "CCTV发现之旅 (1080p)",
@@ -1078,6 +1099,7 @@
         "发现之旅 (576p)"
     ],
     "CCTV央视文化精品": [
+        "CCTV 央视文化精品",
         "CCTV-央视文化精品",
         "CCTV-文化精品",
         "CCTV央视文化精品",
@@ -1091,6 +1113,7 @@
         "文化精品"
     ],
     "CCTV电视指南": [
+        "CCTV 电视指南",
         "CCTV-电视指南",
         "CCTV电视指南",
         "CCTV电视指南 (1080p)",
@@ -1121,6 +1144,7 @@
         "CCTV新科动漫HD"
     ],
     "CCTV女性时尚": [
+        "CCTV 女性时尚",
         "CCTV-女性时尚",
         "CCTVWomensFashion.cn@SD",
         "CCTV女性时尚",
@@ -1135,6 +1159,7 @@
         "女性时尚 (576p)"
     ],
     "CCTV老故事": [
+        "CCTV 老故事",
         "CCTV-老故事",
         "CCTV老故事",
         "CCTV老故事 (1080p)",
@@ -1177,6 +1202,7 @@
         "CGTN (1080p)",
         "CGTN (720p)",
         "CGTN 英語頻道",
+        "CGTN 英语",
         "CGTN.cn@SD",
         "CGTN英语",
         "CGTN英语 (1080p)",
@@ -1191,6 +1217,7 @@
         "RTHK35"
     ],
     "CGTN俄语": [
+        "CGTN 俄语",
         "CGTNRussian",
         "CGTNRussian.cn@SD",
         "CGTN俄罗斯语",
@@ -1204,6 +1231,7 @@
         "CGTN俄语HD"
     ],
     "CGTN阿语": [
+        "CGTN 阿语",
         "CGTNArabic",
         "CGTNArabic.cn@SD",
         "CGTN阿拉伯语",
@@ -1217,8 +1245,8 @@
         "CGTN阿语HD"
     ],
     "CGTN西语": [
-        "CGTN Spanish (1080p)",
         "CGTN Spanish (720p)",
+        "CGTN 西语",
         "CGTNSpanish",
         "CGTNSpanish.cn@SD",
         "CGTN西班牙语",
@@ -1232,6 +1260,7 @@
         "CGTN西语HD"
     ],
     "CGTN法语": [
+        "CGTN 法语",
         "CGTNFrench",
         "CGTNFrench.cn@SD",
         "CGTN法语",
@@ -1246,6 +1275,7 @@
     "CGTN纪录": [
         "CGTN Documentary",
         "CGTN Documentary (1080p)",
+        "CGTN 纪录",
         "CGTNDocumentary",
         "CGTNDocumentary.cn@SD",
         "CGTN外语纪录",
@@ -1330,6 +1360,7 @@
         "中国教育4HD"
     ],
     "CCTV央视台球": [
+        "CCTV 央视台球",
         "CCTV-台球",
         "CCTV-央视台球",
         "CCTV央视台球",
@@ -1364,6 +1395,7 @@
         "CCTV4美洲咪咕"
     ],
     "CCTV卫生健康": [
+        "CCTV 卫生健康",
         "CCTV-卫生健康",
         "CCTV卫生与健康",
         "CCTV卫生健康",
